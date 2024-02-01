@@ -15,10 +15,11 @@ class My_Document_View_Card extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: Colors.white,
-      margin: EdgeInsets.all(16.0),
+      margin: EdgeInsets.all(10.0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
       ),
+      elevation: 0,
       child: Row(
         children: [
           // Image Name
@@ -26,7 +27,6 @@ class My_Document_View_Card extends StatelessWidget {
             child: Center(
               child: Icon(
                 Icons.image,
-                size: 50.0,
               ),
             ),
           ),
@@ -38,7 +38,7 @@ class My_Document_View_Card extends StatelessWidget {
             child: Text(
               documentname,
               style: TextStyle(
-                fontSize: 18.0,
+                fontSize: 15.0,
               ),
             ),
           ),

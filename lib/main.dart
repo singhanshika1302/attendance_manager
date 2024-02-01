@@ -1,5 +1,6 @@
 import 'package:edumarshal/Screens/My_Documents_Screen.dart';
 import 'package:edumarshal/Screens/OverAllAttendance.dart';
+import 'package:edumarshal/Screens/Profile.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      home: MyDocument(),
+      home: Profile(),
     );
   }
 }

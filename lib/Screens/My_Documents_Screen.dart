@@ -99,6 +99,8 @@ class _MyDocumentState extends State<MyDocument> {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
+    double screenwidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: const Color.fromRGBO(235, 243, 255, 1),
       appBar: AppBar(
@@ -139,7 +141,6 @@ class _MyDocumentState extends State<MyDocument> {
                 width: double.infinity,
                 height: 80,
                 child: ListView.builder(
-                    physics: const BouncingScrollPhysics(),
                     itemCount: items.length,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (ctx, index) {
@@ -154,7 +155,7 @@ class _MyDocumentState extends State<MyDocument> {
                             child: AnimatedContainer(
                               duration: const Duration(milliseconds: 300),
                               margin: const EdgeInsets.all(5),
-                              width: 200,
+                              width: screenwidth * 0.45,
                               height: 55,
                               decoration: BoxDecoration(
                                 color: current == index

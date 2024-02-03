@@ -1,6 +1,7 @@
-import 'package:edumarshal/Widget/Profile_Tabs.dart';
+// import 'package:edumarshal/Widget/Profile_Tabs.dart';
+import 'package:edumarshals/Widget/Profile_Tabs.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_acrylic/flutter_acrylic.dart';
+// import 'package:flutter_acrylic/flutter_acrylic.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});

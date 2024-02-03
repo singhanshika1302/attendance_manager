@@ -1,5 +1,6 @@
-import 'package:edumarshal/Widget/AttendanceCard.dart';
-import 'package:edumarshal/Widget/SubjectAttendanceCard.dart';
+
+import 'package:edumarshals/Widget/AttendanceCard.dart';
+import 'package:edumarshals/Widget/SubjectAttendanceCard.dart';
 import 'package:flutter/material.dart';
 
 import '../Widget/CustomAppBar.dart';

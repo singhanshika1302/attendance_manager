@@ -1,14 +1,18 @@
 import 'package:edumarshal/Widget/Profile_Tabs.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_acrylic/flutter_acrylic.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
 
   @override
   State<Profile> createState() => _ProfileState();
+  
+
 }
 
 class _ProfileState extends State<Profile> {
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -115,9 +119,30 @@ class _ProfileState extends State<Profile> {
           ),
           Profile_Tab(
             Profileoption: 'Feedback',
-          )
+          ),
+
+          //   Acrylic(
+          //   effect: AcrylicEffect.transparent,
+          //   child: Center(
+          //     child: Container(
+          //       width: 300.0,
+          //       height: 200.0,
+          //       child: Center(
+          //         child: Text(
+          //           'Transparent Container',
+          //           style: TextStyle(
+          //             color: Colors.white,
+          //             fontSize: 18.0,
+          //           ),
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
   }
+
+ 
 }

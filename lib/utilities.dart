@@ -122,7 +122,6 @@ Widget buildtextfiled(String image, String text, BuildContext context,
   );
 }
 
-
 Widget button(String text, double height, double width, BuildContext context,
     Future<void> Function() onTapFunction) {
   // final screenHeight = MediaQuery.of(context).size.height;
@@ -222,3 +221,220 @@ Widget button3(
     );
   }
 
+Widget UserInput(String text, TextEditingController controller, String text1,
+    TextEditingController controller1, BuildContext context) {
+  final screenHeight = MediaQuery.of(context).size.height;
+  final screenWidth = MediaQuery.of(context).size.width;
+  return Padding(
+    padding: const EdgeInsets.only(left: 10, right: 10, top: 8, bottom: 8),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Container(
+          width: screenWidth * 0.45,
+          child: TextFormField(
+            controller: controller,
+            textInputAction: TextInputAction.next,
+            style: const TextStyle(
+              color: Color.fromARGB(255, 0, 0, 0),
+            ),
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+              labelText: text,
+              labelStyle: const TextStyle(
+                  color: Color.fromARGB(158, 0, 0, 0),
+                  fontSize: 15.9,
+                  fontWeight: FontWeight.w500),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(2),
+                borderSide: const BorderSide(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  width: 1,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: const BorderSide(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  width: 1,
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: const BorderSide(
+                  color: Color.fromARGB(255, 1, 1, 1),
+                  width: 1,
+                ),
+              ),
+            ),
+          ),
+        ),
+        Container(
+          width: screenWidth * 0.45,
+          child: TextFormField(
+            controller: controller1,
+            textInputAction: TextInputAction.next,
+            style: const TextStyle(
+              color: Color.fromARGB(255, 0, 0, 0),
+            ),
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+              labelText: text1,
+              labelStyle: const TextStyle(
+                  color: Color.fromARGB(158, 0, 0, 0),
+                  fontSize: 15.9,
+                  fontWeight: FontWeight.w500),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: const BorderSide(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  width: 1,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: const BorderSide(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  width: 1,
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: const BorderSide(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  width: 1,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget UserInput1(
+    String text, TextEditingController controller, BuildContext context) {
+  final screenHeight = MediaQuery.of(context).size.height;
+  final screenWidth = MediaQuery.of(context).size.width;
+  return Padding(
+    padding: const EdgeInsets.only(left: 10, right: 10, top: 8, bottom: 8),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Container(
+          width: screenWidth * 0.938,
+          child: TextFormField(
+            controller: controller,
+            textInputAction: TextInputAction.next,
+            style: const TextStyle(
+              color: Color.fromARGB(255, 0, 0, 0),
+            ),
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+              labelText: text,
+              labelStyle: const TextStyle(
+                  color: Color.fromARGB(158, 0, 0, 0),
+                  fontSize: 15.9,
+                  fontWeight: FontWeight.w500),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(2),
+                borderSide: const BorderSide(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  width: 1,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: const BorderSide(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  width: 1,
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: const BorderSide(
+                  color: Color.fromARGB(255, 1, 1, 1),
+                  width: 1,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget upper(
+    String text, double height, double width, BuildContext context, page) {
+  final screenHeight = MediaQuery.of(context).size.height;
+  final screenWidth = MediaQuery.of(context).size.width;
+
+  // return GestureDetector(
+  //   onTap: () async {
+  //     Navigator.push(context, MaterialPageRoute(builder: (context) => page));
+  //   },
+  //   child: Container(
+  //       decoration: const BoxDecoration(
+  //         gradient: LinearGradient(
+  //           begin: Alignment(0.00, -1.00),
+  //           end: Alignment(0, 1),
+  //           colors: [Color(0xFF4E82EA), Color(0xFF245BC9)],
+  //         ),
+  //         borderRadius: BorderRadius.all(Radius.circular(7)),
+  //         boxShadow: [
+  //           BoxShadow(),
+  //         ],
+  //       ),
+  //       height: height,
+  //       width: width,
+  //       child: Padding(
+  //         padding: const EdgeInsets.all(7.0),
+  //         child: Text(
+  //           text,
+  //           textAlign: TextAlign.center,
+  //           style: const TextStyle(
+  //             color: Colors.white,
+  //             fontSize: 18,
+  //             fontFamily: 'Poppins',
+  //             fontWeight: FontWeight.w500,
+  //           ),
+  //         ),
+  //       )),
+  // );
+  return Padding(
+    padding: const EdgeInsets.only(top: 12, left: 10),
+    child: Container(
+        child: Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        SizedBox(width: screenWidth * 0.01),
+        GestureDetector(
+          onTap: () async {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => page));
+          },
+          child: Image.asset(
+            'assets/Group 48155.png',
+            scale: 4,
+            // height: screenHeight * 0.032,
+          ),
+        ),
+        SizedBox(width: screenWidth * 0.02),
+        Text(
+          text,
+          style: TextStyle(
+            // fontFamily: ,
+            fontWeight: FontWeight.w500,
+            fontFamily: 'Poppines',
+            color: const Color.fromARGB(255, 0, 0, 0),
+            fontSize: 15,
+
+            // fontStyle: FontStyle.normal,
+          ),
+        )
+      ],
+    )),
+  );
+}

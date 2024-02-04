@@ -1,4 +1,3 @@
-
 import 'package:edumarshals/Widget/My_Document_View_Card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -104,12 +103,14 @@ class _MyDocumentState extends State<MyDocument> {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(235, 243, 255, 1),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+
         toolbarHeight: 100.0, // Adjust the height as needed
         title: const Center(
           child: const Column(
             children: [
               CircleAvatar(
-                backgroundImage: AssetImage('assets/images/pdf 1.png'),
+                backgroundImage: AssetImage('assets/assets/Ellipse 7.jpg'),
                 backgroundColor: Color.fromARGB(255, 17, 37, 218),
               ),
               Text("Vidhi Gupta"),
@@ -199,7 +200,7 @@ class _MyDocumentState extends State<MyDocument> {
                 child: Container(
                   // margin: const EdgeInsets.only(top: 30),
                   width: double.infinity,
-                  height: screenHeight * 2,
+                  height: screenHeight * 6,
                   child: PageView.builder(
                     itemCount: cards.length,
                     controller: pageController,

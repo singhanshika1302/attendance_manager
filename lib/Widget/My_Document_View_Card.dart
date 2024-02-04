@@ -15,7 +15,7 @@ class My_Document_View_Card extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: Colors.white,
-      margin: EdgeInsets.all(10.0),
+      margin: EdgeInsets.all(8.0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
       ),
@@ -24,21 +24,17 @@ class My_Document_View_Card extends StatelessWidget {
         children: [
           // Image Name
           Container(
-            child: Center(
-              child: Icon(
-                Icons.image,
-              ),
-            ),
+            child: Center(child: Image.asset("asset/images/pdf1.png")),
           ),
 
           // Document Name
 
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(5.0),
             child: Text(
               documentname,
               style: TextStyle(
-                fontSize: 15.0,
+                fontSize: MediaQuery.of(context).size.width * 0.035,
               ),
             ),
           ),
@@ -52,7 +48,10 @@ class My_Document_View_Card extends StatelessWidget {
                   onPressed: onpressed,
                   child: Text(
                     textbuttonname,
-                    style: TextStyle(color: Colors.blue),
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontSize: MediaQuery.of(context).size.width * 0.04,
+                    ),
                   ))),
         ],
       ),

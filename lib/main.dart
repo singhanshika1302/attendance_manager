@@ -1,3 +1,7 @@
+import 'package:edumarshals/Screens/OverAllAttendance.dart';
+import 'package:edumarshals/Screens/Profile.dart';
+import 'package:edumarshals/Screens/Subject_Assignment.dart';
+
 import 'package:edumarshals/screens/contact_details.dart';
 import 'package:edumarshals/screens/guardian_info.dart';
 import 'package:edumarshals/screens/splash.dart';

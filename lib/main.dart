@@ -1,3 +1,6 @@
+import 'package:edumarshals/Screens/OverAllAttendance.dart';
+import 'package:edumarshals/Screens/Profile.dart';
+import 'package:edumarshals/Screens/Subject_Assignment.dart';
 import 'package:edumarshals/screens/splash.dart';
 import 'package:flutter/material.dart';
 // import 'package:t/homePage.dart';

@@ -23,7 +23,7 @@ class Profile_Tab extends StatelessWidget {
                 Text(
                   Profileoption,
                   style: TextStyle(
-                    fontSize: 18.0,
+                    fontSize: MediaQuery.of(context).size.width * 0.04,
                     color: Color.fromARGB(255, 0, 0, 0),
                   ),
                 ),

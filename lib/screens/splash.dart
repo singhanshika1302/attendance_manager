@@ -38,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   height: height * 0.05,
                 ),
                 Image.asset(
-                  'assets/unnamed-removebg-preview 1.png',
+                  'assets/assets/unnamed-removebg-preview 1.png',
                   scale: 4,
                   // fit: BoxFit.cover,
                   // height: height * 0.2,

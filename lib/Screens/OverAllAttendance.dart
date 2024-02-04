@@ -1,4 +1,3 @@
-
 import 'package:edumarshals/Widget/AttendanceCard.dart';
 import 'package:edumarshals/Widget/SubjectAttendanceCard.dart';
 import 'package:flutter/material.dart';
@@ -17,9 +16,8 @@ class _OverAllAttdState extends State<OverAllAttd> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 236, 255, 251),
-       appBar: CustomAppBar(
-        userName: 'Vidhi Gupta', 
-      ),
+      appBar: CustomAppBar(
+          userName: 'Vidhi Gupta', userImage: "assets/assets/Ellipse 7.jpg"),
       body: ListView(
         children: [
           Column(
@@ -28,9 +26,10 @@ class _OverAllAttdState extends State<OverAllAttd> {
               AttendanceCard(
                   title: "Overall Attendance",
                   description: "including all subjects and labs."),
-                 Container(
+              Container(
                 alignment: Alignment.centerLeft, // Align text to the left
-                margin: EdgeInsets.only(left: 16.0), // Add left margin for the text
+                margin:
+                    EdgeInsets.only(left: 16.0), // Add left margin for the text
                 child: Text(
                   "All Subject",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
@@ -39,7 +38,8 @@ class _OverAllAttdState extends State<OverAllAttd> {
               SubjectAttendanceCard(
                   subjectName: "Mathematics - IV",
                   attendedClasses: 60,
-                  totalClasses: 100),
+                  totalClasses: 100,
+                  ),
               SubjectAttendanceCard(
                   subjectName: "Mathematics - IV",
                   attendedClasses: 90,
@@ -52,11 +52,11 @@ class _OverAllAttdState extends State<OverAllAttd> {
                   subjectName: "Mathematics - IV",
                   attendedClasses: 70,
                   totalClasses: 100),
-                     SubjectAttendanceCard(
+              SubjectAttendanceCard(
                   subjectName: "Mathematics - IV",
                   attendedClasses: 90,
                   totalClasses: 100),
-                     SubjectAttendanceCard(
+              SubjectAttendanceCard(
                   subjectName: "Mathematics - IV",
                   attendedClasses: 90,
                   totalClasses: 100),

@@ -18,6 +18,7 @@ class SubjectAttendanceCard extends StatelessWidget {
 
     return InkWell(
       onTap: () {
+        
         // Handle the tap event
       },
       child: Container(

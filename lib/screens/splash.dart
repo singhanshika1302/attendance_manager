@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'package:edumarshals/screens/login.dart';
+import 'login.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'sp';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -38,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   height: height * 0.05,
                 ),
                 Image.asset(
-                  'assets/unnamed-removebg-preview 1.png',
+                  'assets/assets/unnamed-removebg-preview 1.png',
                   scale: 4,
                   // fit: BoxFit.cover,
                   // height: height * 0.2,

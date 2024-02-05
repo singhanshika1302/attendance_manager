@@ -38,6 +38,7 @@ dependencies:
   flutter_spinkit: ^5.2.0
   http: '>=0.13.6 <2.0.0'
   intl: ^0.19.0
+  percent_indicator: ^4.2.3
 
 dev_dependencies:
   flutter_test:
@@ -63,8 +64,21 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-  #   - images/a_dot_burr.jpeg
-      - assets/
+# <<<<<<< Homepage
+#     #   - images/a_dot_burr.jpeg
+#     - assets/assets
+# =======
+    - assets/assets/Frame 52.png
+    - assets/assets/unnamed-removebg-preview 1.png
+    - assets/assets/Android Large - 18.png
+    - assets/assets/Ellipse 7.jpg
+    - assets/assets/Frame 100.png
+    - assets/assets/Frame 48117.png
+    - assets/assets/Frame 48117 (1).png
+    - assets/assets/Frame 48117 (2).png
+    - asset/images/pdf1.png
+    - assets/
+# >>>>>>> Development
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

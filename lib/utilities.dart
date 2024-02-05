@@ -209,6 +209,17 @@ Widget button3(
         )),
   );
 }
+  Widget responsiveText(BuildContext context, String text) {
+    return Container(
+      child: Text(
+        text,
+        style: TextStyle(
+          color: Colors.grey,
+          fontSize: MediaQuery.of(context).size.width * 0.02,
+        ),
+      ),
+    );
+  }
 
 Widget UserInput(String text, TextEditingController controller, String text1,
     TextEditingController controller1, BuildContext context) {

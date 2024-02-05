@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'package:edumarshals/screens/login.dart';
+import 'login.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'sp';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);

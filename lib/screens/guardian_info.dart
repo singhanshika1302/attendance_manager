@@ -116,6 +116,7 @@ class _guardianInfoState extends State<guardianInfo> {
                 bottom: BorderSide(width: 1, color: Color(0xFFA0A0A0)),
               ),
             ),
+            //child widget
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               SizedBox(

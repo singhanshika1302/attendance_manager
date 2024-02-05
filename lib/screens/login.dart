@@ -1,3 +1,4 @@
+import 'package:edumarshals/Screens/OverAllAttendance.dart';
 import 'package:edumarshals/main.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -162,13 +163,13 @@ class _LoginState extends State<Login> {
         Positioned(
           bottom: 100.0,
           right: 20.0,
-          child: Image.asset('assets/Frame 100.png'),
+          child: Image.asset('assets/assets/Frame 100.png'),
           // child: button3('Login', 0.6, 0.5, context, () => Login())
         ),
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/Android Large - 18.png'),
+              image: AssetImage('assets/assets/Android Large - 18.png'),
               fit: BoxFit.cover,
             ),
           ),
@@ -409,6 +410,8 @@ class _LoginState extends State<Login> {
               child: ElevatedButton(
                 onPressed: () async {
                   await _saveItem();
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => OverAllAttd()));
 
                   // Add your onPressed logic here
                 },

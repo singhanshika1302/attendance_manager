@@ -1,12 +1,21 @@
-<<<<<<< HEAD
-import 'package:flutter/material.dart';
+
 import 'Screens/Homepage.dart';
-=======
+
+import 'package:edumarshals/Screens/OverAllAttendance.dart';
+import 'package:edumarshals/Screens/Profile.dart';
+import 'package:edumarshals/Screens/Subject_Assignment.dart';
+
+import 'package:edumarshals/screens/contact_details.dart';
+import 'package:edumarshals/screens/guardian_info.dart';
+// >>>>>>> Development
 import 'package:edumarshals/screens/splash.dart';
 import 'package:flutter/material.dart';
 // import 'package:t/homePage.dart';
 import 'package:edumarshals/screens/login.dart';
->>>>>>> 72208cd1ca8438b9f0db29a900382077acb21f67
+
+
+import 'package:edumarshals/screens/profile_info.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -17,18 +26,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Homepage(),
-    );
-  }
-}
-=======
+
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: contactInfo(),
     );
   }
 }
->>>>>>> 72208cd1ca8438b9f0db29a900382077acb21f67
+

@@ -1,4 +1,5 @@
 import 'package:edumarshal/attendance_card.dart';
+import 'package:edumarshal/attendance_list_card.dart';
 import 'package:edumarshal/custom_appbar.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +54,7 @@ class barGraphState extends State<barGraph> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xffEBF3FF) ,
       
          floatingActionButtonLocation: ExpandableFab.location,
       floatingActionButton: ExpandableFab(
@@ -63,15 +64,15 @@ class barGraphState extends State<barGraph> {
         // type: ExpandableFabType.up,
         // pos: ExpandableFabPos.left,
         // childrenOffset: const Offset(0, 20),
-        // fanAngle: 40,
-        // openButtonBuilder: RotateFloatingActionButtonBuilder(
-        //   child: const Icon(Icons.abc),
+      // fanAngle: 40,
+        //  openButtonBuilder: RotateFloatingActionButtonBuilder(
+        //    child: const Icon(Icons.abc),
         //   fabSize: ExpandableFabSize.large,
-        //   foregroundColor: Colors.amber,
-        //   backgroundColor: Colors.green,
-        //   shape: const CircleBorder(),
-        //   angle: 3.14 * 2,
-        // ),
+        //    foregroundColor: Colors.amber,
+        //    backgroundColor: Colors.green,
+        //    shape: const CircleBorder(),
+        //    angle: 3.14 * 2,
+        //),
         // closeButtonBuilder: FloatingActionButtonBuilder(
         //   size: 56,
         //   builder: (BuildContext context, void Function()? onPressed,
@@ -163,16 +164,11 @@ class barGraphState extends State<barGraph> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   
-                  const SizedBox(
-                    width: 38,
-                  ),
-                  const Text(
-                    'Attendance Chart ',
-                    style: TextStyle(color: Colors.black, fontSize: 22),
-                  ),
-                  const SizedBox(
-                    width: 4,
-                  ),
+                  
+          
+                  SizedBox(width:8 ),
+                 Text("Attendance Chart" , style: TextStyle(fontWeight: FontWeight.w500, fontSize:25 )),
+                 
                   //const Text(
                    // 'state',
                   //  style: TextStyle(color: Color(0xff77839a), fontSize: 16),
@@ -270,6 +266,21 @@ class barGraphState extends State<barGraph> {
               const SizedBox(
                 height: 12,
               ),
+             
+              Row(
+                children: [
+                  SizedBox(width:8 ),
+                  Text("Monthly attandance" , style: TextStyle(fontWeight: FontWeight.w500, fontSize:25 )),
+                ],
+              ),
+              SizedBox(height: 15, ),
+              attendance_list_card(date: "1 jan,24", isPresent: true),
+              attendance_list_card(date: "2 jan,24", isPresent: true),
+              attendance_list_card(date: "3 jan,24", isPresent: false),
+              attendance_list_card(date: "4 jan,24", isPresent: true),
+              attendance_list_card(date: "6 jan,24", isPresent: true),
+              attendance_list_card(date: "7 jan,24", isPresent: false),
+              attendance_list_card(date: "9 jan,24", isPresent: true),
             ],
           ),
         ),
@@ -344,52 +355,7 @@ class barGraphState extends State<barGraph> {
         ),
       ],
     );
+
   }
 
-  Widget makeTransactionsIcon() {
-    const width = 4.5;
-    const space = 3.5;
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        Container(
-          width: width,
-          height: 10,
-          color: Colors.white.withOpacity(0.4),
-        ),
-        const SizedBox(
-          width: space,
-        ),
-        Container(
-          width: width,
-          height: 28,
-          color: Colors.white.withOpacity(0.8),
-        ),
-        const SizedBox(
-          width: space,
-        ),
-        Container(
-          width: width,
-          height: 42,
-          color: Colors.white.withOpacity(1),
-        ),
-        const SizedBox(
-          width: space,
-        ),
-        Container(
-          width: width,
-          height: 28,
-          color: Colors.white.withOpacity(0.8),
-        ),
-        const SizedBox(
-          width: space,
-        ),
-        Container(
-          width: width,
-          height: 10,
-          color: Colors.white.withOpacity(0.4),
-        ),
-      ],
-    );
-  }
 }

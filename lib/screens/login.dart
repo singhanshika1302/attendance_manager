@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:edumarshals/Screens/OverAllAttendance.dart';
 import 'package:edumarshals/main.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +16,9 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  HttpClient httpClient = new HttpClient()
+    ..badCertificateCallback =
+        ((X509Certificate cert, String host, int port) => true);
   final TextEditingController _passController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _dobController = TextEditingController();
@@ -68,7 +73,7 @@ class _LoginState extends State<Login> {
       _isLoading = true;
     });
     String formattedDate = selectedDate != null
-        ? DateFormat('dd/MM/yyyy').format(selectedDate!)
+        ? DateFormat('dd-MM-yyyy').format(selectedDate!)
         : '';
     final url = Uri.https('akgec-edu.onrender.com', '/v1/student/login');
     // http.post(url,headers:{}, body: json.encode({
@@ -89,6 +94,86 @@ class _LoginState extends State<Login> {
       //
       print(response.statusCode);
       if (response.statusCode == 200) {
+        // dynamic setCookieHeader = response.headers['set-cookie'];
+
+        // List<String>? cookies;
+
+        // print('Response headers: ${response.headers}');
+        // print('Cookies from response: ${response.headers['set-cookie']}');
+
+        // if (setCookieHeader is String) {
+        //   cookies = [setCookieHeader];
+        // } else if (setCookieHeader is List<String>) {
+        //   cookies = setCookieHeader;
+        // } else {
+        //   cookies = [];
+        // }
+
+        // print('Response Headers: $setCookieHeader');
+
+        // String accessToken = '';
+
+        // if (cookies.isNotEmpty) {
+        //   accessToken = cookies
+        //       .map((cookie) => cookie.split(';').first)
+        //       .firstWhere((value) => value.startsWith('accessToken='),
+        //           orElse: () => '');
+        // }
+        // if (accessToken.isNotEmpty) {
+        //   accessToken = accessToken.replaceFirst('accessToken=', '');
+        // }
+
+        // print('Extracted accessToken: $accessToken');
+
+        // print('Access Token from Cookie: $accessToken');
+
+        // // if (accessToken.isNotEmpty) {
+        // //   prefs.setString('token', accessToken);
+        // //   await _secureStorage.setToken(accessToken);
+        // //   print('Token stored in prefs: $accessToken');
+        // // } else {
+        // //   // Handle the case where the token is empty
+        // //   print('Token is empty');
+        // // }
+        dynamic setCookieHeader = response.headers['set-cookie'];
+
+        List<String>? cookies;
+        // print(response.Cookies);
+        print('Response headers: ${response.headers}');
+        print('Cookies from response: ${response.headers['set-cookie']}');
+
+        if (setCookieHeader is String) {
+          cookies = [setCookieHeader];
+        } else if (setCookieHeader is List<String>) {
+          cookies = setCookieHeader;
+        } else {
+          cookies = [];
+        }
+
+        print('Response Headers: $setCookieHeader');
+
+        String accessToken = '';
+        // String
+
+        if (cookies.isNotEmpty) {
+          accessToken = cookies
+              .map((cookie) => cookie.split(';').first)
+              .firstWhere((value) => value.startsWith('accessToken='),
+                  orElse: () => '');
+        }
+        String actualAccessToken = accessToken.substring("accesstoken=".length);
+
+        print('Access Token from Cookie: $actualAccessToken');
+        PreferencesManager().token = actualAccessToken;
+
+        if (actualAccessToken.isNotEmpty) {
+          // prefs.setString('token', actualAccessToken);
+          print('Token stored in prefs: $actualAccessToken');
+        } else {
+          // Handle the case where the token is empty
+          print('Token is empty');
+        }
+
         final Map<String, dynamic> responseData = json.decode(response.body);
         final message = responseData['message'];
         final name = responseData['name'];
@@ -122,6 +207,8 @@ class _LoginState extends State<Login> {
           _isLoading = false;
         });
         // for navigaation to next page
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => OverAllAttd()));
         // Navigator.push(
         //     context,
         //     MaterialPageRoute(
@@ -160,16 +247,16 @@ class _LoginState extends State<Login> {
     final screenWidth = MediaQuery.of(context).size.width;
     return Stack(
       children: [
-        Positioned(
-          bottom: 100.0,
-          right: 20.0,
-          child: Image.asset('assets/assets/Frame 100.png'),
-          // child: button3('Login', 0.6, 0.5, context, () => Login())
-        ),
+        // Positioned(
+        //   bottom: 100.0,
+        //   right: 20.0,
+        //   // child: Image.asset('assets/Frame 100.png'),
+        //   // child: button3('Login', 0.6, 0.5, context, () => Login())
+        // ),
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/assets/Android Large - 18.png'),
+              image: AssetImage('assets/Android Large - 18.png'),
               fit: BoxFit.cover,
             ),
           ),
@@ -200,8 +287,8 @@ class _LoginState extends State<Login> {
             right: 100.0,
             child: button3('Login', 0.6, 0.5, context, () => Login())),
         Positioned(
-          bottom: 550.0,
-          right: 120.0,
+          bottom: 518.0,
+          right: 110.0,
           child: Image.asset(
             'assets/Frame 100.png',
             scale: 4.5,
@@ -331,7 +418,7 @@ class _LoginState extends State<Login> {
                                               Text(
                                                 // '  Enter D.O.B',
                                                 selectedDate != null
-                                                    ? DateFormat('dd/MM/yyyy')
+                                                    ? DateFormat('dd-MM-yyyy')
                                                         .format(selectedDate!)
                                                     : 'Enter D.O.B',
                                                 style: TextStyle(
@@ -410,8 +497,8 @@ class _LoginState extends State<Login> {
               child: ElevatedButton(
                 onPressed: () async {
                   await _saveItem();
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => OverAllAttd()));
+                  // Navigator.push(context,
+                  //     MaterialPageRoute(builder: (context) => OverAllAttd()));
 
                   // Add your onPressed logic here
                 },

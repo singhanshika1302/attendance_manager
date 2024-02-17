@@ -17,7 +17,7 @@ class _OverAllAttdState extends State<OverAllAttd> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 236, 255, 251),
       appBar: CustomAppBar(
-          userName: 'Vidhi Gupta', userImage: "assets/assets/Ellipse 7.jpg"),
+          userName: 'Vidhi Gupta', userImage: "assets/Ellipse 7.jpg"),
       body: ListView(
         children: [
           Column(
@@ -36,10 +36,10 @@ class _OverAllAttdState extends State<OverAllAttd> {
                 ),
               ),
               SubjectAttendanceCard(
-                  subjectName: "Mathematics - IV",
-                  attendedClasses: 60,
-                  totalClasses: 100,
-                  ),
+                subjectName: "Mathematics - IV",
+                attendedClasses: 60,
+                totalClasses: 100,
+              ),
               SubjectAttendanceCard(
                   subjectName: "Mathematics - IV",
                   attendedClasses: 90,

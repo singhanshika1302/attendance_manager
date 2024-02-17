@@ -1,5 +1,5 @@
 import 'package:edumarshal/subject_wise_attendance.dart';
-import 'package:edumarshal/test.dart';
+import 'package:edumarshal/subject_wise_attendance.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,7 +13,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: BarChartSample2(),
+      debugShowCheckedModeBanner: false,
+      home: barGraph(),
   
       
     

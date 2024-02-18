@@ -69,13 +69,13 @@ flutter:
 #     - assets/assets
 # =======
     - assets/assets/Frame 52.png
-    - assets/assets/unnamed-removebg-preview 1.png
-    - assets/assets/Android Large - 18.png
-    - assets/assets/Ellipse 7.jpg
-    - assets/assets/Frame 100.png
+    - assets/unnamed-removebg-preview 1.png
+    - assets/Android Large - 18.png
+    - assets/Ellipse 7.jpg
+    - assets/Frame 100.png
     - assets/assets/Frame 48117.png
-    - assets/assets/Frame 48117 (1).png
-    - assets/assets/Frame 48117 (2).png
+#    - assets/Frame 48117 (1).png
+#    - assets/Frame 48117 (2).png
     - asset/images/pdf1.png
     - assets/
 # >>>>>>> Development

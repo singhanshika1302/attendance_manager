@@ -63,13 +63,13 @@ class _SplashScreenState extends State<SplashScreen> {
                 // letterSpacing: -0.70,
               ),
             ),
-            SizedBox(
-              height: height * 0.05,
-            ),
-            SpinKitChasingDots(
-              color: Color(0xFF004BB8),
-              size: 40,
-            )
+            // SizedBox(
+            //   height: height * 0.05,
+            // ),
+            // SpinKitChasingDots(
+            //   color: Color(0xFF004BB8),
+            //   size: 40,
+            // )
           ],
         )));
   }

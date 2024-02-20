@@ -78,8 +78,8 @@ flutter:
     - assets/Ellipse 7.jpg
     - assets/Frame 100.png
     - assets/assets/Frame 48117.png
-    - assets/assets/Frame 48117 (1).png
-    - assets/assets/Frame 48117 (2).png
+#    - assets/Frame 48117 (1).png
+#    - assets/Frame 48117 (2).png
     - asset/images/pdf1.png
     - assets/
 # >>>>>>> Development

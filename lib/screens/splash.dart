@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+
 import 'login.dart';
 import 'package:flutter/material.dart';
 // import 'sp';
@@ -38,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   height: height * 0.05,
                 ),
                 Image.asset(
-                  'assets/assets/unnamed-removebg-preview 1.png',
+                  'assets/unnamed-removebg-preview 1.png',
                   scale: 4,
                   // fit: BoxFit.cover,
                   // height: height * 0.2,
@@ -49,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
             SizedBox(
               height: height * 0.001,
             ),
-            Text(
+         const   Text(
               'AKGEC EDUMARSHAL',
               textAlign: TextAlign.center,
               style: TextStyle(

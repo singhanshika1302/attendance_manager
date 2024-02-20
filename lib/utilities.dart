@@ -50,7 +50,7 @@ Widget buildtextfiled(String image, String text, BuildContext context,
         padding: const EdgeInsets.only(left: 50.0),
         child: CustomText(
           text: text,
-          color: Color(0xFF3386FF),
+          color: const Color(0xFF3386FF),
           fontSize: 12,
           fontStyle: null,
           fontfamily: 'Poppins',
@@ -58,7 +58,7 @@ Widget buildtextfiled(String image, String text, BuildContext context,
         ),
       ),
       Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               // color: Color(0xFFA0A0A0),
               border: Border(
                   // bottom: BorderSide(width: 1, color: Color(0xFFA0A0A0)),
@@ -96,7 +96,7 @@ Widget buildtextfiled(String image, String text, BuildContext context,
                     return null;
                   },
                   decoration: InputDecoration(
-                    fillColor: Color.fromARGB(0, 17, 90, 216),
+                    fillColor: const Color.fromARGB(0, 17, 90, 216),
                     filled: true,
                     hintText: hinttext,
                     hintStyle: const TextStyle(
@@ -230,7 +230,7 @@ Widget UserInput(String text, TextEditingController controller, String text1,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Container(
+        SizedBox(
           width: screenWidth * 0.45,
           child: TextFormField(
             controller: controller,
@@ -239,7 +239,7 @@ Widget UserInput(String text, TextEditingController controller, String text1,
               color: Color.fromARGB(255, 0, 0, 0),
             ),
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+              contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
               labelText: text,
               labelStyle: const TextStyle(
                   color: Color.fromARGB(158, 0, 0, 0),
@@ -269,7 +269,7 @@ Widget UserInput(String text, TextEditingController controller, String text1,
             ),
           ),
         ),
-        Container(
+        SizedBox(
           width: screenWidth * 0.45,
           child: TextFormField(
             controller: controller1,
@@ -278,7 +278,7 @@ Widget UserInput(String text, TextEditingController controller, String text1,
               color: Color.fromARGB(255, 0, 0, 0),
             ),
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+              contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
               labelText: text1,
               labelStyle: const TextStyle(
                   color: Color.fromARGB(158, 0, 0, 0),
@@ -322,7 +322,7 @@ Widget UserInput1(
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Container(
+        SizedBox(
           width: screenWidth * 0.938,
           child: TextFormField(
             controller: controller,
@@ -331,7 +331,7 @@ Widget UserInput1(
               color: Color.fromARGB(255, 0, 0, 0),
             ),
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+              contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
               labelText: text,
               labelStyle: const TextStyle(
                   color: Color.fromARGB(158, 0, 0, 0),
@@ -424,11 +424,11 @@ Widget upper(
         SizedBox(width: screenWidth * 0.02),
         Text(
           text,
-          style: TextStyle(
+          style: const TextStyle(
             // fontFamily: ,
             fontWeight: FontWeight.w500,
             fontFamily: 'Poppines',
-            color: const Color.fromARGB(255, 0, 0, 0),
+            color: Color.fromARGB(255, 0, 0, 0),
             fontSize: 15,
 
             // fontStyle: FontStyle.normal,

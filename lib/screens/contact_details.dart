@@ -1,10 +1,6 @@
-import 'package:edumarshals/main.dart';
 import 'package:edumarshals/screens/login.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
 import 'package:edumarshals/utilities.dart';
-import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
 
 class contactInfo extends StatefulWidget {
   const contactInfo({super.key});
@@ -27,7 +23,7 @@ class _contactInfoState extends State<contactInfo> {
   final TextEditingController _perCountryController = TextEditingController();
   final TextEditingController _preCountryController = TextEditingController();
   // bool isChecked = false;
-  bool _isLoading = false;
+  final bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +54,7 @@ class _contactInfoState extends State<contactInfo> {
         SafeArea(
           child: Scaffold(
               // backgroundColor: Color.fromARGB(248, 156, 184, 205),
-              backgroundColor: Color(0xFFEBF3FF),
+              backgroundColor: const Color(0xFFEBF3FF),
               body: ListView(
                 children: [buildheading(context)],
               )),
@@ -66,7 +62,7 @@ class _contactInfoState extends State<contactInfo> {
         if (_isLoading)
           Container(
             color: Colors.black.withOpacity(0.5),
-            child: Center(
+            child: const Center(
               child: CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF4E82EA)),
                 strokeWidth: 5.0,
@@ -128,7 +124,7 @@ class _contactInfoState extends State<contactInfo> {
                 fontfamily: 'Poppins',
               ),
             ])),
-        upper('Contact Details', 0, 0, context, Login()),
+        upper('Contact Details', 0, 0, context, const Login()),
         SizedBox(
           height: screenHeight * 0.025,
         ),

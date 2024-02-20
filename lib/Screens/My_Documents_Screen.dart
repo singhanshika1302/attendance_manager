@@ -1,6 +1,6 @@
+import 'package:edumarshals/Screens/OverAllAttendance.dart';
 import 'package:edumarshals/Widget/My_Document_View_Card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class MyDocument extends StatefulWidget {
   const MyDocument({Key? key}) : super(key: key);
@@ -17,77 +17,77 @@ class _MyDocumentState extends State<MyDocument> {
 
   List<List<Widget>> cards = [
     [
-      My_Document_View_Card(
+      const My_Document_View_Card(
         documentname: "Aadhar Card 1",
         textbuttonname: 'View',
       ),
-      My_Document_View_Card(
+      const My_Document_View_Card(
         documentname: "Graduation/Diploma Marksheet",
         textbuttonname: 'View',
       ),
-      My_Document_View_Card(
+      const My_Document_View_Card(
         documentname: "Aadhar Card 1",
         textbuttonname: 'View',
       ),
-      My_Document_View_Card(
+      const My_Document_View_Card(
         documentname: "Graduation/Diploma Marksheet",
         textbuttonname: 'View',
       ),
-      My_Document_View_Card(
+      const My_Document_View_Card(
         documentname: "Aadhar Card 1",
         textbuttonname: 'View',
       ),
-      My_Document_View_Card(
+      const My_Document_View_Card(
         documentname: "Graduation/Diploma Marksheet",
         textbuttonname: 'View',
       ),
-      My_Document_View_Card(
+      const My_Document_View_Card(
         documentname: "Aadhar Card 1",
         textbuttonname: 'View',
       ),
-      My_Document_View_Card(
+      const My_Document_View_Card(
         documentname: "Graduation/Diploma Marksheet",
         textbuttonname: 'View',
       ),
-      My_Document_View_Card(
+      const My_Document_View_Card(
         documentname: "Aadhar Card 1",
         textbuttonname: 'View',
       ),
-      My_Document_View_Card(
+      const My_Document_View_Card(
         documentname: "Graduation/Diploma Marksheet",
         textbuttonname: 'View',
       ),
-      My_Document_View_Card(
+      const My_Document_View_Card(
         documentname: "Aadhar Card 1",
         textbuttonname: 'View',
       ),
-      My_Document_View_Card(
+      const My_Document_View_Card(
         documentname: "Graduation/Diploma Marksheet",
         textbuttonname: 'View',
       ),
-      My_Document_View_Card(
+      const My_Document_View_Card(
         documentname: "Aadhar Card 1",
         textbuttonname: 'View',
       ),
-      My_Document_View_Card(
+      const My_Document_View_Card(
         documentname: "Graduation/Diploma Marksheet",
         textbuttonname: 'View',
       ),
-      My_Document_View_Card(
+      const My_Document_View_Card(
         documentname: "Aadhar Card 1",
         textbuttonname: 'View',
       ),
-      My_Document_View_Card(
+      const My_Document_View_Card(
         documentname: "Graduation/Diploma Marksheet",
         textbuttonname: 'View',
       ),
     ],
     [
-      My_Document_View_Card(
+      const My_Document_View_Card(
         documentname: "10th Marksheet",
         textbuttonname: 'Upload',
       ),
-      My_Document_View_Card(
+      const My_Document_View_Card(
         documentname: "Passport ",
         textbuttonname: 'Upload',
       ),
@@ -107,7 +107,7 @@ class _MyDocumentState extends State<MyDocument> {
 
         toolbarHeight: 100.0, // Adjust the height as needed
         title: const Center(
-          child: const Column(
+          child: Column(
             children: [
               CircleAvatar(
                 backgroundImage: AssetImage('assets/assets/Ellipse 7.jpg'),
@@ -129,7 +129,9 @@ class _MyDocumentState extends State<MyDocument> {
                   child: Row(
                 children: [
                   IconButton(
-                      onPressed: () {}, icon: const Icon(Icons.arrow_back)),
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> OverAllAttd()));
+                      }, icon: const Icon(Icons.arrow_back)),
                   const Text(
                     "My Documents",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
@@ -197,7 +199,7 @@ class _MyDocumentState extends State<MyDocument> {
               ),
               SingleChildScrollView(
                 scrollDirection: Axis.vertical,
-                child: Container(
+                child: SizedBox(
                   // margin: const EdgeInsets.only(top: 30),
                   width: double.infinity,
                   height: screenHeight * 6,

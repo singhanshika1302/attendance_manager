@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+
 import 'login.dart';
 import 'package:flutter/material.dart';
-import 'sp';
+// import 'sp';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -15,8 +17,8 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 3), () {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+    Timer(const Duration(seconds: 3), () {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const Login()));
     });
   }
 
@@ -25,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
     final height = MediaQuery.sizeOf(context).height * 1;
     final width = MediaQuery.sizeOf(context).width * 1;
     return Scaffold(
-        backgroundColor: Color(0xFFEBF3FF),
+        backgroundColor: const Color(0xFFEBF3FF),
         body: Container(
             child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -49,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
             SizedBox(
               height: height * 0.001,
             ),
-            Text(
+            const Text(
               'AKGEC EDUMARSHAL',
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -64,7 +66,7 @@ class _SplashScreenState extends State<SplashScreen> {
             SizedBox(
               height: height * 0.05,
             ),
-            SpinKitChasingDots(
+            const SpinKitChasingDots(
               color: Color(0xFF004BB8),
               size: 40,
             )

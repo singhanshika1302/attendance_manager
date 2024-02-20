@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:edumarshals/Screens/OverAllAttendance.dart';
 import 'package:edumarshals/main.dart';
+import 'package:edumarshals/screens/time_table.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:edumarshals/utilities.dart';
@@ -14,6 +17,9 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  HttpClient httpClient = new HttpClient()
+    ..badCertificateCallback =
+        ((X509Certificate cert, String host, int port) => true);
   final TextEditingController _passController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _dobController = TextEditingController();
@@ -48,31 +54,14 @@ class _LoginState extends State<Login> {
     }
   }
 
-  // TimeOfDay? selectedTime;
-
-  // Future<void> _selectTime(BuildContext context) async {
-  //   final TimeOfDay? picked = await showTimePicker(
-  //     context: context,
-  //     initialTime: selectedTime ?? TimeOfDay.now(),
-  //   );
-
-  //   if (picked != null && picked != selectedTime) {
-  //     setState(() {
-  //       selectedTime = picked;
-  //     });
-  //   }
-  // }
-
   Future<void> _saveItem() async {
     setState(() {
       _isLoading = true;
     });
     String formattedDate = selectedDate != null
-        ? DateFormat('dd/MM/yyyy').format(selectedDate!)
+        ? DateFormat('dd-MM-yyyy').format(selectedDate!)
         : '';
     final url = Uri.https('akgec-edu.onrender.com', '/v1/student/login');
-    // http.post(url,headers:{}, body: json.encode({
-    // https: //akgec-edu.onrender.com/v1/student/login
 
     final Map<String, String> requestBody = {
       'password': _passController.text,
@@ -89,6 +78,45 @@ class _LoginState extends State<Login> {
       //
       print(response.statusCode);
       if (response.statusCode == 200) {
+        dynamic setCookieHeader = response.headers['set-cookie'];
+
+        List<String>? cookies;
+        // print(response.Cookies);
+        print('Response headers: ${response.headers}');
+        print('Cookies from response: ${response.headers['set-cookie']}');
+
+        if (setCookieHeader is String) {
+          cookies = [setCookieHeader];
+        } else if (setCookieHeader is List<String>) {
+          cookies = setCookieHeader;
+        } else {
+          cookies = [];
+        }
+
+        print('Response Headers: $setCookieHeader');
+
+        String accessToken = '';
+        // String
+
+        if (cookies.isNotEmpty) {
+          accessToken = cookies
+              .map((cookie) => cookie.split(';').first)
+              .firstWhere((value) => value.startsWith('accessToken='),
+                  orElse: () => '');
+        }
+        String actualAccessToken = accessToken.substring("accesstoken=".length);
+
+        print('Access Token from Cookie: $actualAccessToken');
+        PreferencesManager().token = actualAccessToken;
+
+        if (actualAccessToken.isNotEmpty) {
+          // prefs.setString('token', actualAccessToken);
+          print('Token stored in prefs: $actualAccessToken');
+        } else {
+          // Handle the case where the token is empty
+          print('Token is empty');
+        }
+
         final Map<String, dynamic> responseData = json.decode(response.body);
         final message = responseData['message'];
         final name = responseData['name'];
@@ -103,25 +131,13 @@ class _LoginState extends State<Login> {
             duration: const Duration(seconds: 3),
           ),
         );
-        // prefs.setString('email', _emailController.text);
-        // prefs.setString('name', _nameController.text);
-
-        //uncomment for using prefernce manager
-        // PreferencesManager().email = _emailController.text;
-        // PreferencesManager().name = _nameController.text;
-
-        // if (.isNotEmpty) {
-        //   prefs.setString('token', );
-        //   print('Token stored in prefs: $actualAccessToken');
-        // } else {
-        //   // Handle the case where the token is empty
-        //   print('Token is empty');
-        // }
 
         setState(() {
           _isLoading = false;
         });
         // for navigaation to next page
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => ExamTimetableScreen()));
         // Navigator.push(
         //     context,
         //     MaterialPageRoute(
@@ -160,26 +176,14 @@ class _LoginState extends State<Login> {
     final screenWidth = MediaQuery.of(context).size.width;
     return Stack(
       children: [
-        Positioned(
-          bottom: 100.0,
-          right: 20.0,
-          child: Image.asset('assets/assets/Frame 100.png'),
-          // child: button3('Login', 0.6, 0.5, context, () => Login())
-        ),
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/assets/Android Large - 18.png'),
+              image: AssetImage('assets/Android Large - 18.png'),
               fit: BoxFit.cover,
             ),
           ),
         ),
-        // Positioned(
-        //   bottom: 200.0,
-        //   right: 40.0,
-        //   child: Image.asset('assets/user-square.png'),
-        //   // child: button3('Login', 0.6, 0.5, context, () => Login())
-        // ),
         Scaffold(
             backgroundColor: const Color.fromARGB(0, 151, 147, 147),
             body: ListView(
@@ -200,8 +204,8 @@ class _LoginState extends State<Login> {
             right: 100.0,
             child: button3('Login', 0.6, 0.5, context, () => Login())),
         Positioned(
-          bottom: 550.0,
-          right: 120.0,
+          bottom: screenHeight * 0.69,
+          right: screenWidth * 0.29,
           child: Image.asset(
             'assets/Frame 100.png',
             scale: 4.5,
@@ -331,7 +335,7 @@ class _LoginState extends State<Login> {
                                               Text(
                                                 // '  Enter D.O.B',
                                                 selectedDate != null
-                                                    ? DateFormat('dd/MM/yyyy')
+                                                    ? DateFormat('dd-MM-yyyy')
                                                         .format(selectedDate!)
                                                     : 'Enter D.O.B',
                                                 style: TextStyle(
@@ -410,8 +414,8 @@ class _LoginState extends State<Login> {
               child: ElevatedButton(
                 onPressed: () async {
                   await _saveItem();
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => OverAllAttd()));
+                  // Navigator.push(context,
+                  //     MaterialPageRoute(builder: (context) => OverAllAttd()));
 
                   // Add your onPressed logic here
                 },

@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:edumarshals/screens/time_table.dart';
+
 import 'Screens/Homepage.dart';
 
 import 'package:edumarshals/Screens/OverAllAttendance.dart';
@@ -38,7 +40,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
 
 class PreferencesManager {
   static late PreferencesManager _instance;

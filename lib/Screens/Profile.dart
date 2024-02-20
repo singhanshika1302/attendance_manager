@@ -1,5 +1,7 @@
 // import 'package:edumarshal/Widget/Profile_Tabs.dart';
 import 'package:edumarshals/Screens/My_Documents_Screen.dart';
+import 'package:edumarshals/Screens/contact_details.dart';
+import 'package:edumarshals/Screens/guardian_info.dart';
 import 'package:edumarshals/Widget/Profile_Tabs.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_acrylic/flutter_acrylic.dart';
@@ -22,12 +24,12 @@ class _ProfileState extends State<Profile> {
         title: Center(
           child: Column(
             children: [
-              Padding(padding: EdgeInsets.all(8)),
-              CircleAvatar(
+              const Padding(padding: EdgeInsets.all(8)),
+              const CircleAvatar(
                 backgroundImage: AssetImage('assets/assets/Ellipse 7.jpg'),
                 backgroundColor: Color.fromARGB(255, 17, 37, 218),
               ),
-              Text("Vidhi Gupta"),
+              const Text("Vidhi Gupta"),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -49,7 +51,7 @@ class _ProfileState extends State<Profile> {
                   ),
                 ],
               ),
-              Divider(),
+              const Divider(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -60,7 +62,7 @@ class _ProfileState extends State<Profile> {
                       children: [
                         // Padding(padding: EdgeInsets.all(8)),
                         Container(
-                            margin: EdgeInsets.all(7),
+                            margin: const EdgeInsets.all(7),
                             child:
                                 Image.asset("assets/assets/Frame 48117.png")),
                         // Icon(Icons.edit),
@@ -78,7 +80,7 @@ class _ProfileState extends State<Profile> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Container(
-                            margin: EdgeInsets.all(7),
+                            margin: const EdgeInsets.all(7),
                             child:
                                 Image.asset("assets/assets/Frame 48117.png")),
 
@@ -98,7 +100,7 @@ class _ProfileState extends State<Profile> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Container(
-                            margin: EdgeInsets.all(7),
+                            margin: const EdgeInsets.all(7),
                             child: Image.asset(
                                 "assets/assets/Frame 48117 (2).png")),
 
@@ -120,37 +122,55 @@ class _ProfileState extends State<Profile> {
       ),
       body: ListView(
         children: [
-          Profile_Tab(
+           Profile_Tab(
             Profileoption: 'Personal Information',
+             onpressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const MyDocument()));
+              // Callback function for IconButton pressed
+              print('Arrow Forward Pressed');
+            },
           ),
-          Profile_Tab(
+           Profile_Tab(
             Profileoption: 'Guardian Information',
+             onpressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => guardianInfo()));
+              // Callback function for IconButton pressed
+              print('Arrow Forward Pressed');
+            },
           ),
           Profile_Tab(
             Profileoption: 'Contact Details',
+             onpressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const contactInfo()));
+              // Callback function for IconButton pressed
+              print('Arrow Forward Pressed');
+            },
           ),
-          Profile_Tab(
+          const Profile_Tab(
             Profileoption: 'Education Details',
           ),
           Profile_Tab(
             Profileoption: 'My Documents',
             onpressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => MyDocument()));
+                  MaterialPageRoute(builder: (context) => const MyDocument()));
               // Callback function for IconButton pressed
               print('Arrow Forward Pressed');
             },
           ),
-          Profile_Tab(
+          const Profile_Tab(
             Profileoption: 'Student Researches',
           ),
-          Profile_Tab(
+          const Profile_Tab(
             Profileoption: 'Additional Info',
           ),
-          Profile_Tab(
+          const Profile_Tab(
             Profileoption: 'Scholarship Form',
           ),
-          Profile_Tab(
+          const Profile_Tab(
             Profileoption: 'Feedback',
           ),
 

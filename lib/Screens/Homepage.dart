@@ -1,4 +1,5 @@
-import 'package:edumarshal/Utilities/Utilities.dart';
+// import 'package:edumarshal/Utilities/Utilities.dart';
+import 'package:edumarshals/Utilities/Utilities.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
@@ -20,17 +21,17 @@ class _HomepageState extends State<Homepage> {
     final swidth = MediaQuery.of(context).size.width;
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: Color(0xffEBF3FF),
+      backgroundColor: const Color(0xffEBF3FF),
       drawer: Drawer(
-        backgroundColor: Color.fromRGBO(0, 83, 201, 0.8),
+        backgroundColor: const Color.fromRGBO(0, 83, 201, 0.8),
         child: Padding(
           padding: const EdgeInsets.only(top: 50),
           child: ListView(
             padding: EdgeInsets.zero,
             children: <Widget>[
               ListTile(
-                leading: Padding(
-                  padding: const EdgeInsets.only(left: 10),
+                leading: const Padding(
+                  padding: EdgeInsets.only(left: 10),
                   child: Icon(Icons.close_sharp, size: 40, color: Color(0xffCFDDF1),),
                 ),
                 onTap: () {
@@ -103,7 +104,7 @@ class _HomepageState extends State<Homepage> {
                   Container(
                     height: sheight * 0.18,
                     decoration: BoxDecoration(
-                      color: Color(0xff004BB8),
+                      color: const Color(0xff004BB8),
                       borderRadius: BorderRadius.circular(15.0),
                     ),
                     child: Padding(
@@ -114,7 +115,7 @@ class _HomepageState extends State<Homepage> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Overall Attendance', style: TextStyle(
+                              const Text('Overall Attendance', style: TextStyle(
                                   fontSize: 22,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold
@@ -122,7 +123,7 @@ class _HomepageState extends State<Homepage> {
 
                               SizedBox(height: sheight * 0.01,),
 
-                              Text('including all subjects\nand labs.',
+                              const Text('including all subjects\nand labs.',
                                 style: TextStyle(
                                     fontSize: 17,
                                     color: Colors.white,
@@ -136,10 +137,10 @@ class _HomepageState extends State<Homepage> {
                             lineWidth: 15.0,
                             percent: 0.809,
                             // header: Text("Icon header"),
-                            center: Text("80.9%",
+                            center: const Text("80.9%",
                               style: TextStyle(color: Colors.white),),
                             backgroundColor: const Color.fromRGBO(0, 75, 184, 1),
-                            progressColor: Color(0xff00CE46),
+                            progressColor: const Color(0xff00CE46),
                           ),
                         ],
                       ),
@@ -148,7 +149,7 @@ class _HomepageState extends State<Homepage> {
 
                   SizedBox(height: sheight * 0.033,),
 
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('All Subjects', style: TextStyle(
@@ -167,7 +168,7 @@ class _HomepageState extends State<Homepage> {
 
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    child: Container(
+                    child: SizedBox(
                       height: sheight * 0.15,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -190,7 +191,7 @@ class _HomepageState extends State<Homepage> {
                   ),
                   SizedBox(height: sheight * 0.015,),
 
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Recent Class Notes', style: TextStyle(
@@ -215,7 +216,7 @@ class _HomepageState extends State<Homepage> {
                       'By Meenakshi Ma`am'),
 
 
-                  Text('Assignment',
+                  const Text('Assignment',
                     textAlign: TextAlign.start,
                     style: TextStyle(
                         fontSize: 22,
@@ -226,7 +227,7 @@ class _HomepageState extends State<Homepage> {
 
                   Container(
                     decoration: BoxDecoration(
-                        color: Color(0xff004BB8),
+                        color: const Color(0xff004BB8),
                         borderRadius: BorderRadius.circular(15.0)
                     ),
                     child: Padding(
@@ -272,7 +273,7 @@ class _HomepageState extends State<Homepage> {
                                  ],
                                ),
 
-                                Text('View All', style: TextStyle(
+                                const Text('View All', style: TextStyle(
                                     fontSize: 12,
                                     color: Colors.white
                                 ),)
@@ -306,7 +307,7 @@ class _HomepageState extends State<Homepage> {
         borderRadius: BorderRadius.circular(
             10.0), // Adjust the border radius as needed
       ),
-      margin: EdgeInsets.symmetric(horizontal: 15.0),
+      margin: const EdgeInsets.symmetric(horizontal: 15.0),
       // Adjust the vertical margin as needed
       child: ListTile(
         leading: Image.asset(
@@ -315,7 +316,7 @@ class _HomepageState extends State<Homepage> {
         title: Text(
           title,
           style: TextStyle(
-            color: index == selectedTileIndex ? Color.fromRGBO(0, 75, 184, 0.92) : Color.fromRGBO(235, 243, 255, 0.92),
+            color: index == selectedTileIndex ? const Color.fromRGBO(0, 75, 184, 0.92) : const Color.fromRGBO(235, 243, 255, 0.92),
             fontSize: 20,
           ),
         ),

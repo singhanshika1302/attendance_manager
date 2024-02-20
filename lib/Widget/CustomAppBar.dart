@@ -5,7 +5,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String userName;
   final String? userImage;
 
-  CustomAppBar({
+  const CustomAppBar({super.key, 
     required this.userName,
     this.userImage,
   });
@@ -17,10 +17,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.white,
       title: Row(
         children: [
-          Icon(Icons.more_vert),
+          const Icon(Icons.more_vert),
           InkWell(
             onDoubleTap: () => Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Profile())),
+                context, MaterialPageRoute(builder: (context) => const Profile())),
             child: CircleAvatar(
               backgroundColor: const Color.fromARGB(255, 36, 34, 34),
               backgroundImage:
@@ -28,12 +28,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               radius: 20.0,
             ),
           ),
-          SizedBox(width: 10.0),
+          const SizedBox(width: 10.0),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 'Hello',
                 style: TextStyle(
                   fontSize: 16.0,
@@ -42,7 +42,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
               Text(
                 userName,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18.0,
                   fontWeight: FontWeight.bold,
                   color: Colors.grey,
@@ -55,7 +55,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         // You can add additional actions here if needed
         IconButton(
-          icon: Icon(Icons.notification_add),
+          icon: const Icon(Icons.notification_add),
           onPressed: () {
             // Handle settings button press
           },
@@ -65,5 +65,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

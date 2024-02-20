@@ -1,10 +1,6 @@
-import 'package:edumarshals/main.dart';
 import 'package:edumarshals/screens/login.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
 import 'package:edumarshals/utilities.dart';
-import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
 
 class profileInfo extends StatefulWidget {
   const profileInfo({super.key});
@@ -33,7 +29,7 @@ class _profileInfoState extends State<profileInfo> {
   final TextEditingController _lateralController = TextEditingController();
   final TextEditingController _hostelController = TextEditingController();
   // bool isChecked = false;
-  bool _isLoading = false;
+  final bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +60,7 @@ class _profileInfoState extends State<profileInfo> {
         SafeArea(
           child: Scaffold(
               // backgroundColor: Color.fromARGB(248, 156, 184, 205),
-              backgroundColor: Color(0xFFEBF3FF),
+              backgroundColor: const Color(0xFFEBF3FF),
               body: ListView(
                 children: [buildheading(context)],
               )),
@@ -72,7 +68,7 @@ class _profileInfoState extends State<profileInfo> {
         if (_isLoading)
           Container(
             color: Colors.black.withOpacity(0.5),
-            child: Center(
+            child: const Center(
               child: CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF4E82EA)),
                 strokeWidth: 5.0,
@@ -134,7 +130,7 @@ class _profileInfoState extends State<profileInfo> {
                 fontfamily: 'Poppins',
               ),
             ])),
-        upper('Personal Info', 0, 0, context, Login()),
+        upper('Personal Info', 0, 0, context, const Login()),
         SizedBox(
           height: screenHeight * 0.025,
         ),

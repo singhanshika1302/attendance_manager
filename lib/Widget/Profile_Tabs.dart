@@ -4,12 +4,12 @@ class Profile_Tab extends StatelessWidget {
   final String Profileoption;
   final VoidCallback? onpressed;
 
-  Profile_Tab({required this.Profileoption, this.onpressed});
+  const Profile_Tab({super.key, required this.Profileoption, this.onpressed});
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(10.0),
-      padding: EdgeInsets.all(15.0),
+      margin: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(15.0),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15.0),
@@ -24,13 +24,13 @@ class Profile_Tab extends StatelessWidget {
                   Profileoption,
                   style: TextStyle(
                     fontSize: MediaQuery.of(context).size.width * 0.04,
-                    color: Color.fromARGB(255, 0, 0, 0),
+                    color: const Color.fromARGB(255, 0, 0, 0),
                   ),
                 ),
               ],
             ),
           ),
-          IconButton(onPressed: onpressed, icon: Icon(Icons.arrow_forward))
+          IconButton(onPressed: onpressed, icon: const Icon(Icons.arrow_forward))
         ],
       ),
     );

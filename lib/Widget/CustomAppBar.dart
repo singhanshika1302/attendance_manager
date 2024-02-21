@@ -1,4 +1,4 @@
-import 'package:edumarshals/Screens/Profile.dart';
+import 'package:edumarshals/Screens/User_Info/Profile.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {

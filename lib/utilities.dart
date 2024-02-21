@@ -220,91 +220,70 @@ Widget button3(
       ),
     );
   }
-
-Widget UserInput(String text, TextEditingController controller, String text1,
-    TextEditingController controller1, BuildContext context) {
+Widget UserInput(
+  String text,
+  String texta,
+  String textb,
+  String text1,
+  BuildContext context,
+) {
   final screenHeight = MediaQuery.of(context).size.height;
   final screenWidth = MediaQuery.of(context).size.width;
+  final double fontSize = screenHeight * 0.02; 
+
   return Padding(
-    padding: const EdgeInsets.only(left: 10, right: 10, top: 8, bottom: 8),
+    padding: const EdgeInsets.only(left: 5, right: 5, top: 4, bottom: 4),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        SizedBox(
-          width: screenWidth * 0.45,
-          child: TextFormField(
-            controller: controller,
-            textInputAction: TextInputAction.next,
-            style: const TextStyle(
-              color: Color.fromARGB(255, 0, 0, 0),
-            ),
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-              labelText: text,
-              labelStyle: const TextStyle(
-                  color: Color.fromARGB(158, 0, 0, 0),
-                  fontSize: 15.9,
-                  fontWeight: FontWeight.w500),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(2),
-                borderSide: const BorderSide(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  width: 1,
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  width: 1,
-                ),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(
-                  color: Color.fromARGB(255, 1, 1, 1),
-                  width: 1,
-                ),
-              ),
+        Expanded(
+          flex: 5,
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 6),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(text),
+                Container(
+                  child: Text(
+                    texta,
+                    style: TextStyle(fontSize:fontSize ),
+                  ),
+                  width: screenWidth * 0.45,
+                  height: screenHeight / 18,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(9),
+                    border: Border.all(color: Colors.black),
+                  ),
+                )
+              ],
             ),
           ),
         ),
-        SizedBox(
-          width: screenWidth * 0.45,
-          child: TextFormField(
-            controller: controller1,
-            textInputAction: TextInputAction.next,
-            style: const TextStyle(
-              color: Color.fromARGB(255, 0, 0, 0),
-            ),
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-              labelText: text1,
-              labelStyle: const TextStyle(
-                  color: Color.fromARGB(158, 0, 0, 0),
-                  fontSize: 15.9,
-                  fontWeight: FontWeight.w500),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  width: 1,
+        SizedBox(width: 10),
+        Expanded(
+          flex: 5,
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(text1),
+                Center(
+                  child: Container(
+                    child: Text(
+                      textb,
+                      style: TextStyle(fontSize: fontSize),
+                    ),
+                    width: screenWidth * 0.45,
+                    height: screenHeight / 18,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(9),
+                      border: Border.all(color: Colors.black),
+                    ),
+                  ),
                 ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  width: 1,
-                ),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  width: 1,
-                ),
-              ),
+              ],
             ),
           ),
         ),
@@ -316,6 +295,7 @@ Widget UserInput(String text, TextEditingController controller, String text1,
 Widget UserInput1(
     String text, TextEditingController controller, BuildContext context) {
   final screenHeight = MediaQuery.of(context).size.height;
+  
   final screenWidth = MediaQuery.of(context).size.width;
   return Padding(
     padding: const EdgeInsets.only(left: 10, right: 10, top: 8, bottom: 8),

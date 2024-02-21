@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:edumarshals/modules/time_table_model.dart';
 import 'package:edumarshals/repository/timetable_repository.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';

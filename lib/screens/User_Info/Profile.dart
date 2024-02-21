@@ -1,7 +1,13 @@
 // import 'package:edumarshal/Widget/Profile_Tabs.dart';
-import 'package:edumarshals/Screens/My_Documents_Screen.dart';
-import 'package:edumarshals/Screens/contact_details.dart';
-import 'package:edumarshals/Screens/guardian_info.dart';
+import 'package:edumarshals/Model/time_table_model.dart';
+import 'package:edumarshals/Screens/User_Info/Personal_Info/Contact_info_Data.dart';
+import 'package:edumarshals/Screens/User_Info/Document/My_Documents_Screen.dart';
+import 'package:edumarshals/Screens/User_Info/Personal_Info/Parent_Info_Data.dart';
+import 'package:edumarshals/Screens/User_Info/Personal_Info/Personal_Info_Data.dart';
+import 'package:edumarshals/Screens/User_Info/Personal_Info/contact_details.dart';
+import 'package:edumarshals/Screens/User_Info/Personal_Info/guardian_info.dart';
+import 'package:edumarshals/Screens/time_table.dart';
+import 'package:edumarshals/Widget/Profile_Container.dart';
 import 'package:edumarshals/Widget/Profile_Tabs.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_acrylic/flutter_acrylic.dart';
@@ -20,16 +26,17 @@ class _ProfileState extends State<Profile> {
       backgroundColor: const Color.fromRGBO(235, 243, 255, 1),
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        toolbarHeight: 160.0, // Adjust the height as needed
+        toolbarHeight: 190.0, // Adjust the height as needed
         title: Center(
           child: Column(
             children: [
               const Padding(padding: EdgeInsets.all(8)),
               const CircleAvatar(
-                backgroundImage: AssetImage('assets/assets/Ellipse 7.jpg'),
+                backgroundImage: AssetImage('assets/Ellipse 7.jpg'),
                 backgroundColor: Color.fromARGB(255, 17, 37, 218),
               ),
-              const Text("Vidhi Gupta"),
+              const Text("rishi"),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -102,7 +109,7 @@ class _ProfileState extends State<Profile> {
                         Container(
                             margin: const EdgeInsets.all(7),
                             child: Image.asset(
-                                "assets/assets/Frame 48117 (2).png")),
+                                "assets/assets/Frame 48117.png")),
 
                         // Icon(Icons.hdr_auto_select),
                         Text(
@@ -126,7 +133,7 @@ class _ProfileState extends State<Profile> {
             Profileoption: 'Personal Information',
              onpressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const MyDocument()));
+                  MaterialPageRoute(builder: (context) =>  PersonalInfoScreen()));
               // Callback function for IconButton pressed
               print('Arrow Forward Pressed');
             },
@@ -135,7 +142,7 @@ class _ProfileState extends State<Profile> {
             Profileoption: 'Guardian Information',
              onpressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => guardianInfo()));
+                  MaterialPageRoute(builder: (context) => ParentInfoScreen()));
               // Callback function for IconButton pressed
               print('Arrow Forward Pressed');
             },
@@ -144,7 +151,7 @@ class _ProfileState extends State<Profile> {
             Profileoption: 'Contact Details',
              onpressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const contactInfo()));
+                  MaterialPageRoute(builder: (context) => ContactInfoScreen()));
               // Callback function for IconButton pressed
               print('Arrow Forward Pressed');
             },
@@ -156,13 +163,19 @@ class _ProfileState extends State<Profile> {
             Profileoption: 'My Documents',
             onpressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const MyDocument()));
+                  MaterialPageRoute(builder: (context) =>  MyDocument()));
               // Callback function for IconButton pressed
               print('Arrow Forward Pressed');
             },
           ),
-          const Profile_Tab(
-            Profileoption: 'Student Researches',
+          Profile_Tab(
+            Profileoption: 'Timetable',
+               onpressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ExamTimetableScreen()));
+              // Callback function for IconButton pressed
+              print('Arrow Forward Pressed');
+            },
           ),
           const Profile_Tab(
             Profileoption: 'Additional Info',
@@ -173,7 +186,7 @@ class _ProfileState extends State<Profile> {
           const Profile_Tab(
             Profileoption: 'Feedback',
           ),
-
+          // ContainerWithBorderOverlap()
           //   Acrylic(
           //   effect: AcrylicEffect.transparent,
           //   child: Center(

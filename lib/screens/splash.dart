@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-import 'login.dart';
+import 'Login/login.dart';
 import 'package:flutter/material.dart';
 // import 'sp';
 
@@ -40,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   height: height * 0.05,
                 ),
                 Image.asset(
-                  'assets/assets/unnamed-removebg-preview 1.png',
+                  'assets/unnamed-removebg-preview 1.png',
                   scale: 4,
                   // fit: BoxFit.cover,
                   // height: height * 0.2,
@@ -51,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
             SizedBox(
               height: height * 0.001,
             ),
-            const Text(
+         const   Text(
               'AKGEC EDUMARSHAL',
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -63,13 +63,13 @@ class _SplashScreenState extends State<SplashScreen> {
                 // letterSpacing: -0.70,
               ),
             ),
-            SizedBox(
-              height: height * 0.05,
-            ),
-            const SpinKitChasingDots(
-              color: Color(0xFF004BB8),
-              size: 40,
-            )
+            // SizedBox(
+            //   height: height * 0.05,
+            // ),
+            // SpinKitChasingDots(
+            //   color: Color(0xFF004BB8),
+            //   size: 40,
+            // )
           ],
         )));
   }

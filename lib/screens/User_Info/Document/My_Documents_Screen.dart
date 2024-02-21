@@ -1,19 +1,75 @@
-import 'package:edumarshals/Screens/OverAllAttendance.dart';
+// import 'package:edumarshals/Screens/OverAllAttendance.dart';
+import 'dart:convert';
+
+import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
+import 'package:edumarshals/Screens/User_Info/Document/Document_Image.dart';
 import 'package:edumarshals/Widget/My_Document_View_Card.dart';
+import 'package:edumarshals/repository/Document_Repo.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_full_pdf_viewer_null_safe/full_pdf_viewer_scaffold.dart';
 
 class MyDocument extends StatefulWidget {
-  const MyDocument({Key? key}) : super(key: key);
+ const  MyDocument({Key? key}) : super(key: key);
 
   @override
   State<MyDocument> createState() => _MyDocumentState();
 }
 
 class _MyDocumentState extends State<MyDocument> {
+  
+final DocumentRepository _documentRepository = DocumentRepository();
   List<String> items = [
     "My Document",
     "Upload/Update Document",
   ];
+  Map<String, dynamic>? document;
+  
+  @override
+  void initState() {
+    super.initState();
+    fetchDocuments(); // Fetch documents when the screen initializes
+  }
+ void fetchDocuments() async {
+    try {
+      final data = await _documentRepository.fetchDocuments(); // Fetch documents
+      print("hellodube$data");
+      if (data != null) {
+        // Parse the data (Assuming the data is a list of strings)
+        print("vidhi");
+        setState(() {
+          document=json.decode(data)["documents"];
+          print("dududududududud");
+          print(document?.keys);
+          print(document?.length);
+          print("vaibhav");
+        });
+      }
+    } catch (error) {
+      print("vidhisdfg");
+      print('Error fetching documents: $error');
+    }
+  }
+List<Widget> _buildDocumentCards() {
+  if (document == null) {
+    return []; // Return an empty list if document is null
+  }
+  print(document!['tenthMarksheet']);
+  return document!.keys.map((documentName) {
+    return My_Document_View_Card(
+      documentname: documentName,
+      textbuttonname: 'View',
+      onpressed: () {
+        // Navigate to a new screen to display the image
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Document_Image(imageUrl: document![documentName],),
+          ),
+        );
+      },
+    );
+  }).toList();
+}
 
   List<List<Widget>> cards = [
     [
@@ -21,66 +77,21 @@ class _MyDocumentState extends State<MyDocument> {
         documentname: "Aadhar Card 1",
         textbuttonname: 'View',
       ),
-      const My_Document_View_Card(
-        documentname: "Graduation/Diploma Marksheet",
-        textbuttonname: 'View',
-      ),
-      const My_Document_View_Card(
-        documentname: "Aadhar Card 1",
-        textbuttonname: 'View',
-      ),
-      const My_Document_View_Card(
-        documentname: "Graduation/Diploma Marksheet",
-        textbuttonname: 'View',
-      ),
-      const My_Document_View_Card(
-        documentname: "Aadhar Card 1",
-        textbuttonname: 'View',
-      ),
-      const My_Document_View_Card(
-        documentname: "Graduation/Diploma Marksheet",
-        textbuttonname: 'View',
-      ),
-      const My_Document_View_Card(
-        documentname: "Aadhar Card 1",
-        textbuttonname: 'View',
-      ),
-      const My_Document_View_Card(
-        documentname: "Graduation/Diploma Marksheet",
-        textbuttonname: 'View',
-      ),
-      const My_Document_View_Card(
-        documentname: "Aadhar Card 1",
-        textbuttonname: 'View',
-      ),
-      const My_Document_View_Card(
-        documentname: "Graduation/Diploma Marksheet",
-        textbuttonname: 'View',
-      ),
-      const My_Document_View_Card(
-        documentname: "Aadhar Card 1",
-        textbuttonname: 'View',
-      ),
-      const My_Document_View_Card(
-        documentname: "Graduation/Diploma Marksheet",
-        textbuttonname: 'View',
-      ),
-      const My_Document_View_Card(
-        documentname: "Aadhar Card 1",
-        textbuttonname: 'View',
-      ),
-      const My_Document_View_Card(
-        documentname: "Graduation/Diploma Marksheet",
-        textbuttonname: 'View',
-      ),
-      const My_Document_View_Card(
-        documentname: "Aadhar Card 1",
-        textbuttonname: 'View',
-      ),
-      const My_Document_View_Card(
-        documentname: "Graduation/Diploma Marksheet",
-        textbuttonname: 'View',
-      ),
+      // const My_Document_View_Card(
+      //   documentname: "Graduation/Diploma Marksheet",
+      //   textbuttonname: 'View',
+      // ),
+      // const My_Document_View_Card(
+      //   documentname: "Aadhar Card 1",
+      //   textbuttonname: 'View',
+      // ),
+      // const My_Document_View_Card(
+      //   documentname: "Graduation/Diploma Marksheet",
+      //   textbuttonname: 'View',
+      // ),
+
+
+ 
     ],
     [
       const My_Document_View_Card(
@@ -110,7 +121,7 @@ class _MyDocumentState extends State<MyDocument> {
           child: Column(
             children: [
               CircleAvatar(
-                backgroundImage: AssetImage('assets/assets/Ellipse 7.jpg'),
+                backgroundImage: AssetImage('assets/Ellipse 7.jpg'),
                 backgroundColor: Color.fromARGB(255, 17, 37, 218),
               ),
               Text("Vidhi Gupta"),
@@ -209,12 +220,21 @@ class _MyDocumentState extends State<MyDocument> {
                     physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
                       return ListView(
-                        children: cards[current],
+                       children:  _buildDocumentCards(),
                       );
                     },
                   ),
                 ),
               ),
+            //      Column(
+            //   children: documents.map((documentList) {
+            //     return Column(
+            //       children: documentList.map((document) {
+            //         return My_Document_View_Card(documentname: document, textbuttonname: 'View');
+            //       }).toList(),
+            //     );
+            //   }).toList(),
+            // ),
             ],
           ),
         ),

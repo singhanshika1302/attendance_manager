@@ -39,6 +39,12 @@ dependencies:
   http: '>=0.13.6 <2.0.0'
   intl: ^0.19.0
   percent_indicator: ^4.2.3
+  shared_preferences: ^2.2.2
+  path_provider: ^2.1.1
+  path: ^1.8.3
+  provider: ^6.0.5
+  pdf: ^3.10.7
+  flutter_full_pdf_viewer_null_safe: ^1.0.0
 
 dev_dependencies:
   flutter_test:
@@ -74,8 +80,8 @@ flutter:
     - assets/Ellipse 7.jpg
     - assets/Frame 100.png
     - assets/assets/Frame 48117.png
-    - assets/assets/Frame 48117 (1).png
-    - assets/assets/Frame 48117 (2).png
+#    - assets/Frame 48117 (1).png
+#    - assets/Frame 48117 (2).png
     - asset/images/pdf1.png
     - assets/
 # >>>>>>> Development

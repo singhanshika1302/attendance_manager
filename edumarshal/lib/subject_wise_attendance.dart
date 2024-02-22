@@ -1,3 +1,5 @@
+import 'package:bottom_sheet/bottom_sheet.dart';
+import 'package:edumarshal/Utils/floating_action%20_button.dart';
 import 'package:edumarshal/attendance_card.dart';
 import 'package:edumarshal/attendance_list_card.dart';
 import 'package:edumarshal/custom_appbar.dart';
@@ -16,8 +18,8 @@ class barGraph extends StatefulWidget {
 }
 
 class barGraphState extends State<barGraph> {
-   final _key = GlobalKey<ExpandableFabState>();
- final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
+  final _key = GlobalKey<ExpandableFabState>();
+  final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
   final double width = 15;
 
   late List<BarChartGroupData> rawBarGroups;
@@ -54,123 +56,33 @@ class barGraphState extends State<barGraph> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffEBF3FF) ,
-      
-         floatingActionButtonLocation: ExpandableFab.location,
-      floatingActionButton: ExpandableFab(
-        key: _key,
-        // duration: const Duration(milliseconds: 500),
-        // distance: 200.0,
-        // type: ExpandableFabType.up,
-        // pos: ExpandableFabPos.left,
-        // childrenOffset: const Offset(0, 20),
-      // fanAngle: 40,
-        //  openButtonBuilder: RotateFloatingActionButtonBuilder(
-        //    child: const Icon(Icons.abc),
-        //   fabSize: ExpandableFabSize.large,
-        //    foregroundColor: Colors.amber,
-        //    backgroundColor: Colors.green,
-        //    shape: const CircleBorder(),
-        //    angle: 3.14 * 2,
-        //),
-        // closeButtonBuilder: FloatingActionButtonBuilder(
-        //   size: 56,
-        //   builder: (BuildContext context, void Function()? onPressed,
-        //       Animation<double> progress) {
-        //     return IconButton(
-        //       onPressed: onPressed,
-        //       icon: const Icon(
-        //         Icons.check_circle_outline,
-        //         size: 40,
-        //       ),
-        //     );
-        //   },
-        // ),
-        overlayStyle: ExpandableFabOverlayStyle(
-          // color: Colors.black.withOpacity(0.5),
-          blur: 5,
-        ),
-        onOpen: () {
-          debugPrint('onOpen');
-        },
-        afterOpen: () {
-          debugPrint('afterOpen');
-        },
-        onClose: () {
-          debugPrint('onClose');
-        },
-        afterClose: () {
-          debugPrint('afterClose');
-        },
-        children: [
-          FloatingActionButton.small(
-            // shape: const CircleBorder(),
-            heroTag: null,
-            child: const Icon(Icons.home_filled),
-            onPressed: () {
-              const SnackBar snackBar = SnackBar(
-                content: Text("SnackBar"),
-              );
-              scaffoldKey.currentState?.showSnackBar(snackBar);
-            },
-          ),
-          FloatingActionButton.small(
-            // shape: const CircleBorder(),
-            heroTag: null,
-            child: const Icon(Icons.bar_chart),
-            onPressed: () {
-//              Navigator.of(context).push(
-//                  MaterialPageRoute(builder: ((context) => const NextPage())));
-            },
-          ),
-          FloatingActionButton.small(
-            // shape: const CircleBorder(),
-            heroTag: null,
-            child: const Icon(Icons.library_books_rounded),
-            onPressed: () {
-              final state = _key.currentState;
-              if (state != null) {
-                debugPrint('isOpen:${state.isOpen}');
-                state.toggle();
-              }
-            },
-          ),
-
-          FloatingActionButton.small(
-            // shape: const CircleBorder(),
-            heroTag: null,
-            child: const Icon(Icons.person),
-            onPressed: () {
-              final state = _key.currentState;
-              if (state != null) {
-                debugPrint('isOpen:${state.isOpen}');
-                state.toggle();
-              }
-            },
-          ),  
-        ],
-      ),
-       
-       appBar:CustomAppBar(userName:"user",userImage: "image"),
+      backgroundColor: Colors.white,
+      floatingActionButtonLocation: ExpandableFab.location,
+      floatingActionButton: custom_floating_action_button(),
+      appBar: CustomAppBar(userName: "user", userImage: "image"),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: SingleChildScrollView(
           child: Column(
-           crossAxisAlignment: CrossAxisAlignment.stretch,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              AttendanceCard(title:"Mathematics", description: "your attendance is 75% above. You attended 51 lectures out of 63 lectures."),
-              SizedBox(height: 20,),
+              AttendanceCard(
+                  title: "Mathematics",
+                  description:
+                      "your attendance is 75% above. You attended 51 lectures out of 63 lectures."),
+              SizedBox(
+                height: 20,
+              ),
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  
-                  
-          
-                  SizedBox(width:8 ),
-                 Text("Attendance Chart" , style: TextStyle(fontWeight: FontWeight.w500, fontSize:25 )),
-                 
+                  SizedBox(width: 8),
+                  Text("Attendance Chart",
+                      style:
+                          TextStyle(fontWeight: FontWeight.w500, fontSize: 25)),
+
                   //const Text(
-                   // 'state',
+                  // 'state',
                   //  style: TextStyle(color: Color(0xff77839a), fontSize: 16),
                   //),
                 ],
@@ -178,7 +90,8 @@ class barGraphState extends State<barGraph> {
               const SizedBox(
                 height: 38,
               ),
-              SizedBox(height: 150,
+              SizedBox(
+                height: 150,
                 child: BarChart(
                   BarChartData(
                     maxY: 20,
@@ -195,10 +108,9 @@ class barGraphState extends State<barGraph> {
                           });
                           return;
                         }
-                
-                        touchedGroupIndex =
-                            response.spot!.touchedBarGroupIndex;
-                
+
+                        touchedGroupIndex = response.spot!.touchedBarGroupIndex;
+
                         setState(() {
                           if (!event.isInterestedForInteractions) {
                             touchedGroupIndex = -1;
@@ -217,7 +129,7 @@ class barGraphState extends State<barGraph> {
                                 showingBarGroups[touchedGroupIndex]
                                     .barRods
                                     .length;
-                
+
                             showingBarGroups[touchedGroupIndex] =
                                 showingBarGroups[touchedGroupIndex].copyWith(
                               barRods: showingBarGroups[touchedGroupIndex]
@@ -266,14 +178,23 @@ class barGraphState extends State<barGraph> {
               const SizedBox(
                 height: 12,
               ),
-             
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(width:8 ),
-                  Text("Monthly attandance" , style: TextStyle(fontWeight: FontWeight.w500, fontSize:25 )),
+                  // SizedBox(width: 1),
+                  Text(" Monthly attandance",
+                      style:
+                          TextStyle(fontWeight: FontWeight.w500, fontSize: 25)),
+                  IconButton(
+                      onPressed: () {
+                        showFilter();
+                      },
+                      icon: Icon(Icons.filter_list_alt))
                 ],
               ),
-              SizedBox(height: 15, ),
+              SizedBox(
+                height: 15,
+              ),
               attendance_list_card(date: "1 jan,24", isPresent: true),
               attendance_list_card(date: "2 jan,24", isPresent: true),
               attendance_list_card(date: "3 jan,24", isPresent: false),
@@ -355,7 +276,31 @@ class barGraphState extends State<barGraph> {
         ),
       ],
     );
-
   }
 
+  void showFilter() {
+    showFlexibleBottomSheet(
+      minHeight: 0,
+      initHeight: 0.3,
+      maxHeight: 0.33,
+      context: context,
+      builder: _buildBottomSheet,
+      anchors: [0, 0.3, 0.33],
+      isSafeArea: true,
+    );
+  }
+
+  Widget _buildBottomSheet(
+    BuildContext context,
+    ScrollController scrollController,
+    double bottomSheetOffset,
+  ) {
+    return Material(
+      child: Container(
+        child: ListView(
+          controller: scrollController,
+        ),
+      ),
+    );
+  }
 }

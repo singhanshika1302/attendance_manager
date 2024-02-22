@@ -10,10 +10,10 @@ import 'package:edumarshals/Screens/Subject_Assignment.dart';
 
 import 'package:edumarshals/screens/contact_details.dart';
 import 'package:edumarshals/screens/guardian_info.dart';
-// >>>>>>> Development
+
 import 'package:edumarshals/screens/splash.dart';
 import 'package:flutter/material.dart';
-// import 'package:t/homePage.dart';
+
 import 'package:edumarshals/screens/login.dart';
 
 import 'package:edumarshals/screens/profile_info.dart';

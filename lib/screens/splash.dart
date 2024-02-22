@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-import 'login.dart';
+import 'Login/login.dart';
 import 'package:flutter/material.dart';
 // import 'sp';
 
@@ -17,8 +17,8 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 3), () {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+    Timer(const Duration(seconds: 3), () {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const Login()));
     });
   }
 
@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
     final height = MediaQuery.sizeOf(context).height * 1;
     final width = MediaQuery.sizeOf(context).width * 1;
     return Scaffold(
-        backgroundColor: Color(0xFFEBF3FF),
+        backgroundColor: const Color(0xFFEBF3FF),
         body: Container(
             child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -63,13 +63,13 @@ class _SplashScreenState extends State<SplashScreen> {
                 // letterSpacing: -0.70,
               ),
             ),
-            SizedBox(
-              height: height * 0.05,
-            ),
-            SpinKitChasingDots(
-              color: Color(0xFF004BB8),
-              size: 40,
-            )
+            // SizedBox(
+            //   height: height * 0.05,
+            // ),
+            // SpinKitChasingDots(
+            //   color: Color(0xFF004BB8),
+            //   size: 40,
+            // )
           ],
         )));
   }

@@ -12,7 +12,7 @@ class ExamTimetableRepository {
   Future<String?> fetchExamTimetable() async {
     try {
       var request = http.Request('GET', Uri.parse(apiUrl));
-//..............accessToken is send to cookie of the header ....which is stored in PreferencesManager.............//
+//..............accessToken is send inside the cookie of the header ....which is stored in PreferencesManager.............//
       request.headers['Cookie'] = 'accessToken=$token'; 
       http.StreamedResponse response = await request.send();
 

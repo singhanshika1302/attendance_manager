@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:edumarshals/Screens/OverAllAttendance.dart';
 import 'package:edumarshals/main.dart';
+import 'package:edumarshals/screens/test_screen.dart';
 import 'package:edumarshals/screens/time_table.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -120,6 +121,7 @@ class _LoginState extends State<Login> {
         final Map<String, dynamic> responseData = json.decode(response.body);
         final message = responseData['message'];
         final name = responseData['name'];
+        PreferencesManager().name = name;
 
         print('Message from API: $message');
         print('Message from API: $name');
@@ -136,8 +138,8 @@ class _LoginState extends State<Login> {
           _isLoading = false;
         });
         // for navigaation to next page
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => ExamTimetableScreen()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => OverAllAttd()));
         // Navigator.push(
         //     context,
         //     MaterialPageRoute(

@@ -1,8 +1,11 @@
 import 'dart:io';
 
-import 'package:edumarshals/Screens/OverAllAttendance.dart';
+// import 'package:edumarshals/Screens/OverAllAttendance.dart';
+import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
+import 'package:edumarshals/Screens/User_Info/Personal_Info/Contact_info_Data.dart';
+import 'package:edumarshals/Screens/User_Info/Personal_Info/Parent_Info_Data.dart';
+import 'package:edumarshals/Screens/User_Info/Personal_Info/Personal_Info_Data.dart';
 import 'package:edumarshals/main.dart';
-import 'package:edumarshals/screens/test_screen.dart';
 import 'package:edumarshals/screens/time_table.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -38,7 +41,7 @@ class _LoginState extends State<Login> {
       builder: (BuildContext context, Widget? child) {
         return Theme(
           data: ThemeData.light().copyWith(
-            colorScheme: ColorScheme.light(
+            colorScheme: const ColorScheme.light(
               primary: Color(0xFF004BB8), // Background color
               onPrimary: Colors.white, // Selected date text color
             ),
@@ -121,7 +124,6 @@ class _LoginState extends State<Login> {
         final Map<String, dynamic> responseData = json.decode(response.body);
         final message = responseData['message'];
         final name = responseData['name'];
-        PreferencesManager().name = name;
 
         print('Message from API: $message');
         print('Message from API: $name');
@@ -138,8 +140,8 @@ class _LoginState extends State<Login> {
           _isLoading = false;
         });
         // for navigaation to next page
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => OverAllAttd()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) =>OverAllAttd() ));
         // Navigator.push(
         //     context,
         //     MaterialPageRoute(
@@ -179,7 +181,7 @@ class _LoginState extends State<Login> {
     return Stack(
       children: [
         Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/Android Large - 18.png'),
               fit: BoxFit.cover,
@@ -194,7 +196,7 @@ class _LoginState extends State<Login> {
         if (_isLoading)
           Container(
             color: Colors.black.withOpacity(0.5),
-            child: Center(
+            child: const Center(
               child: CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF4E82EA)),
                 strokeWidth: 5.0,
@@ -204,7 +206,7 @@ class _LoginState extends State<Login> {
         Positioned(
             bottom: 500,
             right: 100.0,
-            child: button3('Login', 0.6, 0.5, context, () => Login())),
+            child: button3('Login', 0.6, 0.5, context, () => const Login())),
         Positioned(
           bottom: screenHeight * 0.69,
           right: screenWidth * 0.29,
@@ -240,11 +242,11 @@ class _LoginState extends State<Login> {
               width: screenWidth * 0.85,
               height: screenHeight * 0.44,
               decoration: ShapeDecoration(
-                color: Color(0xFFFBFBFB),
+                color: const Color(0xFFFBFBFB),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(18),
                 ),
-                shadows: [
+                shadows: const [
                   BoxShadow(
                     color: Color(0x26E0E0E0),
                     blurRadius: 30,
@@ -285,7 +287,7 @@ class _LoginState extends State<Login> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Padding(
-                        padding: const EdgeInsets.only(left: 50.0),
+                        padding: EdgeInsets.only(left: 50.0),
                         child: CustomText(
                           text: "Date of Birth",
                           color: Color(0xFF3386FF),
@@ -322,7 +324,7 @@ class _LoginState extends State<Login> {
                                             children: [
                                               Padding(
                                                 padding:
-                                                    EdgeInsets.only(right: 10),
+                                                    const EdgeInsets.only(right: 10),
                                                 // child: Icon(
                                                 //   Icons.calendar_month,
                                                 //   size: 20,
@@ -340,7 +342,7 @@ class _LoginState extends State<Login> {
                                                     ? DateFormat('dd-MM-yyyy')
                                                         .format(selectedDate!)
                                                     : 'Enter D.O.B',
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   fontSize: 12,
                                                   fontWeight: FontWeight.w400,
                                                   color: Color(0xFF565656),
@@ -352,7 +354,7 @@ class _LoginState extends State<Login> {
                                             children: [
                                               Padding(
                                                 padding:
-                                                    EdgeInsets.only(right: 15),
+                                                    const EdgeInsets.only(right: 15),
                                                 child: Image.asset(
                                                   'assets/calendar.png',
                                                   scale: 4.5,
@@ -362,7 +364,7 @@ class _LoginState extends State<Login> {
                                               Text(
                                                 '${selectedDate!.toLocal()}'
                                                     .split(' ')[0],
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     fontSize: 14,
                                                     fontWeight:
                                                         FontWeight.w500),
@@ -383,7 +385,7 @@ class _LoginState extends State<Login> {
                         Checkbox(
                             value: isChecked,
                             splashRadius: 20,
-                            activeColor: Color(0xFF004BB8),
+                            activeColor: const Color(0xFF004BB8),
                             onChanged: (bool? value) {
                               setState(() {
                                 // Color? Color(0xFF004BB8)
@@ -405,6 +407,7 @@ class _LoginState extends State<Login> {
                   )
                 ]),
               )),
+              // Padding(padding: EdgeInsets.all(17)),
           Positioned(
             bottom: 0,
             left: 80,
@@ -414,6 +417,7 @@ class _LoginState extends State<Login> {
                   0.7, // Adjust the portion of the button inside the container
               alignment: Alignment.centerLeft,
               child: ElevatedButton(
+              
                 onPressed: () async {
                   await _saveItem();
                   // Navigator.push(context,
@@ -421,7 +425,8 @@ class _LoginState extends State<Login> {
 
                   // Add your onPressed logic here
                 },
-                child: Text('Login'),
+              style: ButtonStyle( backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(0, 75, 184, 1))),
+                child: const Text('Login',style: TextStyle(color: Colors.white),),
               ),
             ),
           ),
@@ -462,7 +467,7 @@ class _LoginState extends State<Login> {
         //   fontfamily: '',
         // ),
         Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             // borderRadius: BorderRadius.circular(10),
             // border: Border.(
             //   color: Color(0xff00194A),
@@ -477,7 +482,7 @@ class _LoginState extends State<Login> {
               print('Container tapped!');
               // Add your logic for resetting password here
             },
-            child: Text(
+            child: const Text(
               'Reset Password',
               style: TextStyle(
                 color: Color(0xFFFBFBFB),

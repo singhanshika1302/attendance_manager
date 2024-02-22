@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class AttendanceCard extends StatelessWidget {
@@ -10,7 +8,7 @@ class AttendanceCard extends StatelessWidget {
   final int attendedClasses;
   final int totalClassess;
 
-  AttendanceCard({
+  const AttendanceCard({super.key, 
     required this.title,
     required this.description,
     required this.attendedClasses,
@@ -22,8 +20,8 @@ class AttendanceCard extends StatelessWidget {
   Widget build(BuildContext context) {
     double attendancePercentage = (attendedClasses / totalClassess) * 100;
     return Container(
-      margin: EdgeInsets.all(16.0),
-      padding: EdgeInsets.all(16.0),
+      margin: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(10.0),
@@ -36,17 +34,17 @@ class AttendanceCard extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
                   softWrap: true,
                 ),
-                SizedBox(height: 8.0),
+                const SizedBox(height: 8.0),
                 Text(
                   description,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                   ),
                   softWrap: true,
@@ -67,7 +65,7 @@ class AttendanceCard extends StatelessWidget {
               style: TextStyle(color: Colors.white),
             ),
             backgroundColor: const Color.fromRGBO(0, 75, 184, 1),
-            progressColor: Color.fromARGB(255, 66, 231, 0),
+            progressColor: const Color.fromARGB(255, 66, 231, 0),
           ),
         ],
       ),

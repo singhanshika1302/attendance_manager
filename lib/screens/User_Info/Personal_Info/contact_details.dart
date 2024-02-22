@@ -1,39 +1,30 @@
-import 'package:edumarshals/main.dart';
-import 'package:edumarshals/screens/login.dart';
+// import 'package:edumarshals/screens/login.dart';
+import 'package:edumarshals/Screens/Login/login.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
 import 'package:edumarshals/utilities.dart';
-import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
 
-class profileInfo extends StatefulWidget {
-  const profileInfo({super.key});
+class contactInfo extends StatefulWidget {
+  const contactInfo({super.key});
 
   @override
-  State<profileInfo> createState() => _profileInfoState();
+  State<contactInfo> createState() => _contactInfoState();
 }
 
-class _profileInfoState extends State<profileInfo> {
-  final TextEditingController _admissionController = TextEditingController();
-  final TextEditingController _sectionController = TextEditingController();
-  final TextEditingController _categoryController = TextEditingController();
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _genderController = TextEditingController();
-  final TextEditingController _dobController = TextEditingController();
-  final TextEditingController _courseNameController = TextEditingController();
-  final TextEditingController _admController = TextEditingController();
-  final TextEditingController _branchController = TextEditingController();
-  final TextEditingController _semesterController = TextEditingController();
-  final TextEditingController _courseController = TextEditingController();
-  final TextEditingController _admissionModeController =
-      TextEditingController();
-  final TextEditingController _domacileController = TextEditingController();
-  final TextEditingController _jeeController = TextEditingController();
-  final TextEditingController _jeeRollController = TextEditingController();
-  final TextEditingController _lateralController = TextEditingController();
-  final TextEditingController _hostelController = TextEditingController();
+class _contactInfoState extends State<contactInfo> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingControlle = TextEditingController();
+  final TextEditingController _altEmailController = TextEditingController();
+  final TextEditingController _altMobController = TextEditingController();
+  final TextEditingController _permanentController = TextEditingController();
+  final TextEditingController _presentController = TextEditingController();
+  final TextEditingController _perPinController = TextEditingController();
+  final TextEditingController _prePinController = TextEditingController();
+  final TextEditingController _perStateController = TextEditingController();
+  final TextEditingController _preStateController = TextEditingController();
+  final TextEditingController _perCountryController = TextEditingController();
+  final TextEditingController _preCountryController = TextEditingController();
   // bool isChecked = false;
-  bool _isLoading = false;
+  final bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +55,7 @@ class _profileInfoState extends State<profileInfo> {
         SafeArea(
           child: Scaffold(
               // backgroundColor: Color.fromARGB(248, 156, 184, 205),
-              backgroundColor: Color(0xFFEBF3FF),
+              backgroundColor: const Color(0xFFEBF3FF),
               body: ListView(
                 children: [buildheading(context)],
               )),
@@ -72,7 +63,7 @@ class _profileInfoState extends State<profileInfo> {
         if (_isLoading)
           Container(
             color: Colors.black.withOpacity(0.5),
-            child: Center(
+            child: const Center(
               child: CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF4E82EA)),
                 strokeWidth: 5.0,
@@ -134,30 +125,46 @@ class _profileInfoState extends State<profileInfo> {
                 fontfamily: 'Poppins',
               ),
             ])),
-        upper('Personal Info', 0, 0, context, Login()),
+        upper('Contact Details', 0, 0, context, const Login()),
         SizedBox(
           height: screenHeight * 0.025,
         ),
-        UserInput(
-            'Name', _nameController, 'Gender', _genderController, context),
-        SizedBox(
-          height: screenHeight * 0.00,
-        ),
-        UserInput('Date of Birth', _dobController, 'Course Name',
-            _courseController, context),
-        UserInput('Admission Date', _admissionController, 'Branch',
-            _branchController, context),
-        UserInput('Semester', _semesterController, 'Course Name',
-            _courseNameController, context),
-        UserInput('Admission Mode', _admController, 'Section',
-            _sectionController, context),
-        UserInput('Category', _categoryController, 'Domacile State',
-            _domacileController, context),
-        UserInput('JEE Rank', _jeeController, 'JEE Roll no', _jeeRollController,
-            context),
-        UserInput('Lateral Entry', _lateralController, 'Hostel',
-            _hostelController, context),
+        // UserInput('Email', 'Mob no', context),
+        // SizedBox(
+        //   height: screenHeight * 0.00,
+        // ),
+        // UserInput('Alternate Email', 'Alternate Mob no'
+        //     , context),
+        // // UserInput('', _admissionController, 'Email(Mother)',
+        // // _branchController, context),
+        // UserInput1('Permanent Address', _permanentController, context),
+        // UserInput1('Present Address', _presentController, context),
+        // UserInput('Permanent Pincode', 'Present Pincode',
+        //    context),
+        // UserInput('Permanent State', 'Present State',
+        //    context),
+        // // UserInput1('Address', _domacileController, context),
+        // UserInput('Permanent Country', 'Present Country',
+        //    context),
+        // // UserInput('JEE Rank', _jeeController, 'JEE Roll no', _jeeRollController,
+        // //     context),
+        // // UserInput('Lateral Entry', _lateralController, 'Hostel',
+        // //     _hostelController, context),
       ],
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

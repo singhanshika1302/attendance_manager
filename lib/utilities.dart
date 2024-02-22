@@ -50,7 +50,7 @@ Widget buildtextfiled(String image, String text, BuildContext context,
         padding: const EdgeInsets.only(left: 50.0),
         child: CustomText(
           text: text,
-          color: Color(0xFF3386FF),
+          color: const Color(0xFF3386FF),
           fontSize: 12,
           fontStyle: null,
           fontfamily: 'Poppins',
@@ -58,7 +58,7 @@ Widget buildtextfiled(String image, String text, BuildContext context,
         ),
       ),
       Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               // color: Color(0xFFA0A0A0),
               border: Border(
                   // bottom: BorderSide(width: 1, color: Color(0xFFA0A0A0)),
@@ -96,7 +96,7 @@ Widget buildtextfiled(String image, String text, BuildContext context,
                     return null;
                   },
                   decoration: InputDecoration(
-                    fillColor: Color.fromARGB(0, 17, 90, 216),
+                    fillColor: const Color.fromARGB(0, 17, 90, 216),
                     filled: true,
                     hintText: hinttext,
                     hintStyle: const TextStyle(
@@ -220,91 +220,70 @@ Widget button3(
       ),
     );
   }
-
-Widget UserInput(String text, TextEditingController controller, String text1,
-    TextEditingController controller1, BuildContext context) {
+Widget UserInput(
+  String text,
+  String texta,
+  String textb,
+  String text1,
+  BuildContext context,
+) {
   final screenHeight = MediaQuery.of(context).size.height;
   final screenWidth = MediaQuery.of(context).size.width;
+  final double fontSize = screenHeight * 0.02; 
+
   return Padding(
-    padding: const EdgeInsets.only(left: 10, right: 10, top: 8, bottom: 8),
+    padding: const EdgeInsets.only(left: 5, right: 5, top: 4, bottom: 4),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Container(
-          width: screenWidth * 0.45,
-          child: TextFormField(
-            controller: controller,
-            textInputAction: TextInputAction.next,
-            style: const TextStyle(
-              color: Color.fromARGB(255, 0, 0, 0),
-            ),
-            decoration: InputDecoration(
-              contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-              labelText: text,
-              labelStyle: const TextStyle(
-                  color: Color.fromARGB(158, 0, 0, 0),
-                  fontSize: 15.9,
-                  fontWeight: FontWeight.w500),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(2),
-                borderSide: const BorderSide(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  width: 1,
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  width: 1,
-                ),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(
-                  color: Color.fromARGB(255, 1, 1, 1),
-                  width: 1,
-                ),
-              ),
+        Expanded(
+          flex: 5,
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 6),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(text),
+                Container(
+                  child: Text(
+                    texta,
+                    style: TextStyle(fontSize:fontSize ),
+                  ),
+                  width: screenWidth * 0.45,
+                  height: screenHeight / 18,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(9),
+                    border: Border.all(color: Colors.black),
+                  ),
+                )
+              ],
             ),
           ),
         ),
-        Container(
-          width: screenWidth * 0.45,
-          child: TextFormField(
-            controller: controller1,
-            textInputAction: TextInputAction.next,
-            style: const TextStyle(
-              color: Color.fromARGB(255, 0, 0, 0),
-            ),
-            decoration: InputDecoration(
-              contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-              labelText: text1,
-              labelStyle: const TextStyle(
-                  color: Color.fromARGB(158, 0, 0, 0),
-                  fontSize: 15.9,
-                  fontWeight: FontWeight.w500),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  width: 1,
+        SizedBox(width: 10),
+        Expanded(
+          flex: 5,
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(text1),
+                Center(
+                  child: Container(
+                    child: Text(
+                      textb,
+                      style: TextStyle(fontSize: fontSize),
+                    ),
+                    width: screenWidth * 0.45,
+                    height: screenHeight / 18,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(9),
+                      border: Border.all(color: Colors.black),
+                    ),
+                  ),
                 ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  width: 1,
-                ),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  width: 1,
-                ),
-              ),
+              ],
             ),
           ),
         ),
@@ -316,13 +295,14 @@ Widget UserInput(String text, TextEditingController controller, String text1,
 Widget UserInput1(
     String text, TextEditingController controller, BuildContext context) {
   final screenHeight = MediaQuery.of(context).size.height;
+  
   final screenWidth = MediaQuery.of(context).size.width;
   return Padding(
     padding: const EdgeInsets.only(left: 10, right: 10, top: 8, bottom: 8),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Container(
+        SizedBox(
           width: screenWidth * 0.938,
           child: TextFormField(
             controller: controller,
@@ -331,7 +311,7 @@ Widget UserInput1(
               color: Color.fromARGB(255, 0, 0, 0),
             ),
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+              contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
               labelText: text,
               labelStyle: const TextStyle(
                   color: Color.fromARGB(158, 0, 0, 0),
@@ -424,11 +404,11 @@ Widget upper(
         SizedBox(width: screenWidth * 0.02),
         Text(
           text,
-          style: TextStyle(
+          style: const TextStyle(
             // fontFamily: ,
             fontWeight: FontWeight.w500,
             fontFamily: 'Poppines',
-            color: const Color.fromARGB(255, 0, 0, 0),
+            color: Color.fromARGB(255, 0, 0, 0),
             fontSize: 15,
 
             // fontStyle: FontStyle.normal,

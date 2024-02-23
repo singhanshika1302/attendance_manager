@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 Widget AttIndicator(percent, text1, text2){
-  Color progressColor = percent < 0.75 ? Color(0xffF75757) : Color(0xff00CE46);
+  Color progressColor = percent < 0.75 ? const Color(0xffF75757) : const Color(0xff00CE46);
   return Column(
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     children: [
@@ -11,12 +11,12 @@ Widget AttIndicator(percent, text1, text2){
         lineWidth: 15.0,
         percent: percent,
         // header: Text("Icon header"),
-        center: Text(text1,style: TextStyle(color: Colors.black),),
-        backgroundColor: Color(0xffEBF3FF),
+        center: Text(text1,style: const TextStyle(color: Colors.black),),
+        backgroundColor: const Color(0xffEBF3FF),
         progressColor: progressColor,
       ),
 
-      Text(text2,style: TextStyle(
+      Text(text2,style: const TextStyle(
           fontSize: 14,
           color: Colors.grey
       ),)
@@ -30,7 +30,7 @@ Widget notes( text1, text2,text3 ){
     padding: const EdgeInsets.only(bottom: 15),
     child: Container(
       decoration: BoxDecoration(
-          color: Color(0xff004BB8),
+          color: const Color(0xff004BB8),
           borderRadius: BorderRadius.circular(15)
       ),
       child: Padding(
@@ -95,7 +95,7 @@ Widget Asgn(text1, text2, text3){
     padding: const EdgeInsets.only(bottom: 15),
     child: Container(
       decoration: BoxDecoration(
-          color: Color(0xffFBFBFB),
+          color: const Color(0xffFBFBFB),
           borderRadius: BorderRadius.circular(10)
       ),
       child: Padding(
@@ -112,12 +112,12 @@ Widget Asgn(text1, text2, text3){
                  child: Column(
                    crossAxisAlignment: CrossAxisAlignment.start,
                    children: [
-                     Text(text1,style: TextStyle(
+                     Text(text1,style: const TextStyle(
                          fontSize: 15,
                          color: Color(0xff004BB8)
                      ),),
 
-                     Text(text2,style: TextStyle(
+                     Text(text2,style: const TextStyle(
                          fontSize: 12,
                          color: Color(0xff004BB8)
                      ),),
@@ -127,7 +127,7 @@ Widget Asgn(text1, text2, text3){
              ],
            ),
 
-            Text(text3,style: TextStyle(
+            Text(text3,style: const TextStyle(
                 color: Color(0xff004BB8),
                 fontSize: 12
             ),)

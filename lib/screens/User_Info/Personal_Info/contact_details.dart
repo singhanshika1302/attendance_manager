@@ -1,10 +1,8 @@
+// import 'package:edumarshals/screens/login.dart';
+import 'package:edumarshals/Screens/Login/login.dart';
 import 'package:edumarshals/main.dart';
-import 'package:edumarshals/screens/login.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
 import 'package:edumarshals/utilities.dart';
-import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
 
 class contactInfo extends StatefulWidget {
   const contactInfo({super.key});
@@ -15,7 +13,7 @@ class contactInfo extends StatefulWidget {
 
 class _contactInfoState extends State<contactInfo> {
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _mobController = TextEditingController();
+  final TextEditingControlle = TextEditingController();
   final TextEditingController _altEmailController = TextEditingController();
   final TextEditingController _altMobController = TextEditingController();
   final TextEditingController _permanentController = TextEditingController();
@@ -27,7 +25,7 @@ class _contactInfoState extends State<contactInfo> {
   final TextEditingController _perCountryController = TextEditingController();
   final TextEditingController _preCountryController = TextEditingController();
   // bool isChecked = false;
-  bool _isLoading = false;
+  final bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +56,7 @@ class _contactInfoState extends State<contactInfo> {
         SafeArea(
           child: Scaffold(
               // backgroundColor: Color.fromARGB(248, 156, 184, 205),
-              backgroundColor: Color(0xFFEBF3FF),
+              backgroundColor: const Color(0xFFEBF3FF),
               body: ListView(
                 children: [buildheading(context)],
               )),
@@ -66,7 +64,7 @@ class _contactInfoState extends State<contactInfo> {
         if (_isLoading)
           Container(
             color: Colors.black.withOpacity(0.5),
-            child: Center(
+            child: const Center(
               child: CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF4E82EA)),
                 strokeWidth: 5.0,
@@ -120,39 +118,39 @@ class _contactInfoState extends State<contactInfo> {
                 scale: 4,
                 // height: screenHeight * 0.032,
               ),
-              const CustomText(
-                text: "Tripod",
+               CustomText(
+                text: PreferencesManager().name,
                 color: Color.fromARGB(255, 0, 0, 0),
                 fontSize: 12,
                 fontStyle: null,
                 fontfamily: 'Poppins',
               ),
             ])),
-        upper('Contact Details', 0, 0, context, Login()),
+        upper('Contact Details', 0, 0, context, const Login()),
         SizedBox(
           height: screenHeight * 0.025,
         ),
-        UserInput('Email', _emailController, 'Mob no', _mobController, context),
-        SizedBox(
-          height: screenHeight * 0.00,
-        ),
-        UserInput('Alternate Email', _altEmailController, 'Alternate Mob no',
-            _altMobController, context),
-        // UserInput('', _admissionController, 'Email(Mother)',
-        // _branchController, context),
-        UserInput1('Permanent Address', _permanentController, context),
-        UserInput1('Present Address', _presentController, context),
-        UserInput('Permanent Pincode', _perPinController, 'Present Pincode',
-            _prePinController, context),
-        UserInput('Permanent State', _perStateController, 'Present State',
-            _preStateController, context),
-        // UserInput1('Address', _domacileController, context),
-        UserInput('Permanent Country', _perCountryController, 'Present Country',
-            _preCountryController, context),
-        // UserInput('JEE Rank', _jeeController, 'JEE Roll no', _jeeRollController,
-        //     context),
-        // UserInput('Lateral Entry', _lateralController, 'Hostel',
-        //     _hostelController, context),
+        // UserInput('Email', 'Mob no', context),
+        // SizedBox(
+        //   height: screenHeight * 0.00,
+        // ),
+        // UserInput('Alternate Email', 'Alternate Mob no'
+        //     , context),
+        // // UserInput('', _admissionController, 'Email(Mother)',
+        // // _branchController, context),
+        // UserInput1('Permanent Address', _permanentController, context),
+        // UserInput1('Present Address', _presentController, context),
+        // UserInput('Permanent Pincode', 'Present Pincode',
+        //    context),
+        // UserInput('Permanent State', 'Present State',
+        //    context),
+        // // UserInput1('Address', _domacileController, context),
+        // UserInput('Permanent Country', 'Present Country',
+        //    context),
+        // // UserInput('JEE Rank', _jeeController, 'JEE Roll no', _jeeRollController,
+        // //     context),
+        // // UserInput('Lateral Entry', _lateralController, 'Hostel',
+        // //     _hostelController, context),
       ],
     );
   }
@@ -171,23 +169,3 @@ class _contactInfoState extends State<contactInfo> {
 
 
 
-
-
-// upper('Guardian Info', 0, 0, context, Login()),
-//         SizedBox(
-//           height: screenHeight * 0.025,
-//         ),
-//         UserInput('Father Name', _nameController, 'Mother Name',
-//             _genderController, context),
-//         SizedBox(
-//           height: screenHeight * 0.00,
-//         ),
-//         UserInput('Father Mob no', _dobController, 'Mother Mob no',
-//             _courseController, context),
-//         UserInput('Email(father)', _admissionController, 'Email(Mother)',
-//             _branchController, context),
-//         UserInput('Aadher No (Father)', _semesterController,
-//             'Aadher no(Mother)', _courseNameController, context),
-//         UserInput('Occupation(Father)', _admController, 'Ocuupation(mother)',
-//             _sectionController, context),
-//         UserInput1('Address', _domacileController, context)

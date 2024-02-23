@@ -1,7 +1,7 @@
 import 'package:edumarshals/Widget/CustomAppBar.dart';
 import 'package:edumarshals/Widget/Subject_Assignment_Card.dart';
+import 'package:edumarshals/main.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class Subject_Assignment extends StatefulWidget {
   const Subject_Assignment({Key? key}) : super(key: key);
@@ -22,81 +22,81 @@ class _Subject_AssignmentState extends State<Subject_Assignment> {
   /// List of body icon
   List<List<Subject_Assignment_Card>> cards = [
     [
-      Subject_Assignment_Card(
+      const Subject_Assignment_Card(
         subjectName: "Math IV Assignment 1",
         status: "Pending",
       ),
-      Subject_Assignment_Card(
+      const Subject_Assignment_Card(
         subjectName: "Math IV Assignment 2",
         status: "Completed",
       ),
-      Subject_Assignment_Card(
+      const Subject_Assignment_Card(
         subjectName: "Math IV Assignment 1",
         status: "Pending",
       ),
-      Subject_Assignment_Card(
+      const Subject_Assignment_Card(
         subjectName: "Math IV Assignment 2",
         status: "Completed",
       ),
-      Subject_Assignment_Card(
+      const Subject_Assignment_Card(
         subjectName: "Math IV Assignment 1",
         status: "Pending",
       ),
-      Subject_Assignment_Card(
+      const Subject_Assignment_Card(
         subjectName: "Math IV Assignment 2",
         status: "Completed",
       ),
-      Subject_Assignment_Card(
+      const Subject_Assignment_Card(
         subjectName: "Math IV Assignment 1",
         status: "Pending",
       ),
-      Subject_Assignment_Card(
+      const Subject_Assignment_Card(
         subjectName: "Math IV Assignment 2",
         status: "Completed",
       ),
-      Subject_Assignment_Card(
+      const Subject_Assignment_Card(
         subjectName: "Math IV Assignment 1",
         status: "Pending",
       ),
-      Subject_Assignment_Card(
+      const Subject_Assignment_Card(
         subjectName: "Math IV Assignment 2",
         status: "Completed",
       ),
-      Subject_Assignment_Card(
+      const Subject_Assignment_Card(
         subjectName: "Math IV Assignment 1",
         status: "Pending",
       ),
-      Subject_Assignment_Card(
+      const Subject_Assignment_Card(
         subjectName: "Math IV Assignment 2",
         status: "Completed",
       ),
     ],
     [
-      Subject_Assignment_Card(
+      const Subject_Assignment_Card(
         subjectName: "DSTL Assignment 1",
         status: "Pending",
       ),
-      Subject_Assignment_Card(
+      const Subject_Assignment_Card(
         subjectName: "DSTL Assignment 2",
         status: "Completed",
       ),
     ],
     [
-      Subject_Assignment_Card(
+      const Subject_Assignment_Card(
         subjectName: "Data Structure Assignment 1",
         status: "Pending",
       ),
-      Subject_Assignment_Card(
+      const Subject_Assignment_Card(
         subjectName: "Data Structure Assignment 2",
         status: "Completed",
       ),
     ],
     [
-      Subject_Assignment_Card(
+      const Subject_Assignment_Card(
         subjectName: "Python Assignment 1",
         status: "Pending",
       ),
-      Subject_Assignment_Card(
+      const Subject_Assignment_Card(
         subjectName: "Python Assignment 2",
         status: "Completed",
       ),
@@ -107,8 +107,8 @@ class _Subject_AssignmentState extends State<Subject_Assignment> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(235, 243, 255, 1),
-      appBar: CustomAppBar(userName: "Vidhi Gupta"),
+      backgroundColor: const Color.fromRGBO(235, 243, 255, 1),
+      appBar:  CustomAppBar(userName: PreferencesManager().name),
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
@@ -145,14 +145,14 @@ class _Subject_AssignmentState extends State<Subject_Assignment> {
                               height: 55,
                               decoration: BoxDecoration(
                                 color: current == index
-                                    ? Color.fromRGBO(0, 75, 184, 1)
-                                    : Color.fromRGBO(255, 255, 255, 1),
+                                    ? const Color.fromRGBO(0, 75, 184, 1)
+                                    : const Color.fromRGBO(255, 255, 255, 1),
                                 borderRadius: current == index
                                     ? BorderRadius.circular(12)
                                     : BorderRadius.circular(7),
                                 border: current == index
                                     ? Border.all(
-                                        color: Color.fromRGBO(0, 75, 184, 1),
+                                        color: const Color.fromRGBO(0, 75, 184, 1),
                                         width: 2.5)
                                     : null,
                               ),
@@ -184,7 +184,7 @@ class _Subject_AssignmentState extends State<Subject_Assignment> {
 
               SingleChildScrollView(
                 scrollDirection: Axis.vertical,
-                child: Container(
+                child: SizedBox(
                   // margin: const EdgeInsets.only(top: 30),
                   width: double.infinity,
                   height: double.maxFinite,

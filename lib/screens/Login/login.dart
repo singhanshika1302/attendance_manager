@@ -1,11 +1,10 @@
 import 'dart:io';
-
-// import 'package:edumarshals/Screens/OverAllAttendance.dart';
 import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
 import 'package:edumarshals/Screens/User_Info/Personal_Info/Contact_info_Data.dart';
 import 'package:edumarshals/Screens/User_Info/Personal_Info/Parent_Info_Data.dart';
 import 'package:edumarshals/Screens/User_Info/Personal_Info/Personal_Info_Data.dart';
 import 'package:edumarshals/main.dart';
+import 'package:edumarshals/screens/Upload/document_upload.dart';
 import 'package:edumarshals/screens/time_table.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -140,8 +139,8 @@ class _LoginState extends State<Login> {
           _isLoading = false;
         });
         // for navigaation to next page
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) =>OverAllAttd() ));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => OverAllAttd()));
         // Navigator.push(
         //     context,
         //     MaterialPageRoute(
@@ -323,8 +322,8 @@ class _LoginState extends State<Login> {
                                         ? Row(
                                             children: [
                                               Padding(
-                                                padding:
-                                                    const EdgeInsets.only(right: 10),
+                                                padding: const EdgeInsets.only(
+                                                    right: 10),
                                                 // child: Icon(
                                                 //   Icons.calendar_month,
                                                 //   size: 20,
@@ -353,8 +352,8 @@ class _LoginState extends State<Login> {
                                         : Row(
                                             children: [
                                               Padding(
-                                                padding:
-                                                    const EdgeInsets.only(right: 15),
+                                                padding: const EdgeInsets.only(
+                                                    right: 15),
                                                 child: Image.asset(
                                                   'assets/calendar.png',
                                                   scale: 4.5,
@@ -407,7 +406,7 @@ class _LoginState extends State<Login> {
                   )
                 ]),
               )),
-              // Padding(padding: EdgeInsets.all(17)),
+          // Padding(padding: EdgeInsets.all(17)),
           Positioned(
             bottom: 0,
             left: 80,
@@ -417,7 +416,6 @@ class _LoginState extends State<Login> {
                   0.7, // Adjust the portion of the button inside the container
               alignment: Alignment.centerLeft,
               child: ElevatedButton(
-              
                 onPressed: () async {
                   await _saveItem();
                   // Navigator.push(context,
@@ -425,8 +423,13 @@ class _LoginState extends State<Login> {
 
                   // Add your onPressed logic here
                 },
-              style: ButtonStyle( backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(0, 75, 184, 1))),
-                child: const Text('Login',style: TextStyle(color: Colors.white),),
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        Color.fromRGBO(0, 75, 184, 1))),
+                child: const Text(
+                  'Login',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ),

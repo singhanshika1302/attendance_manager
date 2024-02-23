@@ -1,5 +1,6 @@
 import 'dart:async';
-import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
+// import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
+import 'package:edumarshals/Screens/HomePage/Homepage.dart';
 import 'package:edumarshals/main.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart';
@@ -23,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
     getvalidationdata().whenComplete(() async{
  Timer(const Duration(seconds: 3), () {
 
-      Navigator.pop(context, MaterialPageRoute(builder: (context) => finalname==null?Login(): OverAllAttd()));
+      Navigator.pop(context, MaterialPageRoute(builder: (context) => finalname==null?Login(): Homepage()));
     });
     });
     super.initState();

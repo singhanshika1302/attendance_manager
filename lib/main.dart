@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
+// import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
 import 'package:edumarshals/Screens/Login/login.dart';
 import 'package:edumarshals/Screens/User_Info/Personal_Info/profile_info.dart';
 import 'package:edumarshals/Screens/User_Info/Profile.dart';
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         'splashscreen': (context) =>SplashScreen(),
         'homepage': (context) => const Homepage(),
         'login': (context) => Login(),
-        'overallattendance':(context)=>OverAllAttd(),
+        // 'overallattendance':(context)=>OverAllAttd(),
         'timetable':(context) => ExamTimetableScreen(),
         'profile':(context) => Profile(),
         //  'profileinfo':(context) => profileInfo(),

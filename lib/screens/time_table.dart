@@ -4,8 +4,6 @@ import 'package:edumarshals/repository/timetable_repository.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
 
-
-
 class ExamTimetableScreen extends StatefulWidget {
   @override
   _ExamTimetableScreenState createState() => _ExamTimetableScreenState();
@@ -20,6 +18,7 @@ class _ExamTimetableScreenState extends State<ExamTimetableScreen> {
     super.initState();
     _fetchExamTimetableData();
   }
+
 //..............call the repository where function for intigrate api is stored............//
   Future<void> _fetchExamTimetableData() async {
     String? examTimetableData = await _repository.fetchExamTimetable();
@@ -45,11 +44,12 @@ class _ExamTimetableScreenState extends State<ExamTimetableScreen> {
       body: Center(
         child: _examTimetableData != null
             ? Padding(
-                padding: const EdgeInsets.only(right: 8.0),
+                padding: const EdgeInsets.only(right: 0.0),
                 child: Container(
-                  height: screenHeight * 0.9,
+                  margin: EdgeInsets.all(0.0),
+                  height: screenHeight * 0.65,
                   width: screenWidth * 1,
-//..............showing the image in landScape view.....................//                  
+//..............showing the image in landScape view.....................//
                   child: RotatedBox(
                     quarterTurns: 1,
                     child: Image.network(

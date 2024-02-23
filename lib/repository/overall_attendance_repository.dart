@@ -1,7 +1,7 @@
 import 'package:edumarshals/main.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:edumarshals/modules/student_attendance_data_model.dart';
+import 'package:edumarshals/model/student_attendance_data_model.dart';
 
 //..............repository to call the Attendance Api through Model Structure ............//
 

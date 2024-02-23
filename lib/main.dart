@@ -1,9 +1,10 @@
 import 'dart:io';
 import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
 import 'package:edumarshals/Screens/Login/login.dart';
-import 'package:edumarshals/Screens/User_Info/Personal_Info/profile_info.dart';
+// import 'package:edumarshals/Screens/User_Info/Personal_Info/profile_info.dart';
 import 'package:edumarshals/Screens/User_Info/Profile.dart';
 import 'package:edumarshals/Screens/splash.dart';
+import 'package:edumarshals/screens/Upload/document_upload.dart';
 import 'package:edumarshals/screens/time_table.dart';
 import 'package:flutter/material.dart';
 import 'Screens/HomePage/Homepage.dart';
@@ -21,25 +22,24 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
+  
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-       initialRoute: 'login',  
+      initialRoute: 'login',
       routes: {
-        'splashscreen': (context) =>SplashScreen(),
+        'splashscreen': (context) => SplashScreen(),
         'homepage': (context) => const Homepage(),
         'login': (context) => Login(),
-        'overallattendance':(context)=>OverAllAttd(),
-        'timetable':(context) => ExamTimetableScreen(),
-        'profile':(context) => Profile(),
+        'overallattendance': (context) => OverAllAttd(),
+        'timetable': (context) => ExamTimetableScreen(),
+        'profile': (context) => Profile(),
         //  'profileinfo':(context) => profileInfo(),
-
-        'personalinfo':(context) => PersonalInfoScreen(),
-
-
+        'upload': (context) => uploadDocument(),
+        'personalinfo': (context) => PersonalInfoScreen(),
       },
     );
   }

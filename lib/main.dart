@@ -73,6 +73,14 @@ class PreferencesManager {
   set token(String value) => _prefs.setString('token', value);
   String get ack => _prefs.getString('ack') ?? '';
   set ack(String value) => _prefs.setString('ack', value);
+  String get studentPhoto => _prefs.getString('studentPhoto') ?? '';
+  set studentPhoto(String value) => _prefs.setString('studentPhoto', value);
+  String get studentNumber => _prefs.getString('studentNumber') ?? '';
+  set studentNumber(String value) => _prefs.setString('studentNumber', value);
+  String get universityRollNumber => _prefs.getString('universityRollNumber') ?? '';
+  set universityRollNumber(String value) => _prefs.setString('universityRollNumber', value);
+  String get dob => _prefs.getString('dob') ?? '';
+  set dob(String value) => _prefs.setString('dob', value);
 
   // add more methods as needed
 }

@@ -37,7 +37,8 @@ class _ContactInfoScreenState extends State<ContactInfoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(userName:'rishi'),
+       backgroundColor: Color.fromRGBO(242, 246, 255, 1),
+      appBar: CustomAppBar(userName:PreferencesManager().name),
       body: contactDetails != null
           ? ListView(
               children: [

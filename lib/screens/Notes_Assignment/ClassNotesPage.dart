@@ -1,3 +1,4 @@
+import 'package:edumarshals/main.dart';
 import 'package:flutter/material.dart';
 import 'package:edumarshals/Utilities/Utilities.dart';
 
@@ -38,9 +39,9 @@ class _ClassNotesPageState extends State<ClassNotesPage>{
                               child: Image.asset('assets/Group 48065.png',scale: 3,)),
                           Padding(
                             padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                            child: Image.asset('assets/Ellipse 7.png',scale: 3.5,),
+                            child: Image.asset(PreferencesManager().studentPhoto,scale: 3.5,),
                           ),
-                          const Text('Hello...\nTRIPOD',style: TextStyle(
+                           Text(PreferencesManager().token,style: TextStyle(
                               fontSize: 15
                           ),),
                         ],

@@ -9,6 +9,7 @@ import 'package:edumarshals/Screens/User_Info/Personal_Info/guardian_info.dart';
 import 'package:edumarshals/Screens/time_table.dart';
 import 'package:edumarshals/Widget/Profile_Container.dart';
 import 'package:edumarshals/Widget/Profile_Tabs.dart';
+import 'package:edumarshals/main.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_acrylic/flutter_acrylic.dart';
 
@@ -31,18 +32,18 @@ class _ProfileState extends State<Profile> {
           child: Column(
             children: [
               const Padding(padding: EdgeInsets.all(8)),
-              const CircleAvatar(
-                backgroundImage: AssetImage('assets/Ellipse 7.jpg'),
+               CircleAvatar(
+                backgroundImage: NetworkImage(PreferencesManager().studentPhoto),
                 backgroundColor: Color.fromARGB(255, 17, 37, 218),
               ),
-              const Text("rishi"),
+               Text(PreferencesManager().name),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Container(
                     child: Text(
-                      "Roll no - 2200271540121",
+                       PreferencesManager().studentNumber,
                       style: TextStyle(
                           color: Colors.grey,
                           fontSize: MediaQuery.of(context).size.width * 0.03),
@@ -50,7 +51,7 @@ class _ProfileState extends State<Profile> {
                   ),
                   Container(
                     child: Text(
-                      "Student no - 22154141",
+                       PreferencesManager().universityRollNumber,
                       style: TextStyle(
                           color: Colors.grey,
                           fontSize: MediaQuery.of(context).size.width * 0.03),

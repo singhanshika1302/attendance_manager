@@ -12,6 +12,7 @@ import 'dart:convert';
 import 'package:edumarshals/utilities.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -72,12 +73,14 @@ class _LoginState extends State<Login> {
       'username': _usernameController.text,
       'dob': formattedDate,
     };
+    
     try {
       final response = await http.post(
         url,
         headers: <String, String>{'Content-Type': 'application/json'},
         body: jsonEncode(requestBody),
       );
+              // PreferencesManager().email=userna;
 
       //
       print(response.statusCode);
@@ -128,6 +131,8 @@ class _LoginState extends State<Login> {
         print('Message from API: $message');
         print('Message from API: $name');
         print('dob :$formattedDate');
+        
+        PreferencesManager().name=name;
         // Update UI to show success message or navigate to another screen
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -172,6 +177,13 @@ class _LoginState extends State<Login> {
         _isLoading = false;
       });
     }
+ if (isChecked) {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('username', _usernameController.text);
+    prefs.setString('password', _passController.text);
+  }
+
+
   }
 
   @override
@@ -224,7 +236,32 @@ class _LoginState extends State<Login> {
   Widget buildheading(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
+  //    _usernameController ??= TextEditingController();
+  // _passController ??= TextEditingController();
+  SharedPreferences.getInstance().then((prefs) {
+    final savedUsername = prefs.getString('username');
+    final savedPassword = prefs.getString('password');
+    final savedDob = prefs.getString('dob'); 
+    
+    if (savedUsername != null) {
+      _usernameController.text = savedUsername;
+      setState(() {
+        isChecked = true;
+      });
+    }
 
+    if (savedPassword != null) {
+      _passController.text = savedPassword;
+    }
+
+     if (savedDob != null) {
+    // Parse saved date string to DateTime
+    final savedDate = DateFormat('dd-MM-yyyy').parse(savedDob);
+    setState(() {
+      selectedDate = savedDate;
+    });
+  }
+  });
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [

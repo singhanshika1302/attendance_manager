@@ -37,7 +37,7 @@ class _ParentInfoScreenState extends State<ParentInfoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
        backgroundColor: Color.fromRGBO(242, 246, 255, 1),
-      appBar: CustomAppBar(userName:"rishi"),
+      appBar: CustomAppBar(userName:PreferencesManager().name),
       body: parentsInfo != null
           ? ListView(
               children: [

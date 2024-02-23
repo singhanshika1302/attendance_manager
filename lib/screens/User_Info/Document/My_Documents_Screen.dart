@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
 import 'package:edumarshals/Screens/User_Info/Document/Document_Image.dart';
 import 'package:edumarshals/Widget/My_Document_View_Card.dart';
+import 'package:edumarshals/main.dart';
 import 'package:edumarshals/repository/Document_Repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_full_pdf_viewer_null_safe/full_pdf_viewer_scaffold.dart';
@@ -53,7 +54,11 @@ List<Widget> _buildDocumentCards() {
   if (document == null) {
     return []; // Return an empty list if document is null
   }
-  print(document!['tenthMarksheet']);
+  print("hg");
+  print(document!['studentPhoto']);
+  
+          PreferencesManager().studentPhoto=document!['studentPhoto'];
+
   return document!.keys.map((documentName) {
     return My_Document_View_Card(
       documentname: documentName,
@@ -117,14 +122,14 @@ List<Widget> _buildDocumentCards() {
         automaticallyImplyLeading: false,
 
         toolbarHeight: 100.0, // Adjust the height as needed
-        title: const Center(
+        title:  Center(
           child: Column(
             children: [
               CircleAvatar(
-                backgroundImage: AssetImage('assets/Ellipse 7.jpg'),
+                backgroundImage: NetworkImage(document!['studentPhoto']),
                 backgroundColor: Color.fromARGB(255, 17, 37, 218),
               ),
-              Text("Vidhi Gupta"),
+              Text(PreferencesManager().name),
             ],
           ),
         ),

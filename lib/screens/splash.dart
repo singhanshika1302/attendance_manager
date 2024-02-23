@@ -1,10 +1,15 @@
 import 'dart:async';
+// import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
+import 'package:edumarshals/Screens/HomePage/Homepage.dart';
+import 'package:edumarshals/main.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import 'login.dart';
+import 'Login/login.dart';
 import 'package:flutter/material.dart';
 // import 'sp';
-
+String finalname='';
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -16,18 +21,32 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     // TODO: implement initState
-    super.initState();
-    Timer(Duration(seconds: 3), () {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
-    });
-  }
+    getvalidationdata().whenComplete(() async{
+ Timer(const Duration(seconds: 3), () {
 
+      Navigator.pop(context, MaterialPageRoute(builder: (context) => finalname==null?Login(): Homepage()));
+    });
+    });
+    super.initState();
+    // Timer(const Duration(seconds: 3), () {
+
+    //   Navigator.push(context, MaterialPageRoute(builder: (context) => const Login()));
+    // });
+  }
+  Future getvalidationdata() async
+{
+  var obname =PreferencesManager().name;
+  setState(() {
+     finalname=obname;
+  });
+  print(finalname);
+}
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height * 1;
     final width = MediaQuery.sizeOf(context).width * 1;
     return Scaffold(
-        backgroundColor: Color(0xFFEBF3FF),
+        backgroundColor: const Color(0xFFEBF3FF),
         body: Container(
             child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -63,13 +82,13 @@ class _SplashScreenState extends State<SplashScreen> {
                 // letterSpacing: -0.70,
               ),
             ),
-            SizedBox(
-              height: height * 0.05,
-            ),
-            SpinKitChasingDots(
-              color: Color(0xFF004BB8),
-              size: 40,
-            )
+            // SizedBox(
+            //   height: height * 0.05,
+            // ),
+            // SpinKitChasingDots(
+            //   color: Color(0xFF004BB8),
+            //   size: 40,
+            // )
           ],
         )));
   }

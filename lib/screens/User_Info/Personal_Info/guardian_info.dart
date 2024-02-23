@@ -1,10 +1,7 @@
-import 'package:edumarshals/main.dart';
-import 'package:edumarshals/screens/login.dart';
+// import 'package:edumarshals/screens/login.dart';
+import 'package:edumarshals/Screens/Login/login.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
 import 'package:edumarshals/utilities.dart';
-import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
 
 class guardianInfo extends StatefulWidget {
   const guardianInfo({super.key});
@@ -33,7 +30,7 @@ class _guardianInfoState extends State<guardianInfo> {
   // final TextEditingController _lateralController = TextEditingController();
   // final TextEditingController _hostelController = TextEditingController();
   // bool isChecked = false;
-  bool _isLoading = false;
+  final bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +61,7 @@ class _guardianInfoState extends State<guardianInfo> {
         SafeArea(
           child: Scaffold(
               // backgroundColor: Color.fromARGB(248, 156, 184, 205),
-              backgroundColor: Color(0xFFEBF3FF),
+              backgroundColor: const Color(0xFFEBF3FF),
               body: ListView(
                 children: [buildheading(context)],
               )),
@@ -72,7 +69,7 @@ class _guardianInfoState extends State<guardianInfo> {
         if (_isLoading)
           Container(
             color: Colors.black.withOpacity(0.5),
-            child: Center(
+            child: const Center(
               child: CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF4E82EA)),
                 strokeWidth: 5.0,
@@ -135,24 +132,24 @@ class _guardianInfoState extends State<guardianInfo> {
                 fontfamily: 'Poppins',
               ),
             ])),
-        upper('Guardian Info', 0, 0, context, Login()),
+        upper('Guardian Info', 0, 0, context, const Login()),
         SizedBox(
           height: screenHeight * 0.025,
         ),
-        UserInput('Father Name', _fatherController, 'Mother Name',
-            _motherController, context),
-        SizedBox(
-          height: screenHeight * 0.00,
-        ),
-        UserInput('Father Mob no', _fatherMobController, 'Mother Mob no',
-            _motherMobController, context),
-        UserInput('Email(father)', _emailFController, 'Email(Mother)',
-            _emailMController, context),
-        UserInput('Aadher No (Father)', _aadharFController, 'Aadher no(Mother)',
-            _aadharMController, context),
-        UserInput('Occupation(Father)', _occupationFController,
-            'Occupation(mother)', _occupationMController, context),
-        UserInput1('Address', _addressController, context)
+        // UserInput('Father Name', _fatherController, 'Mother Name',
+        //     _motherController, context),
+        // SizedBox(
+        //   height: screenHeight * 0.00,
+        // ),
+        // UserInput('Father Mob no', _fatherMobController, 'Mother Mob no',
+        //     _motherMobController, context),
+        // UserInput('Email(father)', _emailFController, 'Email(Mother)',
+        //     _emailMController, context),
+        // UserInput('Aadher No (Father)', _aadharFController, 'Aadher no(Mother)',
+        //     _aadharMController, context),
+        // UserInput('Occupation(Father)', _occupationFController,
+        //     'Occupation(mother)', _occupationMController, context),
+        // UserInput1('Address', _addressController, context)
         // UserInput('Category', _categoryController, 'Domacile State',
         //     _domacileController, context),
         // UserInput('JEE Rank', _jeeController, 'JEE Roll no', _jeeRollController,

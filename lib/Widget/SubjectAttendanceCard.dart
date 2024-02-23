@@ -6,7 +6,7 @@ class SubjectAttendanceCard extends StatelessWidget {
   final int attendedClasses;
   final int totalClasses;
 
-  SubjectAttendanceCard({
+  const SubjectAttendanceCard({super.key, 
     required this.subjectName,
     required this.attendedClasses,
     required this.totalClasses,
@@ -22,8 +22,8 @@ class SubjectAttendanceCard extends StatelessWidget {
         // Handle the tap event
       },
       child: Container(
-        margin: EdgeInsets.all(16.0),
-        padding: EdgeInsets.all(16.0),
+        margin: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(15.0),
@@ -32,7 +32,7 @@ class SubjectAttendanceCard extends StatelessWidget {
               color: Colors.black.withOpacity(0.2),
               blurRadius: 5.0,
               spreadRadius: 2.0,
-              offset: Offset(0, 2),
+              offset: const Offset(0, 2),
             ),
           ],
         ),
@@ -44,36 +44,36 @@ class SubjectAttendanceCard extends StatelessWidget {
                 children: [
                   Text(
                     subjectName,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
                       color: Color.fromARGB(255, 0, 0, 0),
                     ),
                   ),
-                  SizedBox(height: 8.0),
+                  const SizedBox(height: 8.0),
                   Text(
                     'Attendance: $attendedClasses / $totalClasses',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Color.fromARGB(255, 0, 0, 0),
                     ),
                   ),
                 ],
               ),
             ),
-            SizedBox(width: 16.0),
+            const SizedBox(width: 16.0),
             CircularPercentIndicator(
               radius: 30.0,
               lineWidth: 10.0,
               percent: attendancePercentage / 100,
               center: Text(
                 '${attendancePercentage.toStringAsFixed(1)}%',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 12.0,
                   color: Color.fromARGB(255, 0, 0, 0),
                 ),
               ),
               backgroundColor: Colors.white,
-              progressColor: Color.fromARGB(255, 22, 192, 28),
+              progressColor: const Color.fromARGB(255, 22, 192, 28),
             ),
           ],
         ),

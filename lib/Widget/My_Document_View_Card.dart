@@ -5,7 +5,7 @@ class My_Document_View_Card extends StatelessWidget {
   final String textbuttonname;
   final VoidCallback? onpressed;
 
-  My_Document_View_Card({
+  const My_Document_View_Card({super.key, 
     required this.documentname,
     this.onpressed,
     required this.textbuttonname,
@@ -15,7 +15,7 @@ class My_Document_View_Card extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: Colors.white,
-      margin: EdgeInsets.all(8.0),
+      margin: const EdgeInsets.all(8.0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
       ),
@@ -30,7 +30,7 @@ class My_Document_View_Card extends StatelessWidget {
           // Document Name
 
           Padding(
-            padding: EdgeInsets.all(5.0),
+            padding: const EdgeInsets.all(5.0),
             child: Text(
               documentname,
               style: TextStyle(
@@ -38,12 +38,12 @@ class My_Document_View_Card extends StatelessWidget {
               ),
             ),
           ),
-          Spacer(),
+          const Spacer(),
 
           // View Name
 
           Container(
-              margin: EdgeInsets.all(8.0),
+              margin: const EdgeInsets.all(8.0),
               child: TextButton(
                   onPressed: onpressed,
                   child: Text(

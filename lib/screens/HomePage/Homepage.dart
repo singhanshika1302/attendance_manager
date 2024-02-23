@@ -1,5 +1,6 @@
 // import 'package:edumarshal/Utilities/Utilities.dart';
 import 'package:edumarshals/Utilities/Utilities.dart';
+import 'package:edumarshals/main.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
@@ -75,7 +76,7 @@ class _HomepageState extends State<Homepage> {
                               padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                               child: Image.asset('assets/Ellipse 7.png',scale: 3.5,),
                             ),
-                            const Text('Hello...\nTRIPOD',style: TextStyle(
+                             Text(PreferencesManager().name,style: TextStyle(
                                 fontSize: 15
                             ),),
                           ],

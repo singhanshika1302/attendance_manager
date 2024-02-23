@@ -32,6 +32,9 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
       // Handle error
       print('Error fetching personal info: $e');
     }
+
+     PreferencesManager().studentNumber=_personalInfo!['studentNumber'];
+      PreferencesManager().universityRollNumber=_personalInfo!['universityRollNumber'];
   }
 
   @override
@@ -54,6 +57,12 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
               children: [
                 ListTile(
                   title: Text('Name: ${_personalInfo!['name']}'),
+                ),
+                ListTile(
+                  title: Text('studentNumber: ${_personalInfo!['studentNumber']}'),
+                ),
+                ListTile(
+                  title: Text('universityRollNumber: ${_personalInfo!['universityRollNumber']}'),
                 ),
              
                 ListTile(

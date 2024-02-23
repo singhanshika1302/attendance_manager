@@ -1,4 +1,5 @@
 import 'package:edumarshals/Screens/User_Info/Profile.dart';
+import 'package:edumarshals/main.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -24,8 +25,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             child: CircleAvatar(
               backgroundColor: const Color.fromARGB(255, 36, 34, 34),
               backgroundImage:
-                  userImage != null ? AssetImage(userImage!) : null,
-              radius: 20.0,
+                  userImage != null ? NetworkImage(PreferencesManager().studentPhoto) : null,
+              radius: 15.0,
             ),
           ),
           const SizedBox(width: 10.0),

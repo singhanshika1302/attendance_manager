@@ -1,6 +1,7 @@
 import 'package:edumarshals/Widget/AttendanceCard.dart';
 import 'package:edumarshals/Widget/CustomAppBar.dart';
 import 'package:edumarshals/Widget/SubjectAttendanceCard.dart';
+import 'package:edumarshals/main.dart';
 import 'package:flutter/material.dart';
 
 // import '../Widget/CustomAppBar.dart';
@@ -16,15 +17,17 @@ class OverAllAttd extends StatefulWidget {
 class _OverAllAttdState extends State<OverAllAttd> {
   
   @override
+  
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFFFFFFF),
       appBar: CustomAppBar(
-          userName: 'rishi', userImage: "assets/Ellipse 7.jpg"),
+          userName: PreferencesManager().name, userImage: PreferencesManager().studentPhoto),
       body: ListView(
         children: [
           Column(
             children: [
+              
               // Container(),
               const AttendanceCard(
                   title: "Overall Attendance",

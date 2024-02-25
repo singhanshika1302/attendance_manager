@@ -182,7 +182,7 @@ Widget AllClassNotesBlock(subjectName, teacherName){
               ],
             ),
 
-            Image.asset('assets/note-2.png', scale: 4,)
+            Image.asset('assets/note-2.png',)
           ],
         ),
       ),

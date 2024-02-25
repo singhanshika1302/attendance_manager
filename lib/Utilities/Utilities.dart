@@ -46,7 +46,7 @@ Widget notes( text1, text2,text3 ){
                   padding: const EdgeInsets.only(bottom: 6),
                   child: Text(text1,style: const TextStyle(
                       fontSize: 17,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w500,
                       color: Colors.white
                   ),),
                 ),
@@ -54,7 +54,7 @@ Widget notes( text1, text2,text3 ){
                 Padding(
                   padding: const EdgeInsets.only(bottom: 6),
                   child: Text(text2,style: const TextStyle(
-                      fontSize: 19,
+                      fontSize: 17,
                       fontWeight: FontWeight.w500,
                       color: Colors.white
                   ),),
@@ -62,7 +62,7 @@ Widget notes( text1, text2,text3 ){
 
                 Text(text3,style: const TextStyle(
                     fontSize: 14,
-                    fontWeight: FontWeight.w400,
+                    fontWeight: FontWeight.w300,
                     color: Colors.white
                 ),),
               ],
@@ -73,7 +73,7 @@ Widget notes( text1, text2,text3 ){
               children: [
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10),
-                  child: Image.asset('assets/note-2.png',scale: 4.5,),
+                  child: Image.asset('assets/note-2.png',),
                 ),
 
                 const Text('2 hr ago',style: TextStyle(
@@ -105,7 +105,7 @@ Widget Asgn(text1, text2, text3){
           children: [
            Row(
              children: [
-               Image.asset('assets/Frame 52.png',scale: 3.2,),
+               Image.asset('assets/assets/Frame 52.png',),
 
                Padding(
                  padding: const EdgeInsets.only(left: 8),

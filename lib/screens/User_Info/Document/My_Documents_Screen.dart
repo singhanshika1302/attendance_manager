@@ -8,6 +8,7 @@ import 'package:edumarshals/main.dart';
 import 'package:edumarshals/repository/Document_Repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_full_pdf_viewer_null_safe/full_pdf_viewer_scaffold.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MyDocument extends StatefulWidget {
  const  MyDocument({Key? key}) : super(key: key);
@@ -21,7 +22,7 @@ class _MyDocumentState extends State<MyDocument> {
 final DocumentRepository _documentRepository = DocumentRepository();
   List<String> items = [
     "My Document",
-    "Upload/Update Document",
+    "Upload Document",
   ];
   Map<String, dynamic>? document;
   
@@ -65,7 +66,7 @@ List<Widget> _buildDocumentCards() {
       textbuttonname: 'View',
       onpressed: () {
         // Navigate to a new screen to display the image
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => Document_Image(imageUrl: document![documentName],),
@@ -146,7 +147,7 @@ List<Widget> _buildDocumentCards() {
                 children: [
                   IconButton(
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> Homepage()));
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> Homepage()));
                       }, icon: const Icon(Icons.arrow_back)),
                   const Text(
                     "My Documents",
@@ -171,8 +172,8 @@ List<Widget> _buildDocumentCards() {
                                 current = index;
                               });
                             },
-                            child: AnimatedContainer(
-                              duration: const Duration(milliseconds: 300),
+                            child: Container(
+                              // duration: const Duration(milliseconds: 300),
                               margin: const EdgeInsets.all(5),
                               width: screenwidth * 0.45,
                               height: 55,
@@ -193,16 +194,18 @@ List<Widget> _buildDocumentCards() {
                               child: Center(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
+                                  // crossAxisAlignment: CrossAxisAlignment.,
                                   children: [
                                     Text(
                                       items[index],
-                                      style: TextStyle(
+                                      style:GoogleFonts.poppins( 
                                         fontWeight: FontWeight.w500,
+                                        fontSize: 12,
                                         color: current == index
                                             ? Colors.white
                                             : const Color.fromRGBO(
                                                 0, 88, 214, 1),
-                                      ),
+                                      )
                                     ),
                                   ],
                                 ),

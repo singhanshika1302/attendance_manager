@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class SubjectAttendanceCard extends StatelessWidget {
@@ -44,18 +45,17 @@ class SubjectAttendanceCard extends StatelessWidget {
                 children: [
                   Text(
                     subjectName,
-                    style: const TextStyle(
+                    style: GoogleFonts.roboto(
                       fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w400,
+                     
                       color: Color.fromARGB(255, 0, 0, 0),
-                    ),
+                    )
                   ),
                   const SizedBox(height: 8.0),
                   Text(
                     'Attendance: $attendedClasses / $totalClasses',
-                    style: const TextStyle(
-                      color: Color.fromARGB(255, 0, 0, 0),
-                    ),
+                    style: GoogleFonts.roboto(fontSize: 14)
                   ),
                 ],
               ),

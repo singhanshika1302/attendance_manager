@@ -12,7 +12,8 @@ class PersonalInfoScreen extends StatefulWidget {
 }
 
 class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
-  final PersonalInfoRepository _repository = PersonalInfoRepository('https://akgec-edu.onrender.com/v1/student/profile/personalInfo');
+  final PersonalInfoRepository _repository = PersonalInfoRepository(
+      'https://akgec-edu.onrender.com/v1/student/profile/personalInfo');
   Map<String, dynamic>? _personalInfo;
 
   @override
@@ -23,7 +24,8 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
 
   Future<void> _fetchPersonalInfo() async {
     try {
-      final token = '${PreferencesManager().token}'; // Replace with your actual token
+      final token =
+          '${PreferencesManager().token}'; // Replace with your actual token
       final data = await _repository.fetchPersonalInfo(token);
       setState(() {
         _personalInfo = data['personalInfo'];
@@ -33,79 +35,114 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
       print('Error fetching personal info: $e');
     }
 
-     PreferencesManager().studentNumber=_personalInfo!['studentNumber'];
-      PreferencesManager().universityRollNumber=_personalInfo!['universityRollNumber'];
+    PreferencesManager().studentNumber = _personalInfo!['studentNumber'];
+    PreferencesManager().universityRollNumber =
+        _personalInfo!['universityRollNumber'];
   }
 
   @override
   Widget build(BuildContext context) {
-  
     return Scaffold(
       backgroundColor: Color.fromRGBO(242, 246, 255, 1),
       appBar: AppBar(
         title: Column(
-        children: [
-          Text("Personal Info",style: TextStyle(fontFamily:"popins"),),
-       
-        ],
-        
-      ),
-    
+          children: [
+            Text(
+              "Personal Info",
+              style: TextStyle(fontFamily: "popins"),
+            ),
+          ],
+        ),
       ),
       body: _personalInfo != null
           ? ListView(
               children: [
-                ListTile(
-                  title: Text('Name: ${_personalInfo!['name']}'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    buildInfoItem(title: 'Name', value: _personalInfo!['name']),
+                    buildInfoItem(
+                        title: 'Student Number',
+                        value: _personalInfo!['studentNumber']),
+                  ],
                 ),
-                ListTile(
-                  title: Text('studentNumber: ${_personalInfo!['studentNumber']}'),
+                
+                Row(
+                   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    buildInfoItem(
+                        title: 'University Roll Number',
+                        value: _personalInfo!['universityRollNumber']),
+                    
+                    buildInfoItem(title: 'Gender', value: _personalInfo!['gender']),
+                  ],
                 ),
-                ListTile(
-                  title: Text('universityRollNumber: ${_personalInfo!['universityRollNumber']}'),
+                Row(
+                   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    buildInfoItem(title: 'DOB', value: _personalInfo!['dob']),
+                    buildInfoItem(
+                        title: 'Course Name', value: _personalInfo!['courseName']),
+                  ],
                 ),
-             
-                ListTile(
-                  title: Text('Gender: ${_personalInfo!['gender']}'),
+                Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    buildInfoItem(
+                        title: 'Admission Date',
+                        value: _personalInfo!['admissionDate']),
+                    buildInfoItem(title: 'Branch', value: _personalInfo!['branch']),
+                  ],
                 ),
-                ListTile(
-                  title: Text('dob: ${_personalInfo!['dob']}'),
+
+                Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    buildInfoItem(
+                        title: 'Semester',
+                        value: _personalInfo!['semester']
+                            .toString()), // Convert integer to string
+                    
+                    buildInfoItem(
+                        title: 'Admission Mode',
+                        value: _personalInfo!['admissionMode']),
+                  ],
                 ),
-                ListTile(
-                  title: Text('courseName: ${_personalInfo!['courseName']}'),
+                Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    buildInfoItem(
+                        title: 'Section', value: _personalInfo!['section']),
+                    
+                    buildInfoItem(
+                        title: 'Category', value: _personalInfo!['category']),
+                  ],
                 ),
-                ListTile(
-                  title: Text('admissionDate: ${_personalInfo!['admissionDate']}'),
+                Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    buildInfoItem(
+                        title: 'Domicile State',
+                        value: _personalInfo!['domicileState']),
+                    buildInfoItem(
+                        title: 'JEE Rank', value: _personalInfo!['jeeRank']),
+                  ],
                 ),
-                ListTile(
-                  title: Text('branch: ${_personalInfo!['branch']}'),
+                Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    buildInfoItem(
+                        title: 'JEE Roll No', value: _personalInfo!['jeeRollNo']),
+                    buildInfoItem(
+                        title: 'Lateral Entry',
+                        value: _personalInfo!['lateralEntry']),
+                  ],
                 ),
-                ListTile(
-                  title: Text('semester: ${_personalInfo!['semester']}'),
-                ),
-                ListTile(
-                  title: Text('admissionMode: ${_personalInfo!['admissionMode']}'),
-                ),
-                  ListTile(
-                  title: Text('section: ${_personalInfo!['section']}'),
-                ),
-                  ListTile(
-                  title: Text('category: ${_personalInfo!['category']}'),
-                ),
-                  ListTile(
-                  title: Text('domicileState: ${_personalInfo!['domicileState']}'),
-                ),
-                  ListTile(
-                  title: Text('jeeRank: ${_personalInfo!['jeeRank']}'),
-                ),
-                  ListTile(
-                  title: Text('jeeRollNo: ${_personalInfo!['jeeRollNo']}'),
-                ),
-                   ListTile(
-                  title: Text('lateralEntry: ${_personalInfo!['lateralEntry']}'),
-                ),
-                   ListTile(
-                  title: Text('hostel: ${_personalInfo!['hostel']}'),
+                Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    buildInfoItem(title: 'Hostel', value: _personalInfo!['hostel']),
+                  ],
                 ),
 
                 // Add more ListTile widgets for other fields
@@ -117,4 +154,3 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
     );
   }
 }
-

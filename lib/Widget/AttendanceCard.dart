@@ -35,9 +35,10 @@ class AttendanceCard extends StatelessWidget {
                 Text(
                   title,
                   style: const TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.w500,
                     color: Colors.white,
+                    // fontFamily: 'Poppins'
                   ),
                   softWrap: true,
                 ),
@@ -46,6 +47,8 @@ class AttendanceCard extends StatelessWidget {
                   description,
                   style: const TextStyle(
                     color: Colors.white,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w300,
                   ),
                   softWrap: true,
                 ),

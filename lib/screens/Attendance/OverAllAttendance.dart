@@ -1,11 +1,11 @@
-
-
 import 'package:edumarshals/Widget/AttendanceCard.dart';
 import 'package:edumarshals/Widget/SubjectAttendanceCard.dart';
 import 'package:edumarshals/main.dart';
 import 'package:flutter/material.dart';
+// import 'package:edumarshals/repository/overall_attendance_repository.dart';
 import 'package:edumarshals/repository/overall_attendance_repository.dart';
-import 'package:edumarshals/model/student_attendance_data_model.dart';
+// import 'package:edumarshals/model/student_attendance_data_model.dart';
+import 'package:edumarshals/Model/student_attendance_data_model.dart';
 // import '../Widget/CustomAppBar.dart';
 import 'package:edumarshals/Widget/CustomAppBar.dart';
 
@@ -45,10 +45,21 @@ class _OverAllAttdState extends State<OverAllAttd> {
       _attendanceDataList = attendanceDataList;
       _totalClasses = totalClasses;
       print('totalclasses${_totalClasses}');
+      // PreferencesManager.totalclasses=_totalClasses;
       // print('totalPresentClasses${_totalPresentClasses}');
       _totalPresentClasses = totalPresentClasses;
+
+      PreferencesManager().totalclasses = _totalClasses;
+      PreferencesManager().presentclasses=_totalPresentClasses;
+
       print('totalPresentClasses${_totalPresentClasses}');
+
+    // print('dfghj $attendanceDataList');
+      // PreferencesManager.totalclasses=_totalClasses;
+
+
     });
+   
   }
 
   @override
@@ -56,7 +67,7 @@ class _OverAllAttdState extends State<OverAllAttd> {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 236, 255, 251),
+      backgroundColor: Color.fromRGBO(242, 246, 255, 1),
       appBar: CustomAppBar(
           userName: '${PreferencesManager().name}',
           userImage: "assets/Ellipse 7.jpg"),

@@ -175,7 +175,7 @@ Widget button3(
     onTap: () async {
       // await onTapFunction();
 
-      Navigator.push(context, MaterialPageRoute(builder: (context) => page));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => page));
 
       // onTapFunction();
     },
@@ -392,7 +392,7 @@ Widget upper(
         SizedBox(width: screenWidth * 0.01),
         GestureDetector(
           onTap: () async {
-            Navigator.push(
+            Navigator.pushReplacement(
                 context, MaterialPageRoute(builder: (context) => page));
           },
           child: Image.asset(
@@ -416,5 +416,75 @@ Widget upper(
         )
       ],
     )),
+  );
+}
+
+Widget buildInfoItem({required String title, required String value}) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w500,
+              color: Colors.black87,
+            ),
+          ),
+          // SizedBox(height: 4),
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.grey,
+                width: 1.0,
+              ),
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            padding: EdgeInsets.all(12.0),
+            child: Text(
+              value,
+              style: TextStyle(
+                fontSize: 12,
+                color: Colors.black54,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+Widget buildInfoItems({required String title, required String value}) {
+  return Container(
+    decoration: BoxDecoration(
+      border: Border.all(
+        color: Colors.grey,
+        width: 1.0,
+      ),
+      borderRadius: BorderRadius.circular(8.0),
+    ),
+    padding: EdgeInsets.all(12.0),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
+          ),
+        ),
+        SizedBox(height: 4),
+        Text(
+          value,
+          style: TextStyle(
+            fontSize: 14,
+            color: Colors.black54,
+          ),
+        ),
+      ],
+    ),
   );
 }

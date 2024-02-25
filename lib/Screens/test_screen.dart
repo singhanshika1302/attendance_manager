@@ -1,6 +1,7 @@
+import 'package:edumarshals/Model/student_attendance_data_model.dart';
 import 'package:flutter/material.dart';
 import 'package:edumarshals/repository/overall_attendance_repository.dart';
-import 'package:edumarshals/model/student_attendance_data_model.dart';
+// import 'package:edumarshals/modules/student_attendance_data_model.dart';
 
 class AttendancePage extends StatefulWidget {
   @override

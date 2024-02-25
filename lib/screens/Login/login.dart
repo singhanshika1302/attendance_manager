@@ -147,7 +147,7 @@ class _LoginState extends State<Login> {
           _isLoading = false;
         });
         // for navigaation to next page
-        Navigator.push(context,
+        Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) =>OverAllAttd() ));
         // Navigator.push(
         //     context,
@@ -217,6 +217,8 @@ class _LoginState extends State<Login> {
               ),
             ),
           ),
+          // Spacer(),
+          // Padding(padding: EdgeInsets.all(18)),
         Positioned(
             bottom: 500,
             right: 100.0,
@@ -279,7 +281,7 @@ class _LoginState extends State<Login> {
         Stack(children: [
           Container(
               width: screenWidth * 0.85,
-              height: screenHeight * 0.44,
+              height: screenHeight * 0.47,
               decoration: ShapeDecoration(
                 color: const Color(0xFFFBFBFB),
                 shape: RoundedRectangleBorder(
@@ -336,6 +338,8 @@ class _LoginState extends State<Login> {
                           // fontWeight: FontWeight.w400,
                         ),
                       ),
+                      // Spacer()/
+                      Padding(padding: EdgeInsets.all(4)),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -446,7 +450,8 @@ class _LoginState extends State<Login> {
                   )
                 ]),
               )),
-              // Padding(padding: EdgeInsets.all(17)),
+
+        
           Positioned(
             bottom: 0,
             left: 80,
@@ -464,6 +469,7 @@ class _LoginState extends State<Login> {
 
                   // Add your onPressed logic here
                 },
+                
               style: ButtonStyle( backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(0, 75, 184, 1))),
                 child: const Text('Login',style: TextStyle(color: Colors.white),),
               ),

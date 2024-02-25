@@ -48,6 +48,7 @@ dependencies:
   flutter_full_pdf_viewer_null_safe: ^1.0.0
   dotted_border: ^2.1.0
   image_picker: ^0.8.4+4
+  google_fonts: ^6.1.0
   
   # camera: ^0.10.5+9
 
@@ -85,6 +86,11 @@ flutter:
     - assets/Ellipse 7.jpg
     - assets/Frame 100.png
     - assets/assets/Frame 48117.png
+    - assets/Group 48155.png
+    - assets/bank.png
+    - assets/assets/bankcolor.png
+    - "assets/assets/buliding.png"
+    # - assets\assets\Frame 52.png
 #    - assets/Frame 48117 (1).png
 #    - assets/Frame 48117 (2).png
     - asset/images/pdf1.png

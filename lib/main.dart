@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
-       initialRoute: 'login',  
+       initialRoute: 'homepage',  
       routes: {
         'splashscreen': (context) =>SplashScreen(),
         'homepage': (context) => const Homepage(),
@@ -81,6 +81,11 @@ class PreferencesManager {
   set universityRollNumber(String value) => _prefs.setString('universityRollNumber', value);
   String get dob => _prefs.getString('dob') ?? '';
   set dob(String value) => _prefs.setString('dob', value);
+  int get totalclasses => _prefs.getInt('totalclasses') ?? 0;
+  set totalclasses(int value) => _prefs.setInt('totalclasses', value);
+
+  int get presentclasses => _prefs.getInt('presentclasses') ?? 0;
+  set presentclasses(int value) => _prefs.setInt('presentclasses', value);
 
   // add more methods as needed
 }

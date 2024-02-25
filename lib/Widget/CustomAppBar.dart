@@ -37,7 +37,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               const Text(
                 'Hello',
                 style: TextStyle(
-                  fontSize: 16.0,
+                  fontSize: 14.0,
                   color: Colors.grey,
                 ),
               ),
@@ -45,7 +45,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 userName,
                 style: const TextStyle(
                   fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w500,
                   color: Colors.grey,
                 ),
               ),
@@ -56,7 +56,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         // You can add additional actions here if needed
         IconButton(
-          icon: const Icon(Icons.notification_add),
+          icon: const Icon(Icons.notifications),
           onPressed: () {
             // Handle settings button press
           },

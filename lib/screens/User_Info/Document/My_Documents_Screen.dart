@@ -1,12 +1,14 @@
 // import 'package:edumarshals/Screens/OverAllAttendance.dart';
 import 'dart:convert';
-
-import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
+// import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
+import 'package:edumarshals/Screens/HomePage/Homepage.dart';
 import 'package:edumarshals/Screens/User_Info/Document/Document_Image.dart';
 import 'package:edumarshals/Widget/My_Document_View_Card.dart';
+import 'package:edumarshals/main.dart';
 import 'package:edumarshals/repository/Document_Repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_full_pdf_viewer_null_safe/full_pdf_viewer_scaffold.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MyDocument extends StatefulWidget {
  const  MyDocument({Key? key}) : super(key: key);
@@ -20,7 +22,7 @@ class _MyDocumentState extends State<MyDocument> {
 final DocumentRepository _documentRepository = DocumentRepository();
   List<String> items = [
     "My Document",
-    "Upload/Update Document",
+    "Upload Document",
   ];
   Map<String, dynamic>? document;
   
@@ -53,14 +55,18 @@ List<Widget> _buildDocumentCards() {
   if (document == null) {
     return []; // Return an empty list if document is null
   }
-  print(document!['tenthMarksheet']);
+  print("hg");
+  print(document!['studentPhoto']);
+  
+          PreferencesManager().studentPhoto=document!['studentPhoto'];
+
   return document!.keys.map((documentName) {
     return My_Document_View_Card(
       documentname: documentName,
       textbuttonname: 'View',
       onpressed: () {
         // Navigate to a new screen to display the image
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => Document_Image(imageUrl: document![documentName],),
@@ -117,14 +123,14 @@ List<Widget> _buildDocumentCards() {
         automaticallyImplyLeading: false,
 
         toolbarHeight: 100.0, // Adjust the height as needed
-        title: const Center(
+        title:  Center(
           child: Column(
             children: [
               CircleAvatar(
-                backgroundImage: AssetImage('assets/Ellipse 7.jpg'),
+                backgroundImage: NetworkImage(document!['studentPhoto']),
                 backgroundColor: Color.fromARGB(255, 17, 37, 218),
               ),
-              Text("Vidhi Gupta"),
+              Text(PreferencesManager().name),
             ],
           ),
         ),
@@ -141,7 +147,7 @@ List<Widget> _buildDocumentCards() {
                 children: [
                   IconButton(
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> OverAllAttd()));
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> Homepage()));
                       }, icon: const Icon(Icons.arrow_back)),
                   const Text(
                     "My Documents",
@@ -166,8 +172,8 @@ List<Widget> _buildDocumentCards() {
                                 current = index;
                               });
                             },
-                            child: AnimatedContainer(
-                              duration: const Duration(milliseconds: 300),
+                            child: Container(
+                              // duration: const Duration(milliseconds: 300),
                               margin: const EdgeInsets.all(5),
                               width: screenwidth * 0.45,
                               height: 55,
@@ -188,16 +194,18 @@ List<Widget> _buildDocumentCards() {
                               child: Center(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
+                                  // crossAxisAlignment: CrossAxisAlignment.,
                                   children: [
                                     Text(
                                       items[index],
-                                      style: TextStyle(
+                                      style:GoogleFonts.poppins( 
                                         fontWeight: FontWeight.w500,
+                                        fontSize: 12,
                                         color: current == index
                                             ? Colors.white
                                             : const Color.fromRGBO(
                                                 0, 88, 214, 1),
-                                      ),
+                                      )
                                     ),
                                   ],
                                 ),

@@ -1,5 +1,6 @@
 import 'package:edumarshals/Widget/CustomAppBar.dart';
 import 'package:edumarshals/Widget/Subject_Assignment_Card.dart';
+import 'package:edumarshals/main.dart';
 import 'package:flutter/material.dart';
 
 class Subject_Assignment extends StatefulWidget {
@@ -107,7 +108,7 @@ class _Subject_AssignmentState extends State<Subject_Assignment> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(235, 243, 255, 1),
-      appBar: const CustomAppBar(userName: "Vidhi Gupta"),
+      appBar:  CustomAppBar(userName: PreferencesManager().name),
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,

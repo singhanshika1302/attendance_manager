@@ -1,16 +1,20 @@
 import 'dart:io';
+
+// import 'package:edumarshals/Screens/OverAllAttendance.dart';
+// import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
 import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
+import 'package:edumarshals/Screens/HomePage/Homepage.dart';
 import 'package:edumarshals/Screens/User_Info/Personal_Info/Contact_info_Data.dart';
 import 'package:edumarshals/Screens/User_Info/Personal_Info/Parent_Info_Data.dart';
 import 'package:edumarshals/Screens/User_Info/Personal_Info/Personal_Info_Data.dart';
 import 'package:edumarshals/main.dart';
-import 'package:edumarshals/screens/Upload/document_upload.dart';
 import 'package:edumarshals/screens/time_table.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:edumarshals/utilities.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -71,12 +75,14 @@ class _LoginState extends State<Login> {
       'username': _usernameController.text,
       'dob': formattedDate,
     };
+    
     try {
       final response = await http.post(
         url,
         headers: <String, String>{'Content-Type': 'application/json'},
         body: jsonEncode(requestBody),
       );
+              // PreferencesManager().email=userna;
 
       //
       print(response.statusCode);
@@ -127,6 +133,8 @@ class _LoginState extends State<Login> {
         print('Message from API: $message');
         print('Message from API: $name');
         print('dob :$formattedDate');
+        
+        PreferencesManager().name=name;
         // Update UI to show success message or navigate to another screen
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -139,8 +147,8 @@ class _LoginState extends State<Login> {
           _isLoading = false;
         });
         // for navigaation to next page
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => OverAllAttd()));
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) =>OverAllAttd() ));
         // Navigator.push(
         //     context,
         //     MaterialPageRoute(
@@ -171,6 +179,13 @@ class _LoginState extends State<Login> {
         _isLoading = false;
       });
     }
+ if (isChecked) {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('username', _usernameController.text);
+    prefs.setString('password', _passController.text);
+  }
+
+
   }
 
   @override
@@ -202,6 +217,8 @@ class _LoginState extends State<Login> {
               ),
             ),
           ),
+          // Spacer(),
+          // Padding(padding: EdgeInsets.all(18)),
         Positioned(
             bottom: 500,
             right: 100.0,
@@ -223,7 +240,32 @@ class _LoginState extends State<Login> {
   Widget buildheading(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
+  //    _usernameController ??= TextEditingController();
+  // _passController ??= TextEditingController();
+  SharedPreferences.getInstance().then((prefs) {
+    final savedUsername = prefs.getString('username');
+    final savedPassword = prefs.getString('password');
+    final savedDob = prefs.getString('dob'); 
+    
+    if (savedUsername != null) {
+      _usernameController.text = savedUsername;
+      setState(() {
+        isChecked = true;
+      });
+    }
 
+    if (savedPassword != null) {
+      _passController.text = savedPassword;
+    }
+
+  //    if (savedDob != null) {
+  //   // Parse saved date string to DateTime
+  //   final savedDate = DateFormat('dd-MM-yyyy').parse(savedDob);
+  //   setState(() {
+  //     selectedDate = savedDate;
+  //   });
+  // }
+  });
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -239,7 +281,7 @@ class _LoginState extends State<Login> {
         Stack(children: [
           Container(
               width: screenWidth * 0.85,
-              height: screenHeight * 0.44,
+              height: screenHeight * 0.47,
               decoration: ShapeDecoration(
                 color: const Color(0xFFFBFBFB),
                 shape: RoundedRectangleBorder(
@@ -296,6 +338,8 @@ class _LoginState extends State<Login> {
                           // fontWeight: FontWeight.w400,
                         ),
                       ),
+                      // Spacer()/
+                      Padding(padding: EdgeInsets.all(4)),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -322,8 +366,8 @@ class _LoginState extends State<Login> {
                                         ? Row(
                                             children: [
                                               Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 10),
+                                                padding:
+                                                    const EdgeInsets.only(right: 10),
                                                 // child: Icon(
                                                 //   Icons.calendar_month,
                                                 //   size: 20,
@@ -352,8 +396,8 @@ class _LoginState extends State<Login> {
                                         : Row(
                                             children: [
                                               Padding(
-                                                padding: const EdgeInsets.only(
-                                                    right: 15),
+                                                padding:
+                                                    const EdgeInsets.only(right: 15),
                                                 child: Image.asset(
                                                   'assets/calendar.png',
                                                   scale: 4.5,
@@ -406,7 +450,8 @@ class _LoginState extends State<Login> {
                   )
                 ]),
               )),
-          // Padding(padding: EdgeInsets.all(17)),
+
+        
           Positioned(
             bottom: 0,
             left: 80,
@@ -416,6 +461,7 @@ class _LoginState extends State<Login> {
                   0.7, // Adjust the portion of the button inside the container
               alignment: Alignment.centerLeft,
               child: ElevatedButton(
+              
                 onPressed: () async {
                   await _saveItem();
                   // Navigator.push(context,
@@ -423,13 +469,9 @@ class _LoginState extends State<Login> {
 
                   // Add your onPressed logic here
                 },
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        Color.fromRGBO(0, 75, 184, 1))),
-                child: const Text(
-                  'Login',
-                  style: TextStyle(color: Colors.white),
-                ),
+                
+              style: ButtonStyle( backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(0, 75, 184, 1))),
+                child: const Text('Login',style: TextStyle(color: Colors.white),),
               ),
             ),
           ),

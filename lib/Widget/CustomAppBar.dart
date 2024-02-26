@@ -1,4 +1,5 @@
 import 'package:edumarshals/Screens/User_Info/Profile.dart';
+import 'package:edumarshals/main.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -24,8 +25,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             child: CircleAvatar(
               backgroundColor: const Color.fromARGB(255, 36, 34, 34),
               backgroundImage:
-                  userImage != null ? AssetImage(userImage!) : null,
-              radius: 20.0,
+                  userImage != null ? NetworkImage(PreferencesManager().studentPhoto) : null,
+              radius: 15.0,
             ),
           ),
           const SizedBox(width: 10.0),
@@ -36,7 +37,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               const Text(
                 'Hello',
                 style: TextStyle(
-                  fontSize: 16.0,
+                  fontSize: 14.0,
                   color: Colors.grey,
                 ),
               ),
@@ -44,7 +45,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 userName,
                 style: const TextStyle(
                   fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w500,
                   color: Colors.grey,
                 ),
               ),
@@ -55,7 +56,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         // You can add additional actions here if needed
         IconButton(
-          icon: const Icon(Icons.notification_add),
+          icon: const Icon(Icons.notifications),
           onPressed: () {
             // Handle settings button press
           },

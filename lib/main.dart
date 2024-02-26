@@ -1,10 +1,9 @@
 import 'dart:io';
-import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
+// import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
 import 'package:edumarshals/Screens/Login/login.dart';
-// import 'package:edumarshals/Screens/User_Info/Personal_Info/profile_info.dart';
+import 'package:edumarshals/Screens/User_Info/Personal_Info/profile_info.dart';
 import 'package:edumarshals/Screens/User_Info/Profile.dart';
 import 'package:edumarshals/Screens/splash.dart';
-import 'package:edumarshals/screens/Upload/document_upload.dart';
 import 'package:edumarshals/screens/time_table.dart';
 import 'package:flutter/material.dart';
 import 'Screens/HomePage/Homepage.dart';
@@ -22,24 +21,25 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return  MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: 'login',
+       initialRoute: 'homepage',  
       routes: {
-        'splashscreen': (context) => SplashScreen(),
+        'splashscreen': (context) =>SplashScreen(),
         'homepage': (context) => const Homepage(),
         'login': (context) => Login(),
-        'overallattendance': (context) => OverAllAttd(),
-        'timetable': (context) => ExamTimetableScreen(),
-        'profile': (context) => Profile(),
+        // 'overallattendance':(context)=>OverAllAttd(),
+        'timetable':(context) => ExamTimetableScreen(),
+        'profile':(context) => Profile(),
         //  'profileinfo':(context) => profileInfo(),
-        'upload': (context) => uploadDocument(),
-        'personalinfo': (context) => PersonalInfoScreen(),
+
+        'personalinfo':(context) => PersonalInfoScreen(),
+
+
       },
     );
   }
@@ -73,6 +73,19 @@ class PreferencesManager {
   set token(String value) => _prefs.setString('token', value);
   String get ack => _prefs.getString('ack') ?? '';
   set ack(String value) => _prefs.setString('ack', value);
+  String get studentPhoto => _prefs.getString('studentPhoto') ?? '';
+  set studentPhoto(String value) => _prefs.setString('studentPhoto', value);
+  String get studentNumber => _prefs.getString('studentNumber') ?? '';
+  set studentNumber(String value) => _prefs.setString('studentNumber', value);
+  String get universityRollNumber => _prefs.getString('universityRollNumber') ?? '';
+  set universityRollNumber(String value) => _prefs.setString('universityRollNumber', value);
+  String get dob => _prefs.getString('dob') ?? '';
+  set dob(String value) => _prefs.setString('dob', value);
+  int get totalclasses => _prefs.getInt('totalclasses') ?? 0;
+  set totalclasses(int value) => _prefs.setInt('totalclasses', value);
+
+  int get presentclasses => _prefs.getInt('presentclasses') ?? 0;
+  set presentclasses(int value) => _prefs.setInt('presentclasses', value);
 
   // add more methods as needed
 }

@@ -1,5 +1,6 @@
 // import 'package:edumarshals/screens/login.dart';
 import 'package:edumarshals/Screens/Login/login.dart';
+import 'package:edumarshals/main.dart';
 import 'package:flutter/material.dart';
 import 'package:edumarshals/utilities.dart';
 
@@ -117,8 +118,8 @@ class _contactInfoState extends State<contactInfo> {
                 scale: 4,
                 // height: screenHeight * 0.032,
               ),
-              const CustomText(
-                text: "Tripod",
+               CustomText(
+                text: PreferencesManager().name,
                 color: Color.fromARGB(255, 0, 0, 0),
                 fontSize: 12,
                 fontStyle: null,

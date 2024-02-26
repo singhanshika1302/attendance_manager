@@ -5,6 +5,7 @@ import 'package:edumarshals/Screens/User_Info/Personal_Info/profile_info.dart';
 import 'package:edumarshals/Screens/User_Info/Profile.dart';
 import 'package:edumarshals/Screens/splash.dart';
 import 'package:edumarshals/screens/time_table.dart';
+import 'package:edumarshals/subject_wise_attendance.dart';
 import 'package:flutter/material.dart';
 import 'Screens/HomePage/Homepage.dart';
 import 'package:edumarshals/Screens/User_Info/Personal_Info/Personal_Info_Data.dart';
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
-       initialRoute: 'homepage',  
+       initialRoute: 'subject_wise_attendance',  
       routes: {
         'splashscreen': (context) =>SplashScreen(),
         'homepage': (context) => const Homepage(),
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
         //  'profileinfo':(context) => profileInfo(),
 
         'personalinfo':(context) => PersonalInfoScreen(),
-
+        'subject_wise_attendance':(context) => barGraph(userName: "user",userImage: "vgc",subjectDescription: "your attendance is good",subjectName: "mathematics",),
 
       },
     );

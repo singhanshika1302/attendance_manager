@@ -1,14 +1,27 @@
 import 'package:bottom_sheet/bottom_sheet.dart';
+import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
+import 'package:edumarshals/Screens/HomePage/Homepage.dart';
 import 'package:edumarshals/Utils/floating_action%20_button.dart';
 import 'package:edumarshals/attendance_card.dart';
 import 'package:edumarshals/attendance_list_card.dart';
 import 'package:edumarshals/custom_appbar.dart';
+import 'package:edumarshals/utilities.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 
 class barGraph extends StatefulWidget {
-  barGraph({super.key});
+  final String userName;
+  final String userImage;
+  final String subjectName;
+  final String subjectDescription;
+  //final String userName;
+  barGraph(
+      {super.key,
+      required this.userName,
+      required this.userImage,
+      required this.subjectName,
+      required this.subjectDescription});
   final Color leftBarColor = Color(0xff004BB8);
 
   final Color rightBarColor = Colors.lightBlue;
@@ -59,7 +72,8 @@ class barGraphState extends State<barGraph> {
       backgroundColor: Colors.white,
       floatingActionButtonLocation: ExpandableFab.location,
       floatingActionButton: custom_floating_action_button(),
-      appBar: CustomAppBar(userName: "user", userImage: "image"),
+      appBar:
+          CustomAppBar(userName: widget.userName, userImage: widget.userImage),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: SingleChildScrollView(
@@ -67,9 +81,8 @@ class barGraphState extends State<barGraph> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               AttendanceCard(
-                  title: "Mathematics",
-                  description:
-                      "your attendance is 75% above. You attended 51 lectures out of 63 lectures."),
+                  title: widget.subjectName,
+                  description: widget.subjectDescription),
               SizedBox(
                 height: 20,
               ),
@@ -281,11 +294,11 @@ class barGraphState extends State<barGraph> {
   void showFilter() {
     showFlexibleBottomSheet(
       minHeight: 0,
-      initHeight: 0.3,
-      maxHeight: 0.33,
+      initHeight: 0.4,
+      maxHeight: 0.41,
       context: context,
       builder: _buildBottomSheet,
-      anchors: [0, 0.3, 0.33],
+      anchors: [0, 0.4, 0.41],
       isSafeArea: true,
     );
   }
@@ -297,8 +310,115 @@ class barGraphState extends State<barGraph> {
   ) {
     return Material(
       child: Container(
-        child: ListView(
-          controller: scrollController,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: ListView(
+            controller: scrollController,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: 4,
+                  ),
+                  Text(
+                    "  Attendance",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                  ),
+                  IconButton(
+                    onPressed: () {Navigator.pop(context);},
+                    icon: Icon(Icons.cancel_outlined),
+                  )
+                ],
+              ),
+              Text(
+                "Time",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+              ),
+              CustomRadioButton(
+                //radius: 12,
+                //shapeRadius: 24,
+                enableShape: true,
+                unSelectedBorderColor: Color(0xff004BB8),
+                selectedBorderColor: Colors.white,
+                defaultSelected: "DAILY",
+                customShape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
+                elevation: 0,
+                absoluteZeroSpacing: false,
+                unSelectedColor: Theme.of(context).canvasColor,
+                buttonLables: [
+                  'Daily',
+                  'Monthly',
+                  'Weekly',
+                ],
+                buttonValues: [
+                  "DAILY",
+                  "MONTHLY",
+                  "WEEKLY",
+                ],
+                buttonTextStyle: ButtonTextStyle(
+                    selectedColor: Colors.white,
+                    unSelectedColor: Colors.black,
+                    textStyle: TextStyle(fontSize: 14)),
+                radioButtonValue: (value) {
+                  print(value);
+                },
+                selectedColor: Color(0xff004BB8),
+              ),
+              SizedBox(
+                height: 14,
+              ),
+              Text(
+                "Absence/Presence",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+              ),
+              CustomCheckBoxGroup(
+                enableShape: true,
+                unSelectedBorderColor: Colors.white,
+                selectedBorderColor: Colors.white,
+                buttonTextStyle: ButtonTextStyle(
+                    selectedColor: Colors.white,
+                    unSelectedColor: Colors.black,
+                    textStyle: TextStyle(fontSize: 14)),
+                unSelectedColor: Theme.of(context).canvasColor,
+                buttonLables: [
+                  "Absent",
+                  "Present",
+                ],
+                buttonValuesList: [
+                  "Absent",
+                  "Present",
+                ],
+                checkBoxButtonValues: (values) {
+                  print(values);
+                },
+                spacing: 12,
+                defaultSelected: ["Present"],
+                horizontal: false,
+                enableButtonWrap: false,
+                //width: 40,
+                //absoluteZeroSpacing: false,
+                selectedColor: Color(0xff004BB8),
+                padding: 18,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  SizedBox(
+                      width: 120,
+                      child: ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStatePropertyAll(Color(0xff004BB8)),
+                              foregroundColor:
+                                  MaterialStatePropertyAll(Colors.white)),
+                          onPressed: () {},
+                          child: Text("Apply"))),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -1,6 +1,6 @@
 {
-    "name": "edumarshal",
-    "short_name": "edumarshal",
+    "name": "edumarshals",
+    "short_name": "edumarshals",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

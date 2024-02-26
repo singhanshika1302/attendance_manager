@@ -52,6 +52,7 @@ dependencies:
   dotted_border: ^2.1.0
   image_picker: ^0.8.4+4
   google_fonts: ^6.1.0
+  custom_radio_grouped_button: ^2.2.1
   
   # camera: ^0.10.5+9
 

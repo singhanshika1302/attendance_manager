@@ -1,8 +1,8 @@
 import 'package:bottom_sheet/bottom_sheet.dart';
-import 'package:edumarshal/Utils/floating_action%20_button.dart';
-import 'package:edumarshal/attendance_card.dart';
-import 'package:edumarshal/attendance_list_card.dart';
-import 'package:edumarshal/custom_appbar.dart';
+import 'package:edumarshals/Utils/floating_action%20_button.dart';
+import 'package:edumarshals/attendance_card.dart';
+import 'package:edumarshals/attendance_list_card.dart';
+import 'package:edumarshals/custom_appbar.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';

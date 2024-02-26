@@ -23,6 +23,7 @@ class My_Document_View_Card extends StatelessWidget {
       child: Row(
         children: [
           // Image Name
+          Padding(padding: EdgeInsets.all(4)),
           Container(
             child: Center(child: Image.asset("asset/images/pdf1.png")),
           ),
@@ -30,7 +31,7 @@ class My_Document_View_Card extends StatelessWidget {
           // Document Name
 
           Padding(
-            padding: const EdgeInsets.all(5.0),
+            padding: const EdgeInsets.all(8.0),
             child: Text(
               documentname,
               style: TextStyle(

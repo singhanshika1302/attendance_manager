@@ -2,6 +2,7 @@
 import 'package:edumarshals/Widget/CustomAppBar.dart';
 import 'package:edumarshals/main.dart';
 import 'package:edumarshals/repository/Contact_Info_Repo.dart';
+import 'package:edumarshals/utilities.dart';
 // import 'package:edumarshals/repository/PersonalInforepo.dart';
 import 'package:flutter/material.dart';
 // import 'package:your_app/personal_info_repository.dart'; // Import your repository
@@ -12,7 +13,8 @@ class ContactInfoScreen extends StatefulWidget {
 }
 
 class _ContactInfoScreenState extends State<ContactInfoScreen> {
-  final ContactInfoRepository _repository = ContactInfoRepository('https://akgec-edu.onrender.com/v1/student/profile/contactdetails');
+  final ContactInfoRepository _repository = ContactInfoRepository(
+      'https://akgec-edu.onrender.com/v1/student/profile/contactdetails');
   Map<String, dynamic>? contactDetails;
 
   @override
@@ -23,7 +25,8 @@ class _ContactInfoScreenState extends State<ContactInfoScreen> {
 
   Future<void> _fetchContactInfo() async {
     try {
-      final token = '${PreferencesManager().token}'; // Replace with your actual token
+      final token =
+          '${PreferencesManager().token}'; // Replace with your actual token
       final data = await _repository.fetchContactInfo(token);
       setState(() {
         contactDetails = data['contactDetails'];
@@ -37,45 +40,73 @@ class _ContactInfoScreenState extends State<ContactInfoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(userName:'rishi'),
+      backgroundColor: Color.fromRGBO(242, 246, 255, 1),
+      appBar: CustomAppBar(userName: PreferencesManager().name),
       body: contactDetails != null
           ? ListView(
               children: [
-                ListTile(
-                  title: Text('email: ${contactDetails!['email']}'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    buildInfoItem(title: 'Email', value: contactDetails!['email']),
+                    buildInfoItem(
+                        title: 'Mobile Number', value: contactDetails!['mobNo']),
+                  ],
                 ),
-                ListTile(
-                  title: Text('mobNo: ${contactDetails!['mobNo']}'),
+                Row(
+                     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    buildInfoItem(
+                        title: 'Alternate Email',
+                        value: contactDetails!['alternateEmail']),
+                    buildInfoItem(
+                        title: 'Alternate Mobile Number',
+                        value: contactDetails!['alternateMobNo']),
+                  ],
                 ),
-                ListTile(
-                  title: Text('alternateEmail: ${contactDetails!['alternateEmail']}'),
+                Row(
+                     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    buildInfoItem(
+                        title: 'Permanent Address',
+                        value: contactDetails!['permanentAddress']),
+                    buildInfoItem(
+                        title: 'Present Address',
+                        value: contactDetails!['presentAddress']),
+                  ],
                 ),
-                ListTile(
-                  title: Text('alternateMobNo: ${contactDetails!['alternateMobNo']}'),
+                Row(
+                     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    buildInfoItem(
+                        title: 'Permanent Pincode',
+                        value: contactDetails!['permanentPincode']),
+                    buildInfoItem(
+                        title: 'Present Pincode',
+                        value: contactDetails!['presentPincode']),
+                  ],
                 ),
-                ListTile(
-                  title: Text('permanentAddress: ${contactDetails!['permanentAddress']}'),
+                Row(
+                     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    buildInfoItem(
+                        title: 'Permanent State',
+                        value: contactDetails!['permanentState']),
+                    buildInfoItem(
+                        title: 'Present State',
+                        value: contactDetails!['presentState']),
+                  ],
                 ),
-                ListTile(
-                  title: Text('presentAddress: ${contactDetails!['presentAddress']}'),
-                ),
-                ListTile(
-                  title: Text('permanentPincode: ${contactDetails!['permanentPincode']}'),
-                ),
-                ListTile(
-                  title: Text('presentPincode: ${contactDetails!['presentPincode']}'),
-                ),
-                  ListTile(
-                  title: Text('permanentState: ${contactDetails!['permanentState']}'),
-                ),
-                  ListTile(
-                  title: Text('presentState: ${contactDetails!['presentState']}'),
-                ),
-                  ListTile(
-                  title: Text('permanentCountry: ${contactDetails!['permanentCountry']}'),
-                ),
-                  ListTile(
-                  title: Text('presentCountry: ${contactDetails!['presentCountry']}'),
+                Row(
+                     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    buildInfoItem(
+                        title: 'Permanent Country',
+                        value: contactDetails!['permanentCountry']),
+                    buildInfoItem(
+                        title: 'Present Country',
+                        value: contactDetails!['presentCountry']),
+                  ],
                 ),
                 //   ListTile(
                 //   title: Text('jeeRollNo: ${contactDetails!['jeeRollNo']}'),

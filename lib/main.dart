@@ -1,5 +1,6 @@
 import 'dart:io';
 // import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
+import 'package:edumarshals/Screens/Events_Page.dart';
 import 'package:edumarshals/Screens/Login/login.dart';
 import 'package:edumarshals/Screens/User_Info/Personal_Info/profile_info.dart';
 import 'package:edumarshals/Screens/User_Info/Profile.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
         // 'overallattendance':(context)=>OverAllAttd(),
         'timetable':(context) => ExamTimetableScreen(),
         'profile':(context) => Profile(),
+        'eventpage':(context)=>EventsPage(),
         //  'profileinfo':(context) => profileInfo(),
 
         'personalinfo':(context) => PersonalInfoScreen(),

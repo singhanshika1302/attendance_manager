@@ -21,17 +21,17 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     // TODO: implement initState
-    getvalidationdata().whenComplete(() async{
- Timer(const Duration(seconds: 3), () {
+//     getvalidationdata().whenComplete(() async{
+//  Timer(const Duration(seconds: 3), () {
 
-      Navigator.pop(context, MaterialPageRoute(builder: (context) => finalname==null?Login(): Homepage()));
-    });
-    });
+//       Navigator.pop(context, MaterialPageRoute(builder: (context) => finalname==false?Login(): Homepage()));
+//     });
+//     });
     super.initState();
-    // Timer(const Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 3), () {
 
-    //   Navigator.push(context, MaterialPageRoute(builder: (context) => const Login()));
-    // });
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const Login()));
+    });
   }
   Future getvalidationdata() async
 {

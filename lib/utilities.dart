@@ -420,6 +420,7 @@ Widget upper(
 }
 
 Widget buildInfoItem({required String title, required String value}) {
+  
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 8.0),
       child: Column(
@@ -435,7 +436,10 @@ Widget buildInfoItem({required String title, required String value}) {
           ),
           // SizedBox(height: 4),
           Container(
+            //  constraints: BoxConstraints(maxWidth: 200),
+            width: 150,
             decoration: BoxDecoration(
+              
               border: Border.all(
                 color: Colors.grey,
                 width: 1.0,
@@ -455,8 +459,12 @@ Widget buildInfoItem({required String title, required String value}) {
       ),
     );
   }
-Widget buildInfoItems({required String title, required String value}) {
+Widget buildInfoItems({required String title, required String value,required BuildContext context}) {
+  
+   final screenHeight = MediaQuery.of(context).size.height;
+  final screenWidth = MediaQuery.of(context).size.width;
   return Container(
+    width: screenWidth*2,
     decoration: BoxDecoration(
       border: Border.all(
         color: Colors.grey,

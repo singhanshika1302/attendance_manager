@@ -1,5 +1,8 @@
 // import 'package:edumarshal/Utilities/Utilities.dart';
+// import 'dart:html';
+
 import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
+import 'package:edumarshals/Screens/Events_Page.dart';
 import 'package:edumarshals/Screens/User_Info/Profile.dart';
 import 'package:edumarshals/Utilities/Utilities.dart';
 import 'package:edumarshals/Widget/AttendanceCard.dart';
@@ -188,7 +191,7 @@ class _HomepageState extends State<Homepage> {
                         onPressed: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => OverAllAttd())),
+                                builder: (context) => EventsPage())),
                       )
                     ],
                   ),
@@ -381,10 +384,10 @@ class _HomepageState extends State<Homepage> {
           Navigator.pop(context);
           // switch (index) {
           //   case 0:
-          //     Navigator.push(context, MaterialPageRoute(builder: (context) => ClassroomPage()));
+          //     Navigator.push(context, MaterialPageRoute(builder: (context) => Events_page()));
           //     break;
           //   case 1:
-          //     Navigator.push(context, MaterialPageRoute(builder: (context) => HostelPage()));
+          //     Navigator.push(context, MaterialPageRoute(builder: (context) => Events_page()));
           //     break;
           // }
         },

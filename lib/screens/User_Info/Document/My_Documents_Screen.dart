@@ -66,7 +66,7 @@ List<Widget> _buildDocumentCards() {
       textbuttonname: 'View',
       onpressed: () {
         // Navigate to a new screen to display the image
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => Document_Image(imageUrl: document![documentName],),

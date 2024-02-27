@@ -1,6 +1,6 @@
 import 'package:edumarshals/main.dart';
 import 'package:flutter/material.dart';
-import 'package:edumarshals/Utilities/Utilities.dart';
+import 'package:edumarshals/Utils/Utilities/Utilities.dart';
 
 class ClassNotesPage extends StatefulWidget {
   const ClassNotesPage({Key? key}) : super(key: key);

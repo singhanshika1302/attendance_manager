@@ -6,6 +6,7 @@ import 'package:edumarshals/Screens/User_Info/Profile.dart';
 import 'package:edumarshals/Screens/splash.dart';
 import 'package:edumarshals/Screens/test_screen.dart';
 import 'package:edumarshals/screens/time_table.dart';
+import 'package:edumarshals/subject_wise_attendance.dart';
 import 'package:flutter/material.dart';
 import 'Screens/HomePage/Homepage.dart';
 import 'package:edumarshals/Screens/User_Info/Personal_Info/Personal_Info_Data.dart';
@@ -29,16 +30,19 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: 'splashscreen',
+      // initialRoute: 'subject_wise_attendance',  
       routes: {
         'splashscreen': (context) => SplashScreen(),
         'homepage': (context) => const Homepage(),
         'login': (context) => Login(),
         // 'overallattendance':(context)=>OverAllAttd(),
-        'timetable': (context) => ExamTimetableScreen(),
-        'profile': (context) => Profile(),
-        'LoginDesign': (context) => loginDesign(),
+        'timetable':(context) => ExamTimetableScreen(),
+        'profile':(context) => Profile(),
+        //  'profileinfo':(context) => profileInfo(),
 
-        'personalinfo': (context) => PersonalInfoScreen(),
+        'personalinfo':(context) => PersonalInfoScreen(),
+        'subject_wise_attendance':(context) => barGraph(userName: "user",userImage: "vgc",subjectDescription: "your attendance is good",subjectName: "mathematics",),
+
       },
     );
   }

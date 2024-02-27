@@ -2,13 +2,16 @@
 // import 'dart:html';
 
 import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
-import 'package:edumarshals/Screens/Events_Page.dart';
+import 'package:edumarshals/Screens/Events/Events_Page.dart';
 import 'package:edumarshals/Screens/User_Info/Profile.dart';
-import 'package:edumarshals/Utilities/Utilities.dart';
+import 'package:edumarshals/Utils/Utilities/Utilities.dart';
 import 'package:edumarshals/Widget/AttendanceCard.dart';
 import 'package:edumarshals/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+
+import '../../Utils/floating_action _button.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -26,6 +29,8 @@ class _HomepageState extends State<Homepage> {
     final sheight = MediaQuery.of(context).size.height;
     final swidth = MediaQuery.of(context).size.width;
     return Scaffold(
+        floatingActionButtonLocation: ExpandableFab.location,
+      floatingActionButton: custom_floating_action_button(),
       key: _scaffoldKey,
       backgroundColor: const Color(0xffEBF3FF),
       drawer: Drawer(

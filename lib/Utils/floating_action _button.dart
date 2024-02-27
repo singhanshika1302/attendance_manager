@@ -1,3 +1,9 @@
+import 'package:edumarshals/Screens/HomePage/Homepage.dart';
+import 'package:edumarshals/Screens/Notes_Assignment/ClassNotesPage.dart';
+import 'package:edumarshals/Screens/Notes_Assignment/Subject_Assignment.dart';
+import 'package:edumarshals/Screens/User_Info/Profile.dart';
+import 'package:edumarshals/main.dart';
+import 'package:edumarshals/Screens/Attendance/subject_wise_attendance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 
@@ -74,8 +80,8 @@ class _custom_floating_action_buttonState extends State<custom_floating_action_b
             ),
 
             onPressed: () {
-              //Navigator.of(context).push(
-              // MaterialPageRoute(builder: ((context) => const NextPage())));
+              Navigator.of(context).push(
+              MaterialPageRoute(builder: ((context) => const Homepage())));
             },
             //const SnackBar snackBar = SnackBar(
             // content: Text("SnackBar"),
@@ -91,8 +97,8 @@ class _custom_floating_action_buttonState extends State<custom_floating_action_b
               color: Color(0xff004BB8),
             ),
             onPressed: () {
-              //             Navigator.of(context).push(
-              //                MaterialPageRoute(builder: ((context) => const NextPage())));
+                          Navigator.of(context).push(
+                             MaterialPageRoute(builder: ((context) =>  barGraph(userName: PreferencesManager().name, userImage: PreferencesManager().studentPhoto, subjectName: "Maths", subjectDescription: "m"))));
             },
           ),
           FloatingActionButton.small(
@@ -101,8 +107,8 @@ class _custom_floating_action_buttonState extends State<custom_floating_action_b
             heroTag: null,
             child: Icon(Icons.library_books_rounded, color: Color(0xff004BB8)),
             onPressed: () {
-              //  Navigator.of(context).push(
-              //   MaterialPageRoute(builder: ((context) => const NextPage())));
+               Navigator.of(context).push(
+                MaterialPageRoute(builder: ((context) => Subject_Assignment())));
             },
           ),
           FloatingActionButton.small(
@@ -111,8 +117,8 @@ class _custom_floating_action_buttonState extends State<custom_floating_action_b
             heroTag: null,
             child: Icon(Icons.person, color: Color(0xff004BB8)),
             onPressed: () {
-              //  Navigator.of(context).push(
-              //   MaterialPageRoute(builder: ((context) => const NextPage())));
+               Navigator.of(context).push(
+                MaterialPageRoute(builder: ((context) => const Profile())));
             },
           ),
         ],

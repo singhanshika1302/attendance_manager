@@ -11,7 +11,7 @@ import 'package:edumarshals/Widget/AttendanceCard.dart';
 import 'package:edumarshals/Widget/CustomAppBar.dart';
 
 
-import 'package:edumarshals/utilities.dart';
+import 'package:edumarshals/Utils/Utilities/utilities2.dart';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -284,7 +284,7 @@ class barGraphState extends State<barGraph> {
                       onPressed: () {
                         showFilter();
                       },
-                      icon: Image.asset('Assets/filter.png'))
+                      icon: Image.asset('assets/filter.png'))
                 ],
               ),
               SizedBox(

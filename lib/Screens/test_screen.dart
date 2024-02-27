@@ -100,7 +100,7 @@ import 'package:edumarshals/main.dart';
 import 'package:edumarshals/screens/time_table.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import 'package:edumarshals/utilities.dart';
+import 'package:edumarshals/Utils/Utilities/utilities2.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';

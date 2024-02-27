@@ -53,6 +53,8 @@ dependencies:
   image_picker: ^0.8.4+4
   google_fonts: ^6.1.0
   custom_radio_grouped_button: ^2.2.1
+  easy_date_timeline: ^1.0.5
+  week_of_year: ^2.0.0
   
   # camera: ^0.10.5+9
 
@@ -89,6 +91,7 @@ flutter:
     - assets/Android Large - 18.png
     - assets/Ellipse 7.jpg
     - assets/Frame 100.png
+    - Assets/
     - assets/assets/Frame 48117.png
     - assets/Group 48155.png
     - assets/bank.png

@@ -1,11 +1,18 @@
 import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
+import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:edumarshals/Screens/HomePage/Homepage.dart';
+import 'package:edumarshals/Utils/daily_attendance_card.dart';
 import 'package:edumarshals/Utils/floating_action%20_button.dart';
-import 'package:edumarshals/attendance_card.dart';
-import 'package:edumarshals/attendance_list_card.dart';
-import 'package:edumarshals/custom_appbar.dart';
+
+import 'package:edumarshals/Utils/attendance_list_card.dart';
+import 'package:edumarshals/Utils/weekly_widget.dart';
+import 'package:edumarshals/Widget/AttendanceCard.dart';
+import 'package:edumarshals/Widget/CustomAppBar.dart';
+
+
 import 'package:edumarshals/utilities.dart';
+
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
@@ -24,7 +31,7 @@ class barGraph extends StatefulWidget {
       required this.subjectDescription});
   final Color leftBarColor = Color(0xff004BB8);
 
-  final Color rightBarColor = Colors.lightBlue;
+  final Color rightBarColor = Color(0xff5299FF);
   final Color avgColor = Colors.orange;
   @override
   State<StatefulWidget> createState() => barGraphState();
@@ -34,22 +41,51 @@ class barGraphState extends State<barGraph> {
   final _key = GlobalKey<ExpandableFabState>();
   final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
   final double width = 15;
+  EasyInfiniteDateTimelineController _dailycontroller =
+      EasyInfiniteDateTimelineController();
+  DateTime _focusDate = DateTime.now();
+  DateTime _selectedDay = DateTime.now();
 
   late List<BarChartGroupData> rawBarGroups;
   late List<BarChartGroupData> showingBarGroups;
-
+  String filter = 'Monthly'; // Default filter
+  late Map<String, List<Widget>> filterWidgets;
   int touchedGroupIndex = -1;
+  void _initFilterWidgets() {
+    filterWidgets = {
+      'Monthly': [
+        Column(
+          children: [
+            AttendanceListCard(date: "1 jan,24", isPresent: [true]),
+            AttendanceListCard(date: "2 jan,24", isPresent: [true, false]),
+            AttendanceListCard(date: "3 jan,24", isPresent: [false, false]),
+            AttendanceListCard(date: "4 jan,24", isPresent: [true]),
+            AttendanceListCard(date: "6 jan,24", isPresent: [true, true]),
+            AttendanceListCard(date: "7 jan,24", isPresent: [false]),
+            AttendanceListCard(date: "9 jan,24", isPresent: [true]),
+          ],
+        )
+      ],
+      'Weekly': [
+        _buildWeeklyWidgets(),
+      ],
+      'Daily': [
+        _buildDailyWidgets(),
+      ],
+    };
+  }
 
   @override
   void initState() {
     super.initState();
-    final barGroup1 = makeGroupData(0, 5, 12);
+    final barGroup1 = makeGroupData(0, 12, 5);
     final barGroup2 = makeGroupData(1, 16, 12);
     final barGroup3 = makeGroupData(2, 18, 5);
     final barGroup4 = makeGroupData(3, 20, 16);
     final barGroup5 = makeGroupData(4, 17, 6);
-    final barGroup6 = makeGroupData(5, 19, 1.5);
+    final barGroup6 = makeGroupData(5, 14, 1.5);
     final barGroup7 = makeGroupData(6, 10, 1.5);
+    _initFilterWidgets();
 
     final items = [
       barGroup1,
@@ -69,7 +105,7 @@ class barGraphState extends State<barGraph> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xffF2F6FF),
       floatingActionButtonLocation: ExpandableFab.location,
       floatingActionButton: custom_floating_action_button(),
       appBar:
@@ -81,6 +117,8 @@ class barGraphState extends State<barGraph> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               AttendanceCard(
+                attendedClasses: 24,
+                totalClassess: 28,
                   title: widget.subjectName,
                   description: widget.subjectDescription),
               SizedBox(
@@ -100,8 +138,52 @@ class barGraphState extends State<barGraph> {
                   //),
                 ],
               ),
-              const SizedBox(
-                height: 38,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                    height: 50,
+                    width: 100,
+                    alignment: Alignment.center,
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 5,
+                              backgroundColor: Color(0xff004BB8),
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              'Total Classes',
+                              style: TextStyle(fontSize: 8),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 3,
+                        ),
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 5,
+                              backgroundColor: Color(0xff5299FF),
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              'Classes attended',
+                              style: TextStyle(fontSize: 8),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
               SizedBox(
                 height: 150,
@@ -195,26 +277,20 @@ class barGraphState extends State<barGraph> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   // SizedBox(width: 1),
-                  Text(" Monthly attandance",
+                  Text(" " + filter + " Attendance",
                       style:
                           TextStyle(fontWeight: FontWeight.w500, fontSize: 25)),
                   IconButton(
                       onPressed: () {
                         showFilter();
                       },
-                      icon: Icon(Icons.filter_list_alt))
+                      icon: Image.asset('Assets/filter.png'))
                 ],
               ),
               SizedBox(
                 height: 15,
               ),
-              attendance_list_card(date: "1 jan,24", isPresent: true),
-              attendance_list_card(date: "2 jan,24", isPresent: true),
-              attendance_list_card(date: "3 jan,24", isPresent: false),
-              attendance_list_card(date: "4 jan,24", isPresent: true),
-              attendance_list_card(date: "6 jan,24", isPresent: true),
-              attendance_list_card(date: "7 jan,24", isPresent: false),
-              attendance_list_card(date: "9 jan,24", isPresent: true),
+              ...(filterWidgets[filter] ?? []).map((widget) => widget).toList(),
             ],
           ),
         ),
@@ -326,7 +402,9 @@ class barGraphState extends State<barGraph> {
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                   ),
                   IconButton(
-                    onPressed: () {Navigator.pop(context);},
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                     icon: Icon(Icons.cancel_outlined),
                   )
                 ],
@@ -341,28 +419,25 @@ class barGraphState extends State<barGraph> {
                 enableShape: true,
                 unSelectedBorderColor: Color(0xff004BB8),
                 selectedBorderColor: Colors.white,
-                defaultSelected: "DAILY",
-                customShape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
+                defaultSelected: filter,
+                // customShape: RoundedRectangleBorder(
+                //     borderRadius: BorderRadius.circular(20)),
                 elevation: 0,
                 absoluteZeroSpacing: false,
                 unSelectedColor: Theme.of(context).canvasColor,
                 buttonLables: [
-                  'Daily',
                   'Monthly',
                   'Weekly',
+                  'Daily',
                 ],
-                buttonValues: [
-                  "DAILY",
-                  "MONTHLY",
-                  "WEEKLY",
-                ],
+                buttonValues: ['Monthly', 'Weekly', 'Daily'],
                 buttonTextStyle: ButtonTextStyle(
                     selectedColor: Colors.white,
-                    unSelectedColor: Colors.black,
-                    textStyle: TextStyle(fontSize: 14)),
+                    unSelectedColor: Color(0xff004BB8),
+                    textStyle:
+                        TextStyle(fontSize: 14, color: Color(0xff004BB8))),
                 radioButtonValue: (value) {
-                  print(value);
+                  setFilter(value);
                 },
                 selectedColor: Color(0xff004BB8),
               ),
@@ -375,11 +450,11 @@ class barGraphState extends State<barGraph> {
               ),
               CustomCheckBoxGroup(
                 enableShape: true,
-                unSelectedBorderColor: Colors.white,
-                selectedBorderColor: Colors.white,
+                unSelectedBorderColor: Color(0xff004BB8),
+                // selectedBorderColor: Colors.white,
                 buttonTextStyle: ButtonTextStyle(
                     selectedColor: Colors.white,
-                    unSelectedColor: Colors.black,
+                    unSelectedColor: Color(0xff004BB8),
                     textStyle: TextStyle(fontSize: 14)),
                 unSelectedColor: Theme.of(context).canvasColor,
                 buttonLables: [
@@ -413,7 +488,9 @@ class barGraphState extends State<barGraph> {
                                   MaterialStatePropertyAll(Color(0xff004BB8)),
                               foregroundColor:
                                   MaterialStatePropertyAll(Colors.white)),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
                           child: Text("Apply"))),
                 ],
               ),
@@ -421,6 +498,73 @@ class barGraphState extends State<barGraph> {
           ),
         ),
       ),
+    );
+  }
+
+  void setFilter(String value) {
+    setState(() {
+      filter = value;
+    });
+  }
+
+  Widget _buildDailyWidgets() {
+    return Column(
+      children: [
+        EasyInfiniteDateTimeLine(
+          dayProps: EasyDayProps(
+              dayStructure: DayStructure.dayNumDayStr,
+              height: 38,
+              width: 60,
+              inactiveDayStyle: DayStyle(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12)),
+                  dayNumStyle: TextStyle(
+                      color: Color(0xff004BB8), fontWeight: FontWeight.w500),
+                  dayStrStyle: TextStyle(
+                      color: Color(0xff004BB8), fontWeight: FontWeight.w500))),
+          controller: _dailycontroller,
+          activeColor: Color(0xff004BB8),
+          firstDate: DateTime(2023),
+          focusDate: _focusDate,
+          lastDate: DateTime.now(),
+          showTimelineHeader: false,
+          onDateChange: (selectedDate) {
+            setState(() {
+              print(selectedDate);
+              _focusDate = selectedDate;
+              print(_focusDate);
+            });
+          },
+        ),
+        SizedBox(
+          height: 15,
+        ),
+        DailyAttendanceListCard(
+            date: _focusDate, isPresent: [true, false, true])
+      ],
+    );
+  }
+
+  Widget _buildWeeklyWidgets() {
+    return Column(
+      children: [
+        WeeklyDatePicker(
+          selectedDay: DateTime.now(),
+          changeDay: (value) => setState(() {
+            _selectedDay = value;
+          }),
+        ),
+        AttendanceListCard(date: "Mon", isPresent: [true, true, true]),
+        AttendanceListCard(date: "Tue", isPresent: [
+          true,
+        ]),
+        AttendanceListCard(date: "Wed", isPresent: [false, false]),
+        AttendanceListCard(date: "Thu", isPresent: [true]),
+        AttendanceListCard(date: "Fri", isPresent: [true, true]),
+        AttendanceListCard(date: "Sat", isPresent: []),
+        AttendanceListCard(date: "Sun", isPresent: []),
+      ],
     );
   }
 }

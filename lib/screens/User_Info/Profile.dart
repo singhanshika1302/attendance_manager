@@ -6,6 +6,7 @@ import 'package:edumarshals/Screens/User_Info/Personal_Info/Parent_Info_Data.dar
 import 'package:edumarshals/Screens/User_Info/Personal_Info/Personal_Info_Data.dart';
 import 'package:edumarshals/Screens/User_Info/Personal_Info/contact_details.dart';
 import 'package:edumarshals/Screens/User_Info/Personal_Info/guardian_info.dart';
+import 'package:edumarshals/Screens/User_Info/Subject_Data.dart';
 import 'package:edumarshals/Screens/time_table.dart';
 import 'package:edumarshals/Widget/Profile_Container.dart';
 import 'package:edumarshals/Widget/Profile_Tabs.dart';
@@ -109,8 +110,14 @@ class _ProfileState extends State<Profile> {
                       children: [
                         Container(
                             margin: const EdgeInsets.all(7),
-                            child: Image.asset(
-                                "assets/assets/Frame 48117.png")),
+                            child: InkWell(
+                              onTap: () {
+                                
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=> Subjectdata()));
+                              },
+                              child: Image.asset(
+                                  "assets/assets/Frame 48117 (2).png"),
+                            )),
 
                         // Icon(Icons.hdr_auto_select),
                         Text(

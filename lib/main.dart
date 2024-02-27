@@ -1,10 +1,10 @@
 import 'dart:io';
 // import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
-import 'package:edumarshals/Screens/Events_Page.dart';
 import 'package:edumarshals/Screens/Login/login.dart';
 import 'package:edumarshals/Screens/User_Info/Personal_Info/profile_info.dart';
 import 'package:edumarshals/Screens/User_Info/Profile.dart';
 import 'package:edumarshals/Screens/splash.dart';
+import 'package:edumarshals/Screens/test_screen.dart';
 import 'package:edumarshals/screens/time_table.dart';
 import 'package:flutter/material.dart';
 import 'Screens/HomePage/Homepage.dart';
@@ -26,22 +26,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-       initialRoute: 'homepage',  
+      initialRoute: 'splashscreen',
       routes: {
-        'splashscreen': (context) =>SplashScreen(),
+        'splashscreen': (context) => SplashScreen(),
         'homepage': (context) => const Homepage(),
         'login': (context) => Login(),
         // 'overallattendance':(context)=>OverAllAttd(),
-        'timetable':(context) => ExamTimetableScreen(),
-        'profile':(context) => Profile(),
-        'eventpage':(context)=>EventsPage(),
-        //  'profileinfo':(context) => profileInfo(),
+        'timetable': (context) => ExamTimetableScreen(),
+        'profile': (context) => Profile(),
+        'LoginDesign': (context) => loginDesign(),
 
-        'personalinfo':(context) => PersonalInfoScreen(),
-
-
+        'personalinfo': (context) => PersonalInfoScreen(),
       },
     );
   }
@@ -79,8 +76,10 @@ class PreferencesManager {
   set studentPhoto(String value) => _prefs.setString('studentPhoto', value);
   String get studentNumber => _prefs.getString('studentNumber') ?? '';
   set studentNumber(String value) => _prefs.setString('studentNumber', value);
-  String get universityRollNumber => _prefs.getString('universityRollNumber') ?? '';
-  set universityRollNumber(String value) => _prefs.setString('universityRollNumber', value);
+  String get universityRollNumber =>
+      _prefs.getString('universityRollNumber') ?? '';
+  set universityRollNumber(String value) =>
+      _prefs.setString('universityRollNumber', value);
   String get dob => _prefs.getString('dob') ?? '';
   set dob(String value) => _prefs.setString('dob', value);
   int get totalclasses => _prefs.getInt('totalclasses') ?? 0;

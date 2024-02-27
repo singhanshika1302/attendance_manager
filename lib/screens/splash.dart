@@ -8,8 +8,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Login/login.dart';
 import 'package:flutter/material.dart';
+
 // import 'sp';
-String finalname='';
+String finalname = '';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -21,11 +23,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     // TODO: implement initState
-    getvalidationdata().whenComplete(() async{
- Timer(const Duration(seconds: 3), () {
-
-      Navigator.pop(context, MaterialPageRoute(builder: (context) => finalname==null?Login(): Homepage()));
-    });
+    getvalidationdata().whenComplete(() async {
+      Timer(const Duration(seconds: 3), () {
+        // Navigator.pop(context, MaterialPageRoute(builder: (context) => finalname==null?Login(): Homepage()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const Login()));
+      });
     });
     super.initState();
     // Timer(const Duration(seconds: 3), () {
@@ -33,14 +36,15 @@ class _SplashScreenState extends State<SplashScreen> {
     //   Navigator.push(context, MaterialPageRoute(builder: (context) => const Login()));
     // });
   }
-  Future getvalidationdata() async
-{
-  var obname =PreferencesManager().name;
-  setState(() {
-     finalname=obname;
-  });
-  print(finalname);
-}
+
+  Future getvalidationdata() async {
+    var obname = PreferencesManager().name;
+    setState(() {
+      finalname = obname;
+    });
+    print(finalname);
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height * 1;
@@ -70,7 +74,7 @@ class _SplashScreenState extends State<SplashScreen> {
             SizedBox(
               height: height * 0.001,
             ),
-         const   Text(
+            const Text(
               'AKGEC EDUMARSHAL',
               textAlign: TextAlign.center,
               style: TextStyle(

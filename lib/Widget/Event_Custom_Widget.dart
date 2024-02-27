@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+// import 'package:url_launcher/url_launcher.dart';
 
 class EventCustomWidget extends StatelessWidget {
   final String eventName;
@@ -84,7 +84,7 @@ class EventCustomWidget extends StatelessWidget {
                   
                     onPressed: () {
                       print("button pressedlkjhgfds");
-                        _launchUrl(registrationUrl);
+                        // _launchUrl(registrationUrl);
                       // Handle button tap
                     },
                     child: Text('Register',style: TextStyle(color: Colors.white),),
@@ -95,13 +95,13 @@ class EventCustomWidget extends StatelessWidget {
       ),
     );
   }
-Future<void> _launchUrl(String registrationUrl) async {
-  Uri uri = Uri.parse(registrationUrl);
-  if (!await launchUrl(uri)) {
-    throw Exception('Could not launch $registrationUrl');
-  }
-  await launchUrl(uri);
-}
+// Future<void> _launchUrl(String registrationUrl) async {
+//   Uri uri = Uri.parse(registrationUrl);
+//   if (!await launchUrl(uri)) {
+//     throw Exception('Could not launch $registrationUrl');
+//   }
+//   await launchUrl(uri);
+// }
 
 }
  

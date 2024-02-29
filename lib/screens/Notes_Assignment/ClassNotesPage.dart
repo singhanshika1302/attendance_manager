@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:edumarshals/Utilities/Utilities.dart';
+// import 'package:edumarshals/Utilities/Utilities.dart';
 import 'package:edumarshals/Widget/CustomAppBar.dart';
 import 'package:edumarshals/Repository/classnotes_Repo.dart'; // Import the ClassNotesRepository
 import 'package:edumarshals/Model/classnotes_Model.dart'; // Import the ClassNotes model
 import '../../main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'package:edumarshals/Utils/Utilities/Utilities.dart';
 
 class ClassNotesPage extends StatefulWidget {
   const ClassNotesPage({Key? key}) : super(key: key);

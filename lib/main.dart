@@ -4,10 +4,11 @@ import 'package:edumarshals/Screens/Login/login.dart';
 import 'package:edumarshals/Screens/Notes_Assignment/Subject_Assignment.dart';
 import 'package:edumarshals/Screens/User_Info/Personal_Info/profile_info.dart';
 import 'package:edumarshals/Screens/User_Info/Profile.dart';
+import 'package:edumarshals/Screens/User_Info/Subject_Data.dart';
 import 'package:edumarshals/Screens/splash.dart';
 import 'package:edumarshals/Screens/test_screen.dart';
 import 'package:edumarshals/screens/time_table.dart';
-import 'package:edumarshals/subject_wise_attendance.dart';
+import 'package:edumarshals/Screens/Attendance/subject_wise_attendance.dart';
 import 'package:flutter/material.dart';
 import 'Screens/HomePage/Homepage.dart';
 import 'package:edumarshals/Screens/User_Info/Personal_Info/Personal_Info_Data.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: 'splashscreen',
+      initialRoute: 'login',
       // initialRoute: 'subject_wise_attendance',  
       routes: {
         'splashscreen': (context) => SplashScreen(),
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
 
         'personalinfo':(context) => PersonalInfoScreen(),
         'subject_wise_attendance':(context) => barGraph(userName: "user",userImage: "vgc",subjectDescription: "your attendance is good",subjectName: "mathematics",),
+        'subject':(context) => Subjectdata(),
 
       },
     );
@@ -93,6 +95,9 @@ class PreferencesManager {
 
   int get presentclasses => _prefs.getInt('presentclasses') ?? 0;
   set presentclasses(int value) => _prefs.setInt('presentclasses', value);
+  
+  int get sem => _prefs.getInt('sem') ?? 0;
+  set sem(int value) => _prefs.setInt('sem', value);
 
   // add more methods as needed
 }

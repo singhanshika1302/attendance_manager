@@ -2,7 +2,7 @@
 import 'package:edumarshals/Screens/Login/login.dart';
 import 'package:edumarshals/main.dart';
 import 'package:flutter/material.dart';
-import 'package:edumarshals/utilities.dart';
+import 'package:edumarshals/Utils/Utilities/utilities2.dart';
 
 class contactInfo extends StatefulWidget {
   const contactInfo({super.key});

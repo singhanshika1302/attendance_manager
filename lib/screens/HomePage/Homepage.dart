@@ -1,19 +1,23 @@
-import 'package:edumarshals/Utilities/Utilities.dart';
+// import 'package:edumarshals/Utilities/Utilities.dart';
 // import 'dart:html';
 
-import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
-import 'package:edumarshals/Screens/Events_Page.dart';
+// import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
+// import 'package:edumarshals/Screens/Events_Page.dart';
 import 'package:edumarshals/Screens/Notes_Assignment/ClassNotesPage.dart';
 import 'package:edumarshals/Screens/Notes_Assignment/Subject_Assignment.dart';
+import 'package:edumarshals/Screens/Events/Events_Page.dart';
 import 'package:edumarshals/Screens/User_Info/Profile.dart';
-import 'package:edumarshals/Utilities/Utilities.dart';
+import 'package:edumarshals/Utils/Utilities/Utilities.dart';
 import 'package:edumarshals/Widget/AttendanceCard.dart';
 import 'package:edumarshals/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:edumarshals/Model/assignment_Model.dart';
 import 'package:edumarshals/repository/assignment_Repository.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
+// import 'package:percent_indicator/circular_percent_indicator.dart';
+
+import '../../Utils/floating_action _button.dart';
 
 class Homepage extends StatefulWidget {
 const Homepage({super.key});
@@ -27,101 +31,103 @@ final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 int selectedTileIndex = -1;
 final AssignmentRepository _assignmentRepository = AssignmentRepository();
 
-@override
-Widget build(BuildContext context) {
-final sheight = MediaQuery.of(context).size.height;
-final swidth = MediaQuery.of(context).size.width;
-return Scaffold(
-key: _scaffoldKey,
-backgroundColor: const Color(0xffEBF3FF),
-drawer: Drawer(
-backgroundColor: const Color.fromRGBO(0, 83, 201, 0.8),
-child: Padding(
-padding: const EdgeInsets.only(top: 50),
-child: ListView(
-padding: EdgeInsets.zero,
-children: <Widget>[
-ListTile(
-leading: const Padding(
-padding: EdgeInsets.only(left: 10),
-child: Icon(
-Icons.close_sharp,
-size: 40,
-color: Color(0xffCFDDF1),
-),
-),
-onTap: () {
-_scaffoldKey.currentState?.openDrawer();
-Navigator.pop(context);
-},
-),
-buildDrawerTile(0, 'assets/bank.png', 'Classroom',
-'assets/assets/bankcolor.png', 1),
-buildDrawerTile(1, 'assets/bank.png', 'Hostel',
-'assets/assets/bankcolor.png', 1),
-buildDrawerTile(2, 'assets/bank.png', 'Placement',
-'assets/assets/bankcolor.png', 1),
-buildDrawerTile(3, 'assets/bank.png', 'PYQS Papers',
-'assets/assets/bankcolor.png', 1),
-buildDrawerTile(4, 'assets/bank.png', 'Fees',
-'assets/assets/bankcolor.png', 1),
-buildDrawerTile(5, 'assets/bank.png', 'Events',
-'assets/assets/bankcolor.png', 1)
-],
-),
-),
-),
-body: SafeArea(
-child: SingleChildScrollView(
-child: Padding(
-padding: const EdgeInsets.all(18.0),
-child: Container(
-child: Column(
-crossAxisAlignment: CrossAxisAlignment.start,
-children: [
-Row(
-mainAxisAlignment: MainAxisAlignment.spaceBetween,
-children: [
-Container(
-child: Row(
-children: [
-GestureDetector(
-onTap: () {
-_scaffoldKey.currentState?.openDrawer();
-},
-child: const Icon(Icons.more_vert)),
-Padding(
-padding:
-const EdgeInsets.fromLTRB(10, 0, 10, 0),
-child: InkWell(
-child: CircleAvatar(
-backgroundImage: NetworkImage(
-PreferencesManager().studentPhoto),
-),
-onDoubleTap: () {
-Navigator.push(
-context,
-MaterialPageRoute(
-builder: (context) => Profile()));
-},
-)),
-Text(
-PreferencesManager().name,
-style: const TextStyle(fontSize: 15),
-),
-],
-),
-),
-Container(
-decoration: BoxDecoration(
-border: Border.all(color: Colors.grey),
-shape: BoxShape.circle),
-child: const Padding(
-padding: EdgeInsets.all(6.0),
-child: Icon(Icons.notifications)),
-),
-],
-),
+  @override
+  Widget build(BuildContext context) {
+    final sheight = MediaQuery.of(context).size.height;
+    final swidth = MediaQuery.of(context).size.width;
+    return Scaffold(
+        floatingActionButtonLocation: ExpandableFab.location,
+      floatingActionButton: custom_floating_action_button(),
+      key: _scaffoldKey,
+      backgroundColor: const Color(0xffEBF3FF),
+      drawer: Drawer(
+        backgroundColor: const Color.fromRGBO(0, 83, 201, 0.8),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 50),
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              ListTile(
+                leading: const Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: Icon(
+                    Icons.close_sharp,
+                    size: 40,
+                    color: Color(0xffCFDDF1),
+                  ),
+                ),
+                onTap: () {
+                  _scaffoldKey.currentState?.openDrawer();
+                  Navigator.pop(context);
+                },
+              ),
+              buildDrawerTile(0, 'assets/bank.png', 'Classroom',
+                  'assets/assets/bankcolor.png', 1),
+              buildDrawerTile(1, 'assets/bank.png', 'Hostel',
+                  'assets/assets/bankcolor.png', 1),
+              buildDrawerTile(2, 'assets/bank.png', 'Placement',
+                  'assets/assets/bankcolor.png', 1),
+              buildDrawerTile(3, 'assets/bank.png', 'PYQS Papers',
+                  'assets/assets/bankcolor.png', 1),
+              buildDrawerTile(4, 'assets/bank.png', 'Fees',
+                  'assets/assets/bankcolor.png', 1),
+              buildDrawerTile(5, 'assets/bank.png', 'Events',
+                  'assets/assets/bankcolor.png', 1)
+            ],
+          ),
+        ),
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        child: Row(
+                          children: [
+                            GestureDetector(
+                                onTap: () {
+                                  _scaffoldKey.currentState?.openDrawer();
+                                },
+                                child: const Icon(Icons.more_vert)),
+                            Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                child: InkWell(
+                                  child: CircleAvatar(
+                                    backgroundImage: NetworkImage(
+                                        PreferencesManager().studentPhoto),
+                                  ),
+                                  onDoubleTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Profile()));
+                                  },
+                                )),
+                            Text(
+                              PreferencesManager().name,
+                              style: const TextStyle(fontSize: 15),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey),
+                            shape: BoxShape.circle),
+                        child: const Padding(
+                            padding: EdgeInsets.all(6.0),
+                            child: Icon(Icons.notifications)),
+                      ),
+                    ],
+                  ),
 
 //  SizedBox(height: sheight * 0.03,),
 AttendanceCard(

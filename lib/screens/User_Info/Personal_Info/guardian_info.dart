@@ -1,7 +1,7 @@
 // import 'package:edumarshals/screens/login.dart';
 import 'package:edumarshals/Screens/Login/login.dart';
 import 'package:flutter/material.dart';
-import 'package:edumarshals/utilities.dart';
+import 'package:edumarshals/Utils/Utilities/utilities2.dart';
 
 class guardianInfo extends StatefulWidget {
   const guardianInfo({super.key});

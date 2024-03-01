@@ -87,14 +87,14 @@ flutter:
 #     - assets/assets
 # =======
     - assets/assets/Frame 52.png
-    - assets/unnamed-removebg-preview 1.png
+    # - assets/unnamed-removebg-preview 1.png
     # - assets/Android Large - 18.png
     # - assets/Ellipse 7.jpg
-    # - assets/Frame 100.png
+    - asset/images/
     - Assets/
     - assets/assets/Frame 48117.png
     # - assets/Group 48155.png
-    - assets/bank.png
+    # - assets/bank.png
     - assets/assets/bankcolor.png
     - "assets/assets/buliding.png"
     # - assets\assets\Frame 52.png
@@ -103,7 +103,7 @@ flutter:
     - asset/images/pdf1.png
     - assets/
     - assets/filter.png
-    - assets/assets/Frame 48117 (2).png
+    # - assets/assets/Frame 48117 (2).png
 # >>>>>>> Development
   #   - images/a_dot_ham.jpeg
 

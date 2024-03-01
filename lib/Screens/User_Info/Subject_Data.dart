@@ -28,7 +28,7 @@ class _SubjectdataState extends State<Subjectdata> {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(242, 246, 255, 1),
       appBar: AppBar(
-        
+        automaticallyImplyLeading: false,
         title:  Center(
           child: Column(
             children: [

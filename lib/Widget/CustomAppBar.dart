@@ -18,7 +18,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.white,
       title: Row(
         children: [
-          const Icon(Icons.more_vert),
+          InkWell(child: const Icon(Icons.more_vert),onTap: () {
+            
+          },),
           InkWell(
             onDoubleTap: () => Navigator.push(
                 context, MaterialPageRoute(builder: (context) => const Profile())),
@@ -35,9 +37,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
+                // utilis mein text.dart add karna hai
                 'Hello',
                 style: TextStyle(
                   fontSize: 14.0,
+                  //same background ka 
                   color: Colors.grey,
                 ),
               ),

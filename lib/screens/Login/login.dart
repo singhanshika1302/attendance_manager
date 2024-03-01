@@ -208,13 +208,13 @@ class _LoginState extends State<Login> {
         _passController.text = savedPassword;
       }
 
-      // if (savedDob != null) {
-      //   // Parse saved date string to DateTime
-      //   final savedDate = DateFormat('dd-MM-yyyy').parse(savedDob);
-      //   setState(() {
-      //     selectedDate = savedDate;
-      //   });
-      // }
+      if (savedDob != null) {
+        // Parse saved date string to DateTime
+        final savedDate = DateFormat('dd-MM-yyyy').parse(PreferencesManager().dob);
+        setState(() {
+          selectedDate = savedDate;
+        });
+      }
     });
 
     return SafeArea(
@@ -510,7 +510,7 @@ class _LoginState extends State<Login> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: screenHeight * 0.07),
+                SizedBox(height: screenHeight * 0.089),
                 Image.asset(
                   'assets/Frame 100.png',
                   scale: 4.5,

@@ -8,10 +8,12 @@ import 'package:edumarshals/Screens/User_Info/Personal_Info/contact_details.dart
 import 'package:edumarshals/Screens/User_Info/Personal_Info/guardian_info.dart';
 import 'package:edumarshals/Screens/User_Info/Subject_Data.dart';
 import 'package:edumarshals/Screens/time_table.dart';
+import 'package:edumarshals/Utils/floating_action%20_button.dart';
 import 'package:edumarshals/Widget/Profile_Container.dart';
 import 'package:edumarshals/Widget/Profile_Tabs.dart';
 import 'package:edumarshals/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 // import 'package:flutter_acrylic/flutter_acrylic.dart';
 
 class Profile extends StatefulWidget {
@@ -25,6 +27,8 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       floatingActionButtonLocation: ExpandableFab.location,
+      floatingActionButton: custom_floating_action_button(),
       backgroundColor: const Color.fromRGBO(235, 243, 255, 1),
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -145,6 +149,10 @@ class _ProfileState extends State<Profile> {
               // Callback function for IconButton pressed
               print('Arrow Forward Pressed');
             },
+            onpressed1: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) =>  PersonalInfoScreen()));
+            },
           ),
            Profile_Tab(
             Profileoption: 'Guardian Information',
@@ -154,6 +162,10 @@ class _ProfileState extends State<Profile> {
               // Callback function for IconButton pressed
               print('Arrow Forward Pressed');
             },
+            onpressed1: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) =>  ParentInfoScreen()));
+            },
           ),
           Profile_Tab(
             Profileoption: 'Contact Details',
@@ -162,6 +174,10 @@ class _ProfileState extends State<Profile> {
                   MaterialPageRoute(builder: (context) => ContactInfoScreen()));
               // Callback function for IconButton pressed
               print('Arrow Forward Pressed');
+            },
+            onpressed1: () {
+               Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ContactInfoScreen()));
             },
           ),
           const Profile_Tab(
@@ -174,6 +190,11 @@ class _ProfileState extends State<Profile> {
                   MaterialPageRoute(builder: (context) =>  MyDocument()));
               // Callback function for IconButton pressed
               print('Arrow Forward Pressed');
+            },
+            onpressed1: () {
+               Navigator.push(context,
+                  MaterialPageRoute(builder: (context) =>  MyDocument()));
+              
             },
           ),
           Profile_Tab(

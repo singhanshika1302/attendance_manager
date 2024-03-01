@@ -33,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(const Duration(seconds: 3), () {
 
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const Login()));
+      Navigator.pop(context, MaterialPageRoute(builder: (context) => const Login()));
     });
   }
 

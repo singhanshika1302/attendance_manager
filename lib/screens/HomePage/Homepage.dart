@@ -57,15 +57,15 @@ class _HomepageState extends State<Homepage> {
               buildDrawerTile(0, 'assets/bank.png', 'Classroom',
                   'assets/assets/bankcolor.png', 1),
               buildDrawerTile(1, 'assets/bank.png', 'Hostel',
-                  'assets/assets/bankcolor.png', 1),
-              buildDrawerTile(2, 'assets/bank.png', 'Placement',
+                  'assets/assets/buliding.png', 1),
+              buildDrawerTile(2, 'assets/note-2.png', 'Placement',
                   'assets/assets/bankcolor.png', 1),
               buildDrawerTile(3, 'assets/bank.png', 'PYQS Papers',
                   'assets/assets/bankcolor.png', 1),
-              buildDrawerTile(4, 'assets/bank.png', 'Fees',
-                  'assets/assets/bankcolor.png', 1),
-              buildDrawerTile(5, 'assets/bank.png', 'Events',
-                  'assets/assets/bankcolor.png', 1)
+              buildDrawerTile(4, 'assets/card-pos.png', 'Fees',
+                  'asset/images/card-poscolor.png', 3),
+              buildDrawerTile(5, 'asset/images/ranking.png', 'Events',
+                  'assets/rankingcolor.png', 1)
             ],
           ),
         ),
@@ -196,7 +196,7 @@ class _HomepageState extends State<Homepage> {
                         onPressed: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => EventsPage())),
+                                builder: (context) => OverAllAttd())),
                       )
                     ],
                   ),
@@ -387,14 +387,26 @@ class _HomepageState extends State<Homepage> {
           });
           _scaffoldKey.currentState?.openDrawer();
           Navigator.pop(context);
-          // switch (index) {
-          //   case 0:
-          //     Navigator.push(context, MaterialPageRoute(builder: (context) => Events_page()));
-          //     break;
-          //   case 1:
-          //     Navigator.push(context, MaterialPageRoute(builder: (context) => Events_page()));
-          //     break;
-          // }
+          switch (index) {
+            case 0:
+              Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+              break;
+            case 1:
+              Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+              break;
+              case 2:
+              Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+              break;
+              case 3:
+              Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+              break;
+              case 4:
+              Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+              break;
+               case 5:
+              Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+              break;
+          }
         },
       ),
     );

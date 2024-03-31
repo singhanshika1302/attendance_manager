@@ -98,7 +98,7 @@ class _custom_floating_action_buttonState extends State<custom_floating_action_b
             ),
             onPressed: () {
                           Navigator.of(context).push(
-                             MaterialPageRoute(builder: ((context) =>  barGraph(userName: PreferencesManager().name, userImage: PreferencesManager().studentPhoto, subjectName: "Maths", subjectDescription: "m"))));
+                             MaterialPageRoute(builder: ((context) =>  barGraph(userName: PreferencesManager().name, userImage: PreferencesManager().studentPhoto, subjectName: "Maths", subjectDescription: "You attended 51 lectures out of 63 lectures."))));
             },
           ),
           FloatingActionButton.small(

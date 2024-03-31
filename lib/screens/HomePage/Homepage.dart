@@ -9,7 +9,7 @@ import 'package:edumarshals/Widget/AttendanceCard.dart';
 import 'package:edumarshals/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
+// import 'package:percent_indicator/circular_percent_indicator.dart';
 
 import '../../Utils/floating_action _button.dart';
 

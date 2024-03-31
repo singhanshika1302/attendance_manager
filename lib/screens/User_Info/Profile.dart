@@ -1,5 +1,6 @@
 // import 'package:edumarshal/Widget/Profile_Tabs.dart';
 import 'package:edumarshals/Model/time_table_model.dart';
+import 'package:edumarshals/Screens/Login/login.dart';
 import 'package:edumarshals/Screens/User_Info/Personal_Info/Contact_info_Data.dart';
 import 'package:edumarshals/Screens/User_Info/Document/My_Documents_Screen.dart';
 import 'package:edumarshals/Screens/User_Info/Personal_Info/Parent_Info_Data.dart';
@@ -14,6 +15,7 @@ import 'package:edumarshals/Widget/Profile_Tabs.dart';
 import 'package:edumarshals/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:flutter_acrylic/flutter_acrylic.dart';
 
 class Profile extends StatefulWidget {
@@ -27,10 +29,12 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       floatingActionButtonLocation: ExpandableFab.location,
-      floatingActionButton: custom_floating_action_button(),
+      //  floatingActionButtonLocation: ExpandableFab.location,
+      // floatingActionButton: custom_floating_action_button(),
       backgroundColor: const Color.fromRGBO(235, 243, 255, 1),
       appBar: AppBar(
+        surfaceTintColor: Colors.transparent
+,
         automaticallyImplyLeading: false,
         toolbarHeight: 190.0, // Adjust the height as needed
         title: Center(
@@ -180,9 +184,9 @@ class _ProfileState extends State<Profile> {
                   MaterialPageRoute(builder: (context) => ContactInfoScreen()));
             },
           ),
-          const Profile_Tab(
-            Profileoption: 'Education Details',
-          ),
+          // const Profile_Tab(
+          //   Profileoption: 'Education Details',
+          // ),
           Profile_Tab(
             Profileoption: 'My Documents',
             onpressed: () {
@@ -206,15 +210,15 @@ class _ProfileState extends State<Profile> {
               print('Arrow Forward Pressed');
             },
           ),
-          const Profile_Tab(
-            Profileoption: 'Additional Info',
-          ),
-          const Profile_Tab(
-            Profileoption: 'Scholarship Form',
-          ),
-          const Profile_Tab(
-            Profileoption: 'Feedback',
-          ),
+          // const Profile_Tab(
+          //   Profileoption: 'Additional Info',
+          // ),
+          // const Profile_Tab(
+          //   Profileoption: 'Scholarship Form',
+          // ),
+          // const Profile_Tab(
+          //   Profileoption: 'Feedback',
+          // ),
           // ContainerWithBorderOverlap()
           //   Acrylic(
           //   effect: AcrylicEffect.transparent,
@@ -234,6 +238,20 @@ class _ProfileState extends State<Profile> {
           //     ),
           //   ),
           // ),
+             Profile_Tab(
+            Profileoption: 'Logout',
+               onpressed: () async {
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                            prefs.remove('username');
+                            prefs.remove('password');
+                             prefs.remove('dob');
+
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Login()));
+              // Callback function for IconButton pressed
+              print('Arrow Forward Pressed');
+            },
+          ),
         ],
       ),
     );

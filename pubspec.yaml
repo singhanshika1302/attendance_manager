@@ -102,7 +102,7 @@ flutter:
 #    - assets/Frame 48117 (2).png
     - asset/images/pdf1.png
     - assets/
-    - assets/filter.png
+    # - assets/filter.png
     # - assets/assets/Frame 48117 (2).png
 # >>>>>>> Development
   #   - images/a_dot_ham.jpeg

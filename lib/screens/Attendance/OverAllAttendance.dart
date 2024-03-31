@@ -92,7 +92,7 @@ class _OverAllAttdState extends State<OverAllAttd> {
                 ),
               ),
               Container(
-                height: screenHeight * 0.8,
+                height: screenHeight ,
 //.................fetching list in which all attendace is stored................//
                 child: _attendanceDataList != null
                     ? Column(
@@ -116,7 +116,13 @@ class _OverAllAttdState extends State<OverAllAttd> {
                           ),
                         ],
                       )
-                    : CircularProgressIndicator(),
+                    : Center(
+                        child: SizedBox(
+                          height: 50, // Adjust the height as needed
+                          width: 50, // Adjust the width as needed
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
               ),
             ],
           ),

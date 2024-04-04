@@ -73,7 +73,7 @@ Widget notes( text1, text2,text3 ){
               children: [
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10),
-                  child: Image.asset('assets/note-2.png',),
+                  child: Image.asset('assets/note-2.png',scale: 3.2,),
                 ),
 
                 const Text('2 hr ago',style: TextStyle(

@@ -65,7 +65,7 @@ class _OverAllAttdState extends State<OverAllAttd> {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
+    //final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Color.fromRGBO(242, 246, 255, 1),
       appBar: CustomAppBar(
@@ -92,7 +92,7 @@ class _OverAllAttdState extends State<OverAllAttd> {
                 ),
               ),
               Container(
-                height: screenHeight * 0.8,
+                height: screenHeight ,
 //.................fetching list in which all attendace is stored................//
                 child: _attendanceDataList != null
                     ? Column(
@@ -116,7 +116,13 @@ class _OverAllAttdState extends State<OverAllAttd> {
                           ),
                         ],
                       )
-                    : CircularProgressIndicator(),
+                    : Center(
+                        child: SizedBox(
+                          height: 50, // Adjust the height as needed
+                          width: 50, // Adjust the width as needed
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
               ),
             ],
           ),

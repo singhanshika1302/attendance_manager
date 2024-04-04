@@ -55,6 +55,7 @@ dependencies:
   custom_radio_grouped_button: ^2.2.1
   easy_date_timeline: ^1.0.5
   week_of_year: ^2.0.0
+  url_launcher: ^6.2.5
   
   # camera: ^0.10.5+9
 

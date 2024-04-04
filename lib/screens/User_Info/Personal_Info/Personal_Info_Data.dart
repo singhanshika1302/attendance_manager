@@ -2,7 +2,7 @@
 import 'package:edumarshals/Widget/CustomAppBar.dart';
 import 'package:edumarshals/main.dart';
 import 'package:edumarshals/repository/PersonalInforepo.dart';
-import 'package:edumarshals/utilities.dart';
+import 'package:edumarshals/Utils/Utilities/utilities2.dart';
 import 'package:flutter/material.dart';
 // import 'package:your_app/personal_info_repository.dart'; // Import your repository
 
@@ -38,6 +38,13 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
     PreferencesManager().studentNumber = _personalInfo!['studentNumber'];
     PreferencesManager().universityRollNumber =
         _personalInfo!['universityRollNumber'];
+print(_personalInfo!['semester']);
+int sem=_personalInfo!['semester'];
+            PreferencesManager().sem = sem;
+            print("jhgfds  ${PreferencesManager().sem}");
+
+            // print(PreferencesManager().semester);
+
   }
 
   @override
@@ -139,7 +146,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                   ],
                 ),
                 Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     buildInfoItem(title: 'Hostel', value: _personalInfo!['hostel']),
                   ],

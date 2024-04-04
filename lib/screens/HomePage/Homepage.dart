@@ -1,11 +1,17 @@
 // import 'package:edumarshal/Utilities/Utilities.dart';
+// import 'dart:html';
+
 import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
+import 'package:edumarshals/Screens/Events/Events_Page.dart';
 import 'package:edumarshals/Screens/User_Info/Profile.dart';
-import 'package:edumarshals/Utilities/Utilities.dart';
+import 'package:edumarshals/Utils/Utilities/Utilities.dart';
 import 'package:edumarshals/Widget/AttendanceCard.dart';
 import 'package:edumarshals/main.dart';
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
+// import 'package:percent_indicator/circular_percent_indicator.dart';
+
+import '../../Utils/floating_action _button.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -23,6 +29,8 @@ class _HomepageState extends State<Homepage> {
     final sheight = MediaQuery.of(context).size.height;
     final swidth = MediaQuery.of(context).size.width;
     return Scaffold(
+        floatingActionButtonLocation: ExpandableFab.location,
+      floatingActionButton: custom_floating_action_button(),
       key: _scaffoldKey,
       backgroundColor: const Color(0xffEBF3FF),
       drawer: Drawer(
@@ -49,15 +57,15 @@ class _HomepageState extends State<Homepage> {
               buildDrawerTile(0, 'assets/bank.png', 'Classroom',
                   'assets/assets/bankcolor.png', 1),
               buildDrawerTile(1, 'assets/bank.png', 'Hostel',
-                  'assets/assets/bankcolor.png', 1),
-              buildDrawerTile(2, 'assets/bank.png', 'Placement',
+                  'assets/assets/buliding.png', 1),
+              buildDrawerTile(2, 'assets/note-2.png', 'Placement',
                   'assets/assets/bankcolor.png', 1),
               buildDrawerTile(3, 'assets/bank.png', 'PYQS Papers',
                   'assets/assets/bankcolor.png', 1),
-              buildDrawerTile(4, 'assets/bank.png', 'Fees',
-                  'assets/assets/bankcolor.png', 1),
-              buildDrawerTile(5, 'assets/bank.png', 'Events',
-                  'assets/assets/bankcolor.png', 1)
+              buildDrawerTile(4, 'assets/card-pos.png', 'Fees',
+                  'asset/images/card-poscolor.png', 3),
+              buildDrawerTile(5, 'asset/images/ranking.png', 'Events',
+                  'assets/rankingcolor.png', 1)
             ],
           ),
         ),
@@ -379,14 +387,26 @@ class _HomepageState extends State<Homepage> {
           });
           _scaffoldKey.currentState?.openDrawer();
           Navigator.pop(context);
-          // switch (index) {
-          //   case 0:
-          //     Navigator.push(context, MaterialPageRoute(builder: (context) => ClassroomPage()));
-          //     break;
-          //   case 1:
-          //     Navigator.push(context, MaterialPageRoute(builder: (context) => HostelPage()));
-          //     break;
-          // }
+          switch (index) {
+            case 0:
+              Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+              break;
+            case 1:
+              Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+              break;
+              case 2:
+              Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+              break;
+              case 3:
+              Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+              break;
+              case 4:
+              Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+              break;
+               case 5:
+              Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+              break;
+          }
         },
       ),
     );

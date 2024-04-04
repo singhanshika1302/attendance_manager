@@ -8,8 +8,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Login/login.dart';
 import 'package:flutter/material.dart';
+
 // import 'sp';
-String finalname='';
+String finalname = '';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -19,28 +21,41 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
-  void initState() {
-    // TODO: implement initState
-    getvalidationdata().whenComplete(() async{
- Timer(const Duration(seconds: 3), () {
+@override
+void initState() {
+  super.initState();
+  Timer(const Duration(seconds: 3), () {
+    SharedPreferences.getInstance().then((prefs) {
+      final savedUsername = prefs.getString('username');
+      final savedPassword = prefs.getString('password');
+      final savedDob = PreferencesManager().dob;
 
-      Navigator.pop(context, MaterialPageRoute(builder: (context) => finalname==null?Login(): Homepage()));
+      if (savedUsername != null && savedPassword != null && savedDob != null) {
+        // If all necessary credentials are saved, navigate to HomePage
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Homepage()),
+        );
+      } else {
+        // If any credential is missing, navigate to Login screen
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Login()),
+        );
+      }
     });
-    });
-    super.initState();
-    // Timer(const Duration(seconds: 3), () {
-
-    //   Navigator.push(context, MaterialPageRoute(builder: (context) => const Login()));
-    // });
-  }
-  Future getvalidationdata() async
-{
-  var obname =PreferencesManager().name;
-  setState(() {
-     finalname=obname;
   });
-  print(finalname);
 }
+
+
+  Future getvalidationdata() async {
+    var obname = PreferencesManager().name;
+    setState(() {
+      finalname = obname;
+    });
+    print(finalname);
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height * 1;
@@ -70,7 +85,7 @@ class _SplashScreenState extends State<SplashScreen> {
             SizedBox(
               height: height * 0.001,
             ),
-         const   Text(
+            const Text(
               'AKGEC EDUMARSHAL',
               textAlign: TextAlign.center,
               style: TextStyle(

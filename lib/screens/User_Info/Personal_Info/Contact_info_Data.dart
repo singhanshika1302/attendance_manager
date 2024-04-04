@@ -2,7 +2,7 @@
 import 'package:edumarshals/Widget/CustomAppBar.dart';
 import 'package:edumarshals/main.dart';
 import 'package:edumarshals/repository/Contact_Info_Repo.dart';
-import 'package:edumarshals/utilities.dart';
+import 'package:edumarshals/Utils/Utilities/utilities2.dart';
 // import 'package:edumarshals/repository/PersonalInforepo.dart';
 import 'package:flutter/material.dart';
 // import 'package:your_app/personal_info_repository.dart'; // Import your repository
@@ -41,7 +41,7 @@ class _ContactInfoScreenState extends State<ContactInfoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromRGBO(242, 246, 255, 1),
-      appBar: CustomAppBar(userName: PreferencesManager().name),
+      appBar: AppBar(title: Text("Contact Details"),),
       body: contactDetails != null
           ? ListView(
               children: [

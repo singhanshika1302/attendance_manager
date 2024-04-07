@@ -1,20 +1,19 @@
 import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
+import 'package:edumarshals/Model/student_attendance_data_model.dart';
 import 'package:edumarshals/Screens/HomePage/Homepage.dart';
 import 'package:edumarshals/Utils/daily_attendance_card.dart';
 import 'package:edumarshals/Utils/floating_action%20_button.dart';
-
 import 'package:edumarshals/Utils/attendance_list_card.dart';
 import 'package:edumarshals/Utils/weekly_widget.dart';
 import 'package:edumarshals/Widget/AttendanceCard.dart';
 import 'package:edumarshals/Widget/CustomAppBar.dart';
-
-
+import 'package:edumarshals/repository/overall_attendance_repository.dart';
 import 'package:edumarshals/utilities.dart';
-
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:edumarshals/main.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 
 class barGraph extends StatefulWidget {
@@ -38,6 +37,140 @@ class barGraph extends StatefulWidget {
 }
 
 class barGraphState extends State<barGraph> {
+//.......................attendance api is calling .............................//
+  final AttendanceRepository _repository = AttendanceRepository();
+  List<StudentAttendanceData>? _attendanceDataList;
+  int _totalClasses = 0;
+  int _totalPresentClasses = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchAttendanceData();
+    // super.initState();
+    final barGroup1 = makeGroupData(0, 12, 5);
+    final barGroup2 = makeGroupData(1, 16, 12);
+    final barGroup3 = makeGroupData(2, 18, 5);
+    final barGroup4 = makeGroupData(3, 20, 16);
+    final barGroup5 = makeGroupData(4, 17, 6);
+    final barGroup6 = makeGroupData(5, 14, 1.5);
+    final barGroup7 = makeGroupData(6, 10, 1.5);
+    _initFilterWidgets();
+
+    final items = [
+      barGroup1,
+      barGroup2,
+      barGroup3,
+      barGroup4,
+      barGroup5,
+      barGroup6,
+      barGroup7,
+    ];
+
+    rawBarGroups = items;
+
+    showingBarGroups = rawBarGroups;
+  }
+
+//.............calling attendance repository ...................................//
+  Future<void> _fetchAttendanceData() async {
+    List<StudentAttendanceData>? attendanceDataList =
+        await _repository.fetchAttendance();
+    int totalClasses = 0;
+    int totalPresentClasses = 0;
+    List<Map<String, dynamic>> subjectAttendanceData = [];
+//...............function to store total present and total classes .............//
+    if (attendanceDataList != null) {
+      subjectAttendanceData = attendanceDataList
+          .where((data) => data.subject == widget.subjectName)
+          .map((data) => data.toJson())
+          .toList();
+      // for (var data in attendanceDataList) {
+      //   totalClasses += data.totalClasses ?? 0;
+      //   totalPresentClasses += data.totalPresent ?? 0;
+      // }
+    }
+    Map<String, Map<int, int>> monthWiseAttendance = {};
+    for (var attendance in subjectAttendanceData) {
+      for (var attendanceEntry in attendance['attendance']) {
+        String date = attendanceEntry['date'];
+        int month = DateTime.parse(date).month;
+        monthWiseAttendance.putIfAbsent(date, () => {0: 0, 1: 0});
+        monthWiseAttendance[date]![month] =
+            (monthWiseAttendance[date]![month] ?? 0) + 1;
+      }
+    }
+    List<BarChartGroupData> barGroups = _generateBarGroups(monthWiseAttendance);
+    setState(() {
+      _attendanceDataList = attendanceDataList;
+      _totalClasses = totalClasses;
+      print('totalclasses${_totalClasses}');
+      // PreferencesManager.totalclasses=_totalClasses;
+      // print('totalPresentClasses${_totalPresentClasses}');
+      _totalPresentClasses = totalPresentClasses;
+
+      PreferencesManager().totalclasses = _totalClasses;
+      PreferencesManager().presentclasses = _totalPresentClasses;
+
+      print('totalPresentClasses${_totalPresentClasses}');
+
+      // print('dfghj $attendanceDataList');
+      // PreferencesManager.totalclasses=_totalClasses;
+      showingBarGroups = barGroups;
+    });
+  }
+
+  List<BarChartGroupData> _generateBarGroups(
+      Map<String, Map<int, int>> monthWiseAttendance) {
+    List<BarChartGroupData> barGroups = [];
+
+    // Iterate over the month wise attendance data and generate bar group data
+    monthWiseAttendance.forEach((date, attendance) {
+      int totalClasses = attendance.values.reduce((a, b) => a + b);
+      int totalPresent = attendance[1] ?? 0; // Assuming '1' represents attended
+      double attendancePercentage =
+          totalClasses > 0 ? (totalPresent / totalClasses) * 100 : 0;
+
+      BarChartGroupData barGroup = makeGroupData1(
+        // Here you can map your dates to a numeric representation or directly use it if it's numeric
+        // You may also need to handle cases where multiple dates fall under the same month
+        // You can use a Map<int, double> to store month-wise attendance percentages
+        // Example: DateTime.parse(date).month -> month
+        // Then use 'month' as the x-axis value
+        DateTime.parse(date).month,
+        totalClasses,
+        totalPresent,
+      );
+
+      barGroups.add(barGroup);
+    });
+
+    return barGroups;
+  }
+
+  BarChartGroupData makeGroupData1(
+    int x, // Assuming x represents month index
+    int totalClasses,
+    int totalAttendedClasses,
+  ) {
+    return BarChartGroupData(
+      x: x,
+      barRods: [
+        BarChartRodData(
+          toY: totalAttendedClasses.toDouble(), // Total attended classes
+          color: Colors.blue,
+          width: 20,
+        ),
+        BarChartRodData(
+          toY: (totalClasses - totalAttendedClasses)
+              .toDouble(), // Total missed classes
+          color: Colors.red,
+          width: 20,
+        ),
+      ],
+    );
+  }
+
   final _key = GlobalKey<ExpandableFabState>();
   final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
   final double width = 15;
@@ -76,31 +209,31 @@ class barGraphState extends State<barGraph> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    final barGroup1 = makeGroupData(0, 12, 5);
-    final barGroup2 = makeGroupData(1, 16, 12);
-    final barGroup3 = makeGroupData(2, 18, 5);
-    final barGroup4 = makeGroupData(3, 20, 16);
-    final barGroup5 = makeGroupData(4, 17, 6);
-    final barGroup6 = makeGroupData(5, 14, 1.5);
-    final barGroup7 = makeGroupData(6, 10, 1.5);
-    _initFilterWidgets();
+  // void initState() {
+  //   // super.initState();
+  //   // final barGroup1 = makeGroupData(0, 12, 5);
+  //   // final barGroup2 = makeGroupData(1, 16, 12);
+  //   // final barGroup3 = makeGroupData(2, 18, 5);
+  //   // final barGroup4 = makeGroupData(3, 20, 16);
+  //   // final barGroup5 = makeGroupData(4, 17, 6);
+  //   // final barGroup6 = makeGroupData(5, 14, 1.5);
+  //   // final barGroup7 = makeGroupData(6, 10, 1.5);
+  //   // _initFilterWidgets();
 
-    final items = [
-      barGroup1,
-      barGroup2,
-      barGroup3,
-      barGroup4,
-      barGroup5,
-      barGroup6,
-      barGroup7,
-    ];
+  //   // final items = [
+  //   //   barGroup1,
+  //   //   barGroup2,
+  //   //   barGroup3,
+  //   //   barGroup4,
+  //   //   barGroup5,
+  //   //   barGroup6,
+  //   //   barGroup7,
+  //   // ];
 
-    rawBarGroups = items;
+  //   // rawBarGroups = items;
 
-    showingBarGroups = rawBarGroups;
-  }
+  //   // showingBarGroups = rawBarGroups;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -117,8 +250,8 @@ class barGraphState extends State<barGraph> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               AttendanceCard(
-                attendedClasses: 24,
-                totalClassess: 28,
+                  attendedClasses: 24,
+                  totalClassess: 28,
                   title: widget.subjectName,
                   description: widget.subjectDescription),
               SizedBox(
@@ -555,7 +688,7 @@ class barGraphState extends State<barGraph> {
             _selectedDay = value;
           }),
         ),
-        AttendanceListCard(date: "Mon", isPresent: [true, true, true]),
+        AttendanceListCard(date: "Mon", isPresent: [true, false, true]),
         AttendanceListCard(date: "Tue", isPresent: [
           true,
         ]),

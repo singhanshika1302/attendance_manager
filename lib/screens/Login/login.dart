@@ -1,7 +1,5 @@
 import 'dart:io';
-
-// import 'package:edumarshals/Screens/OverAllAttendance.dart';
-// import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
+import 'package:edumarshals/Model/student_attendance_data_model.dart';
 import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
 import 'package:edumarshals/Screens/HomePage/Homepage.dart';
 import 'package:edumarshals/Screens/User_Info/Personal_Info/Contact_info_Data.dart';
@@ -9,6 +7,7 @@ import 'package:edumarshals/Screens/User_Info/Personal_Info/Parent_Info_Data.dar
 import 'package:edumarshals/Screens/User_Info/Personal_Info/Personal_Info_Data.dart';
 import 'package:edumarshals/main.dart';
 import 'package:edumarshals/screens/time_table.dart';
+import 'package:edumarshals/subject_wise_attendance.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:edumarshals/utilities.dart';
@@ -149,7 +148,7 @@ class _LoginState extends State<Login> {
         });
         // for navigaation to next page
         Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) =>Homepage() ));
+            MaterialPageRoute(builder: (context) =>barGraph(userName: PreferencesManager().name, userImage: '', subjectName: 'Mathematics', subjectDescription: 'null') ));
         // Navigator.push(
         //     context,
         //     MaterialPageRoute(

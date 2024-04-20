@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:edumarshals/Screens/Login/login.dart';
 import 'package:edumarshals/Screens/Notes_Assignment/Subject_Assignment.dart';
-import 'package:edumarshals/Screens/User_Info/Personal_Info/profile_info.dart';
+// import 'package:edumarshals/Screens/User_Info/Personal_Info/profile_info.dart';
 import 'package:edumarshals/Screens/User_Info/Profile.dart';
 import 'package:edumarshals/Screens/User_Info/Subject_Data.dart';
 import 'package:edumarshals/Screens/splash.dart';

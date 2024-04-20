@@ -4,15 +4,12 @@ import 'package:easy_date_timeline/easy_date_timeline.dart';
 // import 'package:edumarshals/Screens/HomePage/Homepage.dart';
 import 'package:edumarshals/Utils/daily_attendance_card.dart';
 // import 'package:edumarshals/Utils/floating_action%20_button.dart';
-
 import 'package:edumarshals/Utils/attendance_list_card.dart';
+import 'package:edumarshals/Utils/floating_action%20_button.dart';
 import 'package:edumarshals/Utils/weekly_widget.dart';
 import 'package:edumarshals/Widget/AttendanceCard.dart';
 import 'package:edumarshals/Widget/CustomAppBar.dart';
-
-
 // import 'package:edumarshals/Utils/Utilities/utilities2.dart';
-
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
@@ -106,8 +103,8 @@ class barGraphState extends State<barGraph> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffF2F6FF),
-      // floatingActionButtonLocation: ExpandableFab.location,
-      // floatingActionButton: custom_floating_action_button(),
+      floatingActionButtonLocation: ExpandableFab.location,
+      floatingActionButton: custom_floating_action_button(),
       appBar:
           CustomAppBar(userName: widget.userName, userImage: widget.userImage),
       body: Padding(

@@ -1,5 +1,5 @@
 import 'package:edumarshals/Screens/HomePage/Homepage.dart';
-import 'package:edumarshals/Screens/Notes_Assignment/ClassNotesPage.dart';
+// import 'package:edumarshals/Screens/Notes_Assignment/ClassNotesPage.dart';
 import 'package:edumarshals/Screens/Notes_Assignment/Subject_Assignment.dart';
 import 'package:edumarshals/Screens/User_Info/Profile.dart';
 import 'package:edumarshals/main.dart';

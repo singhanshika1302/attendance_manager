@@ -42,7 +42,7 @@ class _WeeklyDatePickerState extends State<WeeklyDatePicker> {
     'Sep',
     'Oct',
     'Nov',
-    "Dec"
+    "dec"
   ];
 
   @override

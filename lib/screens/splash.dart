@@ -21,21 +21,32 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
-  void initState() {
-    // TODO: implement initState
-    getvalidationdata().whenComplete(() async {
-      Timer(const Duration(seconds: 3), () {
-        // Navigator.pop(context, MaterialPageRoute(builder: (context) => finalname==null?Login(): Homepage()));
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const Login()));
-      });
-    });
-    super.initState();
-    Timer(const Duration(seconds: 3), () {
+@override
+void initState() {
+  super.initState();
+  Timer(const Duration(seconds: 3), () {
+    SharedPreferences.getInstance().then((prefs) {
+      final savedUsername = prefs.getString('username');
+      final savedPassword = prefs.getString('password');
+      final savedDob = PreferencesManager().dob;
 
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const Login()));
+      if (savedUsername != null && savedPassword != null && savedDob != null) {
+        // If all necessary credentials are saved, navigate to HomePage
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Homepage()),
+        );
+      } else {
+        // If any credential is missing, navigate to Login screen
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => Login()),
+        );
+      }
     });
-  }
+  });
+}
+
 
   Future getvalidationdata() async {
     var obname = PreferencesManager().name;

@@ -3,9 +3,9 @@ import 'dart:async';
 import 'dart:core';
 
 import 'package:edumarshals/main.dart';
-import 'package:flutter/material.dart';
-import 'package:edumarshals/Model/time_table_model.dart';
-import 'dart:convert';
+//import 'package:flutter/material.dart';
+//import 'package:edumarshals/Model/time_table_model.dart';
+//import 'dart:convert';
 import 'package:http/http.dart' as http;
 //...............repository for intigrating the timetable Get Api..................//
 class DocumentRepository {

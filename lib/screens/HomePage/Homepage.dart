@@ -3,40 +3,40 @@
 
 // import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
 // import 'package:edumarshals/Screens/Events_Page.dart';
+import 'package:edumarshals/Model/assignment_Model.dart';
+import 'package:edumarshals/Screens/Events/Events_Page.dart';
 import 'package:edumarshals/Screens/Notes_Assignment/ClassNotesPage.dart';
 import 'package:edumarshals/Screens/Notes_Assignment/Subject_Assignment.dart';
-import 'package:edumarshals/Screens/Events/Events_Page.dart';
 import 'package:edumarshals/Screens/User_Info/Profile.dart';
 import 'package:edumarshals/Utils/Utilities/Utilities.dart';
 import 'package:edumarshals/Widget/AttendanceCard.dart';
 import 'package:edumarshals/main.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:edumarshals/Model/assignment_Model.dart';
 import 'package:edumarshals/repository/assignment_Repository.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
+
 // import 'package:percent_indicator/circular_percent_indicator.dart';
 
 import '../../Utils/floating_action _button.dart';
 
 class Homepage extends StatefulWidget {
-const Homepage({super.key});
+  const Homepage({super.key});
 
-@override
-State<Homepage> createState() => _HomepageState();
+  @override
+  State<Homepage> createState() => _HomepageState();
 }
 
 class _HomepageState extends State<Homepage> {
-final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-int selectedTileIndex = -1;
-final AssignmentRepository _assignmentRepository = AssignmentRepository();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  int selectedTileIndex = -1;
+  final AssignmentRepository _assignmentRepository = AssignmentRepository();
 
   @override
   Widget build(BuildContext context) {
     final sheight = MediaQuery.of(context).size.height;
     final swidth = MediaQuery.of(context).size.width;
     return Scaffold(
-        floatingActionButtonLocation: ExpandableFab.location,
+      floatingActionButtonLocation: ExpandableFab.location,
       floatingActionButton: custom_floating_action_button(),
       key: _scaffoldKey,
       backgroundColor: const Color(0xffEBF3FF),
@@ -64,15 +64,15 @@ final AssignmentRepository _assignmentRepository = AssignmentRepository();
               buildDrawerTile(0, 'assets/bank.png', 'Classroom',
                   'assets/assets/bankcolor.png', 1),
               buildDrawerTile(1, 'assets/bank.png', 'Hostel',
-                  'assets/assets/bankcolor.png', 1),
-              buildDrawerTile(2, 'assets/bank.png', 'Placement',
+                  'assets/assets/buliding.png', 1),
+              buildDrawerTile(2, 'assets/note-2.png', 'Placement',
                   'assets/assets/bankcolor.png', 1),
               buildDrawerTile(3, 'assets/bank.png', 'PYQS Papers',
                   'assets/assets/bankcolor.png', 1),
-              buildDrawerTile(4, 'assets/bank.png', 'Fees',
-                  'assets/assets/bankcolor.png', 1),
-              buildDrawerTile(5, 'assets/bank.png', 'Events',
-                  'assets/assets/bankcolor.png', 1)
+              buildDrawerTile(4, 'assets/card-pos.png', 'Fees',
+                  'asset/images/card-poscolor.png', 3),
+              buildDrawerTile(5, 'asset/images/ranking.png', 'Events',
+                  'assets/rankingcolor.png', 1)
             ],
           ),
         ),
@@ -82,59 +82,58 @@ final AssignmentRepository _assignmentRepository = AssignmentRepository();
           child: Padding(
             padding: const EdgeInsets.all(18.0),
             child: Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        child: Row(
-                          children: [
-                            GestureDetector(
-                                onTap: () {
-                                  _scaffoldKey.currentState?.openDrawer();
+                child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                              onTap: () {
+                                _scaffoldKey.currentState?.openDrawer();
+                              },
+                              child: const Icon(Icons.more_vert)),
+                          Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                              child: InkWell(
+                                child: CircleAvatar(
+                                  backgroundImage: NetworkImage(
+                                      PreferencesManager().studentPhoto),
+                                ),
+                                onDoubleTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Profile()));
                                 },
-                                child: const Icon(Icons.more_vert)),
-                            Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                child: InkWell(
-                                  child: CircleAvatar(
-                                    backgroundImage: NetworkImage(
-                                        PreferencesManager().studentPhoto),
-                                  ),
-                                  onDoubleTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Profile()));
-                                  },
-                                )),
-                            Text(
-                              PreferencesManager().name,
-                              style: const TextStyle(fontSize: 15),
-                            ),
-                          ],
-                        ),
+                              )),
+                          Text(
+                            PreferencesManager().name,
+                            style: const TextStyle(fontSize: 15),
+                          ),
+                        ],
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
-                            shape: BoxShape.circle),
-                        child: const Padding(
-                            padding: EdgeInsets.all(6.0),
-                            child: Icon(Icons.notifications)),
-                      ),
-                    ],
-                  ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey),
+                          shape: BoxShape.circle),
+                      child: const Padding(
+                          padding: EdgeInsets.all(6.0),
+                          child: Icon(Icons.notifications)),
+                    ),
+                  ],
+                ),
 
 //  SizedBox(height: sheight * 0.03,),
-AttendanceCard(
-title: "Overall Attendance",
-description: "including all subjects\nand labs.",
-attendedClasses: PreferencesManager().presentclasses,
-totalClassess: PreferencesManager().totalclasses),
+                AttendanceCard(
+                    title: "Overall Attendance",
+                    description: "including all subjects\nand labs.",
+                    attendedClasses: PreferencesManager().presentclasses,
+                    totalClassess: PreferencesManager().totalclasses),
 
 // Container(
 //   height: sheight * 0.18,
@@ -186,102 +185,102 @@ totalClassess: PreferencesManager().totalclasses),
 //   height: sheight * 0.033,
 // ),
 
-Row(
-mainAxisAlignment: MainAxisAlignment.spaceBetween,
-children: [
-Text(
-'All Subjects',
-style: TextStyle(
-fontSize: 22, fontWeight: FontWeight.bold),
-),
-TextButton(
-child: Text(
-'View All',
-style:
-TextStyle(fontSize: 14, color: Color(0xff004BB8)),
-),
-onPressed: () => Navigator.push(
-context,
-MaterialPageRoute(
-builder: (context) => EventsPage())),
-)
-],
-),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'All Subjects',
+                      style:
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    ),
+                    TextButton(
+                      child: Text(
+                        'View All',
+                        style:
+                            TextStyle(fontSize: 14, color: Color(0xff004BB8)),
+                      ),
+                      onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EventsPage())),
+                    )
+                  ],
+                ),
 
 // SizedBox(
 //   height: sheight * 0.013,
 // ),
 
-SingleChildScrollView(
-scrollDirection: Axis.horizontal,
-child: SizedBox(
-height: sheight * 0.15,
-child: Row(
-mainAxisAlignment: MainAxisAlignment.spaceBetween,
-children: [
-AttIndicator(0.809, '80.9%', 'COA'),
-SizedBox(
-width: swidth * 0.04,
-),
-AttIndicator(0.705, '70.5%', 'DS'),
-SizedBox(
-width: swidth * 0.04,
-),
-AttIndicator(0.75, '75%', 'PYTHON'),
-SizedBox(
-width: swidth * 0.04,
-),
-AttIndicator(0.909, '90.9%', 'DSTL'),
-SizedBox(
-width: swidth * 0.04,
-),
-AttIndicator(0.89, '89%', 'UHV'),
-SizedBox(
-width: swidth * 0.04,
-),
-AttIndicator(0.65, '65%', 'COA LAB'),
-],
-),
-),
-),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: SizedBox(
+                    height: sheight * 0.15,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        AttIndicator(0.809, '80.9%', 'COA'),
+                        SizedBox(
+                          width: swidth * 0.04,
+                        ),
+                        AttIndicator(0.705, '70.5%', 'DS'),
+                        SizedBox(
+                          width: swidth * 0.04,
+                        ),
+                        AttIndicator(0.75, '75%', 'PYTHON'),
+                        SizedBox(
+                          width: swidth * 0.04,
+                        ),
+                        AttIndicator(0.909, '90.9%', 'DSTL'),
+                        SizedBox(
+                          width: swidth * 0.04,
+                        ),
+                        AttIndicator(0.89, '89%', 'UHV'),
+                        SizedBox(
+                          width: swidth * 0.04,
+                        ),
+                        AttIndicator(0.65, '65%', 'COA LAB'),
+                      ],
+                    ),
+                  ),
+                ),
 // SizedBox(
 //   height: sheight * 0.015,
 // ),
 
-Row(
-mainAxisAlignment: MainAxisAlignment.spaceBetween,
-children: [
-Text(
-'Recent Class Notes',
-style: TextStyle(
-fontSize: 22, fontWeight: FontWeight.bold),
-),
-TextButton(
-child: Text(
-'View All',
-style:
-TextStyle(fontSize: 14, color: Color(0xff004BB8)),
-),
-onPressed: () => Navigator.push(
-context,
-MaterialPageRoute(
-builder: (context) => ClassNotesPage())),
-)
-],
-),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Recent Class Notes',
+                      style:
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    ),
+                    TextButton(
+                      child: Text(
+                        'View All',
+                        style:
+                            TextStyle(fontSize: 14, color: Color(0xff004BB8)),
+                      ),
+                      onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ClassNotesPage())),
+                    )
+                  ],
+                ),
 
-SizedBox(
-height: sheight * 0.03,
-),
+                SizedBox(
+                  height: sheight * 0.03,
+                ),
 
-notes('Mathematics - IV', 'Statical Techinque I',
-'By Meenakshi Ma`am'),
+                notes('Mathematics - IV', 'Statical Techinque I',
+                    'By Meenakshi Ma`am'),
 
-notes('Mathematics - IV', 'Statical Techinque I',
-'By Meenakshi Ma`am'),
+                notes('Mathematics - IV', 'Statical Techinque I',
+                    'By Meenakshi Ma`am'),
 
-notes('Mathematics - IV', 'Statical Techinque I',
-'By Meenakshi Ma`am'),
+                notes('Mathematics - IV', 'Statical Techinque I',
+                    'By Meenakshi Ma`am'),
 
                   FutureBuilder<List<Assignment>>(
                     future: _assignmentRepository.fetchAssignments(),
@@ -368,26 +367,26 @@ BorderRadius.circular(10.0), // Adjust the border radius as needed
 ),
 margin: const EdgeInsets.symmetric(horizontal: 15.0),
 // Adjust the vertical margin as needed
-child: ListTile(
-leading: Image.asset(
-index == selectedTileIndex ? selectedImage : defaultImage,
-scale: scale,
-),
-title: Text(
-title,
-style: TextStyle(
-color: index == selectedTileIndex
-? const Color.fromRGBO(0, 75, 184, 0.92)
-    : const Color.fromRGBO(235, 243, 255, 0.92),
-fontSize: 20,
-),
-),
-onTap: () {
-setState(() {
-selectedTileIndex = index;
-});
-_scaffoldKey.currentState?.openDrawer();
-Navigator.pop(context);
+      child: ListTile(
+        leading: Image.asset(
+          index == selectedTileIndex ? selectedImage : defaultImage,
+          scale: scale,
+        ),
+        title: Text(
+          title,
+          style: TextStyle(
+            color: index == selectedTileIndex
+                ? const Color.fromRGBO(0, 75, 184, 0.92)
+                : const Color.fromRGBO(235, 243, 255, 0.92),
+            fontSize: 20,
+          ),
+        ),
+        onTap: () {
+          setState(() {
+            selectedTileIndex = index;
+          });
+          _scaffoldKey.currentState?.openDrawer();
+          Navigator.pop(context);
 // switch (index) {
 //   case 0:
 //     Navigator.push(context, MaterialPageRoute(builder: (context) => Events_page()));
@@ -396,10 +395,10 @@ Navigator.pop(context);
 //     Navigator.push(context, MaterialPageRoute(builder: (context) => Events_page()));
 //     break;
 // }
-},
-),
-);
-}
+        },
+      ),
+    );
+  }
 }
 
 Map<String, List<Assignment>> groupAssignmentsBySubject(List<Assignment> assignments) {
@@ -420,11 +419,11 @@ Map<String, List<Assignment>> groupAssignmentsBySubject(List<Assignment> assignm
 
 
 class AssignmentCard extends StatelessWidget {
-final String subjectName;
-final String description;
-final String deadline;
-final String teacherName;
-final VoidCallback onTap;
+  final String subjectName;
+  final String description;
+  final String deadline;
+  final String teacherName;
+  final VoidCallback onTap;
 
 const AssignmentCard({
 required this.subjectName,

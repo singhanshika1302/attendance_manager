@@ -112,6 +112,43 @@ List<Widget> _buildDocumentCards() {
   ];
   int current = 0;
   PageController pageController = PageController();
+  AppBar buildAppBar() {
+  if (document != null) {
+    return AppBar(
+      automaticallyImplyLeading: false,
+      toolbarHeight: 100.0,
+      title: Center(
+        child: Column(
+          children: [
+            CircleAvatar(
+              backgroundImage: NetworkImage(document!['studentPhoto']),
+              backgroundColor: Color.fromARGB(255, 17, 37, 218),
+            ),
+            Text(PreferencesManager().name),
+          ],
+        ),
+      ),
+    );
+  } else {
+    // Return an empty AppBar if document is null
+    return AppBar(
+       automaticallyImplyLeading: false,
+      toolbarHeight: 100.0,
+      title: Center(
+        child: Column(
+          children: [
+            CircleAvatar(
+              // backgroundImage: NetworkImage(document!['studentPhoto']),
+              backgroundColor: Color.fromARGB(255, 254, 254, 255),
+            ),
+            Text(PreferencesManager().name),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -119,22 +156,23 @@ List<Widget> _buildDocumentCards() {
 
     return Scaffold(
       backgroundColor: const Color.fromRGBO(235, 243, 255, 1),
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
+      appBar: buildAppBar(),
+      // appBar: AppBar(
+      //   automaticallyImplyLeading: false,
 
-        toolbarHeight: 100.0, // Adjust the height as needed
-        title:  Center(
-          child: Column(
-            children: [
-              CircleAvatar(
-                backgroundImage: NetworkImage(document!['studentPhoto']),
-                backgroundColor: Color.fromARGB(255, 17, 37, 218),
-              ),
-              Text(PreferencesManager().name),
-            ],
-          ),
-        ),
-      ),
+      //   toolbarHeight: 100.0, // Adjust the height as needed
+      //   title:  Center(
+      //     child: Column(
+      //       children: [
+      //         CircleAvatar(
+      //           backgroundImage: NetworkImage(document!['studentPhoto']),
+      //           backgroundColor: Color.fromARGB(255, 17, 37, 218),
+      //         ),
+      //         Text(PreferencesManager().name),
+      //       ],
+      //     ),
+      //   ),
+      // ),
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
@@ -166,6 +204,7 @@ List<Widget> _buildDocumentCards() {
                     itemBuilder: (ctx, index) {
                       return Column(
                         children: [
+                          
                           GestureDetector(
                             onTap: () {
                               setState(() {
@@ -216,24 +255,28 @@ List<Widget> _buildDocumentCards() {
                       );
                     }),
               ),
-              SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: SizedBox(
-                  // margin: const EdgeInsets.only(top: 30),
-                  width: double.infinity,
-                  height: screenHeight * 6,
-                  child: PageView.builder(
-                    itemCount: cards.length,
-                    controller: pageController,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return ListView(
-                       children:  _buildDocumentCards(),
-                      );
-                    },
+                if (document == null)
+                Center(
+                  child: CircularProgressIndicator(),
+                ),
+     if (document != null)
+                SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: screenHeight * 100,
+                    child: PageView.builder(
+                      itemCount: cards.length,
+                      controller: pageController,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return ListView(
+                          children: _buildDocumentCards(),
+                        );
+                      },
+                    ),
                   ),
                 ),
-              ),
             //      Column(
             //   children: documents.map((documentList) {
             //     return Column(
@@ -243,6 +286,10 @@ List<Widget> _buildDocumentCards() {
             //     );
             //   }).toList(),
             // ),
+            //  if (document == null)
+            //     Center(
+            //       child: CircularProgressIndicator(),
+            //     ),
             ],
           ),
         ),

@@ -429,7 +429,7 @@ Widget buildInfoItem({required String title, required String value}) {
           Text(
             title,
             style: TextStyle(
-              fontSize: 15,
+              fontSize: 10,
               fontWeight: FontWeight.w500,
               color: Colors.black87,
             ),

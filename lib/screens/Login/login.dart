@@ -1,16 +1,18 @@
 import 'dart:io';
-import 'package:edumarshals/Model/student_attendance_data_model.dart';
-import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
+
+// import 'package:edumarshals/Screens/OverAllAttendance.dart';
+// import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
+// import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
 import 'package:edumarshals/Screens/HomePage/Homepage.dart';
-import 'package:edumarshals/Screens/User_Info/Personal_Info/Contact_info_Data.dart';
-import 'package:edumarshals/Screens/User_Info/Personal_Info/Parent_Info_Data.dart';
-import 'package:edumarshals/Screens/User_Info/Personal_Info/Personal_Info_Data.dart';
+// import 'package:edumarshals/Screens/User_Info/Personal_Info/Contact_info_Data.dart';
+// import 'package:edumarshals/Screens/User_Info/Personal_Info/Parent_Info_Data.dart';
+// import 'package:edumarshals/Screens/User_Info/Personal_Info/Personal_Info_Data.dart';
+// import 'package:edumarshals/Screens/User_Info/Subject_Data.dart';
 import 'package:edumarshals/main.dart';
-import 'package:edumarshals/screens/time_table.dart';
-import 'package:edumarshals/subject_wise_attendance.dart';
+// import 'package:edumarshals/screens/time_table.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import 'package:edumarshals/utilities.dart';
+import 'package:edumarshals/Utils/Utilities/utilities2.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,7 +30,7 @@ class _LoginState extends State<Login> {
         ((X509Certificate cert, String host, int port) => true);
   final TextEditingController _passController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _dobController = TextEditingController();
+  // final TextEditingController _dobController = TextEditingController();
   bool isChecked = false;
   bool _isLoading = false;
   DateTime? selectedDate;
@@ -147,14 +149,9 @@ class _LoginState extends State<Login> {
           _isLoading = false;
         });
         // for navigaation to next page
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) =>barGraph(userName: PreferencesManager().name, userImage: '', subjectName: 'Mathematics', subjectDescription: 'null') ));
-        // Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //       builder: (context) =>
-        //           otpVerification(email: _emailController.text),
-        //     ));
+        // Navigator.pushReplacement(context,
+        //     MaterialPageRoute(builder: (context) =>barGraph(userName: PreferencesManager().name, userImage: '', subjectName: 'Mathematics', subjectDescription: 'null') ));
+       
       } else {
         final Map<String, dynamic> responseData = json.decode(response.body);
         final message = responseData['message'];
@@ -208,7 +205,7 @@ class _LoginState extends State<Login> {
 
       if (savedDob != null) {
         // Parse saved date string to DateTime
-        final savedDate = DateFormat('dd-MM-yyyy').parse(savedDob);
+        final savedDate = DateFormat('dd-MM-yyyy').parse(PreferencesManager().dob);
         setState(() {
           selectedDate = savedDate;
         });
@@ -218,380 +215,382 @@ class _LoginState extends State<Login> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Color.fromRGBO(0, 75, 184, 1),
-        body: Stack(
-          children: <Widget>[
-            Container(
-              height: screenHeight * 0.79,
-              width: screenWidth * 1,
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 197, 212, 220),
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.elliptical(440, 550),
-                        bottomRight: const Radius.elliptical(440, 550))),
+        body: SingleChildScrollView(
+          child: Stack(
+            children: <Widget>[
+              Container(
+                height: screenHeight * 0.79,
+                width: screenWidth * 1,
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 197, 212, 220),
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.elliptical(440, 550),
+                          bottomRight: const Radius.elliptical(440, 550))),
+                ),
               ),
-            ),
-            Container(
-              height: screenHeight * 0.786,
-              width: screenWidth * 1,
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 197, 212, 220),
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.elliptical(440, 350),
-                        bottomRight: const Radius.elliptical(440, 350))),
+              Container(
+                height: screenHeight * 0.786,
+                width: screenWidth * 1,
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 197, 212, 220),
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.elliptical(440, 350),
+                          bottomRight: const Radius.elliptical(440, 350))),
+                ),
               ),
-            ),
-            Container(
-              height: screenHeight * 0.78,
-              width: screenWidth * 1,
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 197, 212, 220),
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.elliptical(210, 130),
-                        bottomRight: const Radius.elliptical(210, 130))),
+              Container(
+                height: screenHeight * 0.78,
+                width: screenWidth * 1,
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 197, 212, 220),
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.elliptical(210, 130),
+                          bottomRight: const Radius.elliptical(210, 130))),
+                ),
               ),
-            ),
-            Container(
-              height: screenHeight * 0.77,
-              width: screenWidth * 1,
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 197, 212, 220),
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.elliptical(310, 130),
-                        bottomRight: const Radius.elliptical(310, 130))),
+              Container(
+                height: screenHeight * 0.77,
+                width: screenWidth * 1,
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 197, 212, 220),
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.elliptical(310, 130),
+                          bottomRight: const Radius.elliptical(310, 130))),
+                ),
               ),
-            ),
-            Container(
-              height: screenHeight * 0.75,
-              width: screenWidth * 1,
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 197, 212, 220),
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.elliptical(400, 95),
-                        bottomRight: const Radius.elliptical(400, 95))),
+              Container(
+                height: screenHeight * 0.75,
+                width: screenWidth * 1,
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 197, 212, 220),
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.elliptical(400, 95),
+                          bottomRight: const Radius.elliptical(400, 95))),
+                ),
               ),
-            ),
-            Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(height: screenHeight * 0.02),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const CustomText(
-                        textAlign: TextAlign.center,
-                        text: "Login",
-                        color: Color.fromARGB(255, 0, 0, 0),
-                        fontSize: 42,
-                        fontStyle: null,
-                        fontfamily: '',
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: screenHeight * 0.08),
-                  Container(
-                      width: screenWidth * 0.85,
-                      height: screenHeight * 0.47,
-                      decoration: ShapeDecoration(
-                        color: const Color(0xFFFBFBFB),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18),
+              Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(height: screenHeight * 0.02),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const CustomText(
+                          textAlign: TextAlign.center,
+                          text: "Login",
+                          color: Color.fromARGB(255, 0, 0, 0),
+                          fontSize: 42,
+                          fontStyle: null,
+                          fontfamily: '',
                         ),
-                        shadows: const [
-                          BoxShadow(
-                            color: Color(0x26E0E0E0),
-                            blurRadius: 30,
-                            offset: Offset(0, 3),
-                            spreadRadius: 3,
-                          )
-                        ],
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Column(children: [
-                          SizedBox(
-                            height: screenHeight * 0.05,
+                      ],
+                    ),
+                    SizedBox(height: screenHeight * 0.08),
+                    Container(
+                        width: screenWidth * 0.85,
+                        height: screenHeight * 0.47,
+                        decoration: ShapeDecoration(
+                          color: const Color(0xFFFBFBFB),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18),
                           ),
-                          buildtextfiled(
-                            'assets/User.png',
-                            "User ID",
-                            context,
-                            "Enter User ID",
-                            false,
-                            _usernameController,
-                          ),
-                          SizedBox(
-                            height: screenHeight * 0.02,
-                          ),
-                          buildtextfiled(
-                            'assets/shield-security.png',
-                            "Password",
-                            context,
-                            "Enter Password",
-                            false,
-                            _passController,
-                          ),
-                          SizedBox(
-                            height: screenHeight * 0.02,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Padding(
-                                padding: EdgeInsets.only(left: 50.0),
-                                child: CustomText(
-                                  text: "Date of Birth",
-                                  color: Color(0xFF3386FF),
-                                  fontSize: 12,
-                                  fontStyle: null,
-                                  fontfamily: 'Poppins',
-                                  // fontWeight: FontWeight.w400,
+                          shadows: const [
+                            BoxShadow(
+                              color: Color(0x26E0E0E0),
+                              blurRadius: 30,
+                              offset: Offset(0, 3),
+                              spreadRadius: 3,
+                            )
+                          ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Column(children: [
+                            SizedBox(
+                              height: screenHeight * 0.05,
+                            ),
+                            buildtextfiled(
+                              'assets/User.png',
+                              "User ID",
+                              context,
+                              "Enter User ID",
+                              false,
+                              _usernameController,
+                            ),
+                            SizedBox(
+                              height: screenHeight * 0.02,
+                            ),
+                            buildtextfiled(
+                              'assets/shield-security.png',
+                              "Password",
+                              context,
+                              "Enter Password",
+                              false,
+                              _passController,
+                            ),
+                            SizedBox(
+                              height: screenHeight * 0.02,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Padding(
+                                  padding: EdgeInsets.only(left: 50.0),
+                                  child: CustomText(
+                                    text: "Date of Birth",
+                                    color: Color(0xFF3386FF),
+                                    fontSize: 12,
+                                    fontStyle: null,
+                                    fontfamily: 'Poppins',
+                                    // fontWeight: FontWeight.w400,
+                                  ),
                                 ),
-                              ),
-                              // Spacer()/
-                              Padding(padding: EdgeInsets.all(4)),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  GestureDetector(
-                                    onTap: () => _selectDate(context),
-                                    child: Container(
-                                      // height: screenHeight * .05,
-                                      width: screenWidth * 0.7,
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 0, right: 0),
-                                        child: Center(
-                                            child: selectedDate == null
-                                                ? Row(
-                                                    children: [
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(
-                                                                right: 10),
-                                                        child: Image.asset(
-                                                          'assets/calendar.png',
-                                                          scale: 4.5,
-                                                          // height: screenHeight * 0.032,
-                                                        ),
-                                                      ),
-                                                      Container(
-                                                        width:
-                                                            screenWidth * 0.58,
-                                                        decoration:
-                                                            const BoxDecoration(
-                                                          // borderRadius: BorderRadius.circular(10),
-                                                          // border: Border.(
-                                                          //   color: Color(0xff00194A),
-                                                          // ),
-                                                          border: Border(
-                                                            bottom: BorderSide(
-                                                                width: 1,
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        224,
-                                                                        16,
-                                                                        15,
-                                                                        15)),
+                                // Spacer()/
+                                Padding(padding: EdgeInsets.all(4)),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () => _selectDate(context),
+                                      child: Container(
+                                        // height: screenHeight * .05,
+                                        width: screenWidth * 0.7,
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 0, right: 0),
+                                          child: Center(
+                                              child: selectedDate == null
+                                                  ? Row(
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  right: 10),
+                                                          child: Image.asset(
+                                                            'assets/calendar.png',
+                                                            scale: 4.5,
+                                                            // height: screenHeight * 0.032,
                                                           ),
                                                         ),
-                                                        child: Text(
-                                                          // '  Enter D.O.B',
-                                                          selectedDate != null
-                                                              ? DateFormat(
-                                                                      'dd-MM-yyyy')
-                                                                  .format(
-                                                                      selectedDate!)
-                                                              : '  Enter D.O.B',
-                                                          style:
-                                                              const TextStyle(
-                                                            fontSize: 12,
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            color: Color(
-                                                                0xFF565656),
+                                                        Container(
+                                                          width:
+                                                              screenWidth * 0.58,
+                                                          decoration:
+                                                              const BoxDecoration(
+                                                            // borderRadius: BorderRadius.circular(10),
+                                                            // border: Border.(
+                                                            //   color: Color(0xff00194A),
+                                                            // ),
+                                                            border: Border(
+                                                              bottom: BorderSide(
+                                                                  width: 1,
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          224,
+                                                                          16,
+                                                                          15,
+                                                                          15)),
+                                                            ),
                                                           ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  )
-                                                : Row(
-                                                    children: [
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(
-                                                                right: 15),
-                                                        child: Image.asset(
-                                                          'assets/calendar.png',
-                                                          scale: 4.5,
-                                                          // height: screenHeight * 0.032,
-                                                        ),
-                                                      ),
-                                                      Container(
-                                                        width:
-                                                            screenWidth * 0.58,
-                                                        decoration:
-                                                            const BoxDecoration(
-                                                          // borderRadius: BorderRadius.circular(10),
-                                                          // border: Border.(
-                                                          //   color: Color(0xff00194A),
-                                                          // ),
-                                                          border: Border(
-                                                            bottom: BorderSide(
-                                                                width: 1,
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        224,
-                                                                        16,
-                                                                        15,
-                                                                        15)),
-                                                          ),
-                                                        ),
-                                                        child: Text(
-                                                          '${selectedDate!.toLocal()}'
-                                                              .split(' ')[0],
-                                                          style: const TextStyle(
-                                                              fontSize: 14,
+                                                          child: Text(
+                                                            // '  Enter D.O.B',
+                                                            selectedDate != null
+                                                                ? DateFormat(
+                                                                        'dd-MM-yyyy')
+                                                                    .format(
+                                                                        selectedDate!)
+                                                                : '  Enter D.O.B',
+                                                            style:
+                                                                const TextStyle(
+                                                              fontSize: 12,
                                                               fontWeight:
-                                                                  FontWeight
-                                                                      .w500),
+                                                                  FontWeight.w400,
+                                                              color: Color(
+                                                                  0xFF565656),
+                                                            ),
+                                                          ),
                                                         ),
-                                                      ),
-                                                    ],
-                                                  )),
+                                                      ],
+                                                    )
+                                                  : Row(
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  right: 15),
+                                                          child: Image.asset(
+                                                            'assets/calendar.png',
+                                                            scale: 4.5,
+                                                            // height: screenHeight * 0.032,
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          width:
+                                                              screenWidth * 0.58,
+                                                          decoration:
+                                                              const BoxDecoration(
+                                                            // borderRadius: BorderRadius.circular(10),
+                                                            // border: Border.(
+                                                            //   color: Color(0xff00194A),
+                                                            // ),
+                                                            border: Border(
+                                                              bottom: BorderSide(
+                                                                  width: 1,
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          224,
+                                                                          16,
+                                                                          15,
+                                                                          15)),
+                                                            ),
+                                                          ),
+                                                          child: Text(
+                                                            '${selectedDate!.toLocal()}'
+                                                                .split(' ')[0],
+                                                            style: const TextStyle(
+                                                                fontSize: 14,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    )),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          Container(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Checkbox(
-                                    value: isChecked,
-                                    splashRadius: 20,
-                                    activeColor: const Color(0xFF004BB8),
-                                    onChanged: (bool? value) {
-                                      setState(() {
-                                        // Color? Color(0xFF004BB8)
-                                        isChecked = value ?? false;
-                                      });
-                                    }),
-                                SizedBox(
-                                  width: screenWidth * 0.001,
-                                ),
-                                const CustomText(
-                                  text: "Remember me",
-                                  color: Color(0xFF828282),
-                                  fontSize: 12,
-                                  fontStyle: null,
-                                  fontfamily: 'Poppins',
+                                  ],
                                 ),
                               ],
                             ),
-                          )
-                        ]),
-                      )),
-                ]),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(height: screenHeight * 0.07),
-                Image.asset(
-                  'assets/Frame 100.png',
-                  scale: 4.5,
-                ),
-                Container(
-                  decoration: ShapeDecoration(
-                    color: const Color(0xFFFBFBFB),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    shadows: const [
-                      BoxShadow(
-                        color: Color(0x26E0E0E0),
-                        blurRadius: 30,
-                        offset: Offset(0, 3),
-                        spreadRadius: 3,
-                      )
-                    ],
+                            Container(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Checkbox(
+                                      value: isChecked,
+                                      splashRadius: 20,
+                                      activeColor: const Color(0xFF004BB8),
+                                      onChanged: (bool? value) {
+                                        setState(() {
+                                          // Color? Color(0xFF004BB8)
+                                          isChecked = value ?? false;
+                                        });
+                                      }),
+                                  SizedBox(
+                                    width: screenWidth * 0.001,
+                                  ),
+                                  const CustomText(
+                                    text: "Remember me",
+                                    color: Color(0xFF828282),
+                                    fontSize: 12,
+                                    fontStyle: null,
+                                    fontfamily: 'Poppins',
+                                  ),
+                                ],
+                              ),
+                            )
+                          ]),
+                        )),
+                  ]),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(height: screenHeight * 0.089),
+                  Image.asset(
+                    'assets/Frame 100.png',
+                    scale: 4.5,
                   ),
-                ),
-                SizedBox(height: screenHeight * 0.345),
-                ElevatedButton(
-                  onPressed: () async {
-                    await _saveItem();
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) => OverAllAttd()));
-
-                    // Add your onPressed logic here
-                  },
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          Color.fromRGBO(0, 75, 184, 1))),
-                  child: const Text(
-                    '       Log in       ',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-                SizedBox(height: screenHeight * 0.15),
-                const CustomText(
-                  text: "Forget your password?",
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontStyle: null,
-                  fontfamily: '',
-                ),
-                SizedBox(height: screenHeight * 0.015),
-                Container(
-                  decoration: const BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(width: 1, color: Color(0xFFFBFBFB)),
+                  Container(
+                    decoration: ShapeDecoration(
+                      color: const Color(0xFFFBFBFB),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      shadows: const [
+                        BoxShadow(
+                          color: Color(0x26E0E0E0),
+                          blurRadius: 30,
+                          offset: Offset(0, 3),
+                          spreadRadius: 3,
+                        )
+                      ],
                     ),
                   ),
-                  child: GestureDetector(
-                    onTap: () {
-                      // Handle the onTap event here
-                      print('Container tapped!');
-                      // Add your logic for resetting password here
+                  SizedBox(height: screenHeight * 0.345),
+                  ElevatedButton(
+                    onPressed: () async {
+                      await _saveItem();
+                      // Navigator.push(context,
+                      //     MaterialPageRoute(builder: (context) => OverAllAttd()));
+          
+                      // Add your onPressed logic here
                     },
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Color.fromRGBO(0, 75, 184, 1))),
                     child: const Text(
-                      'Reset Password',
-                      style: TextStyle(
-                        color: Color(0xFFFBFBFB),
-                        fontSize: 15,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w400,
+                      '       Log in       ',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  SizedBox(height: screenHeight * 0.15),
+                  const CustomText(
+                    text: "Forget your password?",
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontStyle: null,
+                    fontfamily: '',
+                  ),
+                  SizedBox(height: screenHeight * 0.015),
+                  Container(
+                    decoration: const BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(width: 1, color: Color(0xFFFBFBFB)),
+                      ),
+                    ),
+                    child: GestureDetector(
+                      onTap: () {
+                        // Handle the onTap event here
+                        print('Container tapped!');
+                        // Add your logic for resetting password here
+                      },
+                      child: const Text(
+                        'Reset Password',
+                        style: TextStyle(
+                          color: Color(0xFFFBFBFB),
+                          fontSize: 15,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            if (_isLoading)
-              Container(
-                color: Colors.black.withOpacity(0.5),
-                child: const Center(
-                  child: CircularProgressIndicator(
-                    valueColor:
-                        AlwaysStoppedAnimation<Color>(Color(0xFF4E82EA)),
-                    strokeWidth: 5.0,
+                ],
+              ),
+              if (_isLoading)
+                Container(
+                  color: Colors.black.withOpacity(0.5),
+                  child: const Center(
+                    child: CircularProgressIndicator(
+                      valueColor:
+                          AlwaysStoppedAnimation<Color>(Color(0xFF4E82EA)),
+                      strokeWidth: 5.0,
+                    ),
                   ),
                 ),
-              ),
-          ],
+            ],
+          ),
         ),
       ),
     );

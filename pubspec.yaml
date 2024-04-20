@@ -70,7 +70,8 @@ dependencies:
   custom_radio_grouped_button: ^2.2.1
   easy_date_timeline: ^1.0.5
   week_of_year: ^2.0.0
-  # url_launcher: ^6.0.6
+  url_launcher: ^6.2.5
+  screenshot: ^2.1.0
   
   # camera: ^0.10.5+9
 
@@ -103,13 +104,14 @@ flutter:
 #     - assets/assets
 # =======
     - assets/assets/Frame 52.png
-    - assets/unnamed-removebg-preview 1.png
-    - assets/Android Large - 18.png
-    - assets/Ellipse 7.jpg
-    - assets/Frame 100.png
+    # - assets/unnamed-removebg-preview 1.png
+    # - assets/Android Large - 18.png
+    # - assets/Ellipse 7.jpg
+    - asset/images/
+    - Assets/
     - assets/assets/Frame 48117.png
-    - assets/Group 48155.png
-    - assets/bank.png
+    # - assets/Group 48155.png
+    # - assets/bank.png
     - assets/assets/bankcolor.png
     - "assets/assets/buliding.png"
     # - assets\assets\Frame 52.png
@@ -117,6 +119,8 @@ flutter:
 #    - assets/Frame 48117 (2).png
     - asset/images/pdf1.png
     - assets/
+    # - assets/filter.png
+    # - assets/assets/Frame 48117 (2).png
 # >>>>>>> Development
   #   - images/a_dot_ham.jpeg
 

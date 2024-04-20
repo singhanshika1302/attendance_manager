@@ -29,19 +29,23 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: 'splashscreen',
-      // initialRoute: 'subject_wise_attendance',  
+      // initialRoute: 'subject_wise_attendance',
       routes: {
         'splashscreen': (context) => SplashScreen(),
         'homepage': (context) => const Homepage(),
         'login': (context) => Login(),
         // 'overallattendance':(context)=>OverAllAttd(),
-        'timetable':(context) => ExamTimetableScreen(),
-        'profile':(context) => Profile(),
+        'timetable': (context) => ExamTimetableScreen(),
+        'profile': (context) => Profile(),
         //  'profileinfo':(context) => profileInfo(),
 
-        'personalinfo':(context) => PersonalInfoScreen(),
-        'subject_wise_attendance':(context) => barGraph(userName: "user",userImage: "vgc",subjectDescription: "your attendance is good",subjectName: "mathematics",),
-
+        'personalinfo': (context) => PersonalInfoScreen(),
+        'subject_wise_attendance': (context) => barGraph(
+              userName: "user",
+              userImage: "vgc",
+              subjectDescription: "your attendance is good",
+              subjectName: "mathematics",
+            ),
       },
     );
   }

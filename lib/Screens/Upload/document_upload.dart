@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
-import 'package:edumarshals/Screens/User_Info/Document/Document_Image.dart';
-import 'package:edumarshals/Widget/My_Document_View_Card.dart';
-import 'package:edumarshals/repository/Document_Repo.dart';
+// import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
+// import 'package:edumarshals/Screens/User_Info/Document/Document_Image.dart';
+// import 'package:edumarshals/Widget/My_Document_View_Card.dart';
+// import 'package:edumarshals/repository/Document_Repo.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:flutter_full_pdf_viewer_null_safe/full_pdf_viewer_scaffold.dart';
+// import 'package:flutter_full_pdf_viewer_null_safe/full_pdf_viewer_scaffold.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:http/http.dart' as http;
 import 'package:edumarshals/main.dart';
@@ -21,8 +21,8 @@ class uploadDocument extends StatefulWidget {
 class _uploadDocumentState extends State<uploadDocument> {
   // final DocumentRepository _documentRepository = DocumentRepository();
   bool _isLoading = false;
-  File? _aadharImage;
-  File? _importantDocumentImage;
+  // File? _aadharImage;
+  // File? _importantDocumentImage;
 
   File? _image;
   Future _getImageFromCamera() async {

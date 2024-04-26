@@ -1,18 +1,14 @@
 import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
-import 'package:edumarshals/Screens/HomePage/Homepage.dart';
+//import 'package:edumarshals/Screens/HomePage/Homepage.dart';
 import 'package:edumarshals/Utils/daily_attendance_card.dart';
 import 'package:edumarshals/Utils/floating_action%20_button.dart';
-
 import 'package:edumarshals/Utils/attendance_list_card.dart';
 import 'package:edumarshals/Utils/weekly_widget.dart';
 import 'package:edumarshals/Widget/AttendanceCard.dart';
 import 'package:edumarshals/Widget/CustomAppBar.dart';
-
-
-import 'package:edumarshals/Utils/Utilities/utilities2.dart';
-
+//import 'package:edumarshals/Utils/Utilities/utilities2.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
@@ -30,7 +26,6 @@ class barGraph extends StatefulWidget {
       required this.subjectName,
       required this.subjectDescription});
   final Color leftBarColor = Color(0xff004BB8);
-
   final Color rightBarColor = Color(0xff5299FF);
   final Color avgColor = Colors.orange;
   @override
@@ -117,8 +112,8 @@ class barGraphState extends State<barGraph> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               AttendanceCard(
-                attendedClasses: 24,
-                totalClassess: 28,
+                  attendedClasses: 24,
+                  totalClassess: 28,
                   title: widget.subjectName,
                   description: widget.subjectDescription),
               SizedBox(

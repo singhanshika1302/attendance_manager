@@ -39,12 +39,16 @@ class MyApp extends StatelessWidget {
         'timetable': (context) => ExamTimetableScreen(),
         'profile': (context) => Profile(),
         //  'profileinfo':(context) => profileInfo(),
-        'test_screen':(context) => Subject_Assignment(),
+        'test_screen': (context) => Subject_Assignment(),
 
-        'personalinfo':(context) => PersonalInfoScreen(),
-        'subject_wise_attendance':(context) => barGraph(userName: "user",userImage: "vgc",subjectDescription: "your attendance is good",subjectName: "mathematics",),
-        'subject':(context) => Subjectdata(),
-
+        'personalinfo': (context) => PersonalInfoScreen(),
+        'subject_wise_attendance': (context) => barGraph(
+              userName: "user",
+              userImage: "vgc",
+              subjectDescription: "your attendance is good",
+              subjectName: "mathematics",
+            ),
+        'subject': (context) => Subjectdata(),
       },
     );
   }
@@ -93,7 +97,7 @@ class PreferencesManager {
 
   int get presentclasses => _prefs.getInt('presentclasses') ?? 0;
   set presentclasses(int value) => _prefs.setInt('presentclasses', value);
-  
+
   int get sem => _prefs.getInt('sem') ?? 0;
   set sem(int value) => _prefs.setInt('sem', value);
 

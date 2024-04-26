@@ -10,7 +10,7 @@ import 'package:edumarshals/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-
+import 'package:edumarshals/Screens/Attendance/subject_wise_attendance.dart';
 import '../../Utils/floating_action _button.dart';
 
 class Homepage extends StatefulWidget {
@@ -29,7 +29,7 @@ class _HomepageState extends State<Homepage> {
     final sheight = MediaQuery.of(context).size.height;
     final swidth = MediaQuery.of(context).size.width;
     return Scaffold(
-        floatingActionButtonLocation: ExpandableFab.location,
+      floatingActionButtonLocation: ExpandableFab.location,
       floatingActionButton: custom_floating_action_button(),
       key: _scaffoldKey,
       backgroundColor: const Color(0xffEBF3FF),
@@ -196,7 +196,13 @@ class _HomepageState extends State<Homepage> {
                         onPressed: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => EventsPage())),
+                                builder: (context) => barGraph(
+                                      userName: 'user',
+                                      userImage: 'userimg',
+                                      subjectName: 'Maths',
+                                      subjectDescription:
+                                          'your attendance is okay',
+                                    ))),
                       )
                     ],
                   ),

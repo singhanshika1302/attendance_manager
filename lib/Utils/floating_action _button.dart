@@ -1,5 +1,5 @@
 import 'package:edumarshals/Screens/HomePage/Homepage.dart';
-import 'package:edumarshals/Screens/Notes_Assignment/ClassNotesPage.dart';
+// import 'package:edumarshals/Screens/Notes_Assignment/ClassNotesPage.dart';
 import 'package:edumarshals/Screens/Notes_Assignment/Subject_Assignment.dart';
 import 'package:edumarshals/Screens/User_Info/Profile.dart';
 import 'package:edumarshals/main.dart';
@@ -98,7 +98,7 @@ class _custom_floating_action_buttonState extends State<custom_floating_action_b
             ),
             onPressed: () {
                           Navigator.of(context).push(
-                             MaterialPageRoute(builder: ((context) =>  barGraph(userName: PreferencesManager().name, userImage: PreferencesManager().studentPhoto, subjectName: "Maths", subjectDescription: "m"))));
+                             MaterialPageRoute(builder: ((context) =>  barGraph(userName: PreferencesManager().name, userImage: PreferencesManager().studentPhoto, subjectName: "Maths", subjectDescription: "You attended 51 lectures out of 63 lectures."))));
             },
           ),
           FloatingActionButton.small(

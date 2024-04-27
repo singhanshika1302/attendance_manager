@@ -4,9 +4,9 @@
 // import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
 // import 'package:edumarshals/Screens/Events_Page.dart';
 import 'package:edumarshals/Model/assignment_Model.dart';
-import 'package:edumarshals/Screens/Events/Events_Page.dart';
 import 'package:edumarshals/Screens/Notes_Assignment/ClassNotesPage.dart';
 import 'package:edumarshals/Screens/Notes_Assignment/Subject_Assignment.dart';
+import 'package:edumarshals/Screens/Upload/document_upload.dart';
 import 'package:edumarshals/Screens/User_Info/Profile.dart';
 import 'package:edumarshals/Utils/Utilities/Utilities.dart';
 import 'package:edumarshals/Widget/AttendanceCard.dart';
@@ -202,7 +202,7 @@ class _HomepageState extends State<Homepage> {
                       onPressed: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => EventsPage())),
+                              builder: (context) => uploadDocument())),
                     )
                   ],
                 ),

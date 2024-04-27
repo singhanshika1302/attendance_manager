@@ -16,6 +16,7 @@ import 'package:edumarshals/Model/assignment_Model.dart';
 import 'package:edumarshals/repository/assignment_Repository.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 // import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:edumarshals/Screens/Events/Events_Page.dart';
 
 import '../../Utils/floating_action _button.dart';
 
@@ -41,7 +42,7 @@ final AssignmentRepository _assignmentRepository = AssignmentRepository();
       key: _scaffoldKey,
       backgroundColor: const Color(0xffEBF3FF),
       drawer: Drawer(
-        backgroundColor: const Color.fromRGBO(0, 83, 201, 0.8),
+        backgroundColor: const Color(0xff004BB8),
         child: Padding(
           padding: const EdgeInsets.only(top: 50),
           child: ListView(
@@ -61,18 +62,13 @@ final AssignmentRepository _assignmentRepository = AssignmentRepository();
                   Navigator.pop(context);
                 },
               ),
-              buildDrawerTile(0, 'assets/bank.png', 'Classroom',
-                  'assets/assets/bankcolor.png', 1),
-              buildDrawerTile(1, 'assets/bank.png', 'Hostel',
-                  'assets/assets/bankcolor.png', 1),
-              buildDrawerTile(2, 'assets/bank.png', 'Placement',
-                  'assets/assets/bankcolor.png', 1),
-              buildDrawerTile(3, 'assets/bank.png', 'PYQS Papers',
-                  'assets/assets/bankcolor.png', 1),
-              buildDrawerTile(4, 'assets/bank.png', 'Fees',
-                  'assets/assets/bankcolor.png', 1),
-              buildDrawerTile(5, 'assets/bank.png', 'Events',
-                  'assets/assets/bankcolor.png', 1)
+              buildDrawerTile(0, 'assets/bank.png', 'Classroom', 'assets/sel_bank.png', 4),
+              buildDrawerTile(1, 'assets/buliding.png', 'Hostel', 'assets/sel_building.png', 4),
+              buildDrawerTile(2, 'assets/teacher.png', 'Placement', 'assets/sel_teacher.png', 4),
+              buildDrawerTile(3, 'assets/note.png', 'PYQS Papers', 'assets/sel_note.png', 3.7),
+              buildDrawerTile(4, 'assets/fees.png', 'Fees', 'assets/sel_fees.png', 3.7),
+              buildDrawerTile(5, 'assets/events.png', 'Events', 'assets/sel_events.png', 4)
+
             ],
           ),
         ),
@@ -388,14 +384,26 @@ selectedTileIndex = index;
 });
 _scaffoldKey.currentState?.openDrawer();
 Navigator.pop(context);
-// switch (index) {
-//   case 0:
-//     Navigator.push(context, MaterialPageRoute(builder: (context) => Events_page()));
-//     break;
-//   case 1:
-//     Navigator.push(context, MaterialPageRoute(builder: (context) => Events_page()));
-//     break;
-// }
+switch (index) {
+  case 0:
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()));
+    break;
+  case 1:
+    Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+    break;
+  case 2:
+    Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+    break;
+  case 3:
+    Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+    break;
+  case 4:
+    Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+    break;
+  case 5:
+    Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+    break;
+}
 },
 ),
 );

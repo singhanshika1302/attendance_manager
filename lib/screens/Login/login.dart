@@ -1,9 +1,8 @@
+import 'dart:convert';
 import 'dart:io';
 
-// import 'package:edumarshals/Screens/OverAllAttendance.dart';
-// import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
-// import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
-import 'package:edumarshals/Screens/HomePage/Homepage.dart';
+import 'package:edumarshals/Screens/Upload/document_upload.dart';
+import 'package:edumarshals/Utils/Utilities/utilities2.dart';
 // import 'package:edumarshals/Screens/User_Info/Personal_Info/Contact_info_Data.dart';
 // import 'package:edumarshals/Screens/User_Info/Personal_Info/Parent_Info_Data.dart';
 // import 'package:edumarshals/Screens/User_Info/Personal_Info/Personal_Info_Data.dart';
@@ -11,8 +10,6 @@ import 'package:edumarshals/Screens/HomePage/Homepage.dart';
 import 'package:edumarshals/main.dart';
 // import 'package:edumarshals/screens/time_table.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:edumarshals/Utils/Utilities/utilities2.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -150,7 +147,7 @@ class _LoginState extends State<Login> {
         });
         // for navigaation to next page
         Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) =>Homepage() ));
+            MaterialPageRoute(builder: (context) =>uploadDocument() ));
         // Navigator.push(
         //     context,
         //     MaterialPageRoute(

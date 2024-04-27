@@ -146,7 +146,7 @@ int sem=_personalInfo!['semester'];
                   ],
                 ),
                 Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     buildInfoItem(title: 'Hostel', value: _personalInfo!['hostel']),
                   ],

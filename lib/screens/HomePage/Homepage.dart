@@ -17,16 +17,19 @@ import 'package:edumarshals/repository/assignment_Repository.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 // import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:edumarshals/Screens/Events/Events_Page.dart';
+
+import '../../Model/classnotes_Model.dart';
 import '../../Utils/floating_action _button.dart';
 import 'package:edumarshals/repository/classnotes_Repo.dart';
-import 'package:edumarshals/Model/classnotes_Model.dart';
+
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
+
 
   @override
   State<Homepage> createState() => _HomepageState();
 }
-
+final _key = GlobalKey<ExpandableFabState>();
 class _HomepageState extends State<Homepage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   int selectedTileIndex = -1;
@@ -38,7 +41,7 @@ class _HomepageState extends State<Homepage> {
     final swidth = MediaQuery.of(context).size.width;
     return Scaffold(
       floatingActionButtonLocation: ExpandableFab.location,
-      floatingActionButton: custom_floating_action_button(),
+      floatingActionButton: custom_floating_action_button(Gkey: _key),
       key: _scaffoldKey,
       backgroundColor: const Color(0xffEBF3FF),
       drawer: Drawer(
@@ -242,9 +245,7 @@ class _HomepageState extends State<Homepage> {
                     ),
 // SizedBox(
 //   height: sheight * 0.015,
-// )
-
-
+// ),
 
                     FutureBuilder<List<ClassNotes>?>(
                       future: _classNotesRepository.fetchClassNotes(),
@@ -318,7 +319,11 @@ class _HomepageState extends State<Homepage> {
                     FutureBuilder<List<Assignment>>(
                       future: _assignmentRepository.fetchAssignments(),
                       builder: (context, snapshot) {
-                        if (snapshot.hasError) {
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else if (snapshot.hasError) {
                           return Center(
                             child: Text('Error: ${snapshot.error}'),
                           );
@@ -362,12 +367,7 @@ class _HomepageState extends State<Homepage> {
                                 AssignmentCard(
                                   subjectName: subject,
                                   onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => Subject_Assignment(),
-                                      ),
-                                    );// Handle assignment tap
+                                    // Handle assignment tap
                                     // You can navigate to a detailed assignment page or perform other actions
                                   },
                                   assignments: groupedAssignments[subject]!,

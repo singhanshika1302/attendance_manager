@@ -32,6 +32,7 @@ class barGraph extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => barGraphState();
 }
+final _key = GlobalKey<ExpandableFabState>();
 
 class barGraphState extends State<barGraph> {
   final _key = GlobalKey<ExpandableFabState>();
@@ -103,7 +104,7 @@ class barGraphState extends State<barGraph> {
     return Scaffold(
       backgroundColor: Color(0xffF2F6FF),
       floatingActionButtonLocation: ExpandableFab.location,
-      floatingActionButton: custom_floating_action_button(),
+      floatingActionButton: custom_floating_action_button(Gkey: _key,),
       appBar:
           CustomAppBar(userName: widget.userName, userImage: widget.userImage),
       body: Padding(

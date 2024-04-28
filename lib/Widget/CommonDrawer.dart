@@ -1,6 +1,8 @@
 import 'package:edumarshals/Screens/Events/Events_Page.dart';
 import 'package:edumarshals/Screens/HomePage/Homepage.dart';
 import 'package:flutter/material.dart';
+import '../Screens/Events/Events_Page.dart';
+import '../Screens/HomePage/Homepage.dart';
 
 class CommonDrawer extends StatelessWidget {
   // final Function(int) onDrawerItemSelected;
@@ -53,7 +55,8 @@ class CommonDrawer extends StatelessWidget {
     );
   }
 
-  Widget buildDrawerTile(int index, String defaultImage, String title, String selectedImage, double scale, BuildContext context) {
+  Widget buildDrawerTile(int index, String defaultImage, String title,
+      String selectedImage, double scale, BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         color: index == selectedTileIndex ? Colors.white : null,
@@ -68,7 +71,8 @@ class CommonDrawer extends StatelessWidget {
         title: Text(
           title,
           style: TextStyle(
-            color: index == selectedTileIndex ? const Color.fromRGBO(0, 75, 184, 0.92) : const Color.fromRGBO(235, 243, 255, 0.92),
+            color: index == selectedTileIndex ? const Color.fromRGBO(
+                0, 75, 184, 0.92) : const Color.fromRGBO(235, 243, 255, 0.92),
             fontSize: 20,
           ),
         ),
@@ -103,3 +107,4 @@ class CommonDrawer extends StatelessWidget {
     );
   }
 }
+

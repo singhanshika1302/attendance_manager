@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:edumarshals/Screens/Upload/document_upload.dart';
+import 'package:edumarshals/Screens/HomePage/Homepage.dart';
 import 'package:edumarshals/Utils/Utilities/utilities2.dart';
 // import 'package:edumarshals/Screens/User_Info/Personal_Info/Contact_info_Data.dart';
 // import 'package:edumarshals/Screens/User_Info/Personal_Info/Parent_Info_Data.dart';
@@ -146,19 +146,8 @@ class _LoginState extends State<Login> {
           _isLoading = false;
         });
         // for navigaation to next page
-<<<<<<< HEAD
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) =>uploadDocument() ));
-        // Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //       builder: (context) =>
-        //           otpVerification(email: _emailController.text),
-        //     ));
-=======
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Homepage()));
->>>>>>> 394784e208c5f26345c7440e887cebe6d96549c6
       } else {
         final Map<String, dynamic> responseData = json.decode(response.body);
         final message = responseData['message'];

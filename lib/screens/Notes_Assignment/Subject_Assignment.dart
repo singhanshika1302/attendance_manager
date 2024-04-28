@@ -1,9 +1,11 @@
 import 'package:edumarshals/Model/assignment_Model.dart';
+import 'package:edumarshals/Utils/floating_action%20_button.dart';
 import 'package:edumarshals/Widget/CustomAppBar.dart';
 import 'package:edumarshals/Widget/Subject_Assignment_Card.dart';
 import 'package:edumarshals/main.dart';
 import 'package:edumarshals/repository/assignment_Repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 
 class Subject_Assignment extends StatefulWidget {
   const Subject_Assignment({Key? key}) : super(key: key);
@@ -11,6 +13,7 @@ class Subject_Assignment extends StatefulWidget {
   @override
   State<Subject_Assignment> createState() => _Subject_AssignmentState();
 }
+final _key = GlobalKey<ExpandableFabState>();
 
 class _Subject_AssignmentState extends State<Subject_Assignment> {
   final AssignmentRepository _repository = AssignmentRepository();
@@ -86,10 +89,14 @@ class _Subject_AssignmentState extends State<Subject_Assignment> {
     super.initState();
     loadAssignments();
   }
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+            floatingActionButtonLocation: ExpandableFab.location,
+      floatingActionButton: custom_floating_action_button(Gkey: _key,),
+      key: _scaffoldKey,
       backgroundColor: const Color.fromRGBO(235, 243, 255, 1),
       appBar: CustomAppBar(userName: PreferencesManager().name, 
       userImage: PreferencesManager().studentPhoto,

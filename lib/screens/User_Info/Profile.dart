@@ -6,9 +6,11 @@ import 'package:edumarshals/Screens/User_Info/Personal_Info/Parent_Info_Data.dar
 import 'package:edumarshals/Screens/User_Info/Personal_Info/Personal_Info_Data.dart';
 import 'package:edumarshals/Screens/User_Info/Subject_Data.dart';
 import 'package:edumarshals/Screens/time_table.dart';
+import 'package:edumarshals/Utils/floating_action%20_button.dart';
 import 'package:edumarshals/Widget/Profile_Tabs.dart';
 import 'package:edumarshals/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:flutter_acrylic/flutter_acrylic.dart';
 
@@ -23,13 +25,8 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< HEAD
-      //  floatingActionButtonLocation: ExpandableFab.location,
-      // floatingActionButton: custom_floating_action_button(),
-=======
        floatingActionButtonLocation: ExpandableFab.location,
       floatingActionButton: custom_floating_action_button(Gkey: _key,),
->>>>>>> 8460274864c59faf7199cc42edadb53f2027702a
       backgroundColor: const Color.fromRGBO(235, 243, 255, 1),
       appBar: AppBar(
         surfaceTintColor: Colors.transparent

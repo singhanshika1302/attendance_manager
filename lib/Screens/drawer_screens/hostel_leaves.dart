@@ -27,7 +27,7 @@ class _hostelLeavePageState extends State<hostelLeavePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffF2F6FF),
-      appBar: CustomAppBar(userName: 'tripod', userImage: 'abc'),
+      appBar: CustomAppBar(userName: 'tripod', userImage: 'abc',onTap: (){},),
       body: SafeArea(
         child: DefaultTabController(
           length: 2,

@@ -1,18 +1,20 @@
 import 'dart:io';
+
 import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
+import 'package:edumarshals/Screens/Attendance/subject_wise_attendance.dart';
 import 'package:edumarshals/Screens/Login/login.dart';
 import 'package:edumarshals/Screens/Notes_Assignment/Subject_Assignment.dart';
+import 'package:edumarshals/Screens/User_Info/Personal_Info/Personal_Info_Data.dart';
 // import 'package:edumarshals/Screens/User_Info/Personal_Info/profile_info.dart';
 import 'package:edumarshals/Screens/User_Info/Profile.dart';
 import 'package:edumarshals/Screens/User_Info/Subject_Data.dart';
 import 'package:edumarshals/Screens/splash.dart';
 import 'package:edumarshals/screens/time_table.dart';
-import 'package:edumarshals/Screens/Attendance/subject_wise_attendance.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'Screens/HomePage/Homepage.dart';
-import 'package:edumarshals/Screens/User_Info/Personal_Info/Personal_Info_Data.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'Screens/HomePage/Homepage.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,10 +34,8 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       
       debugShowCheckedModeBanner: false,
-
-      initialRoute: 'splashscreen',
-      // initialRoute: 'subject_wise_attendance',
-
+      //initialRoute: 'login',
+       initialRoute: 'splashscreen',  
       routes: {
         'splashscreen': (context) => SplashScreen(),
         'homepage': (context) => const Homepage(),

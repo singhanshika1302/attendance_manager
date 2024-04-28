@@ -1,16 +1,23 @@
+import 'package:edumarshals/Screens/Events/Events_Page.dart';
+import 'package:edumarshals/Screens/HomePage/Homepage.dart';
 import 'package:flutter/material.dart';
 
 class CommonDrawer extends StatelessWidget {
-  final Function(int) onDrawerItemSelected;
+  // final Function(int) onDrawerItemSelected;
+  final VoidCallback onTap;
+  
   final int selectedTileIndex;
 
   const CommonDrawer({
-    required this.onDrawerItemSelected,
-    required this.selectedTileIndex,
+    // required this.onDrawerItemSelected,
+    required this.selectedTileIndex, 
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
+      // final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  // int selectedTileIndex = -1;
     return Drawer(
       backgroundColor: const Color(0xff004BB8),
       child: Padding(
@@ -28,6 +35,9 @@ class CommonDrawer extends StatelessWidget {
                 ),
               ),
               onTap: () {
+                onTap;
+                              // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Homepage()));
+    
                 Navigator.pop(context);
               },
             ),
@@ -63,8 +73,31 @@ class CommonDrawer extends StatelessWidget {
           ),
         ),
         onTap: () {
-          onDrawerItemSelected(index);
+          // setState(() {
+          //   // selectedTileIndex = index;
+          // });
+          // _scaffoldKey.currentState?.openDrawer();
           Navigator.pop(context);
+          switch (index) {
+            case 0:
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()));
+              break;
+            case 1:
+              Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+              break;
+            case 2:
+              Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+              break;
+            case 3:
+              Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+              break;
+            case 4:
+              Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+              break;
+            case 5:
+              Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+              break;
+          }
         },
       ),
     );

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
 import 'package:edumarshals/Screens/Login/login.dart';
 import 'package:edumarshals/Screens/Notes_Assignment/Subject_Assignment.dart';
 // import 'package:edumarshals/Screens/User_Info/Personal_Info/profile_info.dart';
@@ -8,6 +9,7 @@ import 'package:edumarshals/Screens/splash.dart';
 import 'package:edumarshals/screens/time_table.dart';
 import 'package:edumarshals/Screens/Attendance/subject_wise_attendance.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'Screens/HomePage/Homepage.dart';
 import 'package:edumarshals/Screens/User_Info/Personal_Info/Personal_Info_Data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,24 +29,31 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
+      
       debugShowCheckedModeBanner: false,
-      //initialRoute: 'login',
-       initialRoute: 'homepage',  
+
+      initialRoute: 'splashscreen',
+      // initialRoute: 'subject_wise_attendance',
+
       routes: {
         'splashscreen': (context) => SplashScreen(),
         'homepage': (context) => const Homepage(),
         'login': (context) => Login(),
-        // 'overallattendance':(context)=>OverAllAttd(),
-        'timetable':(context) => ExamTimetableScreen(),
-        'profile':(context) => Profile(),
+        'overallattendance': (context) => OverAllAttd(),
+        'timetable': (context) => ExamTimetableScreen(),
+        'profile': (context) => Profile(),
         //  'profileinfo':(context) => profileInfo(),
-        'test_screen':(context) => Subject_Assignment(),
+        'test_screen': (context) => Subject_Assignment(),
 
-        'personalinfo':(context) => PersonalInfoScreen(),
-        'subject_wise_attendance':(context) => barGraph(userName: "user",userImage: "vgc",subjectDescription: "your attendance is good",subjectName: "mathematics",),
-        'subject':(context) => Subjectdata(),
-
+        'personalinfo': (context) => PersonalInfoScreen(),
+        'subject_wise_attendance': (context) => barGraph(
+              userName: "user",
+              userImage: "vgc",
+              subjectDescription: "your attendance is good",
+              subjectName: "mathematics",
+            ),
+        'subject': (context) => Subjectdata(),
       },
     );
   }
@@ -93,7 +102,7 @@ class PreferencesManager {
 
   int get presentclasses => _prefs.getInt('presentclasses') ?? 0;
   set presentclasses(int value) => _prefs.setInt('presentclasses', value);
-  
+
   int get sem => _prefs.getInt('sem') ?? 0;
   set sem(int value) => _prefs.setInt('sem', value);
 

@@ -2,6 +2,7 @@ import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:edumarshals/Utils/Utilities/custom_heading.dart';
 import 'package:edumarshals/Utils/custom_textfield.dart';
 import 'package:edumarshals/Widget/CustomAppBar.dart';
+import 'package:edumarshals/main.dart';
 import 'package:expandable_section/expandable_section.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class _feesPageState extends State<feesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffF2F6FF),
-      appBar: CustomAppBar(userName: 'tripod', userImage: 'abc'),
+      appBar: CustomAppBar(userName: PreferencesManager().name, userImage:PreferencesManager().studentPhoto,onTap: (){},),
       body: SafeArea(
         child: DefaultTabController(
           length: 4,

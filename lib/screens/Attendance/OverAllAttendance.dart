@@ -50,16 +50,13 @@ class _OverAllAttdState extends State<OverAllAttd> {
       _totalPresentClasses = totalPresentClasses;
 
       PreferencesManager().totalclasses = _totalClasses;
-      PreferencesManager().presentclasses=_totalPresentClasses;
+      PreferencesManager().presentclasses = _totalPresentClasses;
 
       print('totalPresentClasses${_totalPresentClasses}');
 
-    // print('dfghj $attendanceDataList');
+      // print('dfghj $attendanceDataList');
       // PreferencesManager.totalclasses=_totalClasses;
-
-
     });
-   
   }
 
   @override
@@ -95,7 +92,7 @@ class _OverAllAttdState extends State<OverAllAttd> {
                 ),
               ),
               Container(
-                height: screenHeight ,
+                height: screenHeight,
 //.................fetching list in which all attendace is stored................//
                 child: _attendanceDataList != null
                     ? Column(

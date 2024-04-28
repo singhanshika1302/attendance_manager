@@ -1,11 +1,10 @@
 import 'dart:io';
-// import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
 import 'package:edumarshals/Screens/Login/login.dart';
-import 'package:edumarshals/Screens/User_Info/Personal_Info/profile_info.dart';
+import 'package:edumarshals/Screens/Notes_Assignment/Subject_Assignment.dart';
+// import 'package:edumarshals/Screens/User_Info/Personal_Info/profile_info.dart';
 import 'package:edumarshals/Screens/User_Info/Profile.dart';
 import 'package:edumarshals/Screens/User_Info/Subject_Data.dart';
 import 'package:edumarshals/Screens/splash.dart';
-import 'package:edumarshals/Screens/test_screen.dart';
 import 'package:edumarshals/screens/time_table.dart';
 import 'package:edumarshals/Screens/Attendance/subject_wise_attendance.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +39,7 @@ class MyApp extends StatelessWidget {
         'timetable':(context) => ExamTimetableScreen(),
         'profile':(context) => Profile(),
         //  'profileinfo':(context) => profileInfo(),
+        'test_screen':(context) => Subject_Assignment(),
 
         'personalinfo':(context) => PersonalInfoScreen(),
         'subject_wise_attendance':(context) => barGraph(userName: "user",userImage: "vgc",subjectDescription: "your attendance is good",subjectName: "mathematics",),

@@ -2,15 +2,15 @@ import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 // import 'package:edumarshals/Utils/floating_action%20_button.dart';
+import 'package:edumarshals/Model/student_attendance_data_model.dart';
 import 'package:edumarshals/Utils/attendance_list_card.dart';
-// import 'package:edumarshals/Screens/HomePage/Homepage.dart';
 import 'package:edumarshals/Utils/daily_attendance_card.dart';
 import 'package:edumarshals/Utils/floating_action%20_button.dart';
 import 'package:edumarshals/Utils/weekly_widget.dart';
 import 'package:edumarshals/Widget/AttendanceCard.dart';
 import 'package:edumarshals/Widget/CustomAppBar.dart';
 import 'package:edumarshals/main.dart';
-// import 'package:edumarshals/Utils/Utilities/utilities2.dart';
+import 'package:edumarshals/repository/overall_attendance_repository.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
@@ -36,6 +36,45 @@ class barGraph extends StatefulWidget {
 final _key = GlobalKey<ExpandableFabState>();
 
 class barGraphState extends State<barGraph> {
+  // ..............attendace api is intigrated ..................
+  final AttendanceRepository _repository = AttendanceRepository();
+  List<StudentAttendanceData>? _attendanceDataList;
+  int _totalClasses = 0;
+  int _totalPresentClasses = 0;
+
+//.............calling attendance repository ...................................//
+  Future<void> _fetchAttendanceData() async {
+    List<StudentAttendanceData>? attendanceDataList =
+        await _repository.fetchAttendance();
+    int totalClasses = 0;
+    int totalPresentClasses = 0;
+//...............function to store total present and total classes .............//
+    if (attendanceDataList != null) {
+      for (var data in attendanceDataList) {
+        totalClasses += data.totalClasses ?? 0;
+        totalPresentClasses += data.totalPresent ?? 0;
+      }
+    }
+    setState(() {
+      _attendanceDataList = attendanceDataList;
+      _totalClasses = totalClasses;
+      print('totalclasses${_totalClasses}');
+      // PreferencesManager.totalclasses=_totalClasses;
+      // print('totalPresentClasses${_totalPresentClasses}');
+      _totalPresentClasses = totalPresentClasses;
+
+      PreferencesManager().totalclasses = _totalClasses;
+      PreferencesManager().presentclasses = _totalPresentClasses;
+
+      print('totalPresentClasses${_totalPresentClasses}');
+
+      // print('dfghj $attendanceDataList');
+      // PreferencesManager.totalclasses=_totalClasses;
+    });
+  }
+
+  //................attendance api is intigrated ....................//
+
   final _key = GlobalKey<ExpandableFabState>();
   final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
   final double width = 15;
@@ -76,6 +115,7 @@ class barGraphState extends State<barGraph> {
   @override
   void initState() {
     super.initState();
+    _fetchAttendanceData();
     final barGroup1 = makeGroupData(0, 12, 5);
     final barGroup2 = makeGroupData(1, 16, 12);
     final barGroup3 = makeGroupData(2, 18, 5);
@@ -102,6 +142,8 @@ class barGraphState extends State<barGraph> {
 
   @override
   Widget build(BuildContext context) {
+    final sheight = MediaQuery.of(context).size.height;
+    final swidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Color(0xffF2F6FF),
       floatingActionButtonLocation: ExpandableFab.location,
@@ -115,11 +157,69 @@ class barGraphState extends State<barGraph> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              AttendanceCard(
-                  attendedClasses: 24,
-                  totalClassess: 28,
-                  title: widget.subjectName,
-                  description: widget.subjectDescription),
+
+              Container(
+                height: sheight * 0.18,
+//.................fetching list in which all attendace is stored................//
+                child: _attendanceDataList != null
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: _attendanceDataList!.length,
+                              itemBuilder: (context, index) {
+                                final attendanceData =
+                                    _attendanceDataList![index];
+//.......................assigning subject attendace to the SubjectAttendaceCard......//
+                                if (attendanceData.subject == 'DSTL') {
+                                  // Only render the SubjectAttendanceCard if the subject is Mathematics
+                                  return AttendanceCard(
+                                      attendedClasses:
+                                          attendanceData.totalPresent!,
+                                      totalClassess:
+                                          attendanceData.totalClasses!,
+                                      // title: widget.subjectName,
+                                      title:
+                                          'Subject: ${attendanceData.subject}',
+                                      description: widget.subjectDescription);
+                                  // SubjectAttendanceCard(
+                                  //   subjectName:
+                                  //       'Subject: ${attendanceData.subject}',
+                                  //   attendedClasses:
+                                  //       attendanceData.totalPresent!,
+                                  //   totalClasses: attendanceData.totalClasses!,
+                                  // );
+                                } else {
+                                  // Return an empty container for other subjects
+                                  return Container();
+                                }
+                                // return SubjectAttendanceCard(
+                                //   subjectName:
+                                //       'Subject: ${attendanceData.subject}',
+                                //   attendedClasses: attendanceData.totalPresent!,
+                                //   totalClasses: attendanceData.totalClasses!,
+                                // );
+                              },
+                            ),
+                          ),
+                        ],
+                      )
+                    : Center(
+                        child: SizedBox(
+                          height: 50, // Adjust the height as needed
+                          width: 50, // Adjust the width as needed
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
+              ),
+              // AttendanceCard(
+              //     attendedClasses: 24,
+              //     totalClassess: 28,
+              //     // title: widget.subjectName,
+              //     title: "Mathematics",
+              //     description: widget.subjectDescription),
+
               SizedBox(
                 height: 20,
               ),
@@ -130,11 +230,6 @@ class barGraphState extends State<barGraph> {
                   Text("Attendance Chart",
                       style:
                           TextStyle(fontWeight: FontWeight.w500, fontSize: 25)),
-
-                  //const Text(
-                  // 'state',
-                  //  style: TextStyle(color: Color(0xff77839a), fontSize: 16),
-                  //),
                 ],
               ),
               Row(

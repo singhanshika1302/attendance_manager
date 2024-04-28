@@ -9,6 +9,8 @@ import 'package:edumarshals/Screens/Events/Events_Page.dart';
 import 'package:edumarshals/Screens/Notes_Assignment/ClassNotesPage.dart';
 import 'package:edumarshals/Screens/Notes_Assignment/Subject_Assignment.dart';
 import 'package:edumarshals/Screens/User_Info/Profile.dart';
+import 'package:edumarshals/Screens/drawer_screens/fees.dart';
+import 'package:edumarshals/Screens/drawer_screens/hostel_leaves.dart';
 import 'package:edumarshals/Utils/Utilities/Utilities.dart';
 import 'package:edumarshals/Widget/AttendanceCard.dart';
 import 'package:edumarshals/main.dart';
@@ -24,6 +26,7 @@ class Homepage extends StatefulWidget {
   @override
   State<Homepage> createState() => _HomepageState();
 }
+final _key = GlobalKey<ExpandableFabState>();
 
 class _HomepageState extends State<Homepage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -36,7 +39,7 @@ class _HomepageState extends State<Homepage> {
     final swidth = MediaQuery.of(context).size.width;
     return Scaffold(
       floatingActionButtonLocation: ExpandableFab.location,
-      floatingActionButton: custom_floating_action_button(),
+      floatingActionButton: custom_floating_action_button(Gkey: _key,),
       key: _scaffoldKey,
       backgroundColor: const Color(0xffEBF3FF),
       drawer: Drawer(
@@ -387,7 +390,7 @@ class _HomepageState extends State<Homepage> {
               Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()));
               break;
             case 1:
-              Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => hostelLeavePage()));
               break;
             case 2:
               Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
@@ -396,7 +399,7 @@ class _HomepageState extends State<Homepage> {
               Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
               break;
             case 4:
-              Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => feesPage()));
               break;
             case 5:
               Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));

@@ -1,8 +1,10 @@
 import 'package:edumarshals/Model/classnotes_Model.dart'; // Import the ClassNotes model
 import 'package:edumarshals/Repository/classnotes_Repo.dart'; // Import the ClassNotesRepository
+import 'package:edumarshals/Utils/floating_action%20_button.dart';
 // import 'package:edumarshals/Utilities/Utilities.dart';
 import 'package:edumarshals/Widget/CustomAppBar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../main.dart';
@@ -13,6 +15,7 @@ class ClassNotesPage extends StatefulWidget {
   @override
   State<ClassNotesPage> createState() => _ClassNotesPageState();
 }
+final _key = GlobalKey<ExpandableFabState>();
 
 class _ClassNotesPageState extends State<ClassNotesPage> {
   int current = 0;
@@ -37,6 +40,7 @@ class _ClassNotesPageState extends State<ClassNotesPage> {
       return [];
     }
   }
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +48,9 @@ class _ClassNotesPageState extends State<ClassNotesPage> {
     final swidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
+         floatingActionButtonLocation: ExpandableFab.location,
+      floatingActionButton: custom_floating_action_button(Gkey: _key,),
+      key: _scaffoldKey,
       backgroundColor: Color(0xffEBF3FF),
       appBar: CustomAppBar(userName: PreferencesManager().name, 
       userImage: PreferencesManager().studentPhoto,

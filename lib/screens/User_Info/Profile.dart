@@ -143,54 +143,54 @@ class _ProfileState extends State<Profile> {
         children: [
            Profile_Tab(
             Profileoption: 'Personal Information',
-             onpressed: () {
+             onpressed1: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) =>  PersonalInfoScreen()));
               // Callback function for IconButton pressed
               print('Arrow Forward Pressed');
             },
-            onpressed1: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) =>  PersonalInfoScreen()));
-            },
+            // onpressed1: () {
+            //   Navigator.push(context,
+            //       MaterialPageRoute(builder: (context) =>  PersonalInfoScreen()));
+            // },
           ),
            Profile_Tab(
             Profileoption: 'Guardian Information',
-             onpressed: () {
+             onpressed1: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => ParentInfoScreen()));
               // Callback function for IconButton pressed
               print('Arrow Forward Pressed');
             },
-            onpressed1: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) =>  ParentInfoScreen()));
-            },
+            // onpressed1: () {
+            //   Navigator.push(context,
+            //       MaterialPageRoute(builder: (context) =>  ParentInfoScreen()));
+            // },
           ),
           Profile_Tab(
             Profileoption: 'Contact Details',
-             onpressed: () {
+             onpressed1: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => ContactInfoScreen()));
               // Callback function for IconButton pressed
               print('Arrow Forward Pressed');
             },
-            onpressed1: () {
-               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ContactInfoScreen()));
-            },
+            // onpressed1: () {
+            //    Navigator.push(context,
+            //       MaterialPageRoute(builder: (context) => ContactInfoScreen()));
+            // },
           ),
           // const Profile_Tab(
           //   Profileoption: 'Education Details',
           // ),
           Profile_Tab(
             Profileoption: 'My Documents',
-            onpressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) =>  MyDocument()));
-              // Callback function for IconButton pressed
-              print('Arrow Forward Pressed');
-            },
+            // onpressed: () {
+            //   Navigator.push(context,
+            //       MaterialPageRoute(builder: (context) =>  MyDocument()));
+            //   // Callback function for IconButton pressed
+            //   print('Arrow Forward Pressed');
+            // },
             onpressed1: () {
                Navigator.push(context,
                   MaterialPageRoute(builder: (context) =>  MyDocument()));
@@ -199,7 +199,7 @@ class _ProfileState extends State<Profile> {
           ),
           Profile_Tab(
             Profileoption: 'Timetable',
-               onpressed: () {
+               onpressed1: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => ExamTimetableScreen()));
               // Callback function for IconButton pressed
@@ -236,13 +236,13 @@ class _ProfileState extends State<Profile> {
           // ),
              Profile_Tab(
             Profileoption: 'Logout',
-               onpressed: () async {
+               onpressed1: () async {
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                             prefs.remove('username');
                             prefs.remove('password');
                              prefs.remove('dob');
 
-              Navigator.push(context,
+              Navigator.pop(context,
                   MaterialPageRoute(builder: (context) => Login()));
               // Callback function for IconButton pressed
               print('Arrow Forward Pressed');

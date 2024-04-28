@@ -4,7 +4,6 @@ import 'package:edumarshals/Widget/Subject_Assignment_Card.dart';
 import 'package:edumarshals/main.dart';
 import 'package:edumarshals/repository/assignment_Repository.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class Subject_Assignment extends StatefulWidget {
   const Subject_Assignment({Key? key}) : super(key: key);
@@ -92,7 +91,12 @@ class _Subject_AssignmentState extends State<Subject_Assignment> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(235, 243, 255, 1),
-      appBar: CustomAppBar(userName: PreferencesManager().name),
+      appBar: CustomAppBar(userName: PreferencesManager().name, 
+      userImage: PreferencesManager().studentPhoto,
+      onTap: () { 
+                                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>Subject_Assignment()));
+
+       },),
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
@@ -103,7 +107,7 @@ class _Subject_AssignmentState extends State<Subject_Assignment> {
                 width: double.infinity,
                 height: 80,
                 child: ListView.builder(
-                  physics: const BouncingScrollPhysics(),
+                  // physics: const BouncingScrollPhysics(),
                   itemCount: items.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (ctx, index) {
@@ -123,8 +127,8 @@ class _Subject_AssignmentState extends State<Subject_Assignment> {
                             // Load assignments for the selected subject
                             loadAssignments();
                           },
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 300),
+                          child: Container(
+                            // duration: const Duration(milliseconds: 300),
                             margin: const EdgeInsets.all(5),
                             width: 150,
                             height: 55,

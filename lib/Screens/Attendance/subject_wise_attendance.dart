@@ -28,12 +28,12 @@ class barGraph extends StatefulWidget {
       required this.subjectName,
       required this.subjectDescription});
   final Color leftBarColor = Color(0xff004BB8);
-
   final Color rightBarColor = Color(0xff5299FF);
   final Color avgColor = Colors.orange;
   @override
   State<StatefulWidget> createState() => barGraphState();
 }
+final _key = GlobalKey<ExpandableFabState>();
 
 class barGraphState extends State<barGraph> {
   final _key = GlobalKey<ExpandableFabState>();
@@ -105,7 +105,7 @@ class barGraphState extends State<barGraph> {
     return Scaffold(
       backgroundColor: Color(0xffF2F6FF),
       floatingActionButtonLocation: ExpandableFab.location,
-      floatingActionButton: custom_floating_action_button(),
+      floatingActionButton: custom_floating_action_button(Gkey: _key,),
       appBar:
           CustomAppBar(userName: widget.userName, userImage: widget.userImage, onTap: () {                               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => barGraph(userName: PreferencesManager().name, userImage: PreferencesManager().studentPhoto, subjectName: "", subjectDescription: "")));
  },),
@@ -116,8 +116,8 @@ class barGraphState extends State<barGraph> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               AttendanceCard(
-                attendedClasses: 24,
-                totalClassess: 28,
+                  attendedClasses: 24,
+                  totalClassess: 28,
                   title: widget.subjectName,
                   description: widget.subjectDescription),
               SizedBox(

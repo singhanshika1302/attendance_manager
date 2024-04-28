@@ -1,12 +1,11 @@
-import 'package:flutter/material.dart';
+import 'package:edumarshals/Model/classnotes_Model.dart'; // Import the ClassNotes model
+import 'package:edumarshals/Repository/classnotes_Repo.dart'; // Import the ClassNotesRepository
 // import 'package:edumarshals/Utilities/Utilities.dart';
 import 'package:edumarshals/Widget/CustomAppBar.dart';
-import 'package:edumarshals/Repository/classnotes_Repo.dart'; // Import the ClassNotesRepository
-import 'package:edumarshals/Model/classnotes_Model.dart'; // Import the ClassNotes model
-import '../../main.dart';
+import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:edumarshals/Utils/Utilities/Utilities.dart';
+import '../../main.dart';
 
 class ClassNotesPage extends StatefulWidget {
   const ClassNotesPage({Key? key}) : super(key: key);
@@ -46,61 +45,71 @@ class _ClassNotesPageState extends State<ClassNotesPage> {
 
     return Scaffold(
       backgroundColor: Color(0xffEBF3FF),
-      appBar: CustomAppBar(userName: PreferencesManager().name),
+      appBar: CustomAppBar(userName: PreferencesManager().name, 
+      userImage: PreferencesManager().studentPhoto,
+      onTap: () {
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ClassNotesPage()));
+ },),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(10.0),
             child: Column(
               children: [
-                Row(
-                  children: <Widget>[
-                    ChoiceChip(
-                      selected: current == 0,
-                      label: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          'All Class Notes',
-                          style: TextStyle(
-                              color: current == 0 ? Colors.white : Colors.black, fontSize: 12),
+                SingleChildScrollView(
+                  // physics: AlwaysScrollableScrollPhysics,
+                   physics: const BouncingScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  child: Row(
+                    children: <Widget>[
+                      // Padding(padding: EdgeInsets.all(4)),
+                      ChoiceChip(
+                        selected: current == 0,
+                        label: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'All Class Notes',
+                            style: TextStyle(
+                                color: current == 0 ? Colors.white : Colors.black, fontSize: 12),
+                          ),
                         ),
-                      ),
-                      selectedColor: Color(0xFF004BB8),
-                      backgroundColor: current == 0 ? Color(0xFF004BB8) : Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      onSelected: (selected) {
-                        setState(() {
-                          current = (selected ? 0 : null)!;
-                        });
-                      },
-                      showCheckmark: false,
-                    ),
-                    SizedBox(width: 20),
-                    ChoiceChip(
-                      selected: current == 1,
-                      label: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          'Recent Class Notes',
-                          style: TextStyle(
-                              color: current == 1 ? Colors.white : Colors.black, fontSize: 12),
+                        selectedColor: Color(0xFF004BB8),
+                        backgroundColor: current == 0 ? Color(0xFF004BB8) : Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
+                        onSelected: (selected) {
+                          setState(() {
+                            current = (selected ? 0 : null)!;
+                          });
+                        },
+                        showCheckmark: false,
                       ),
-                      selectedColor: Color(0xFF004BB8),
-                      backgroundColor: current == 1 ? Color(0xFF004BB8) : Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                      SizedBox(width: 20),
+                      ChoiceChip(
+                        selected: current == 1,
+                        label: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'Recent Class Notes',
+                            style: TextStyle(
+                                color: current == 1 ? Colors.white : Colors.black, fontSize: 12),
+                          ),
+                        ),
+                        selectedColor: Color(0xFF004BB8),
+                        backgroundColor: current == 1 ? Color(0xFF004BB8) : Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        onSelected: (selected) {
+                          setState(() {
+                            current = (selected ? 1 : null)!;
+                          });
+                        },
+                        showCheckmark: false,
                       ),
-                      onSelected: (selected) {
-                        setState(() {
-                          current = (selected ? 1 : null)!;
-                        });
-                      },
-                      showCheckmark: false,
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 SizedBox(height: sheight * 0.03),
                 FutureBuilder<List<ClassNotes>>(
@@ -183,7 +192,7 @@ Widget AllClassNotesBlock(String subjectName, String teacherName, String classNo
                   )
                 ],
               ),
-              Image.asset('assets/note-2.png', scale: 4),
+              Image.asset('assets/note.png', scale: 4),
             ],
           ),
         ),

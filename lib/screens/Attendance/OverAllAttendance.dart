@@ -1,13 +1,13 @@
-import 'package:edumarshals/Widget/AttendanceCard.dart';
-import 'package:edumarshals/Widget/SubjectAttendanceCard.dart';
-import 'package:edumarshals/main.dart';
-import 'package:flutter/material.dart';
-// import 'package:edumarshals/repository/overall_attendance_repository.dart';
-import 'package:edumarshals/repository/overall_attendance_repository.dart';
 // import 'package:edumarshals/model/student_attendance_data_model.dart';
 import 'package:edumarshals/Model/student_attendance_data_model.dart';
+import 'package:edumarshals/Widget/AttendanceCard.dart';
 // import '../Widget/CustomAppBar.dart';
 import 'package:edumarshals/Widget/CustomAppBar.dart';
+import 'package:edumarshals/Widget/SubjectAttendanceCard.dart';
+import 'package:edumarshals/main.dart';
+// import 'package:edumarshals/repository/overall_attendance_repository.dart';
+import 'package:edumarshals/repository/overall_attendance_repository.dart';
+import 'package:flutter/material.dart';
 
 class OverAllAttd extends StatefulWidget {
   const OverAllAttd({super.key});
@@ -70,7 +70,10 @@ class _OverAllAttdState extends State<OverAllAttd> {
       backgroundColor: Color.fromRGBO(242, 246, 255, 1),
       appBar: CustomAppBar(
           userName: '${PreferencesManager().name}',
-          userImage: "assets/Ellipse 7.jpg"),
+          userImage: PreferencesManager().studentPhoto, onTap: () {  
+                                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => OverAllAttd()));
+
+          },),
       body: ListView(
         children: [
           Column(

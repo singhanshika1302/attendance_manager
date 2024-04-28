@@ -92,6 +92,7 @@ flutter:
     # - assets/unnamed-removebg-preview 1.png
     # - assets/Android Large - 18.png
     # - assets/Ellipse 7.jpg
+    - assets/note.png
     - asset/images/
     - Assets/
     - assets/assets/Frame 48117.png

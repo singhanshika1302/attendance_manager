@@ -1,15 +1,17 @@
 import 'dart:convert';
 import 'dart:io';
+
+// import 'package:flutter_full_pdf_viewer_null_safe/full_pdf_viewer_scaffold.dart';
+import 'package:dotted_border/dotted_border.dart';
 // import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
 // import 'package:edumarshals/Screens/User_Info/Document/Document_Image.dart';
 // import 'package:edumarshals/Widget/My_Document_View_Card.dart';
 // import 'package:edumarshals/repository/Document_Repo.dart';
-import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-// import 'package:flutter_full_pdf_viewer_null_safe/full_pdf_viewer_scaffold.dart';
-import 'package:dotted_border/dotted_border.dart';
-import 'package:http/http.dart' as http;
+import 'package:edumarshals/Widget/CustomAppBar.dart';
 import 'package:edumarshals/main.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 
 class uploadDocument extends StatefulWidget {
   const uploadDocument({Key? key}) : super(key: key);
@@ -121,40 +123,14 @@ class _uploadDocumentState extends State<uploadDocument> {
 
     return Scaffold(
       backgroundColor: const Color.fromRGBO(235, 243, 255, 1),
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
+   appBar: CustomAppBar(userName: PreferencesManager().name,
+   userImage: PreferencesManager().studentPhoto,
+    onTap:
+    (){
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => uploadDocument()));
 
-        toolbarHeight: 70.0, // Adjust the height as needed
-        title: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Image.asset(
-                'assets/Ellipse 7.jpg',
-                scale: 4.5,
-              ),
-              const Text(
-                'Student Photo',
-                style: TextStyle(
-                  // fontFamily: ,
-                  fontWeight: FontWeight.w500,
-                  fontFamily: 'Poppins',
-                  color: const Color.fromARGB(255, 10, 10, 10),
-                  fontSize: 20,
-                  fontStyle: FontStyle.normal,
-                ),
-              ),
-              SizedBox(
-                width: screenwidth * 0.25,
-              ),
-              Image.asset(
-                'assets/Ellipse 7.jpg',
-                scale: 4.5,
-              ),
-            ],
-          ),
-        ),
-      ),
+    }
+     ),
       body: Center(
         child: Column(
           children: [

@@ -17,9 +17,9 @@ import 'package:edumarshals/repository/assignment_Repository.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 // import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:edumarshals/Screens/Events/Events_Page.dart';
-
 import '../../Utils/floating_action _button.dart';
-
+import 'package:edumarshals/repository/classnotes_Repo.dart';
+import 'package:edumarshals/Model/classnotes_Model.dart';
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
 
@@ -31,7 +31,7 @@ class _HomepageState extends State<Homepage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   int selectedTileIndex = -1;
   final AssignmentRepository _assignmentRepository = AssignmentRepository();
-
+  final ClassNotesRepository _classNotesRepository = ClassNotesRepository();
   @override
   Widget build(BuildContext context) {
     final sheight = MediaQuery.of(context).size.height;
@@ -242,51 +242,83 @@ class _HomepageState extends State<Homepage> {
                     ),
 // SizedBox(
 //   height: sheight * 0.015,
-// ),
+// )
 
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Recent Class Notes',
-                          style: TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.bold),
-                        ),
-                        TextButton(
-                          child: Text(
-                            'View All',
-                            style:
-                            TextStyle(fontSize: 14, color: Color(0xff004BB8)),
-                          ),
-                          onPressed: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ClassNotesPage())),
-                        )
-                      ],
-                    ),
 
-                    SizedBox(
-                      height: sheight * 0.03,
-                    ),
 
-                    notes('Mathematics - IV', 'Statical Techinque I',
-                        'By Meenakshi Ma`am'),
-
-                    notes('Mathematics - IV', 'Statical Techinque I',
-                        'By Meenakshi Ma`am'),
-
-                    notes('Mathematics - IV', 'Statical Techinque I',
-                        'By Meenakshi Ma`am'),
-
-                    FutureBuilder<List<Assignment>>(
-                      future: _assignmentRepository.fetchAssignments(),
+                    FutureBuilder<List<ClassNotes>?>(
+                      future: _classNotesRepository.fetchClassNotes(),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.waiting) {
                           return const Center(
                             child: CircularProgressIndicator(),
                           );
                         } else if (snapshot.hasError) {
+                          return Center(
+                            child: Text('Error: ${snapshot.error}'),
+                          );
+                        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                          // If there are no class notes, you can display a message or hide this section
+                          return const SizedBox.shrink();
+                        } else {
+                          final List<ClassNotes> recentClassNotes = snapshot.data!.take(3).toList();
+                          // Display class notes here
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(height: 10),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children:  [
+                                  Text(
+                                    'Recent Class Notes',
+                                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => ClassNotesPage(),
+                                        ),
+                                      );
+                                    },
+                                    child: Text(
+                                      'View All',
+                                      style: TextStyle(fontSize: 14, color: Color(0xff004BB8)),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              const SizedBox(height: 8),
+                              // Create notes widget for each class note
+                              for (var classNote in recentClassNotes)
+                                GestureDetector(
+                                  onTap:(){
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ClassNotesPage(),
+                                      ),
+                                    );
+                                  },
+                                  child: notes(
+                                    classNote.subject?.name ?? '',
+                                    'Semester-3',
+                                    classNote.teacher?.name ?? '',
+                                  ),
+                                ),
+                            ],
+                          );
+                        }
+                      },
+                    ),
+
+
+                    FutureBuilder<List<Assignment>>(
+                      future: _assignmentRepository.fetchAssignments(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasError) {
                           return Center(
                             child: Text('Error: ${snapshot.error}'),
                           );
@@ -330,7 +362,12 @@ class _HomepageState extends State<Homepage> {
                                 AssignmentCard(
                                   subjectName: subject,
                                   onTap: () {
-                                    // Handle assignment tap
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Subject_Assignment(),
+                                      ),
+                                    );// Handle assignment tap
                                     // You can navigate to a detailed assignment page or perform other actions
                                   },
                                   assignments: groupedAssignments[subject]!,

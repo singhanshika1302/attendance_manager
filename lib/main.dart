@@ -32,8 +32,10 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       
       debugShowCheckedModeBanner: false,
+
       initialRoute: 'splashscreen',
       // initialRoute: 'subject_wise_attendance',
+
       routes: {
         'splashscreen': (context) => SplashScreen(),
         'homepage': (context) => const Homepage(),

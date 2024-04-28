@@ -149,14 +149,8 @@ class _LoginState extends State<Login> {
           _isLoading = false;
         });
         // for navigaation to next page
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) =>Homepage() ));
-        // Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //       builder: (context) =>
-        //           otpVerification(email: _emailController.text),
-        //     ));
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => Homepage()));
       } else {
         final Map<String, dynamic> responseData = json.decode(response.body);
         final message = responseData['message'];
@@ -210,7 +204,8 @@ class _LoginState extends State<Login> {
 
       if (savedDob != null) {
         // Parse saved date string to DateTime
-        final savedDate = DateFormat('dd-MM-yyyy').parse(PreferencesManager().dob);
+        final savedDate =
+            DateFormat('dd-MM-yyyy').parse(PreferencesManager().dob);
         setState(() {
           selectedDate = savedDate;
         });
@@ -332,7 +327,7 @@ class _LoginState extends State<Login> {
                               height: screenHeight * 0.02,
                             ),
                             buildtextfiled(
-                              'assets/shield-security.png',
+                              'assets/User.png',
                               "Password",
                               context,
                               "Enter Password",
@@ -386,8 +381,8 @@ class _LoginState extends State<Login> {
                                                           ),
                                                         ),
                                                         Container(
-                                                          width:
-                                                              screenWidth * 0.58,
+                                                          width: screenWidth *
+                                                              0.58,
                                                           decoration:
                                                               const BoxDecoration(
                                                             // borderRadius: BorderRadius.circular(10),
@@ -417,7 +412,8 @@ class _LoginState extends State<Login> {
                                                                 const TextStyle(
                                                               fontSize: 12,
                                                               fontWeight:
-                                                                  FontWeight.w400,
+                                                                  FontWeight
+                                                                      .w400,
                                                               color: Color(
                                                                   0xFF565656),
                                                             ),
@@ -439,8 +435,8 @@ class _LoginState extends State<Login> {
                                                           ),
                                                         ),
                                                         Container(
-                                                          width:
-                                                              screenWidth * 0.58,
+                                                          width: screenWidth *
+                                                              0.58,
                                                           decoration:
                                                               const BoxDecoration(
                                                             // borderRadius: BorderRadius.circular(10),
@@ -538,7 +534,7 @@ class _LoginState extends State<Login> {
                       await _saveItem();
                       // Navigator.push(context,
                       //     MaterialPageRoute(builder: (context) => OverAllAttd()));
-          
+
                       // Add your onPressed logic here
                     },
                     style: ButtonStyle(

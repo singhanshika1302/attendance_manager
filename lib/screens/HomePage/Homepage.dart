@@ -4,6 +4,8 @@
 // import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
 // import 'package:edumarshals/Screens/Events_Page.dart';
 import 'package:edumarshals/Model/assignment_Model.dart';
+import 'package:edumarshals/Model/student_attendance_data_model.dart';
+import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
 import 'package:edumarshals/Screens/Events/Events_Page.dart';
 import 'package:edumarshals/Screens/Notes_Assignment/ClassNotesPage.dart';
 import 'package:edumarshals/Screens/Notes_Assignment/Subject_Assignment.dart';
@@ -11,6 +13,7 @@ import 'package:edumarshals/Screens/User_Info/Profile.dart';
 import 'package:edumarshals/Utils/Utilities/Utilities.dart';
 import 'package:edumarshals/Widget/AttendanceCard.dart';
 import 'package:edumarshals/main.dart';
+import 'package:edumarshals/repository/overall_attendance_repository.dart';
 import 'package:edumarshals/repository/assignment_Repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
@@ -27,6 +30,48 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  final AttendanceRepository _repository = AttendanceRepository();
+  List<StudentAttendanceData>? _attendanceDataList;
+  int _totalClasses = 0;
+  int _totalPresentClasses = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchAttendanceData();
+  }
+
+//.............calling attendance repository ...................................//
+  Future<void> _fetchAttendanceData() async {
+    List<StudentAttendanceData>? attendanceDataList =
+        await _repository.fetchAttendance();
+    int totalClasses = 0;
+    int totalPresentClasses = 0;
+//...............function to store total present and total classes .............//
+    if (attendanceDataList != null) {
+      for (var data in attendanceDataList) {
+        totalClasses += data.totalClasses ?? 0;
+        totalPresentClasses += data.totalPresent ?? 0;
+      }
+    }
+    setState(() {
+      _attendanceDataList = attendanceDataList;
+      _totalClasses = totalClasses;
+      print('totalclasses${_totalClasses}');
+      // PreferencesManager.totalclasses=_totalClasses;
+      // print('totalPresentClasses${_totalPresentClasses}');
+      _totalPresentClasses = totalPresentClasses;
+
+      PreferencesManager().totalclasses = _totalClasses;
+      PreferencesManager().presentclasses = _totalPresentClasses;
+
+      print('totalPresentClasses${_totalPresentClasses}');
+
+      // print('dfghj $attendanceDataList');
+      // PreferencesManager.totalclasses=_totalClasses;
+    });
+  }
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   int selectedTileIndex = -1;
   final AssignmentRepository _assignmentRepository = AssignmentRepository();
@@ -202,7 +247,7 @@ class _HomepageState extends State<Homepage> {
                       onPressed: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => EventsPage())),
+                              builder: (context) => OverAllAttd())),
                     )
                   ],
                 ),
@@ -210,39 +255,44 @@ class _HomepageState extends State<Homepage> {
 // SizedBox(
 //   height: sheight * 0.013,
 // ),
+/////////////////attendance api is called here/////////////////////
+                Container(
+                  height: sheight * 0.13,
 
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: SizedBox(
-                    height: sheight * 0.15,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        AttIndicator(0.809, '80.9%', 'COA'),
-                        SizedBox(
-                          width: swidth * 0.04,
+                  width: swidth * 0.9,
+//.................fetching list in which all attendace is stored................//
+                  child: _attendanceDataList != null
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: _attendanceDataList!.length,
+                                itemBuilder: (context, index) {
+                                  final attendanceData =
+                                      _attendanceDataList![index];
+//.......................assigning subject attendace to the SubjectAttendaceCard......//
+                                  return AttIndicator(
+                                      ((attendanceData.totalPresent!) /
+                                          (attendanceData.totalClasses!)),
+                                      '${((attendanceData.totalPresent!) / (attendanceData.totalClasses!)).toStringAsFixed(1)}',
+                                      '${attendanceData.subject}');
+                                },
+                              ),
+                            ),
+                          ],
+                        )
+                      : Center(
+                          child: SizedBox(
+                            height: 50, // Adjust the height as needed
+                            width: 50, // Adjust the width as needed
+                            child: CircularProgressIndicator(),
+                          ),
                         ),
-                        AttIndicator(0.705, '70.5%', 'DS'),
-                        SizedBox(
-                          width: swidth * 0.04,
-                        ),
-                        AttIndicator(0.75, '75%', 'PYTHON'),
-                        SizedBox(
-                          width: swidth * 0.04,
-                        ),
-                        AttIndicator(0.909, '90.9%', 'DSTL'),
-                        SizedBox(
-                          width: swidth * 0.04,
-                        ),
-                        AttIndicator(0.89, '89%', 'UHV'),
-                        SizedBox(
-                          width: swidth * 0.04,
-                        ),
-                        AttIndicator(0.65, '65%', 'COA LAB'),
-                      ],
-                    ),
-                  ),
                 ),
+                // .................................................//
+
 // SizedBox(
 //   height: sheight * 0.015,
 // ),
@@ -282,90 +332,98 @@ class _HomepageState extends State<Homepage> {
                 notes('Mathematics - IV', 'Statical Techinque I',
                     'By Meenakshi Ma`am'),
 
-                  FutureBuilder<List<Assignment>>(
-                    future: _assignmentRepository.fetchAssignments(),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      } else if (snapshot.hasError) {
-                        return Center(
-                          child: Text('Error: ${snapshot.error}'),
-                        );
-                      } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                        // If there are no assignments, you can display a message or hide this section
-                        return const SizedBox.shrink();
-                      } else {
-                        // Group assignments by subjects
-                        final Map<String, List<Assignment>> groupedAssignments =
-                        groupAssignmentsBySubject(snapshot.data!);
+                FutureBuilder<List<Assignment>>(
+                  future: _assignmentRepository.fetchAssignments(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (snapshot.hasError) {
+                      return Center(
+                        child: Text('Error: ${snapshot.error}'),
+                      );
+                    } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                      // If there are no assignments, you can display a message or hide this section
+                      return const SizedBox.shrink();
+                    } else {
+                      // Group assignments by subjects
+                      final Map<String, List<Assignment>> groupedAssignments =
+                          groupAssignmentsBySubject(snapshot.data!);
 
-                        // Display assignments here
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 16),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text(
-                                  'Assignments',
-                                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                                ),
-                                TextButton(
-                                  child: Text(
-                                    'View All',
-                                    style: TextStyle(fontSize: 14, color: Color(0xff004BB8)),
-                                  ),
-                                  onPressed: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => Subject_Assignment(),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                            const SizedBox(height: 8),
-                            // Create AssignmentCard for each subject
-                            for (String subject in groupedAssignments.keys)
-                              AssignmentCard(
-                                subjectName: subject,
-                                onTap: () {
-                                  // Handle assignment tap
-                                  // You can navigate to a detailed assignment page or perform other actions
-                                },
-                                assignments: groupedAssignments[subject]!,
-                                description: groupedAssignments[subject]!.first.description ?? '',
-                                deadline: groupedAssignments[subject]!.first.deadline ?? '',
-                                teacherName: groupedAssignments[subject]!.first.teacher?.name ?? '',
+                      // Display assignments here
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 16),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                'Assignments',
+                                style: TextStyle(
+                                    fontSize: 22, fontWeight: FontWeight.bold),
                               ),
-                          ],
-                        );
-                      }
-                    },
-                  ),
-],
-)
-),
-),
-),
-),
-);
-}
+                              TextButton(
+                                child: Text(
+                                  'View All',
+                                  style: TextStyle(
+                                      fontSize: 14, color: Color(0xff004BB8)),
+                                ),
+                                onPressed: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Subject_Assignment(),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          // Create AssignmentCard for each subject
+                          for (String subject in groupedAssignments.keys)
+                            AssignmentCard(
+                              subjectName: subject,
+                              onTap: () {
+                                // Handle assignment tap
+                                // You can navigate to a detailed assignment page or perform other actions
+                              },
+                              assignments: groupedAssignments[subject]!,
+                              description: groupedAssignments[subject]!
+                                      .first
+                                      .description ??
+                                  '',
+                              deadline:
+                                  groupedAssignments[subject]!.first.deadline ??
+                                      '',
+                              teacherName: groupedAssignments[subject]!
+                                      .first
+                                      .teacher
+                                      ?.name ??
+                                  '',
+                            ),
+                        ],
+                      );
+                    }
+                  },
+                ),
+              ],
+            )),
+          ),
+        ),
+      ),
+    );
+  }
 
-
-
-Widget buildDrawerTile(int index, String defaultImage, String title,
-String selectedImage, double scale) {
-return Container(
-decoration: BoxDecoration(
-color: index == selectedTileIndex ? Colors.white : null,
-borderRadius:
-BorderRadius.circular(10.0), // Adjust the border radius as needed
-),
-margin: const EdgeInsets.symmetric(horizontal: 15.0),
+  Widget buildDrawerTile(int index, String defaultImage, String title,
+      String selectedImage, double scale) {
+    return Container(
+      decoration: BoxDecoration(
+        color: index == selectedTileIndex ? Colors.white : null,
+        borderRadius:
+            BorderRadius.circular(10.0), // Adjust the border radius as needed
+      ),
+      margin: const EdgeInsets.symmetric(horizontal: 15.0),
 // Adjust the vertical margin as needed
       child: ListTile(
         leading: Image.asset(
@@ -401,7 +459,8 @@ margin: const EdgeInsets.symmetric(horizontal: 15.0),
   }
 }
 
-Map<String, List<Assignment>> groupAssignmentsBySubject(List<Assignment> assignments) {
+Map<String, List<Assignment>> groupAssignmentsBySubject(
+    List<Assignment> assignments) {
   final Map<String, List<Assignment>> groupedAssignments = {};
 
   for (Assignment assignment in assignments) {
@@ -417,7 +476,6 @@ Map<String, List<Assignment>> groupAssignmentsBySubject(List<Assignment> assignm
   return groupedAssignments;
 }
 
-
 class AssignmentCard extends StatelessWidget {
   final String subjectName;
   final String description;
@@ -425,68 +483,74 @@ class AssignmentCard extends StatelessWidget {
   final String teacherName;
   final VoidCallback onTap;
 
-const AssignmentCard({
-required this.subjectName,
-required this.description,
-required this.deadline,
-required this.teacherName,
-required this.onTap, required List<Assignment> assignments,
-});
+  const AssignmentCard({
+    required this.subjectName,
+    required this.description,
+    required this.deadline,
+    required this.teacherName,
+    required this.onTap,
+    required List<Assignment> assignments,
+  });
 
-
-
-@override
-Widget build(BuildContext context) {
-  final sheight = MediaQuery.of(context).size.height;
-  final swidth = MediaQuery.of(context).size.width;
-return GestureDetector(
-onTap: onTap,
-child: Card(
-color: Color(0xff004BB8),
+  @override
+  Widget build(BuildContext context) {
+    final sheight = MediaQuery.of(context).size.height;
+    final swidth = MediaQuery.of(context).size.width;
+    return GestureDetector(
+      onTap: onTap,
+      child: Card(
+        color: Color(0xff004BB8),
 // margin: const EdgeInsets.symmetric(vertical: 8),
-child: Container(
-  width: MediaQuery.of(context).size.width,
-  child: Padding(
-  padding: const EdgeInsets.all(16),
-  child: Column(
-  crossAxisAlignment: CrossAxisAlignment.start,
-  children: [
-  Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      Text(
-      '$subjectName',
-      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold,color:Colors.white ),
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '$subjectName',
+                      style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                    Image.asset(
+                      'assets/arrow-up.png',
+                      scale: 4,
+                    )
+                  ],
+                ),
+
+                SizedBox(
+                  height: sheight * 0.01,
+                ),
+                // Text('Description: $description'),
+                // Text('Deadline: $deadline'),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Image.asset(
+                      'assets/Frame 50.png',
+                      scale: 4,
+                    ),
+                    SizedBox(
+                      width: swidth * 0.03,
+                    ),
+                    Text(
+                      '$teacherName',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
-
-      Image.asset('assets/arrow-up.png',scale: 4,)
-    ],
-  ),
-
-    SizedBox(
-      height: sheight * 0.01,
-    ),
-  // Text('Description: $description'),
-  // Text('Deadline: $deadline'),
-  Row(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Image.asset('assets/Frame 50.png',scale: 4,),
-
-      SizedBox(
-        width: swidth * 0.03,
-      ),
-
-      Text('$teacherName',style: TextStyle(
-      color: Colors.white
-      ),),
-    ],
-  ),
-  ],
-  ),
-  ),
-),
-),
-);
-}
+    );
+  }
 }

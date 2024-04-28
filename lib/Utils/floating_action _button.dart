@@ -1,127 +1,146 @@
-import 'package:edumarshals/Screens/HomePage/Homepage.dart';
-// import 'package:edumarshals/Screens/Notes_Assignment/ClassNotesPage.dart';
-import 'package:edumarshals/Screens/Notes_Assignment/Subject_Assignment.dart';
-import 'package:edumarshals/Screens/User_Info/Profile.dart';
-import 'package:edumarshals/main.dart';
-import 'package:edumarshals/Screens/Attendance/subject_wise_attendance.dart';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 
 class custom_floating_action_button extends StatefulWidget {
-  const custom_floating_action_button({super.key});
+  final GlobalKey<ExpandableFabState> Gkey;
+  custom_floating_action_button({super.key, required this.Gkey});
 
   @override
-  State<custom_floating_action_button> createState() => _custom_floating_action_buttonState();
+  State<custom_floating_action_button> createState() =>
+      _custom_floating_action_buttonState();
 }
- final _key = GlobalKey<ExpandableFabState>();
+//**********when importing this widget, initialize the key below in your page to create separate instance for each page
+// final _key = GlobalKey<ExpandableFabState>();
 
-class _custom_floating_action_buttonState extends State<custom_floating_action_button> {
+class _custom_floating_action_buttonState
+    extends State<custom_floating_action_button> {
+  bool _isFabOpen = false;
+
   @override
   Widget build(BuildContext context) {
-    return ExpandableFab(
-        key: _key,
-        //       duration: const Duration(milliseconds: 500),
-        //      distance: 200.0,
-        //      type: ExpandableFabType.up,
-        //    pos: ExpandableFabPos.left,
-        //      childrenOffset: const Offset(0, 20),
-        //    fanAngle: 40,
-        openButtonBuilder: RotateFloatingActionButtonBuilder(
-          child: Icon(Icons.grid_view_rounded),
-          //fabSize: ExpandableFabSize.large,
-          foregroundColor: Colors.white,
-          backgroundColor: Color(0xff004BB8),
-          shape: CircleBorder(),
-          //         angle: 3.14 * 2,
-        ),
-        closeButtonBuilder: FloatingActionButtonBuilder(
-          size: 56,
-          builder: (BuildContext context, void Function()? onPressed,
-              Animation<double> progress) {
-            return CircleAvatar(
-              backgroundColor: Color(0xff004BB8),
-              radius: 30,
-              child: IconButton(
-                onPressed: onPressed,
-                icon: Icon(
-                  Icons.grid_view_rounded,
-                  color: Colors.white,
-
-                  //size: 40,
+    return Stack(
+      children: [
+        // BackdropFilter with QuarterCircleClipper for blur effect
+        if (_isFabOpen)
+          Positioned(
+            bottom: -200,
+            right: -200,
+            child: ClipPath(
+              clipper: QuarterCircleClipper(),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
+                child: Container(
+                  width: 400,
+                  height: 400,
+                  color: Colors.transparent,
                 ),
               ),
-            );
+            ),
+          ),
+        ExpandableFab(
+          key: widget.Gkey,
+          onOpen: () {
+            setState(() {
+              _isFabOpen = true;
+            });
           },
-        ),
-        overlayStyle: ExpandableFabOverlayStyle(
-          //color: Colors.black.withOpacity(0.5),
-          blur: 2,
-        ),
-        onOpen: () {
-          debugPrint('onOpen');
-        },
-        afterOpen: () {
-          debugPrint('afterOpen');
-        },
-        onClose: () {
-          debugPrint('onClose');
-        },
-        afterClose: () {
-          debugPrint('afterClose');
-        },
-        children: [
-          FloatingActionButton.small(
-            backgroundColor: Colors.white,
+          onClose: () {
+            setState(() {
+              _isFabOpen = false;
+            });
+          },
+          openButtonBuilder: RotateFloatingActionButtonBuilder(
+            child: Icon(Icons.grid_view_rounded),
+            foregroundColor: Colors.white,
+            backgroundColor: Color(0xff004BB8),
             shape: CircleBorder(),
-            heroTag: null,
-            child: Icon(
-              Icons.home_filled,
-              color: Color(0xff004BB8),
+          ),
+          closeButtonBuilder: FloatingActionButtonBuilder(
+            size: 56,
+            builder: (BuildContext context, void Function()? onPressed,
+                Animation<double> progress) {
+              return CircleAvatar(
+                backgroundColor: Color(0xff004BB8),
+                radius: 30,
+                child: IconButton(
+                  onPressed: onPressed,
+                  icon: Icon(
+                    Icons.grid_view_rounded,
+                    color: Colors.white,
+                  ),
+                ),
+              );
+            },
+          ),
+          children: [
+            // Your expandable FAB buttons
+            FloatingActionButton.small(
+              backgroundColor: Colors.white,
+              shape: CircleBorder(),
+              child: Icon(
+                Icons.home_filled,
+                color: Color(0xff004BB8),
+              ),
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, 'homepage');
+              },
             ),
+            FloatingActionButton.small(
+              backgroundColor: Colors.white,
+              shape: CircleBorder(),
+              child: Icon(
+                Icons.bar_chart,
+                color: Color(0xff004BB8),
+              ),
+              onPressed: () {
+                // Navigate to bar chart page
+                Navigator.pushReplacementNamed(
+                    context, 'subject_wise_attendance');
+              },
+            ),
+            FloatingActionButton.small(
+              backgroundColor: Colors.white,
+              shape: CircleBorder(),
+              child: Icon(
+                Icons.library_books_rounded,
+                color: Color(0xff004BB8),
+              ),
+              onPressed: () {
+                // Navigate to assignment page
+                Navigator.pushReplacementNamed(context, 'test_screen');
+              },
+            ),
+            FloatingActionButton.small(
+              backgroundColor: Colors.white,
+              shape: CircleBorder(),
+              child: Icon(
+                Icons.person,
+                color: Color(0xff004BB8),
+              ),
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, 'profile');
+              },
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
 
-            onPressed: () {
-              Navigator.of(context).push(
-              MaterialPageRoute(builder: ((context) => const Homepage())));
-            },
-            //const SnackBar snackBar = SnackBar(
-            // content: Text("SnackBar"),
-            // );
-            // scaffoldKey.currentState?.showSnackBar(snackBar);
-          ),
-          FloatingActionButton.small(
-            backgroundColor: Colors.white,
-            shape: CircleBorder(),
-            heroTag: null,
-            child: Icon(
-              Icons.bar_chart,
-              color: Color(0xff004BB8),
-            ),
-            onPressed: () {
-                          Navigator.of(context).push(
-                             MaterialPageRoute(builder: ((context) =>  barGraph(userName: PreferencesManager().name, userImage: PreferencesManager().studentPhoto, subjectName: "Maths", subjectDescription: "You attended 51 lectures out of 63 lectures."))));
-            },
-          ),
-          FloatingActionButton.small(
-            backgroundColor: Colors.white,
-            shape: CircleBorder(),
-            heroTag: null,
-            child: Icon(Icons.library_books_rounded, color: Color(0xff004BB8)),
-            onPressed: () {
-               Navigator.of(context).push(
-                MaterialPageRoute(builder: ((context) => Subject_Assignment())));
-            },
-          ),
-          FloatingActionButton.small(
-            backgroundColor: Colors.white,
-            shape: CircleBorder(),
-            heroTag: null,
-            child: Icon(Icons.person, color: Color(0xff004BB8)),
-            onPressed: () {
-               Navigator.of(context).push(
-                MaterialPageRoute(builder: ((context) => const Profile())));
-            },
-          ),
-        ],
-      );
+class QuarterCircleClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    Path path = Path();
+    path.addOval(Rect.fromCircle(
+        center: Offset(size.width / 2, size.height / 2),
+        radius: size.width / 2));
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    return false;
   }
 }

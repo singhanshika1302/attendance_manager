@@ -24,13 +24,13 @@ class Profile extends StatefulWidget {
   @override
   State<Profile> createState() => _ProfileState();
 }
-
+final _key = GlobalKey<ExpandableFabState>();
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
        floatingActionButtonLocation: ExpandableFab.location,
-      floatingActionButton: custom_floating_action_button(),
+      floatingActionButton: custom_floating_action_button(Gkey: _key,),
       backgroundColor: const Color.fromRGBO(235, 243, 255, 1),
       appBar: AppBar(
         surfaceTintColor: Colors.transparent

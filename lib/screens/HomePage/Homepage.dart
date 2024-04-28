@@ -3,22 +3,33 @@
 
 // import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
 // import 'package:edumarshals/Screens/Events_Page.dart';
+
 import 'package:edumarshals/Model/assignment_Model.dart';
 import 'package:edumarshals/Model/student_attendance_data_model.dart';
 import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
 import 'package:edumarshals/Screens/Events/Events_Page.dart';
+
 import 'package:edumarshals/Screens/Notes_Assignment/ClassNotesPage.dart';
 import 'package:edumarshals/Screens/Notes_Assignment/Subject_Assignment.dart';
+import 'package:edumarshals/Screens/Events/Events_Page.dart';
 import 'package:edumarshals/Screens/User_Info/Profile.dart';
+import 'package:edumarshals/Screens/drawer_screens/fees.dart';
+import 'package:edumarshals/Screens/drawer_screens/hostel_leaves.dart';
 import 'package:edumarshals/Utils/Utilities/Utilities.dart';
 import 'package:edumarshals/Widget/AttendanceCard.dart';
 import 'package:edumarshals/main.dart';
+
 import 'package:edumarshals/repository/overall_attendance_repository.dart';
 import 'package:edumarshals/repository/assignment_Repository.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 
+import 'package:flutter/cupertino.dart';
+
+import 'package:flutter/material.dart';
+import 'package:edumarshals/Model/assignment_Model.dart';
+import 'package:edumarshals/repository/assignment_Repository.dart';
+import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 // import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:edumarshals/Screens/Events/Events_Page.dart';
 
 import '../../Utils/floating_action _button.dart';
 
@@ -28,6 +39,7 @@ class Homepage extends StatefulWidget {
   @override
   State<Homepage> createState() => _HomepageState();
 }
+final _key = GlobalKey<ExpandableFabState>();
 
 class _HomepageState extends State<Homepage> {
   final AttendanceRepository _repository = AttendanceRepository();
@@ -82,11 +94,11 @@ class _HomepageState extends State<Homepage> {
     final swidth = MediaQuery.of(context).size.width;
     return Scaffold(
       floatingActionButtonLocation: ExpandableFab.location,
-      floatingActionButton: custom_floating_action_button(),
+      floatingActionButton: custom_floating_action_button(Gkey: _key,),
       key: _scaffoldKey,
       backgroundColor: const Color(0xffEBF3FF),
       drawer: Drawer(
-        backgroundColor: const Color.fromRGBO(0, 83, 201, 0.8),
+        backgroundColor: const Color(0xff004BB8),
         child: Padding(
           padding: const EdgeInsets.only(top: 50),
           child: ListView(
@@ -106,18 +118,13 @@ class _HomepageState extends State<Homepage> {
                   Navigator.pop(context);
                 },
               ),
-              buildDrawerTile(0, 'assets/bank.png', 'Classroom',
-                  'assets/assets/bankcolor.png', 1),
-              buildDrawerTile(1, 'assets/bank.png', 'Hostel',
-                  'assets/assets/buliding.png', 1),
-              buildDrawerTile(2, 'assets/note-2.png', 'Placement',
-                  'assets/assets/bankcolor.png', 1),
-              buildDrawerTile(3, 'assets/bank.png', 'PYQS Papers',
-                  'assets/assets/bankcolor.png', 1),
-              buildDrawerTile(4, 'assets/card-pos.png', 'Fees',
-                  'asset/images/card-poscolor.png', 3),
-              buildDrawerTile(5, 'asset/images/ranking.png', 'Events',
-                  'assets/rankingcolor.png', 1)
+              buildDrawerTile(0, 'assets/bank.png', 'Classroom', 'assets/sel_bank.png', 4),
+              buildDrawerTile(1, 'assets/buliding.png', 'Hostel', 'assets/sel_building.png', 4),
+              buildDrawerTile(2, 'assets/teacher.png', 'Placement', 'assets/sel_teacher.png', 4),
+              buildDrawerTile(3, 'assets/note.png', 'PYQS Papers', 'assets/sel_note.png', 3.7),
+              buildDrawerTile(4, 'assets/fees.png', 'Fees', 'assets/sel_fees.png', 3.7),
+              buildDrawerTile(5, 'assets/events.png', 'Events', 'assets/sel_events.png', 4)
+
             ],
           ),
         ),
@@ -128,57 +135,58 @@ class _HomepageState extends State<Homepage> {
             padding: const EdgeInsets.all(18.0),
             child: Container(
                 child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      child: Row(
-                        children: [
-                          GestureDetector(
-                              onTap: () {
-                                _scaffoldKey.currentState?.openDrawer();
-                              },
-                              child: const Icon(Icons.more_vert)),
-                          Padding(
-                              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                              child: InkWell(
-                                child: CircleAvatar(
-                                  backgroundImage: NetworkImage(
-                                      PreferencesManager().studentPhoto),
-                                ),
-                                onDoubleTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Profile()));
-                                },
-                              )),
-                          Text(
-                            PreferencesManager().name,
-                            style: const TextStyle(fontSize: 15),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          child: Row(
+                            children: [
+                              GestureDetector(
+                                  onTap: () {
+                                    _scaffoldKey.currentState?.openDrawer();
+                                  },
+                                  child: const Icon(Icons.more_vert)),
+                              Padding(
+                                  padding:
+                                  const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                  child: InkWell(
+                                    child: CircleAvatar(
+                                      backgroundImage: NetworkImage(
+                                          PreferencesManager().studentPhoto),
+                                    ),
+                                    onDoubleTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => Profile()));
+                                    },
+                                  )),
+                              Text(
+                                PreferencesManager().name,
+                                style: const TextStyle(fontSize: 15),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey),
+                              shape: BoxShape.circle),
+                          child: const Padding(
+                              padding: EdgeInsets.all(6.0),
+                              child: Icon(Icons.notifications)),
+                        ),
+                      ],
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey),
-                          shape: BoxShape.circle),
-                      child: const Padding(
-                          padding: EdgeInsets.all(6.0),
-                          child: Icon(Icons.notifications)),
-                    ),
-                  ],
-                ),
 
 //  SizedBox(height: sheight * 0.03,),
-                AttendanceCard(
-                    title: "Overall Attendance",
-                    description: "including all subjects\nand labs.",
-                    attendedClasses: PreferencesManager().presentclasses,
-                    totalClassess: PreferencesManager().totalclasses),
+                    AttendanceCard(
+                        title: "Overall Attendance",
+                        description: "including all subjects\nand labs.",
+                        attendedClasses: PreferencesManager().presentclasses,
+                        totalClassess: PreferencesManager().totalclasses),
 
 // Container(
 //   height: sheight * 0.18,
@@ -230,19 +238,20 @@ class _HomepageState extends State<Homepage> {
 //   height: sheight * 0.033,
 // ),
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'All Subjects',
-                      style:
-                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                    ),
-                    TextButton(
-                      child: Text(
-                        'View All',
-                        style:
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'All Subjects',
+                          style: TextStyle(
+                              fontSize: 22, fontWeight: FontWeight.bold),
+                        ),
+                        TextButton(
+                          child: Text(
+                            'View All',
+                            style:
                             TextStyle(fontSize: 14, color: Color(0xff004BB8)),
+
                       ),
                       onPressed: () => Navigator.push(
                           context,
@@ -252,9 +261,11 @@ class _HomepageState extends State<Homepage> {
                   ],
                 ),
 
+
 // SizedBox(
 //   height: sheight * 0.013,
 // ),
+
 /////////////////attendance api is called here/////////////////////
                 Container(
                   height: sheight * 0.13,
@@ -293,127 +304,122 @@ class _HomepageState extends State<Homepage> {
                 ),
                 // .................................................//
 
+
 // SizedBox(
 //   height: sheight * 0.015,
 // ),
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Recent Class Notes',
-                      style:
-                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                    ),
-                    TextButton(
-                      child: Text(
-                        'View All',
-                        style:
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Recent Class Notes',
+                          style: TextStyle(
+                              fontSize: 22, fontWeight: FontWeight.bold),
+                        ),
+                        TextButton(
+                          child: Text(
+                            'View All',
+                            style:
                             TextStyle(fontSize: 14, color: Color(0xff004BB8)),
-                      ),
-                      onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ClassNotesPage())),
-                    )
-                  ],
-                ),
+                          ),
+                          onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ClassNotesPage())),
+                        )
+                      ],
+                    ),
 
-                SizedBox(
-                  height: sheight * 0.03,
-                ),
+                    SizedBox(
+                      height: sheight * 0.03,
+                    ),
 
-                notes('Mathematics - IV', 'Statical Techinque I',
-                    'By Meenakshi Ma`am'),
 
-                notes('Mathematics - IV', 'Statical Techinque I',
-                    'By Meenakshi Ma`am'),
+                    notes('Mathematics - IV', 'Statical Techinque I',
+                        'By Meenakshi Ma`am'),
 
-                notes('Mathematics - IV', 'Statical Techinque I',
-                    'By Meenakshi Ma`am'),
+                    notes('Mathematics - IV', 'Statical Techinque I',
+                        'By Meenakshi Ma`am'),
 
-                FutureBuilder<List<Assignment>>(
-                  future: _assignmentRepository.fetchAssignments(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    } else if (snapshot.hasError) {
-                      return Center(
-                        child: Text('Error: ${snapshot.error}'),
-                      );
-                    } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                      // If there are no assignments, you can display a message or hide this section
-                      return const SizedBox.shrink();
-                    } else {
-                      // Group assignments by subjects
-                      final Map<String, List<Assignment>> groupedAssignments =
+                    notes('Mathematics - IV', 'Statical Techinque I',
+                        'By Meenakshi Ma`am'),
+
+                    FutureBuilder<List<Assignment>>(
+                      future: _assignmentRepository.fetchAssignments(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else if (snapshot.hasError) {
+                          return Center(
+                            child: Text('Error: ${snapshot.error}'),
+                          );
+                        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                          // If there are no assignments, you can display a message or hide this section
+                          return const SizedBox.shrink();
+                        } else {
+                          // Group assignments by subjects
+                          final Map<String, List<Assignment>> groupedAssignments =
                           groupAssignmentsBySubject(snapshot.data!);
 
-                      // Display assignments here
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: 16),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          // Display assignments here
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                'Assignments',
-                                style: TextStyle(
-                                    fontSize: 22, fontWeight: FontWeight.bold),
-                              ),
-                              TextButton(
-                                child: Text(
-                                  'View All',
-                                  style: TextStyle(
-                                      fontSize: 14, color: Color(0xff004BB8)),
-                                ),
-                                onPressed: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Subject_Assignment(),
+                              const SizedBox(height: 16),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text(
+                                    'Assignments',
+                                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                                   ),
+                                  TextButton(
+                                    child: Text(
+                                      'View All',
+                                      style: TextStyle(fontSize: 14, color: Color(0xff004BB8)),
+                                    ),
+                                    onPressed: () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Subject_Assignment(),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              const SizedBox(height: 8),
+                              // Create AssignmentCard for each subject
+                              for (String subject in groupedAssignments.keys)
+                                AssignmentCard(
+                                  subjectName: subject,
+                                  onTap: () {
+                                    // Handle assignment tap
+                                    // You can navigate to a detailed assignment page or perform other actions
+                                  },
+                                  assignments: groupedAssignments[subject]!,
+                                  description: groupedAssignments[subject]!.first.description ?? '',
+                                  deadline: groupedAssignments[subject]!.first.deadline ?? '',
+                                  teacherName: groupedAssignments[subject]!.first.teacher?.name ?? '',
                                 ),
-                              )
                             ],
-                          ),
-                          const SizedBox(height: 8),
-                          // Create AssignmentCard for each subject
-                          for (String subject in groupedAssignments.keys)
-                            AssignmentCard(
-                              subjectName: subject,
-                              onTap: () {
-                                // Handle assignment tap
-                                // You can navigate to a detailed assignment page or perform other actions
-                              },
-                              assignments: groupedAssignments[subject]!,
-                              description: groupedAssignments[subject]!
-                                      .first
-                                      .description ??
-                                  '',
-                              deadline:
-                                  groupedAssignments[subject]!.first.deadline ??
-                                      '',
-                              teacherName: groupedAssignments[subject]!
-                                      .first
-                                      .teacher
-                                      ?.name ??
-                                  '',
-                            ),
-                        ],
-                      );
-                    }
-                  },
-                ),
-              ],
-            )),
+                          );
+                        }
+                      },
+                    ),
+                  ],
+                )
+            ),
           ),
         ),
       ),
     );
   }
+
+
+
 
   Widget buildDrawerTile(int index, String defaultImage, String title,
       String selectedImage, double scale) {
@@ -421,7 +427,9 @@ class _HomepageState extends State<Homepage> {
       decoration: BoxDecoration(
         color: index == selectedTileIndex ? Colors.white : null,
         borderRadius:
-            BorderRadius.circular(10.0), // Adjust the border radius as needed
+
+        BorderRadius.circular(10.0), // Adjust the border radius as needed
+
       ),
       margin: const EdgeInsets.symmetric(horizontal: 15.0),
 // Adjust the vertical margin as needed
@@ -445,14 +453,26 @@ class _HomepageState extends State<Homepage> {
           });
           _scaffoldKey.currentState?.openDrawer();
           Navigator.pop(context);
-// switch (index) {
-//   case 0:
-//     Navigator.push(context, MaterialPageRoute(builder: (context) => Events_page()));
-//     break;
-//   case 1:
-//     Navigator.push(context, MaterialPageRoute(builder: (context) => Events_page()));
-//     break;
-// }
+          switch (index) {
+            case 0:
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()));
+              break;
+            case 1:
+              Navigator.push(context, MaterialPageRoute(builder: (context) => hostelLeavePage()));
+              break;
+            case 2:
+              Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+              break;
+            case 3:
+              Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+              break;
+            case 4:
+              Navigator.push(context, MaterialPageRoute(builder: (context) => feesPage()));
+              break;
+            case 5:
+              Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+              break;
+          }
         },
       ),
     );
@@ -488,9 +508,12 @@ class AssignmentCard extends StatelessWidget {
     required this.description,
     required this.deadline,
     required this.teacherName,
+
     required this.onTap,
     required List<Assignment> assignments,
   });
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -513,6 +536,7 @@ class AssignmentCard extends StatelessWidget {
                   children: [
                     Text(
                       '$subjectName',
+
                       style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -533,6 +557,7 @@ class AssignmentCard extends StatelessWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+
                     Image.asset(
                       'assets/Frame 50.png',
                       scale: 4,
@@ -554,3 +579,5 @@ class AssignmentCard extends StatelessWidget {
     );
   }
 }
+
+

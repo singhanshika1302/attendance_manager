@@ -1,4 +1,5 @@
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 
@@ -83,7 +84,7 @@ class _custom_floating_action_buttonState
                 color: Color(0xff004BB8),
               ),
               onPressed: () {
-                Navigator.pushReplacementNamed(context, 'homepage');
+                Navigator.pushNamed(context, 'homepage');
               },
             ),
             FloatingActionButton.small(
@@ -95,7 +96,7 @@ class _custom_floating_action_buttonState
               ),
               onPressed: () {
                 // Navigate to bar chart page
-                Navigator.pushReplacementNamed(
+                Navigator.pushNamed(
                     context, 'subject_wise_attendance');
               },
             ),
@@ -108,7 +109,7 @@ class _custom_floating_action_buttonState
               ),
               onPressed: () {
                 // Navigate to assignment page
-                Navigator.pushReplacementNamed(context, 'test_screen');
+                Navigator.pushNamed(context, 'test_screen');
               },
             ),
             FloatingActionButton.small(
@@ -119,7 +120,7 @@ class _custom_floating_action_buttonState
                 color: Color(0xff004BB8),
               ),
               onPressed: () {
-                Navigator.pushReplacementNamed(context, 'profile');
+                Navigator.pushNamed(context, 'profile');
               },
             ),
           ],

@@ -17,7 +17,10 @@ class _EventsPageState extends State<EventsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromRGBO(242, 246, 255, 1),
-      appBar: CustomAppBar(userName: PreferencesManager().name,),
+      appBar: CustomAppBar(userName: PreferencesManager().name,
+      userImage: PreferencesManager().studentPhoto,
+       onTap: () {  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>EventsPage()));
+  },),
       body: 
       FutureBuilder<List<EventModel>>(
         future: EventRepository().fetchEvents(),

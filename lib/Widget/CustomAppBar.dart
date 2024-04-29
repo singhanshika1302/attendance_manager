@@ -3,6 +3,8 @@ import 'package:edumarshals/Widget/CommonDrawer.dart';
 import 'package:edumarshals/main.dart';
 import 'package:flutter/material.dart';
 
+import 'CommonDrawer.dart';
+
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String userName;
   final String? userImage;
@@ -13,6 +15,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.userName,
     this.userImage, required this.onTap,
   });
+
+  get selectedTileIndex => -1;
 
   @override
   Widget build(BuildContext context) {

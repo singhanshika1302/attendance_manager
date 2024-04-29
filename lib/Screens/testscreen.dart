@@ -1,7 +1,6 @@
 import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
-// import 'package:edumarshals/Utils/floating_action%20_button.dart';
 import 'package:edumarshals/Model/student_attendance_data_model.dart';
 import 'package:edumarshals/Utils/attendance_list_card.dart';
 import 'package:edumarshals/Utils/daily_attendance_card.dart';
@@ -15,42 +14,66 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 
-class barGraph extends StatefulWidget {
+class testscreen extends StatefulWidget {
   final String userName;
   final String userImage;
   final String subjectName;
   final String subjectDescription;
   //final String userName;
-  barGraph(
+  testscreen(
       {super.key,
       required this.userName,
       required this.userImage,
       required this.subjectName,
       required this.subjectDescription});
+
+
+
+
   final Color leftBarColor = Color(0xff004BB8);
   final Color rightBarColor = Color(0xff5299FF);
   final Color avgColor = Colors.orange;
   @override
-  State<StatefulWidget> createState() => barGraphState();
+  State<StatefulWidget> createState() => testscreenState();
+
+
 }
+
+
+
 final _key = GlobalKey<ExpandableFabState>();
 
-class barGraphState extends State<barGraph> {
+class testscreenState extends State<testscreen> {
   // ..............attendace api is intigrated ..................
   final AttendanceRepository _repository = AttendanceRepository();
   List<StudentAttendanceData>? _attendanceDataList;
   int _totalClasses = 0;
   int _totalPresentClasses = 0;
-
+  
+Map<String, List<StudentAttendanceData>> groupAttendanceByMonth(List<StudentAttendanceData> data) {
+  Map<String, List<StudentAttendanceData>> groupedData = {};
+  for (var attendance in data) {
+    if (attendance.attendance != null) {
+      for (var record in attendance.attendance!) {
+        String monthYearKey = '${record.date?.split('-')[0]}-${record.date?.split('-')[1]}';
+        if (!groupedData.containsKey(monthYearKey)) {
+          groupedData[monthYearKey] = [];
+        }
+        groupedData[monthYearKey]!.add(attendance);
+      }
+    }
+  }
+  return groupedData;
+}
 //.............calling attendance repository ...................................//
-  Future<void> _fetchAttendanceData() async {
-    List<StudentAttendanceData>? attendanceDataList =
-        await _repository.fetchAttendance();
-    int totalClasses = 0;
-    int totalPresentClasses = 0;
-//...............function to store total present and total classes .............//
-    if (attendanceDataList != null) {
-      for (var data in attendanceDataList) {
+Future<Map<String, List<StudentAttendanceData>>> _fetchAttendanceData() async {
+  List<StudentAttendanceData>? attendanceDataList = await _repository.fetchAttendance();
+  int totalClasses = 0;
+  int totalPresentClasses = 0;
+  if (attendanceDataList != null) {
+    Map<String, List<StudentAttendanceData>> groupedData = groupAttendanceByMonth(attendanceDataList);
+    for (var monthData in groupedData.values) {
+      for (var data in monthData) {
         totalClasses += data.totalClasses ?? 0;
         totalPresentClasses += data.totalPresent ?? 0;
       }
@@ -58,25 +81,15 @@ class barGraphState extends State<barGraph> {
     setState(() {
       _attendanceDataList = attendanceDataList;
       _totalClasses = totalClasses;
-      print('totalclasses${_totalClasses}');
-      // PreferencesManager.totalclasses=_totalClasses;
-      // print('totalPresentClasses${_totalPresentClasses}');
       _totalPresentClasses = totalPresentClasses;
-
       PreferencesManager().totalclasses = _totalClasses;
       PreferencesManager().presentclasses = _totalPresentClasses;
-
-      print('totalPresentClasses${_totalPresentClasses}');
-
-      // print('dfghj $attendanceDataList');
-      // PreferencesManager.totalclasses=_totalClasses;
-
-
-
-
-      
     });
+    return groupedData;
   }
+  return {};
+}
+
 
   //................attendance api is intigrated ....................//
 
@@ -96,70 +109,78 @@ class barGraphState extends State<barGraph> {
 
 
 
-  void _initFilterWidgets() {
-    filterWidgets = {
-      'Monthly': [
-        Column(
-          children: [
-            AttendanceListCard(date: "1 jan,24", isPresent: [true]),
-            AttendanceListCard(date: "2 jan,24", isPresent: [true, false]),
-            AttendanceListCard(date: "3 jan,24", isPresent: [false, false]),
-            AttendanceListCard(date: "4 jan,24", isPresent: [true]),
-            AttendanceListCard(date: "6 jan,24", isPresent: [true, true]),
-            AttendanceListCard(date: "7 jan,24", isPresent: [false]),
-            AttendanceListCard(date: "9 jan,24", isPresent: [true]),
-          ],
-        )
-      ],
-      'Weekly': [
-        _buildWeeklyWidgets(),
-      ],
-      'Daily': [
-        _buildDailyWidgets(),
-      ],
-    };
-  }
+  // void _initFilterWidgets() {
+  //   filterWidgets = {
+  //     'Monthly': [
+  //         for (var entry in groupedData.entries)
+  //       Column(
+  //         children: [
+  //           Text(entry.key), // Display month
+  //           for (var attendanceData in entry.value)
+  //             AttendanceListCard(date: attendanceData.date, isPresent: attendanceData.isPresent),
+  //         ],
+  //       ),
+  //       // Column(
+  //       //   children: [
+  //       //     AttendanceListCard(date: "1 jan,24", isPresent: [true]),
+  //       //     AttendanceListCard(date: "2 jan,24", isPresent: [true, false]),
+  //       //     AttendanceListCard(date: "3 jan,24", isPresent: [false, false]),
+  //       //     AttendanceListCard(date: "4 jan,24", isPresent: [true]),
+  //       //     AttendanceListCard(date: "6 jan,24", isPresent: [true, true]),
+  //       //     AttendanceListCard(date: "7 jan,24", isPresent: [false]),
+  //       //     AttendanceListCard(date: "9 jan,24", isPresent: [true]),
+  //       //   ],
+  //       // )
+  //     ],
+  //     'Weekly': [
+  //       _buildWeeklyWidgets(),
+  //     ],
+  //     'Daily': [
+  //       _buildDailyWidgets(),
+  //     ],
+  //   };
+  // }
 
 
 
   @override
-  void initState() {
-    super.initState();
-    _fetchAttendanceData();
-    final barGroup1 = makeGroupData(0, 12, 5);
-    final barGroup2 = makeGroupData(1, 16, 12);
-    final barGroup3 = makeGroupData(2, 18, 5);
-    final barGroup4 = makeGroupData(3, 20, 16);
-    final barGroup5 = makeGroupData(4, 17, 6);
-    final barGroup6 = makeGroupData(5, 14, 1.5);
-    final barGroup7 = makeGroupData(6, 10, 1.5);
-    _initFilterWidgets();
+  // void initState() {
+  //   super.initState();
+  //   _fetchAttendanceData();
+  //   final barGroup1 = makeGroupData(0, 12, 5);
+  //   final barGroup2 = makeGroupData(1, 16, 12);
+  //   final barGroup3 = makeGroupData(2, 18, 5);
+  //   final barGroup4 = makeGroupData(3, 20, 16);
+  //   final barGroup5 = makeGroupData(4, 17, 6);
+  //   final barGroup6 = makeGroupData(5, 14, 1.5);
+  //   final barGroup7 = makeGroupData(6, 10, 1.5);
+  //   _initFilterWidgets();
 
-    final items = [
-      barGroup1,
-      barGroup2,
-      barGroup3,
-      barGroup4,
-      barGroup5,
-      barGroup6,
-      barGroup7,
-    ];
+  //   final items = [
+  //     barGroup1,
+  //     barGroup2,
+  //     barGroup3,
+  //     barGroup4,
+  //     barGroup5,
+  //     barGroup6,
+  //     barGroup7,
+  //   ];
 
-    rawBarGroups = items;
+  //   rawBarGroups = items;
 
-    showingBarGroups = rawBarGroups;
-  }
+  //   showingBarGroups = rawBarGroups;
+  // }
 
   @override
   Widget build(BuildContext context) {
     final sheight = MediaQuery.of(context).size.height;
-    final swidth = MediaQuery.of(context).size.width;
+    // final swidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Color(0xffF2F6FF),
       floatingActionButtonLocation: ExpandableFab.location,
       floatingActionButton: custom_floating_action_button(Gkey: _key,),
       appBar:
-          CustomAppBar(userName: widget.userName, userImage: widget.userImage, onTap: () { Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => barGraph(userName: PreferencesManager().name, userImage: PreferencesManager().studentPhoto, subjectName: "", subjectDescription: "")));
+          CustomAppBar(userName: widget.userName, userImage: widget.userImage, onTap: () { Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => testscreen(userName: PreferencesManager().name, userImage: PreferencesManager().studentPhoto, subjectName: "", subjectDescription: "")));
  },),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -291,88 +312,88 @@ class barGraphState extends State<barGraph> {
               ),
               SizedBox(
                 height: 150,
-                child: BarChart(
-                  BarChartData(
-                    maxY: 20,
-                    barTouchData: BarTouchData(
-                      touchTooltipData: BarTouchTooltipData(
-                        tooltipBgColor: Colors.grey,
-                        getTooltipItem: (a, b, c, d) => null,
-                      ),
-                      touchCallback: (FlTouchEvent event, response) {
-                        if (response == null || response.spot == null) {
-                          setState(() {
-                            touchedGroupIndex = -1;
-                            showingBarGroups = List.of(rawBarGroups);
-                          });
-                          return;
-                        }
+                // child: BarChart(
+                //   BarChartData(
+                //     maxY: 20,
+                //     barTouchData: BarTouchData(
+                //       touchTooltipData: BarTouchTooltipData(
+                //         tooltipBgColor: Colors.grey,
+                //         getTooltipItem: (a, b, c, d) => null,
+                //       ),
+                //       touchCallback: (FlTouchEvent event, response) {
+                //         if (response == null || response.spot == null) {
+                //           setState(() {
+                //             touchedGroupIndex = -1;
+                //             showingBarGroups = List.of(rawBarGroups);
+                //           });
+                //           return;
+                //         }
 
-                        touchedGroupIndex = response.spot!.touchedBarGroupIndex;
+                //         touchedGroupIndex = response.spot!.touchedBarGroupIndex;
 
-                        setState(() {
-                          if (!event.isInterestedForInteractions) {
-                            touchedGroupIndex = -1;
-                            showingBarGroups = List.of(rawBarGroups);
-                            return;
-                          }
-                          showingBarGroups = List.of(rawBarGroups);
-                          if (touchedGroupIndex != -1) {
-                            var sum = 0.0;
-                            for (final rod
-                                in showingBarGroups[touchedGroupIndex]
-                                    .barRods) {
-                              sum += rod.toY;
-                            }
-                            final avg = sum /
-                                showingBarGroups[touchedGroupIndex]
-                                    .barRods
-                                    .length;
+                //         setState(() {
+                //           if (!event.isInterestedForInteractions) {
+                //             touchedGroupIndex = -1;
+                //             showingBarGroups = List.of(rawBarGroups);
+                //             return;
+                //           }
+                //           showingBarGroups = List.of(rawBarGroups);
+                //           if (touchedGroupIndex != -1) {
+                //             var sum = 0.0;
+                //             for (final rod
+                //                 in showingBarGroups[touchedGroupIndex]
+                //                     .barRods) {
+                //               sum += rod.toY;
+                //             }
+                //             final avg = sum /
+                //                 showingBarGroups[touchedGroupIndex]
+                //                     .barRods
+                //                     .length;
 
-                            showingBarGroups[touchedGroupIndex] =
-                                showingBarGroups[touchedGroupIndex].copyWith(
-                              barRods: showingBarGroups[touchedGroupIndex]
-                                  .barRods
-                                  .map((rod) {
-                                return rod.copyWith(
-                                    toY: avg, color: widget.avgColor);
-                              }).toList(),
-                            );
-                          }
-                        });
-                      },
-                    ),
-                    titlesData: FlTitlesData(
-                      show: true,
-                      rightTitles: const AxisTitles(
-                        sideTitles: SideTitles(showTitles: false),
-                      ),
-                      topTitles: const AxisTitles(
-                        sideTitles: SideTitles(showTitles: false),
-                      ),
-                      bottomTitles: AxisTitles(
-                        sideTitles: SideTitles(
-                          showTitles: true,
-                          getTitlesWidget: bottomTitles,
-                          reservedSize: 42,
-                        ),
-                      ),
-                      leftTitles: AxisTitles(
-                        sideTitles: SideTitles(
-                          showTitles: true,
-                          reservedSize: 28,
-                          interval: 1,
-                          getTitlesWidget: leftTitles,
-                        ),
-                      ),
-                    ),
-                    borderData: FlBorderData(
-                      show: false,
-                    ),
-                    barGroups: showingBarGroups,
-                    gridData: const FlGridData(show: false),
-                  ),
-                ),
+                //             showingBarGroups[touchedGroupIndex] =
+                //                 showingBarGroups[touchedGroupIndex].copyWith(
+                //               barRods: showingBarGroups[touchedGroupIndex]
+                //                   .barRods
+                //                   .map((rod) {
+                //                 return rod.copyWith(
+                //                     toY: avg, color: widget.avgColor);
+                //               }).toList(),
+                //             );
+                //           }
+                //         });
+                //       },
+                //     ),
+                //     titlesData: FlTitlesData(
+                //       show: true,
+                //       rightTitles: const AxisTitles(
+                //         sideTitles: SideTitles(showTitles: false),
+                //       ),
+                //       topTitles: const AxisTitles(
+                //         sideTitles: SideTitles(showTitles: false),
+                //       ),
+                //       bottomTitles: AxisTitles(
+                //         sideTitles: SideTitles(
+                //           showTitles: true,
+                //           getTitlesWidget: bottomTitles,
+                //           reservedSize: 42,
+                //         ),
+                //       ),
+                //       leftTitles: AxisTitles(
+                //         sideTitles: SideTitles(
+                //           showTitles: true,
+                //           reservedSize: 28,
+                //           interval: 1,
+                //           getTitlesWidget: leftTitles,
+                //         ),
+                //       ),
+                //     ),
+                //     borderData: FlBorderData(
+                //       show: false,
+                //     ),
+                //     barGroups: showingBarGroups,
+                //     gridData: const FlGridData(show: false),
+                //   ),
+                // ),
               ),
               const SizedBox(
                 height: 12,
@@ -402,74 +423,74 @@ class barGraphState extends State<barGraph> {
     );
   }
 
-  Widget leftTitles(double value, TitleMeta meta) {
-    const style = TextStyle(
-      color: Color(0xff7589a2),
-      fontWeight: FontWeight.bold,
-      fontSize: 14,
-    );
-    String text;
-    if (value == 0) {
-      text = '10';
-    } else if (value == 10) {
-      text = '25';
-    } else if (value == 19) {
-      text = '50';
-    } else {
-      return Container();
-    }
-    return SideTitleWidget(
-      axisSide: meta.axisSide,
-      space: 0,
-      child: Text(text, style: style),
-    );
-  }
+  // Widget leftTitles(double value, TitleMeta meta) {
+  //   const style = TextStyle(
+  //     color: Color(0xff7589a2),
+  //     fontWeight: FontWeight.bold,
+  //     fontSize: 14,
+  //   );
+  //   String text;
+  //   if (value == 0) {
+  //     text = '10';
+  //   } else if (value == 10) {
+  //     text = '25';
+  //   } else if (value == 19) {
+  //     text = '50';
+  //   } else {
+  //     return Container();
+  //   }
+  //   return SideTitleWidget(
+  //     axisSide: meta.axisSide,
+  //     space: 0,
+  //     child: Text(text, style: style),
+  //   );
+  // }
 
-  Widget bottomTitles(double value, TitleMeta meta) {
-    final titles = <String>[
-      'Aug\'23',
-      'Sept\'23',
-      'Oct\'23',
-      'Nov\'23',
-      'Dec\'23',
-      'Jan\'24',
-      'Feb\'24'
-    ];
+  // Widget bottomTitles(double value, TitleMeta meta) {
+  //   final titles = <String>[
+  //     'Aug\'23',
+  //     'Sept\'23',
+  //     'Oct\'23',
+  //     'Nov\'23',
+  //     'Dec\'23',
+  //     'Jan\'24',
+  //     'Feb\'24'
+  //   ];
 
-    final Widget text = Text(
-      titles[value.toInt()],
-      style: const TextStyle(
-        color: Color(0xff7589a2),
-        fontWeight: FontWeight.bold,
-        fontSize: 10,
-      ),
-    );
+  //   final Widget text = Text(
+  //     titles[value.toInt()],
+  //     style: const TextStyle(
+  //       color: Color(0xff7589a2),
+  //       fontWeight: FontWeight.bold,
+  //       fontSize: 10,
+  //     ),
+  //   );
 
-    return SideTitleWidget(
-      axisSide: meta.axisSide,
-      space: 16, //margin top
-      child: text,
-    );
-  }
+  //   return SideTitleWidget(
+  //     axisSide: meta.axisSide,
+  //     space: 16, //margin top
+  //     child: text,
+  //   );
+  // }
 
-  BarChartGroupData makeGroupData(int x, double y1, double y2) {
-    return BarChartGroupData(
-      barsSpace: 4,
-      x: x,
-      barRods: [
-        BarChartRodData(
-          toY: y1,
-          color: widget.leftBarColor,
-          width: width,
-        ),
-        BarChartRodData(
-          toY: y2,
-          color: widget.rightBarColor,
-          width: width,
-        ),
-      ],
-    );
-  }
+  // BarChartGroupData makeGroupData(int x, double y1, double y2) {
+  //   return BarChartGroupData(
+  //     barsSpace: 4,
+  //     x: x,
+  //     barRods: [
+  //       BarChartRodData(
+  //         toY: y1,
+  //         color: widget.leftBarColor,
+  //         width: width,
+  //       ),
+  //       BarChartRodData(
+  //         toY: y2,
+  //         color: widget.rightBarColor,
+  //         width: width,
+  //       ),
+  //     ],
+  //   );
+  // }
 
   void showFilter() {
     showFlexibleBottomSheet(
@@ -672,3 +693,72 @@ class barGraphState extends State<barGraph> {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+// // Define a helper function to group attendance data by month
+// Map<String, List<StudentAttendanceData>> groupAttendanceByMonth(List<StudentAttendanceData> data) {
+//   Map<String, List<StudentAttendanceData>> groupedData = {};
+//   for (var attendance in data) {
+//     for (var record in attendance.attendance) {
+//       String monthYearKey = '${record.date.year}-${record.date.month}';
+//       if (!groupedData.containsKey(monthYearKey)) {
+//         groupedData[monthYearKey] = [];
+//       }
+//       groupedData[monthYearKey]!.add(attendance);
+//     }
+//   }
+//   return groupedData;
+// }
+
+// // Update _fetchAttendanceData method to group data by month
+// Future<void> _fetchAttendanceData() async {
+//   List<StudentAttendanceData>? attendanceDataList =
+//       await _repository.fetchAttendance();
+//   int totalClasses = 0;
+//   int totalPresentClasses = 0;
+
+//   if (attendanceDataList != null) {
+//     // Group data by month
+//     Map<String, List<StudentAttendanceData>> groupedData = groupAttendanceByMonth(attendanceDataList);
+
+//     // Calculate total classes and total present classes
+//     for (var monthData in groupedData.values) {
+//       for (var data in monthData) {
+//         totalClasses += data.totalClasses ?? 0;
+//         totalPresentClasses += data.totalPresent ?? 0;
+//       }
+//     }
+//   }
+//   setState(() {
+//     _attendanceDataList = attendanceDataList;
+//     _totalClasses = totalClasses;
+//     _totalPresentClasses = totalPresentClasses;
+
+//     PreferencesManager().totalclasses = _totalClasses;
+//     PreferencesManager().presentclasses = _totalPresentClasses;
+//   });
+// }
+
+// // Update _initFilterWidgets method to populate monthly data
+// void _initFilterWidgets() {
+//   filterWidgets = {
+//     'Monthly': [
+//       for (var entry in groupedData.entries)
+//         Column(
+//           children: [
+//             Text(entry.key), // Display month
+//             for (var attendanceData in entry.value)
+//               AttendanceListCard(date: attendanceData.date, isPresent: attendanceData.isPresent),
+//           ],
+//         ),
+//     ],
+//     // Other filters...
+//   };
+// }

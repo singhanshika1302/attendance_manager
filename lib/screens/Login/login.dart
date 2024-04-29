@@ -313,7 +313,7 @@ class _LoginState extends State<Login> {
                               height: screenHeight * 0.05,
                             ),
                             buildtextfiled(
-                              'assets/User.png',
+                              'asset/images/user.png',
                               "User ID",
                               context,
                               "Enter User ID",
@@ -324,7 +324,7 @@ class _LoginState extends State<Login> {
                               height: screenHeight * 0.02,
                             ),
                             buildtextfiled(
-                              'assets/User.png',
+                              'asset/images/user.png',
                               "Password",
                               context,
                               "Enter Password",

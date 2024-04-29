@@ -6,6 +6,7 @@ import 'package:edumarshals/Widget/AttendanceCard.dart';
 // import '../Widget/CustomAppBar.dart';
 import 'package:edumarshals/Widget/CustomAppBar.dart';
 import 'package:edumarshals/Widget/SubjectAttendanceCard.dart';
+import 'package:edumarshals/display.dart';
 import 'package:edumarshals/main.dart';
 // import 'package:edumarshals/repository/overall_attendance_repository.dart';
 import 'package:edumarshals/repository/overall_attendance_repository.dart';
@@ -125,6 +126,9 @@ class _OverAllAttdState extends State<OverAllAttd> {
                                       'Subject: ${attendanceData.subject}',
                                   attendedClasses: attendanceData.totalPresent!,
                                   totalClasses: attendanceData.totalClasses!,
+                                  onpressed1: () {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=> DisplayScreen(subject: attendanceData.subject)));
+                                  },
                                 );
                               },
                             ),

@@ -5,24 +5,23 @@
 // import 'package:edumarshals/Screens/Events_Page.dart';
 
 import 'package:edumarshals/Model/assignment_Model.dart';
-import 'package:edumarshals/Model/student_attendance_data_model.dart';
 import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
 import 'package:edumarshals/Screens/Events/Events_Page.dart';
 import 'package:edumarshals/Screens/Notes_Assignment/ClassNotesPage.dart';
 import 'package:edumarshals/Screens/Notes_Assignment/Subject_Assignment.dart';
 import 'package:edumarshals/Screens/User_Info/Profile.dart';
+import 'package:edumarshals/Screens/testscreen.dart';
 import 'package:edumarshals/Utils/Utilities/Utilities.dart';
 import 'package:edumarshals/Widget/AttendanceCard.dart';
+import 'package:edumarshals/display.dart';
 import 'package:edumarshals/main.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:edumarshals/repository/assignment_Repository.dart';
-import 'package:edumarshals/repository/overall_attendance_repository.dart';
+import 'package:edumarshals/repository/classnotes_Repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 
 import '../../Model/classnotes_Model.dart';
 import '../../Utils/floating_action _button.dart';
-import 'package:edumarshals/repository/classnotes_Repo.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -201,10 +200,14 @@ class _HomepageState extends State<Homepage> {
                             style:
                             TextStyle(fontSize: 14, color: Color(0xff004BB8)),
                           ),
-                          onPressed: () => Navigator.push(
+                          // onPressed: () => Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => testscreen(userName: '', userImage: '', subjectName: '', subjectDescription: '7s'))),
+                            onPressed: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => EventsPage())),
+                                  builder: (context) =>OverAllAttd())),
                         )
                       ],
                     ),
@@ -282,7 +285,7 @@ class _HomepageState extends State<Homepage> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => ClassNotesPage(),
+                                          builder: (context) => testscreen(subjectName: '', subjectDescription: '', userImage: '', userName: '',),
                                         ),
                                       );
                                     },
@@ -428,7 +431,7 @@ class _HomepageState extends State<Homepage> {
               Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()));
               break;
             case 1:
-              Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => DisplayScreen(subject: 'COA',)));
               break;
             case 2:
               Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));

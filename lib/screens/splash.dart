@@ -1,13 +1,12 @@
 import 'dart:async';
+
 // import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
 import 'package:edumarshals/Screens/HomePage/Homepage.dart';
 import 'package:edumarshals/main.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:http/http.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Login/login.dart';
-import 'package:flutter/material.dart';
 
 // import 'sp';
 String finalname = '';
@@ -74,8 +73,8 @@ void initState() {
                   height: height * 0.05,
                 ),
                 Image.asset(
-                  'assets/unnamed-removebg-preview 1.png',
-                  scale: 4,
+                  'asset/images/Group 63.png',
+                  // scale: 4,
                   // fit: BoxFit.cover,
                   // height: height * 0.2,
                   // width: width * 0.5,
@@ -85,18 +84,18 @@ void initState() {
             SizedBox(
               height: height * 0.001,
             ),
-            const Text(
-              'AKGEC EDUMARSHAL',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 17,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w500,
-                // height: 0.02,
-                // letterSpacing: -0.70,
-              ),
-            ),
+            // const Text(
+            //   'AKGEC EDUMARSHAL',
+            //   textAlign: TextAlign.center,
+            //   style: TextStyle(
+            //     color: Colors.black,
+            //     fontSize: 17,
+            //     fontFamily: 'Poppins',
+            //     fontWeight: FontWeight.w500,
+            //     // height: 0.02,
+            //     // letterSpacing: -0.70,
+            //   ),
+            // ),
             // SizedBox(
             //   height: height * 0.05,
             // ),

@@ -107,7 +107,7 @@ class _HomepageState extends State<Homepage> {
                   Navigator.pop(context);
                 },
               ),
-              buildDrawerTile(0, 'assets/bank.png', 'Classroom', 'assets/sel_bank.png', 4),
+              buildDrawerTile(0, 'assets/buliding.png', 'Classroom', 'assets/sel_bank.png', 4),
               buildDrawerTile(1, 'assets/buliding.png', 'Hostel', 'assets/sel_building.png', 4),
               buildDrawerTile(2, 'assets/teacher.png', 'Placement', 'assets/sel_teacher.png', 4),
               buildDrawerTile(3, 'assets/note.png', 'PYQS Papers', 'assets/sel_note.png', 3.7),

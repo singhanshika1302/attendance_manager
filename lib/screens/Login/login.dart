@@ -1,9 +1,8 @@
+import 'dart:convert';
 import 'dart:io';
 
-// import 'package:edumarshals/Screens/OverAllAttendance.dart';
-// import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
-// import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
 import 'package:edumarshals/Screens/HomePage/Homepage.dart';
+import 'package:edumarshals/Utils/Utilities/utilities2.dart';
 // import 'package:edumarshals/Screens/User_Info/Personal_Info/Contact_info_Data.dart';
 // import 'package:edumarshals/Screens/User_Info/Personal_Info/Parent_Info_Data.dart';
 // import 'package:edumarshals/Screens/User_Info/Personal_Info/Personal_Info_Data.dart';
@@ -11,8 +10,6 @@ import 'package:edumarshals/Screens/HomePage/Homepage.dart';
 import 'package:edumarshals/main.dart';
 // import 'package:edumarshals/screens/time_table.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:edumarshals/Utils/Utilities/utilities2.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -149,14 +146,8 @@ class _LoginState extends State<Login> {
           _isLoading = false;
         });
         // for navigaation to next page
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) =>Homepage() ));
-        // Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //       builder: (context) =>
-        //           otpVerification(email: _emailController.text),
-        //     ));
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => Homepage()));
       } else {
         final Map<String, dynamic> responseData = json.decode(response.body);
         final message = responseData['message'];
@@ -210,7 +201,8 @@ class _LoginState extends State<Login> {
 
       if (savedDob != null) {
         // Parse saved date string to DateTime
-        final savedDate = DateFormat('dd-MM-yyyy').parse(PreferencesManager().dob);
+        final savedDate =
+            DateFormat('dd-MM-yyyy').parse(PreferencesManager().dob);
         setState(() {
           selectedDate = savedDate;
         });
@@ -321,7 +313,7 @@ class _LoginState extends State<Login> {
                               height: screenHeight * 0.05,
                             ),
                             buildtextfiled(
-                              'assets/User.png',
+                              'asset/images/user.png',
                               "User ID",
                               context,
                               "Enter User ID",
@@ -332,7 +324,7 @@ class _LoginState extends State<Login> {
                               height: screenHeight * 0.02,
                             ),
                             buildtextfiled(
-                              'assets/shield-security.png',
+                              'asset/images/user.png',
                               "Password",
                               context,
                               "Enter Password",
@@ -386,8 +378,8 @@ class _LoginState extends State<Login> {
                                                           ),
                                                         ),
                                                         Container(
-                                                          width:
-                                                              screenWidth * 0.58,
+                                                          width: screenWidth *
+                                                              0.58,
                                                           decoration:
                                                               const BoxDecoration(
                                                             // borderRadius: BorderRadius.circular(10),
@@ -417,7 +409,8 @@ class _LoginState extends State<Login> {
                                                                 const TextStyle(
                                                               fontSize: 12,
                                                               fontWeight:
-                                                                  FontWeight.w400,
+                                                                  FontWeight
+                                                                      .w400,
                                                               color: Color(
                                                                   0xFF565656),
                                                             ),
@@ -439,8 +432,8 @@ class _LoginState extends State<Login> {
                                                           ),
                                                         ),
                                                         Container(
-                                                          width:
-                                                              screenWidth * 0.58,
+                                                          width: screenWidth *
+                                                              0.58,
                                                           decoration:
                                                               const BoxDecoration(
                                                             // borderRadius: BorderRadius.circular(10),
@@ -538,7 +531,7 @@ class _LoginState extends State<Login> {
                       await _saveItem();
                       // Navigator.push(context,
                       //     MaterialPageRoute(builder: (context) => OverAllAttd()));
-          
+
                       // Add your onPressed logic here
                     },
                     style: ButtonStyle(

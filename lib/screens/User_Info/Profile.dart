@@ -1,16 +1,12 @@
 // import 'package:edumarshal/Widget/Profile_Tabs.dart';
-import 'package:edumarshals/Model/time_table_model.dart';
 import 'package:edumarshals/Screens/Login/login.dart';
-import 'package:edumarshals/Screens/User_Info/Personal_Info/Contact_info_Data.dart';
 import 'package:edumarshals/Screens/User_Info/Document/My_Documents_Screen.dart';
+import 'package:edumarshals/Screens/User_Info/Personal_Info/Contact_info_Data.dart';
 import 'package:edumarshals/Screens/User_Info/Personal_Info/Parent_Info_Data.dart';
 import 'package:edumarshals/Screens/User_Info/Personal_Info/Personal_Info_Data.dart';
-import 'package:edumarshals/Screens/User_Info/Personal_Info/contact_details.dart';
-import 'package:edumarshals/Screens/User_Info/Personal_Info/guardian_info.dart';
 import 'package:edumarshals/Screens/User_Info/Subject_Data.dart';
 import 'package:edumarshals/Screens/time_table.dart';
 import 'package:edumarshals/Utils/floating_action%20_button.dart';
-import 'package:edumarshals/Widget/Profile_Container.dart';
 import 'package:edumarshals/Widget/Profile_Tabs.dart';
 import 'package:edumarshals/main.dart';
 import 'package:flutter/material.dart';
@@ -24,13 +20,13 @@ class Profile extends StatefulWidget {
   @override
   State<Profile> createState() => _ProfileState();
 }
-
+final _key = GlobalKey<ExpandableFabState>();
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //  floatingActionButtonLocation: ExpandableFab.location,
-      // floatingActionButton: custom_floating_action_button(),
+       floatingActionButtonLocation: ExpandableFab.location,
+      floatingActionButton: custom_floating_action_button(Gkey: _key,),
       backgroundColor: const Color.fromRGBO(235, 243, 255, 1),
       appBar: AppBar(
         surfaceTintColor: Colors.transparent
@@ -147,54 +143,54 @@ class _ProfileState extends State<Profile> {
         children: [
            Profile_Tab(
             Profileoption: 'Personal Information',
-             onpressed: () {
+             onpressed1: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) =>  PersonalInfoScreen()));
               // Callback function for IconButton pressed
               print('Arrow Forward Pressed');
             },
-            onpressed1: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) =>  PersonalInfoScreen()));
-            },
+            // onpressed1: () {
+            //   Navigator.push(context,
+            //       MaterialPageRoute(builder: (context) =>  PersonalInfoScreen()));
+            // },
           ),
            Profile_Tab(
             Profileoption: 'Guardian Information',
-             onpressed: () {
+             onpressed1: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => ParentInfoScreen()));
               // Callback function for IconButton pressed
               print('Arrow Forward Pressed');
             },
-            onpressed1: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) =>  ParentInfoScreen()));
-            },
+            // onpressed1: () {
+            //   Navigator.push(context,
+            //       MaterialPageRoute(builder: (context) =>  ParentInfoScreen()));
+            // },
           ),
           Profile_Tab(
             Profileoption: 'Contact Details',
-             onpressed: () {
+             onpressed1: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => ContactInfoScreen()));
               // Callback function for IconButton pressed
               print('Arrow Forward Pressed');
             },
-            onpressed1: () {
-               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ContactInfoScreen()));
-            },
+            // onpressed1: () {
+            //    Navigator.push(context,
+            //       MaterialPageRoute(builder: (context) => ContactInfoScreen()));
+            // },
           ),
           // const Profile_Tab(
           //   Profileoption: 'Education Details',
           // ),
           Profile_Tab(
             Profileoption: 'My Documents',
-            onpressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) =>  MyDocument()));
-              // Callback function for IconButton pressed
-              print('Arrow Forward Pressed');
-            },
+            // onpressed: () {
+            //   Navigator.push(context,
+            //       MaterialPageRoute(builder: (context) =>  MyDocument()));
+            //   // Callback function for IconButton pressed
+            //   print('Arrow Forward Pressed');
+            // },
             onpressed1: () {
                Navigator.push(context,
                   MaterialPageRoute(builder: (context) =>  MyDocument()));
@@ -203,7 +199,7 @@ class _ProfileState extends State<Profile> {
           ),
           Profile_Tab(
             Profileoption: 'Timetable',
-               onpressed: () {
+               onpressed1: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => ExamTimetableScreen()));
               // Callback function for IconButton pressed
@@ -240,7 +236,7 @@ class _ProfileState extends State<Profile> {
           // ),
              Profile_Tab(
             Profileoption: 'Logout',
-               onpressed: () async {
+               onpressed1: () async {
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                             prefs.remove('username');
                             prefs.remove('password');

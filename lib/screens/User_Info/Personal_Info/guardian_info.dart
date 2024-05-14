@@ -1,7 +1,8 @@
 // import 'package:edumarshals/screens/login.dart';
 import 'package:edumarshals/Screens/Login/login.dart';
-import 'package:flutter/material.dart';
 import 'package:edumarshals/Utils/Utilities/utilities2.dart';
+import 'package:edumarshals/main.dart';
+import 'package:flutter/material.dart';
 
 class guardianInfo extends StatefulWidget {
   const guardianInfo({super.key});
@@ -124,8 +125,8 @@ class _guardianInfoState extends State<guardianInfo> {
                 scale: 4,
                 // height: screenHeight * 0.032,
               ),
-              const CustomText(
-                text: "Tripod",
+               CustomText(
+                text: PreferencesManager().name,
                 color: Color.fromARGB(255, 0, 0, 0),
                 fontSize: 12,
                 fontStyle: null,

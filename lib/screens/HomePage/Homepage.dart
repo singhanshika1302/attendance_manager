@@ -10,10 +10,10 @@ import 'package:edumarshals/Screens/Events/Events_Page.dart';
 import 'package:edumarshals/Screens/Notes_Assignment/ClassNotesPage.dart';
 import 'package:edumarshals/Screens/Notes_Assignment/Subject_Assignment.dart';
 import 'package:edumarshals/Screens/User_Info/Profile.dart';
-import 'package:edumarshals/Screens/testscreen.dart';
+import 'package:edumarshals/Screens/drawer_screens/fees.dart';
+import 'package:edumarshals/Screens/drawer_screens/hostel_leaves.dart';
 import 'package:edumarshals/Utils/Utilities/Utilities.dart';
 import 'package:edumarshals/Widget/AttendanceCard.dart';
-import 'package:edumarshals/display.dart';
 import 'package:edumarshals/main.dart';
 import 'package:edumarshals/repository/assignment_Repository.dart';
 import 'package:edumarshals/repository/classnotes_Repo.dart';
@@ -285,7 +285,7 @@ class _HomepageState extends State<Homepage> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => testscreen(subjectName: '', subjectDescription: '', userImage: '', userName: '',),
+                                          builder: (context) => ClassNotesPage()
                                         ),
                                       );
                                     },
@@ -431,7 +431,7 @@ class _HomepageState extends State<Homepage> {
               Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()));
               break;
             case 1:
-              Navigator.push(context, MaterialPageRoute(builder: (context) => DisplayScreen(subject: 'COA',)));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => hostelLeavePage()));
               break;
             case 2:
               Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
@@ -440,7 +440,7 @@ class _HomepageState extends State<Homepage> {
               Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
               break;
             case 4:
-              Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => feesPage()));
               break;
             case 5:
               Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));

@@ -1,28 +1,136 @@
 import 'package:edumarshals/Model/student_attendance_data_model.dart';
+import 'package:edumarshals/Widget/AttendanceCard.dart';
+import 'package:edumarshals/main.dart';
+import 'package:edumarshals/repository/overall_attendance_repository.dart';
 import 'package:flutter/material.dart';
 
-class MonthlyAttendanceList extends StatelessWidget {
+class MonthlyAttendanceList extends StatefulWidget {
+  final String? subject;
   final List<StudentAttendanceData>? attendanceData;
 
-  MonthlyAttendanceList({required this.attendanceData});
+  MonthlyAttendanceList({required this.attendanceData,required this.subject});
 
   @override
+  State<MonthlyAttendanceList> createState() => _MonthlyAttendanceListState();
+}
+
+class _MonthlyAttendanceListState extends State<MonthlyAttendanceList> {
+  // ..............attendace api is intigrated ..................
+  final AttendanceRepository _repository = AttendanceRepository();
+  List<StudentAttendanceData>? _attendanceDataList;
+  int _totalClasses = 0;
+  int _totalPresentClasses = 0;
+ 
+
+//.............calling attendance repository ...................................//
+  Future<void> _fetchAttendanceData() async {
+    List<StudentAttendanceData>? attendanceDataList =
+        await _repository.fetchAttendance();
+    int totalClasses = 0;
+    int totalPresentClasses = 0;
+//...............function to store total present and total classes .............//
+    if (attendanceDataList != null) {
+      for (var data in attendanceDataList) {
+        totalClasses += data.totalClasses ?? 0;
+        totalPresentClasses += data.totalPresent ?? 0;
+      }
+    }
+    setState(() {
+      _attendanceDataList = attendanceDataList;
+      _totalClasses = totalClasses;
+      print('totalclasses${_totalClasses}');
+      // PreferencesManager.totalclasses=_totalClasses;
+      // print('totalPresentClasses${_totalPresentClasses}');
+      _totalPresentClasses = totalPresentClasses;
+
+      PreferencesManager().totalclasses = _totalClasses;
+      PreferencesManager().presentclasses = _totalPresentClasses;
+
+      print('totalPresentClasses${_totalPresentClasses}');
+
+      // print('dfghj $attendanceDataList');
+      // PreferencesManager.totalclasses=_totalClasses;
+    });
+  }
+    @override
+  void initState() {
+    super.initState();
+    _fetchAttendanceData();
+  }
+
+  //................attendance api is intigrated ....................//
+  @override
   Widget build(BuildContext context) {
+    final sheight = MediaQuery.of(context).size.height;
+    final swidth = MediaQuery.of(context).size.width;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Add your additional containers here
         Container(
-          
-          // Your container properties
-          // Add any widgets or content you want
-        ),
+                height: sheight * 0.18,
+//.................fetching list in which all attendace is stored................//
+                child: _attendanceDataList != null
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: _attendanceDataList!.length,
+                              itemBuilder: (context, index) {
+                                final attendanceData =
+                                    _attendanceDataList![index];
+//.......................assigning subject attendace to the SubjectAttendaceCard......//
+                                if (attendanceData.subject == '${widget.subject}') {
+                                  // Only render the SubjectAttendanceCard if the subject is Mathematics
+                                  return AttendanceCard(
+                                      attendedClasses:
+                                          attendanceData.totalPresent!,
+                                      totalClassess:
+                                          attendanceData.totalClasses!,
+                                      // title: widget.subjectName,
+                                      title:
+                                          'Subject: ${attendanceData.subject}',
+                                      description: '');
+                                  // SubjectAttendanceCard(
+                                  //   subjectName:
+                                  //       'Subject: ${attendanceData.subject}',
+                                  //   attendedClasses:
+                                  //       attendanceData.totalPresent!,
+                                  //   totalClasses: attendanceData.totalClasses!,
+                                  // );
+                                } else {
+                                  // Return an empty container for other subjects
+                                  return Container();
+                                }
+                                // return SubjectAttendanceCard(
+                                //   subjectName:
+                                //       'Subject: ${attendanceData.subject}',
+                                //   attendedClasses: attendanceData.totalPresent!,
+                                //   totalClasses: attendanceData.totalClasses!,
+                                // );
+                              },
+                            ),
+                          ),
+                        ],
+                      )
+                    : Center(
+                        child: SizedBox(
+                          height: 50, // Adjust the height as needed
+                          width: 50, // Adjust the width as needed
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
+              ),
+        // Add your additional containers here
+        // Container(
+        //  child: AttendanceCard(title: "", description: "", attendedClasses: 8, totalClassess: 9),
+        // ),
         Expanded(
           // Wrap ListView.builder with Expanded to allow it to take all remaining space
           child: ListView.builder(
-            itemCount: attendanceData?.length,
+            itemCount: widget.attendanceData?.length,
             itemBuilder: (context, index) {
-              final StudentAttendanceData monthData = attendanceData![index];
+              final StudentAttendanceData monthData = widget.attendanceData![index];
               final String subject = monthData.subject ?? '';
               final List<Attendance> attendance = monthData.attendance ?? [];
 

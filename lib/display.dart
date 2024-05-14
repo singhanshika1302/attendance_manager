@@ -23,6 +23,7 @@ class _DisplayScreenState extends State<DisplayScreen> {
     _fetchAttendanceData();
   }
 
+
   Future<void> _fetchAttendanceData() async {
     final List<StudentAttendanceData>? attendanceDataList =
         await _repository.fetchAttendance();
@@ -43,7 +44,7 @@ class _DisplayScreenState extends State<DisplayScreen> {
         title: Text('Attendance Display'),
       ),
       body: _attendanceDataList != null
-          ? MonthlyAttendanceList(attendanceData: _attendanceDataList!)
+          ? MonthlyAttendanceList(attendanceData: _attendanceDataList!,subject: widget.subject,)
           : Center(
               child: CircularProgressIndicator(),
             ),

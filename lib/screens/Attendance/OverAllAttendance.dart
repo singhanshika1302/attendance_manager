@@ -1,13 +1,17 @@
-import 'package:edumarshals/Widget/AttendanceCard.dart';
-import 'package:edumarshals/Widget/SubjectAttendanceCard.dart';
-import 'package:edumarshals/main.dart';
-import 'package:flutter/material.dart';
-// import 'package:edumarshals/repository/overall_attendance_repository.dart';
-import 'package:edumarshals/repository/overall_attendance_repository.dart';
 // import 'package:edumarshals/model/student_attendance_data_model.dart';
 import 'package:edumarshals/Model/student_attendance_data_model.dart';
+import 'package:edumarshals/Screens/HomePage/Homepage.dart';
+import 'package:edumarshals/Utils/floating_action%20_button.dart';
+import 'package:edumarshals/Widget/AttendanceCard.dart';
 // import '../Widget/CustomAppBar.dart';
 import 'package:edumarshals/Widget/CustomAppBar.dart';
+import 'package:edumarshals/Widget/SubjectAttendanceCard.dart';
+import 'package:edumarshals/display.dart';
+import 'package:edumarshals/main.dart';
+// import 'package:edumarshals/repository/overall_attendance_repository.dart';
+import 'package:edumarshals/repository/overall_attendance_repository.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 
 class OverAllAttd extends StatefulWidget {
   const OverAllAttd({super.key});
@@ -15,6 +19,7 @@ class OverAllAttd extends StatefulWidget {
   @override
   State<OverAllAttd> createState() => _OverAllAttdState();
 }
+final _key = GlobalKey<ExpandableFabState>();
 
 class _OverAllAttdState extends State<OverAllAttd> {
   final AttendanceRepository _repository = AttendanceRepository();
@@ -50,27 +55,31 @@ class _OverAllAttdState extends State<OverAllAttd> {
       _totalPresentClasses = totalPresentClasses;
 
       PreferencesManager().totalclasses = _totalClasses;
-      PreferencesManager().presentclasses=_totalPresentClasses;
+      PreferencesManager().presentclasses = _totalPresentClasses;
 
       print('totalPresentClasses${_totalPresentClasses}');
 
-    // print('dfghj $attendanceDataList');
+      // print('dfghj $attendanceDataList');
       // PreferencesManager.totalclasses=_totalClasses;
-
-
     });
-   
   }
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     //final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+        floatingActionButtonLocation: ExpandableFab.location,
+      floatingActionButton: custom_floating_action_button(Gkey: _key,),
+      key: _scaffoldKey,
       backgroundColor: Color.fromRGBO(242, 246, 255, 1),
       appBar: CustomAppBar(
           userName: '${PreferencesManager().name}',
-          userImage: "assets/Ellipse 7.jpg"),
+          userImage: PreferencesManager().studentPhoto, onTap: () {  
+                                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => OverAllAttd()));
+
+          },),
       body: ListView(
         children: [
           Column(
@@ -86,13 +95,20 @@ class _OverAllAttdState extends State<OverAllAttd> {
                 alignment: Alignment.centerLeft, // Align text to the left
                 margin:
                     EdgeInsets.only(left: 16.0), // Add left margin for the text
-                child: Text(
-                  "All Subject",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                child: Row(
+                  children: [
+                    IconButton(icon:Icon(Icons.arrow_back), onPressed: () { 
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> Homepage()));
+                     }, ),
+                    Text(
+                      "All Subject",
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    ),
+                  ],
                 ),
               ),
               Container(
-                height: screenHeight ,
+                height: screenHeight,
 //.................fetching list in which all attendace is stored................//
                 child: _attendanceDataList != null
                     ? Column(
@@ -110,6 +126,9 @@ class _OverAllAttdState extends State<OverAllAttd> {
                                       'Subject: ${attendanceData.subject}',
                                   attendedClasses: attendanceData.totalPresent!,
                                   totalClasses: attendanceData.totalClasses!,
+                                  onpressed1: () {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=> DisplayScreen(subject: attendanceData.subject)));
+                                  },
                                 );
                               },
                             ),

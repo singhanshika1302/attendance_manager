@@ -3,8 +3,6 @@ import 'package:edumarshals/Screens/HomePage/Homepage.dart';
 import 'package:edumarshals/Screens/drawer_screens/fees.dart';
 import 'package:edumarshals/Screens/drawer_screens/hostel_leaves.dart';
 import 'package:flutter/material.dart';
-import '../Screens/Events/Events_Page.dart';
-import '../Screens/HomePage/Homepage.dart';
 
 class CommonDrawer extends StatelessWidget {
   // final Function(int) onDrawerItemSelected;

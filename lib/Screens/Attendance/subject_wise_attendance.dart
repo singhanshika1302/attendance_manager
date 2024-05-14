@@ -33,6 +33,7 @@ class barGraph extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => barGraphState();
 }
+
 final _key = GlobalKey<ExpandableFabState>();
 
 class barGraphState extends State<barGraph> {
@@ -70,11 +71,6 @@ class barGraphState extends State<barGraph> {
 
       // print('dfghj $attendanceDataList');
       // PreferencesManager.totalclasses=_totalClasses;
-
-
-
-
-      
     });
   }
 
@@ -93,8 +89,6 @@ class barGraphState extends State<barGraph> {
   String filter = 'Monthly'; // Default filter
   late Map<String, List<Widget>> filterWidgets;
   int touchedGroupIndex = -1;
-
-
 
   void _initFilterWidgets() {
     filterWidgets = {
@@ -119,8 +113,6 @@ class barGraphState extends State<barGraph> {
       ],
     };
   }
-
-
 
   @override
   void initState() {
@@ -157,17 +149,29 @@ class barGraphState extends State<barGraph> {
     return Scaffold(
       backgroundColor: Color(0xffF2F6FF),
       floatingActionButtonLocation: ExpandableFab.location,
-      floatingActionButton: custom_floating_action_button(Gkey: _key,),
-      appBar:
-          CustomAppBar(userName: widget.userName, userImage: widget.userImage, onTap: () { Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => barGraph(userName: PreferencesManager().name, userImage: PreferencesManager().studentPhoto, subjectName: "", subjectDescription: "")));
- },),
+      floatingActionButton: custom_floating_action_button(
+        Gkey: _key,
+      ),
+      appBar: CustomAppBar(
+        userName: widget.userName,
+        userImage: widget.userImage,
+        onTap: () {
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => barGraph(
+                      userName: PreferencesManager().name,
+                      userImage: PreferencesManager().studentPhoto,
+                      subjectName: "",
+                      subjectDescription: "")));
+        },
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-
               Container(
                 height: sheight * 0.18,
 //.................fetching list in which all attendace is stored................//

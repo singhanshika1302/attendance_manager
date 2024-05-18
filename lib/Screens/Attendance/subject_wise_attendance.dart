@@ -148,9 +148,9 @@ class barGraphState extends State<barGraph> {
       backgroundColor: Color(0xffF2F6FF),
       floatingActionButtonLocation: ExpandableFab.location,
       floatingActionButton: custom_floating_action_button(Gkey: _key,),
-      appBar:
-          CustomAppBar(userName: widget.userName, userImage: widget.userImage, onTap: () {                               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => barGraph(userName: PreferencesManager().name, userImage: PreferencesManager().studentPhoto, subjectName: "", subjectDescription: "")));
- },),
+ //      appBar:
+ //          CustomAppBar(userName: widget.userName, userImage: widget.userImage, onTap: () {                               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => barGraph(userName: PreferencesManager().name, userImage: PreferencesManager().studentPhoto, subjectName: "", subjectDescription: "")));
+ // },),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: SingleChildScrollView(

@@ -52,11 +52,11 @@ class _ClassNotesPageState extends State<ClassNotesPage> {
       floatingActionButton: custom_floating_action_button(Gkey: _key,),
       key: _scaffoldKey,
       backgroundColor: Color(0xffEBF3FF),
-      appBar: CustomAppBar(userName: PreferencesManager().name, 
-      userImage: PreferencesManager().studentPhoto,
-      onTap: () {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ClassNotesPage()));
- },),
+ //      appBar: CustomAppBar(userName: PreferencesManager().name,
+ //      userImage: PreferencesManager().studentPhoto,
+ //      onTap: () {
+ //        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ClassNotesPage()));
+ // },),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(

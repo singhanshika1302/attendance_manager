@@ -38,7 +38,7 @@ class Assignment {
       this.description});
 
   Assignment.fromJson(Map<String, dynamic> json) {
-    assignmentId = json['assignmentId'];
+    assignmentId = json['_id'];
     subject =
         json['subject'] != null ? new Subject.fromJson(json['subject']) : null;
     assignment = json['assignment'];

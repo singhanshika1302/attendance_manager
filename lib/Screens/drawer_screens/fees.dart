@@ -7,6 +7,8 @@ import 'package:expandable_section/expandable_section.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
+import '../../Widget/CommonDrawer.dart';
+
 class feesPage extends StatefulWidget {
   const feesPage({super.key});
 
@@ -30,11 +32,23 @@ final _feeCollectionController = TextEditingController();
 final _remarksController = TextEditingController();
 
 class _feesPageState extends State<feesPage> {
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       backgroundColor: Color(0xffF2F6FF),
-      appBar: CustomAppBar(userName: PreferencesManager().name, userImage:PreferencesManager().studentPhoto,onTap: (){},),
+      appBar: CustomAppBar(
+        userName: PreferencesManager().name,
+        userImage: PreferencesManager().studentPhoto,
+        onTap: () {
+          scaffoldKey.currentState?.openDrawer();
+        },
+        scaffoldKey: scaffoldKey, // Pass the _scaffoldKey
+      ),
+      drawer: CommonDrawer(
+        scaffoldKey: scaffoldKey, currentIndex: 4, // Pass the _scaffoldKey
+      ),
       body: SafeArea(
         child: DefaultTabController(
           length: 4,

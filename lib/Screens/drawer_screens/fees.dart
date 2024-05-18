@@ -35,6 +35,10 @@ class _feesPageState extends State<feesPage> {
   final GlobalKey<ScaffoldState> scaffoldKey_ = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final screenWidth = mediaQuery.size.width;
+    final screenHeight = mediaQuery.size.height;
+
     return Scaffold(
       key: scaffoldKey_,
       backgroundColor: Color(0xffF2F6FF),
@@ -44,10 +48,10 @@ class _feesPageState extends State<feesPage> {
         onTap: () {
           scaffoldKey_.currentState?.openDrawer();
         },
-        scaffoldKey_: scaffoldKey_, // Pass the _scaffoldKey
+        scaffoldKey_: scaffoldKey_,// Pass the _scaffoldKey
       ),
       drawer: CommonDrawer(
-        scaffoldKey_: scaffoldKey_, currentIndex: 4, // Pass the _scaffoldKey
+        scaffoldKey_: scaffoldKey_, currentIndex: 0, // Pass the _scaffoldKey
       ),
       body: SafeArea(
         child: DefaultTabController(
@@ -58,16 +62,18 @@ class _feesPageState extends State<feesPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 ButtonsTabBar(
-                  height: 60,
+                  height: screenHeight * 0.1,
                   buttonMargin: EdgeInsets.all(10),
                   contentPadding: EdgeInsets.all(12),
                   backgroundColor: Color(0xff004BB8),
                   unselectedBackgroundColor: Colors.white,
                   unselectedLabelStyle: TextStyle(color: Colors.black),
                   labelStyle: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12),
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: screenWidth *
+                        0.04, // Adjusted font size using screenWidth
+                  ),
                   tabs: [
                     Tab(
                       text: "Fee Structure",
@@ -102,6 +108,9 @@ class _feesPageState extends State<feesPage> {
   }
 
   Widget _buildFeeStructure() {
+    final mediaQuery = MediaQuery.of(context);
+    final screenWidth = mediaQuery.size.width;
+    final screenHeight = mediaQuery.size.height;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       width: double.infinity,
@@ -145,13 +154,13 @@ class _feesPageState extends State<feesPage> {
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
-                              fontSize: 12,
+                              fontSize: 18,
                             ),
                           ),
                           Icon(
                             _isExpandNormal
-                                ? Icons.keyboard_arrow_up
-                                : Icons.keyboard_arrow_down,
+                                ? Icons.arrow_drop_up
+                                : Icons.arrow_drop_down,
                             color: Colors.white,
                           )
                         ],
@@ -161,7 +170,7 @@ class _feesPageState extends State<feesPage> {
                   ExpandableSection(
                     expand: _isExpandNormal,
                     child: Container(
-                      height: 300,
+                      height: screenHeight * 0.3,
                       width: double.infinity,
                       margin: const EdgeInsets.only(top: 2),
                       decoration: const BoxDecoration(
@@ -225,13 +234,13 @@ class _feesPageState extends State<feesPage> {
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
-                              fontSize: 10,
+                              fontSize: 18,
                             ),
                           ),
                           Icon(
                             _isExpandFeeWaiver
-                                ? Icons.keyboard_arrow_up
-                                : Icons.keyboard_arrow_down,
+                                ? Icons.arrow_drop_up
+                                : Icons.arrow_drop_down,
                             color: Colors.white,
                           )
                         ],
@@ -241,7 +250,7 @@ class _feesPageState extends State<feesPage> {
                   ExpandableSection(
                     expand: _isExpandFeeWaiver,
                     child: Container(
-                      height: 300,
+                      height: screenHeight * 0.3,
                       width: double.infinity,
                       margin: const EdgeInsets.only(top: 2),
                       decoration: const BoxDecoration(
@@ -305,13 +314,13 @@ class _feesPageState extends State<feesPage> {
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
-                              fontSize: 10,
+                              fontSize: 18,
                             ),
                           ),
                           Icon(
                             _isExpandLateralEntry
-                                ? Icons.keyboard_arrow_up
-                                : Icons.keyboard_arrow_down,
+                                ? Icons.arrow_drop_up
+                                : Icons.arrow_drop_down,
                             color: Colors.white,
                           )
                         ],
@@ -321,7 +330,7 @@ class _feesPageState extends State<feesPage> {
                   ExpandableSection(
                     expand: _isExpandLateralEntry,
                     child: Container(
-                      height: 300,
+                      height: screenHeight * 0.3,
                       width: double.infinity,
                       margin: const EdgeInsets.only(top: 2),
                       decoration: const BoxDecoration(
@@ -390,8 +399,8 @@ class _feesPageState extends State<feesPage> {
                           ),
                           Icon(
                             _isExpandMCA
-                                ? Icons.keyboard_arrow_up
-                                : Icons.keyboard_arrow_down,
+                                ? Icons.arrow_drop_up
+                                : Icons.arrow_drop_down,
                             color: Colors.white,
                           )
                         ],
@@ -401,7 +410,7 @@ class _feesPageState extends State<feesPage> {
                   ExpandableSection(
                     expand: _isExpandMCA,
                     child: Container(
-                      height: 300,
+                      height: screenHeight * 0.3,
                       width: double.infinity,
                       margin: const EdgeInsets.only(top: 2),
                       decoration: const BoxDecoration(
@@ -436,6 +445,10 @@ class _feesPageState extends State<feesPage> {
   }
 
   Widget _buildPayOnline() {
+    final mediaQuery = MediaQuery.of(context);
+    final screenWidth = mediaQuery.size.width;
+    final screenHeight = mediaQuery.size.height;
+
     return Column(
       children: [
         SizedBox(
@@ -450,7 +463,10 @@ class _feesPageState extends State<feesPage> {
                 children: [
                   Text(
                     'Important Note: ',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: screenWidth *
+                            0.04), // Adjusted font size using screenWidth
                   ),
                   Text(
                       '1. Current Year (2023-23) Academic fees is visible here'),
@@ -464,22 +480,27 @@ class _feesPageState extends State<feesPage> {
           ),
         ),
         SizedBox(
-          height: 10,
+          height: screenHeight * 0.02,
         ),
         customHeading(heading: 'Collection Name', subHeading: 'College Fee'),
         customHeading(heading: 'Amount', subHeading: '120056'),
         SizedBox(
-          height: 40,
+          height: screenHeight * 0.1,
         ),
         SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-                style: ButtonStyle(
-                    foregroundColor: MaterialStatePropertyAll(Colors.white),
-                    backgroundColor:
-                        MaterialStatePropertyAll(Color(0xff004BB8))),
-                onPressed: () {},
-                child: Text('Pay')))
+          width: double.infinity,
+          child: ElevatedButton(
+            style: ButtonStyle(
+              foregroundColor: MaterialStatePropertyAll(Colors.white),
+              backgroundColor: MaterialStatePropertyAll(Color(0xff004BB8)),
+            ),
+            onPressed: () {},
+            child: Text('Pay',
+                style: TextStyle(
+                    fontSize: screenWidth *
+                        0.04)), // Adjusted font size using screenWidth
+          ),
+        ),
       ],
     );
   }
@@ -533,8 +554,8 @@ class _feesPageState extends State<feesPage> {
                           ),
                           Icon(
                             _isExpandFeePayment
-                                ? Icons.keyboard_arrow_up
-                                : Icons.keyboard_arrow_down,
+                                ? Icons.arrow_drop_up
+                                : Icons.arrow_drop_down,
                             color: Colors.white,
                           )
                         ],
@@ -641,8 +662,8 @@ class _feesPageState extends State<feesPage> {
                           ),
                           Icon(
                             _isExpandHostelFeePayment
-                                ? Icons.keyboard_arrow_up
-                                : Icons.keyboard_arrow_down,
+                                ? Icons.arrow_drop_up
+                                : Icons.arrow_drop_down,
                             color: Colors.white,
                           )
                         ],
@@ -652,7 +673,7 @@ class _feesPageState extends State<feesPage> {
                   ExpandableSection(
                     expand: _isExpandHostelFeePayment,
                     child: Container(
-                      // height: 300,
+                      // height: screenHeight * 0.3,
                       width: double.infinity,
                       margin: const EdgeInsets.only(top: 2),
                       decoration: const BoxDecoration(
@@ -716,6 +737,10 @@ class _feesPageState extends State<feesPage> {
   }
 
   Widget _buildOfflineHistory() {
+    final mediaQuery = MediaQuery.of(context);
+    final screenWidth = mediaQuery.size.width;
+    final screenHeight = mediaQuery.size.height;
+
     DateTime _selectedDate = DateTime.now();
 
     Future<void> _selectDate(
@@ -736,7 +761,10 @@ class _feesPageState extends State<feesPage> {
     }
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      padding: EdgeInsets.symmetric(
+        horizontal: screenWidth * 0.025,
+        vertical: screenHeight * 0.01,
+      ),
       width: double.infinity,
       child: SingleChildScrollView(
         child: Column(
@@ -745,16 +773,17 @@ class _feesPageState extends State<feesPage> {
             AnimatedContainer(
               duration: const Duration(milliseconds: 200),
               decoration: BoxDecoration(
-                  color: Color(0xff004BB8),
-                  border: Border.all(width: 1, color: Colors.grey),
-                  borderRadius: _isExpandOfflinePaymentHistory
-                      ? const BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10),
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),
-                        )
-                      : BorderRadius.circular(10)),
+                color: Color(0xff004BB8),
+                border: Border.all(width: 1, color: Colors.grey),
+                borderRadius: _isExpandOfflinePaymentHistory
+                    ? const BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10),
+                      )
+                    : BorderRadius.circular(10),
+              ),
               child: Column(
                 children: [
                   GestureDetector(
@@ -765,11 +794,9 @@ class _feesPageState extends State<feesPage> {
                       });
                     },
                     child: Padding(
-                      padding: const EdgeInsets.only(
-                        left: 16,
-                        right: 8,
-                        top: 8,
-                        bottom: 8,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: screenWidth * 0.025,
+                        vertical: screenHeight * 0.01,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -787,8 +814,8 @@ class _feesPageState extends State<feesPage> {
                           ),
                           Icon(
                             _isExpandOfflinePaymentHistory
-                                ? Icons.arrow_drop_down
-                                : Icons.arrow_drop_up,
+                                ? Icons.arrow_drop_up
+                                : Icons.arrow_drop_down,
                             color: Colors.white,
                           )
                         ],
@@ -798,7 +825,6 @@ class _feesPageState extends State<feesPage> {
                   ExpandableSection(
                     expand: _isExpandOfflinePaymentHistory,
                     child: Container(
-                      // height: 300,
                       width: double.infinity,
                       margin: const EdgeInsets.only(top: 2),
                       decoration: const BoxDecoration(
@@ -824,39 +850,44 @@ class _feesPageState extends State<feesPage> {
                             Row(
                               children: [
                                 SizedBox(
-                                  height: 70,
-                                  width: 175,
+                                  height: screenHeight * 0.09,
+                                  width: screenWidth * 0.45,
                                   child: customTextFormField(
-                                      controller: _paymentModeController,
-                                      text: 'Payment Mode'),
+                                    controller: _paymentModeController,
+                                    text: 'Payment Mode',
+                                  ),
                                 ),
                                 SizedBox(
-                                  height: 70,
-                                  width: 175,
+                                  height: screenHeight * 0.09,
+                                  width: screenWidth * 0.45,
                                   child: customTextFormField(
-                                      controller: _addNoController,
-                                      text: 'Admission No.'),
+                                    controller: _addNoController,
+                                    text: 'Admission No.',
+                                  ),
                                 ),
                               ],
                             ),
                             SizedBox(
-                              height: 70,
-                              width: 400,
+                              height: screenHeight * 0.09,
+                              width: screenWidth * 0.9,
                               child: customTextFormField(
-                                  controller: _accountHolderController,
-                                  text: 'Account Holder Name'),
+                                controller: _accountHolderController,
+                                text: 'Account Holder Name',
+                              ),
                             ),
                             Row(
                               children: [
                                 SizedBox(
-                                    height: 70,
-                                    width: 175,
-                                    child: customTextFormField(
-                                        controller: _feeCollectionController,
-                                        text: 'Fee Collection')),
+                                  height: screenHeight * 0.09,
+                                  width: screenWidth * 0.45,
+                                  child: customTextFormField(
+                                    controller: _feeCollectionController,
+                                    text: 'Fee Collection',
+                                  ),
+                                ),
                                 SizedBox(
-                                  height: 70,
-                                  width: 175,
+                                  height: screenHeight * 0.09,
+                                  width: screenWidth * 0.45,
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: TextFormField(
@@ -864,22 +895,29 @@ class _feesPageState extends State<feesPage> {
                                       controller: _paymentDateController,
                                       decoration: InputDecoration(
                                         border: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.black, width: 2),
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
+                                          borderSide: BorderSide(
+                                            color: Colors.black,
+                                            width: 2,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                        ),
                                         labelText: 'Payment Date',
                                         suffixIcon: IconButton(
                                           icon: Icon(Icons.calendar_today),
                                           onPressed: () {
-                                            _selectDate(context,
-                                                _paymentDateController);
+                                            _selectDate(
+                                              context,
+                                              _paymentDateController,
+                                            );
                                           },
                                         ), // Add a calendar icon
                                       ),
                                       onTap: () {
                                         _selectDate(
-                                            context, _paymentDateController);
+                                          context,
+                                          _paymentDateController,
+                                        );
                                       },
                                     ),
                                   ),
@@ -887,28 +925,31 @@ class _feesPageState extends State<feesPage> {
                               ],
                             ),
                             SizedBox(
-                              height: 70,
-                              width: 400,
+                              height: screenHeight * 0.09,
+                              width: screenWidth * 0.9,
                               child: customTextFormField(
-                                  controller: _remarksController,
-                                  text: 'Remarks'),
+                                controller: _remarksController,
+                                text: 'Remarks',
+                              ),
                             ),
                             SizedBox(
-                              height: 10,
+                              height: screenHeight * 0.02,
                             ),
                             Row(
                               children: [
                                 Text(
                                   'Attachments (5MB max)',
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                  ),
                                 ),
                                 IconButton(
-                                    onPressed: () {
-                                      pickFile();
-                                    },
-                                    icon: Icon(Icons.file_upload_outlined)),
+                                  onPressed: () {
+                                    pickFile();
+                                  },
+                                  icon: Icon(Icons.file_upload_outlined),
+                                ),
                               ],
                             ),
                             GestureDetector(
@@ -920,51 +961,57 @@ class _feesPageState extends State<feesPage> {
                                   borderRadius: BorderRadius.circular(8),
                                   color: Colors.grey[300],
                                 ),
-                                height: 150,
-                                width: 150,
+                                height: screenHeight * 0.15,
+                                width: screenWidth * 0.4,
                                 child: Center(child: Text('No File attached')),
                               ),
                             ),
                             SizedBox(
-                              height: 10,
+                              height: screenHeight * 0.02,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 SizedBox(
-                                  width: 150,
+                                  width: screenWidth * 0.4,
                                   child: ElevatedButton(
                                     onPressed: () {},
                                     child: Text('Cancel'),
                                     style: ButtonStyle(
-                                        shape: MaterialStatePropertyAll(
-                                            RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(12))),
-                                        backgroundColor:
-                                            MaterialStatePropertyAll(
-                                                Color(0xffF75757)),
-                                        foregroundColor:
-                                            MaterialStatePropertyAll(
-                                                Colors.white)),
+                                      shape: MaterialStatePropertyAll(
+                                        RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                        ),
+                                      ),
+                                      backgroundColor: MaterialStatePropertyAll(
+                                        Color(0xffF75757),
+                                      ),
+                                      foregroundColor: MaterialStatePropertyAll(
+                                        Colors.white,
+                                      ),
+                                    ),
                                   ),
                                 ),
                                 SizedBox(
-                                  width: 150,
+                                  width: screenWidth * 0.4,
                                   child: ElevatedButton(
                                     onPressed: () {},
                                     child: Text('Save'),
                                     style: ButtonStyle(
-                                        shape: MaterialStatePropertyAll(
-                                            RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(12))),
-                                        backgroundColor:
-                                            MaterialStatePropertyAll(
-                                                Color(0xff004BB8)),
-                                        foregroundColor:
-                                            MaterialStatePropertyAll(
-                                                Colors.white)),
+                                      shape: MaterialStatePropertyAll(
+                                        RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                        ),
+                                      ),
+                                      backgroundColor: MaterialStatePropertyAll(
+                                        Color(0xff004BB8),
+                                      ),
+                                      foregroundColor: MaterialStatePropertyAll(
+                                        Colors.white,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ],
@@ -977,8 +1024,8 @@ class _feesPageState extends State<feesPage> {
                 ],
               ),
             ),
-            const SizedBox(
-              height: 20,
+            SizedBox(
+              height: screenHeight * 0.02,
             ),
           ],
         ),

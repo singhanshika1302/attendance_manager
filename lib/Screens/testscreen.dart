@@ -136,7 +136,6 @@ class testscreenState extends State<testscreen> {
         await _repository.fetchAttendance();
     if (attendanceDataList != null) {
       setState(() {
-        print("nhi ho payega aab");
         _attendanceDataList = attendanceDataList;
         
       });

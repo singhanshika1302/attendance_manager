@@ -242,7 +242,7 @@ class _ProfileState extends State<Profile> {
                             prefs.remove('password');
                              prefs.remove('dob');
 
-              Navigator.pop(context,
+              Navigator.push(context,
                   MaterialPageRoute(builder: (context) => Login()));
               // Callback function for IconButton pressed
               print('Arrow Forward Pressed');

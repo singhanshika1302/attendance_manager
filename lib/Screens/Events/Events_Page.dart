@@ -5,6 +5,8 @@ import 'package:edumarshals/main.dart';
 import 'package:edumarshals/repository/Event_Repository.dart';
 import 'package:flutter/material.dart';
 
+import '../../Widget/CommonDrawer.dart';
+
 class EventsPage extends StatefulWidget {
   const EventsPage({Key? key});
 
@@ -13,14 +15,24 @@ class EventsPage extends StatefulWidget {
 }
 
 class _EventsPageState extends State<EventsPage> {
+  final GlobalKey<ScaffoldState> scaffoldKey_ = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey_,
       backgroundColor: Color.fromRGBO(242, 246, 255, 1),
-      appBar: CustomAppBar(userName: PreferencesManager().name,
-      userImage: PreferencesManager().studentPhoto,
-       onTap: () {  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>EventsPage()));
-  },),
+      appBar: CustomAppBar(
+        userName: PreferencesManager().name,
+        userImage: PreferencesManager().studentPhoto,
+        onTap: () {
+          scaffoldKey_.currentState?.openDrawer();
+        },
+        scaffoldKey_: scaffoldKey_, // Pass the _scaffoldKey
+      ),
+      drawer: CommonDrawer(
+        scaffoldKey_: scaffoldKey_, currentIndex: 2, // Pass the _scaffoldKey
+      ),
+
       body: 
       FutureBuilder<List<EventModel>>(
         future: EventRepository().fetchEvents(),

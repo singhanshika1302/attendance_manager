@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:edumarshals/Screens/HomePage/Homepage.dart';
+import 'package:edumarshals/Screens/Password/forget_password.dart';
 import 'package:edumarshals/Utils/Utilities/utilities2.dart';
 // import 'package:edumarshals/Screens/User_Info/Personal_Info/Contact_info_Data.dart';
 // import 'package:edumarshals/Screens/User_Info/Personal_Info/Parent_Info_Data.dart';
@@ -145,6 +146,13 @@ class _LoginState extends State<Login> {
         setState(() {
           _isLoading = false;
         });
+
+
+          if (isChecked) {
+          final prefs = await SharedPreferences.getInstance();
+          prefs.setString('username', _usernameController.text);
+          prefs.setString('password', _passController.text);
+        }
         // for navigaation to next page
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Homepage()));
@@ -172,11 +180,11 @@ class _LoginState extends State<Login> {
         _isLoading = false;
       });
     }
-    if (isChecked) {
-      final prefs = await SharedPreferences.getInstance();
-      prefs.setString('username', _usernameController.text);
-      prefs.setString('password', _passController.text);
-    }
+    // if (isChecked) {
+    //   final prefs = await SharedPreferences.getInstance();
+    //   prefs.setString('username', _usernameController.text);
+    //   prefs.setString('password', _passController.text);
+    // }
   }
 
   @override
@@ -313,7 +321,7 @@ class _LoginState extends State<Login> {
                               height: screenHeight * 0.05,
                             ),
                             buildtextfiled(
-                              'assets/filter.png',
+                              'asset/images/user.png',
                               "User ID",
                               context,
                               "Enter User ID",
@@ -324,7 +332,7 @@ class _LoginState extends State<Login> {
                               height: screenHeight * 0.02,
                             ),
                             buildtextfiled(
-                              'assets/filter.png',
+                              'asset/images/user.png',
                               "Password",
                               context,
                               "Enter Password",
@@ -561,6 +569,7 @@ class _LoginState extends State<Login> {
                       onTap: () {
                         // Handle the onTap event here
                         print('Container tapped!');
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> ForgetPassword()));
                         // Add your logic for resetting password here
                       },
                       child: const Text(

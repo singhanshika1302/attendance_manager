@@ -2,7 +2,6 @@ import 'package:edumarshals/Model/student_attendance_data_model.dart';
 import 'package:edumarshals/main.dart';
 import 'package:edumarshals/repository/overall_attendance_repository.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 
 class ApiController extends GetxController {
   final AttendanceRepository _repository = AttendanceRepository();

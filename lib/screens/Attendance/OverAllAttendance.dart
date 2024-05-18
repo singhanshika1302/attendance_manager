@@ -6,6 +6,7 @@ import 'package:edumarshals/Widget/AttendanceCard.dart';
 // import '../Widget/CustomAppBar.dart';
 import 'package:edumarshals/Widget/CustomAppBar.dart';
 import 'package:edumarshals/Widget/SubjectAttendanceCard.dart';
+import 'package:edumarshals/display.dart';
 import 'package:edumarshals/main.dart';
 // import 'package:edumarshals/repository/overall_attendance_repository.dart';
 import 'package:edumarshals/repository/overall_attendance_repository.dart';
@@ -73,12 +74,12 @@ class _OverAllAttdState extends State<OverAllAttd> {
       floatingActionButton: custom_floating_action_button(Gkey: _key,),
       key: _scaffoldKey,
       backgroundColor: Color.fromRGBO(242, 246, 255, 1),
-      appBar: CustomAppBar(
-          userName: '${PreferencesManager().name}',
-          userImage: PreferencesManager().studentPhoto, onTap: () {  
-                                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => OverAllAttd()));
-
-          },),
+      // appBar: CustomAppBar(
+      //     userName: '${PreferencesManager().name}',
+      //     userImage: PreferencesManager().studentPhoto, onTap: () {
+      //                                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => OverAllAttd()));
+      //
+      //     },),
       body: ListView(
         children: [
           Column(
@@ -125,6 +126,9 @@ class _OverAllAttdState extends State<OverAllAttd> {
                                       'Subject: ${attendanceData.subject}',
                                   attendedClasses: attendanceData.totalPresent!,
                                   totalClasses: attendanceData.totalClasses!,
+                                  onpressed1: () {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=> DisplayScreen(subject: attendanceData.subject)));
+                                  },
                                 );
                               },
                             ),

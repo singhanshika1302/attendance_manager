@@ -33,20 +33,15 @@ final DocumentRepository _documentRepository = DocumentRepository();
  void fetchDocuments() async {
     try {
       final data = await _documentRepository.fetchDocuments(); // Fetch documents
-      print("hellodube$data");
       if (data != null) {
         // Parse the data (Assuming the data is a list of strings)
-        print("vidhi");
         setState(() {
           document=json.decode(data)["documents"];
-          print("dududududududud");
           print(document?.keys);
           print(document?.length);
-          print("vaibhav");
         });
       }
     } catch (error) {
-      print("vidhisdfg");
       print('Error fetching documents: $error');
     }
   }
@@ -54,7 +49,6 @@ List<Widget> _buildDocumentCards() {
   if (document == null) {
     return []; // Return an empty list if document is null
   }
-  print("hg");
   print(document!['studentPhoto']);
   
           PreferencesManager().studentPhoto=document!['studentPhoto'];

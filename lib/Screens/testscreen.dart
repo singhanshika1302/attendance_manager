@@ -15,13 +15,13 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 
-class barGraph extends StatefulWidget {
+class testscreen extends StatefulWidget {
   final String userName;
   final String userImage;
   final String subjectName;
   final String subjectDescription;
   //final String userName;
-  barGraph(
+  testscreen(
       {super.key,
       required this.userName,
       required this.userImage,
@@ -31,52 +31,121 @@ class barGraph extends StatefulWidget {
   final Color rightBarColor = Color(0xff5299FF);
   final Color avgColor = Colors.orange;
   @override
-  State<StatefulWidget> createState() => barGraphState();
+  State<StatefulWidget> createState() => testscreenState();
 }
-
 final _key = GlobalKey<ExpandableFabState>();
 
-class barGraphState extends State<barGraph> {
-  // ..............attendace api is intigrated ..................
+
+
+
+class testscreenState extends State<testscreen> {
+
+
+
+
   final AttendanceRepository _repository = AttendanceRepository();
+
   List<StudentAttendanceData>? _attendanceDataList;
-  int _totalClasses = 0;
-  int _totalPresentClasses = 0;
+
+  // ..............attendace api is intigrated ..................
+  // final AttendanceRepository _repository = AttendanceRepository();
+  // List<StudentAttendanceData>? _attendanceDataList;
+  // int _totalClasses = 0;
+  // int _totalPresentClasses = 0;
+
+
+
 
 //.............calling attendance repository ...................................//
+
+
+//   Future<void> _fetchAttendanceData() async {
+//     List<StudentAttendanceData>? attendanceDataList =
+//         await _repository.fetchAttendance();
+//     int totalClasses = 0;
+//     int totalPresentClasses = 0;
+// //...............function to store total present and total classes .............//
+
+
+
+
+//     if (attendanceDataList != null) {
+//       for (var data in attendanceDataList) {
+//         totalClasses += data.totalClasses ?? 0;
+//         totalPresentClasses += data.totalPresent ?? 0;
+//       }
+//     }
+//      void printAttendanceData(List<StudentAttendanceData> data) {
+//     data.forEach((attendanceData) {
+//       print('Subject: ${attendanceData.subject}');
+//       print('Total Classes: ${attendanceData.totalClasses}');
+//       print('Total Present: ${attendanceData.totalPresent}');
+//       print('Attendance:');
+//       attendanceData.attendance?.forEach((entry) {
+//         print('  Date: ${entry.date}');
+//         print('  Attended: ${entry.attended}');
+//         print('  Is Academic: ${entry.isAc}');
+//       });
+//       print('\n');
+//     });
+//   }
+//   print("hello");
+//   if (attendanceDataList != null) {
+//     printAttendanceData(attendanceDataList);
+//   }
+
+//   // if (attendanceDataList != null) {
+//   //     setState(() {
+//   //       _attendanceDataList = attendanceDataList;
+//   //     });
+//   //   }
+
+//     setState(() {
+//       _attendanceDataList = attendanceDataList ?? [];
+      
+//       // if(attendanceDataList!= null){
+//       //    _attendanceDataList = attendanceDataList;
+//       // }
+//       _totalClasses = totalClasses;
+//       print('totalclasses${_totalClasses}');
+//       // PreferencesManager.totalclasses=_totalClasses;
+//       // print('totalPresentClasses${_totalPresentClasses}');
+//       _totalPresentClasses = totalPresentClasses;
+
+//       PreferencesManager().totalclasses = _totalClasses;
+//       PreferencesManager().presentclasses = _totalPresentClasses;
+
+//       print('totalPresentClasses${_totalPresentClasses}');
+
+//       // print('dfghj $attendanceDataList');
+//       // PreferencesManager.totalclasses=_totalClasses;
+
+
+
+
+      
+//     });
+//   }
+
+
+
+//.............calling attendance repository ...................................//
+
   Future<void> _fetchAttendanceData() async {
-    List<StudentAttendanceData>? attendanceDataList =
+    final List<StudentAttendanceData>? attendanceDataList =
         await _repository.fetchAttendance();
-    int totalClasses = 0;
-    int totalPresentClasses = 0;
-//...............function to store total present and total classes .............//
     if (attendanceDataList != null) {
-      for (var data in attendanceDataList) {
-        totalClasses += data.totalClasses ?? 0;
-        totalPresentClasses += data.totalPresent ?? 0;
-      }
+      setState(() {
+        _attendanceDataList = attendanceDataList;
+        
+      });
     }
-    setState(() {
-      _attendanceDataList = attendanceDataList;
-      _totalClasses = totalClasses;
-      print('totalclasses${_totalClasses}');
-      // PreferencesManager.totalclasses=_totalClasses;
-      // print('totalPresentClasses${_totalPresentClasses}');
-      _totalPresentClasses = totalPresentClasses;
-
-      PreferencesManager().totalclasses = _totalClasses;
-      PreferencesManager().presentclasses = _totalPresentClasses;
-
-      print('totalPresentClasses${_totalPresentClasses}');
-
-      // print('dfghj $attendanceDataList');
-      // PreferencesManager.totalclasses=_totalClasses;
-    });
   }
+
 
   //................attendance api is intigrated ....................//
 
-  final _key = GlobalKey<ExpandableFabState>();
+  // final _key = GlobalKey<ExpandableFabState>();
   final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
   final double width = 15;
   EasyInfiniteDateTimelineController _dailycontroller =
@@ -93,17 +162,12 @@ class barGraphState extends State<barGraph> {
   void _initFilterWidgets() {
     filterWidgets = {
       'Monthly': [
-        Column(
-          children: [
-            AttendanceListCard(date: "1 jan,24", isPresent: [true]),
-            AttendanceListCard(date: "2 jan,24", isPresent: [true, false]),
-            AttendanceListCard(date: "3 jan,24", isPresent: [false, false]),
-            AttendanceListCard(date: "4 jan,24", isPresent: [true]),
-            AttendanceListCard(date: "6 jan,24", isPresent: [true, true]),
-            AttendanceListCard(date: "7 jan,24", isPresent: [false]),
-            AttendanceListCard(date: "9 jan,24", isPresent: [true]),
-          ],
-        )
+        // monthly()
+        // _attendanceDataList != null
+        //  ? MonthlyAttendanceList(attendanceData: _attendanceDataList!)
+        //  : Center(
+        //      child: CircularProgressIndicator(),
+        //    )
       ],
       'Weekly': [
         _buildWeeklyWidgets(),
@@ -113,6 +177,8 @@ class barGraphState extends State<barGraph> {
       ],
     };
   }
+
+
 
   @override
   void initState() {
@@ -149,29 +215,21 @@ class barGraphState extends State<barGraph> {
     return Scaffold(
       backgroundColor: Color(0xffF2F6FF),
       floatingActionButtonLocation: ExpandableFab.location,
-      floatingActionButton: custom_floating_action_button(
-        Gkey: _key,
-      ),
-      appBar: CustomAppBar(
-        userName: widget.userName,
-        userImage: widget.userImage,
-        onTap: () {
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => barGraph(
-                      userName: PreferencesManager().name,
-                      userImage: PreferencesManager().studentPhoto,
-                      subjectName: "",
-                      subjectDescription: "")));
-        },
-      ),
-      body: Padding(
+      floatingActionButton: custom_floating_action_button(Gkey: _key,),
+      appBar:
+          CustomAppBar(userName: widget.userName, userImage: widget.userImage, onTap: () { Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => testscreen(userName: PreferencesManager().name, userImage: PreferencesManager().studentPhoto, subjectName: "", subjectDescription: "")));
+ },),
+      body: 
+      Padding(
         padding: const EdgeInsets.all(16),
         child: SingleChildScrollView(
           child: Column(
+            
+
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
+
+// monthly(),
               Container(
                 height: sheight * 0.18,
 //.................fetching list in which all attendace is stored................//
@@ -293,91 +351,6 @@ class barGraphState extends State<barGraph> {
                   ),
                 ],
               ),
-              SizedBox(
-                height: 150,
-                child: BarChart(
-                  BarChartData(
-                    maxY: 20,
-                    barTouchData: BarTouchData(
-                      touchTooltipData: BarTouchTooltipData(
-                        tooltipBgColor: Colors.grey,
-                        getTooltipItem: (a, b, c, d) => null,
-                      ),
-                      touchCallback: (FlTouchEvent event, response) {
-                        if (response == null || response.spot == null) {
-                          setState(() {
-                            touchedGroupIndex = -1;
-                            showingBarGroups = List.of(rawBarGroups);
-                          });
-                          return;
-                        }
-
-                        touchedGroupIndex = response.spot!.touchedBarGroupIndex;
-
-                        setState(() {
-                          if (!event.isInterestedForInteractions) {
-                            touchedGroupIndex = -1;
-                            showingBarGroups = List.of(rawBarGroups);
-                            return;
-                          }
-                          showingBarGroups = List.of(rawBarGroups);
-                          if (touchedGroupIndex != -1) {
-                            var sum = 0.0;
-                            for (final rod
-                                in showingBarGroups[touchedGroupIndex]
-                                    .barRods) {
-                              sum += rod.toY;
-                            }
-                            final avg = sum /
-                                showingBarGroups[touchedGroupIndex]
-                                    .barRods
-                                    .length;
-
-                            showingBarGroups[touchedGroupIndex] =
-                                showingBarGroups[touchedGroupIndex].copyWith(
-                              barRods: showingBarGroups[touchedGroupIndex]
-                                  .barRods
-                                  .map((rod) {
-                                return rod.copyWith(
-                                    toY: avg, color: widget.avgColor);
-                              }).toList(),
-                            );
-                          }
-                        });
-                      },
-                    ),
-                    titlesData: FlTitlesData(
-                      show: true,
-                      rightTitles: const AxisTitles(
-                        sideTitles: SideTitles(showTitles: false),
-                      ),
-                      topTitles: const AxisTitles(
-                        sideTitles: SideTitles(showTitles: false),
-                      ),
-                      bottomTitles: AxisTitles(
-                        sideTitles: SideTitles(
-                          showTitles: true,
-                          getTitlesWidget: bottomTitles,
-                          reservedSize: 42,
-                        ),
-                      ),
-                      leftTitles: AxisTitles(
-                        sideTitles: SideTitles(
-                          showTitles: true,
-                          reservedSize: 28,
-                          interval: 1,
-                          getTitlesWidget: leftTitles,
-                        ),
-                      ),
-                    ),
-                    borderData: FlBorderData(
-                      show: false,
-                    ),
-                    barGroups: showingBarGroups,
-                    gridData: const FlGridData(show: false),
-                  ),
-                ),
-              ),
               const SizedBox(
                 height: 12,
               ),
@@ -398,6 +371,7 @@ class barGraphState extends State<barGraph> {
               SizedBox(
                 height: 15,
               ),
+             
               ...(filterWidgets[filter] ?? []).map((widget) => widget).toList(),
             ],
           ),
@@ -675,4 +649,11 @@ class barGraphState extends State<barGraph> {
       ],
     );
   }
+  // Widget monthly(){
+  //   return   _attendanceDataList != null
+  //        ? MonthlyAttendanceList(attendanceData: _attendanceDataList!,subject: ,)
+  //        : Center(
+  //            child: CircularProgressIndicator(),
+  //          );
+  // }
 }

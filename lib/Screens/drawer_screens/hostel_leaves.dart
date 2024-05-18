@@ -25,23 +25,23 @@ final _placeController = TextEditingController();
 
 class _hostelLeavePageState extends State<hostelLeavePage> {
   bool _isExpand = true;
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> scaffoldKey_ = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: scaffoldKey,
+      key: scaffoldKey_,
       backgroundColor: Color(0xffF2F6FF),
       appBar: CustomAppBar(
         userName: PreferencesManager().name,
         userImage: PreferencesManager().studentPhoto,
         onTap: () {
-          scaffoldKey.currentState?.openDrawer();
+          scaffoldKey_.currentState?.openDrawer();
         },
-        scaffoldKey: scaffoldKey, // Pass the _scaffoldKey
+        scaffoldKey_: scaffoldKey_, // Pass the _scaffoldKey
       ),
       drawer: CommonDrawer(
-        scaffoldKey: scaffoldKey, currentIndex: 1, // Pass the _scaffoldKey
+        scaffoldKey_: scaffoldKey_, currentIndex: 1, // Pass the _scaffoldKey
       ),
       body: SafeArea(
         child: DefaultTabController(

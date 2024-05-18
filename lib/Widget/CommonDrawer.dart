@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:edumarshals/Screens/HomePage/Homepage.dart';
 
 class CommonDrawer extends StatefulWidget {
-  final GlobalKey<ScaffoldState> scaffoldKey;
+  final GlobalKey<ScaffoldState> scaffoldKey_;
   final int currentIndex; // Add currentIndex property
 
   const CommonDrawer({
     Key? key,
-    required this.scaffoldKey,
+    required this.scaffoldKey_,
     required this.currentIndex, // Add currentIndex parameter
   }) : super(key: key);
 
@@ -32,7 +32,7 @@ class _CommonDrawerState extends State<CommonDrawer> {
   Widget build(BuildContext context) {
     double drawerWidth = MediaQuery.of(context).size.width * 0.7;
     return Drawer(
-      key: widget.scaffoldKey,
+      key: widget.scaffoldKey_,
       backgroundColor: Color(0xff004BB8),
       child: Padding(
         padding: const EdgeInsets.only(top: 50),
@@ -91,7 +91,7 @@ class _CommonDrawerState extends State<CommonDrawer> {
           setState(() {
             selectedTileIndex = index;
           });
-          widget.scaffoldKey.currentState?.openDrawer();
+          widget.scaffoldKey_.currentState?.openDrawer();
           Navigator.pop(context);
           // Navigate based on the selected tile index
           switch (index) {

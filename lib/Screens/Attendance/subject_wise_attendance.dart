@@ -15,6 +15,8 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 
+import '../../Widget/CommonDrawer.dart';
+
 class barGraph extends StatefulWidget {
   final String userName;
   final String userImage;
@@ -37,6 +39,8 @@ class barGraph extends StatefulWidget {
 final _key = GlobalKey<ExpandableFabState>();
 
 class barGraphState extends State<barGraph> {
+
+  final GlobalKey<ScaffoldState> scaffoldKey_ = GlobalKey<ScaffoldState>();
   // ..............attendace api is intigrated ..................
   final AttendanceRepository _repository = AttendanceRepository();
   List<StudentAttendanceData>? _attendanceDataList;
@@ -152,19 +156,17 @@ class barGraphState extends State<barGraph> {
       floatingActionButton: custom_floating_action_button(
         Gkey: _key,
       ),
+
       appBar: CustomAppBar(
-        userName: widget.userName,
-        userImage: widget.userImage,
+        userName: PreferencesManager().name,
+        userImage: PreferencesManager().studentPhoto,
         onTap: () {
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => barGraph(
-                      userName: PreferencesManager().name,
-                      userImage: PreferencesManager().studentPhoto,
-                      subjectName: "",
-                      subjectDescription: "")));
+          scaffoldKey_.currentState?.openDrawer();
         },
+        scaffoldKey_: scaffoldKey_, // Pass the _scaffoldKey
+      ),
+      drawer: CommonDrawer(
+        scaffoldKey_: scaffoldKey_, currentIndex: 1, // Pass the _scaffoldKey
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),

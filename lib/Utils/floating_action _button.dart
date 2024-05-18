@@ -97,7 +97,7 @@ class _custom_floating_action_buttonState
               onPressed: () {
                 // Navigate to bar chart page
                 Navigator.pushNamed(
-                    context, 'subject_wise_attendance');
+                    context, 'overallattendance');
               },
             ),
             FloatingActionButton.small(

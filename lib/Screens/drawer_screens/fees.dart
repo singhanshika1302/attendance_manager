@@ -145,7 +145,7 @@ class _feesPageState extends State<feesPage> {
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                              fontSize: 12,
                             ),
                           ),
                           Icon(
@@ -225,7 +225,7 @@ class _feesPageState extends State<feesPage> {
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                              fontSize: 10,
                             ),
                           ),
                           Icon(
@@ -305,7 +305,7 @@ class _feesPageState extends State<feesPage> {
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                              fontSize: 10,
                             ),
                           ),
                           Icon(

@@ -105,6 +105,8 @@ class PreferencesManager {
 
   int get sem => _prefs.getInt('sem') ?? 0;
   set sem(int value) => _prefs.setInt('sem', value);
+    String get userid => _prefs.getString('userid') ?? '';
+  set userid(String value) => _prefs.setString('userid', value);
 
   // add more methods as needed
 }

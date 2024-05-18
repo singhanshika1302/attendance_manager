@@ -5,24 +5,23 @@
 // import 'package:edumarshals/Screens/Events_Page.dart';
 
 import 'package:edumarshals/Model/assignment_Model.dart';
-import 'package:edumarshals/Model/student_attendance_data_model.dart';
 import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
 import 'package:edumarshals/Screens/Events/Events_Page.dart';
 import 'package:edumarshals/Screens/Notes_Assignment/ClassNotesPage.dart';
 import 'package:edumarshals/Screens/Notes_Assignment/Subject_Assignment.dart';
 import 'package:edumarshals/Screens/User_Info/Profile.dart';
+import 'package:edumarshals/Screens/drawer_screens/fees.dart';
+import 'package:edumarshals/Screens/drawer_screens/hostel_leaves.dart';
 import 'package:edumarshals/Utils/Utilities/Utilities.dart';
 import 'package:edumarshals/Widget/AttendanceCard.dart';
 import 'package:edumarshals/main.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:edumarshals/repository/assignment_Repository.dart';
-import 'package:edumarshals/repository/overall_attendance_repository.dart';
+import 'package:edumarshals/repository/classnotes_Repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 
 import '../../Model/classnotes_Model.dart';
 import '../../Utils/floating_action _button.dart';
-import 'package:edumarshals/repository/classnotes_Repo.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -67,7 +66,7 @@ class _HomepageState extends State<Homepage> {
                   Navigator.pop(context);
                 },
               ),
-              buildDrawerTile(0, 'assets/bank.png', 'Classroom', 'assets/sel_bank.png', 4),
+              buildDrawerTile(0, 'assets/buliding.png', 'Classroom', 'assets/sel_bank.png', 4),
               buildDrawerTile(1, 'assets/buliding.png', 'Hostel', 'assets/sel_building.png', 4),
               buildDrawerTile(2, 'assets/teacher.png', 'Placement', 'assets/sel_teacher.png', 4),
               buildDrawerTile(3, 'assets/note.png', 'PYQS Papers', 'assets/sel_note.png', 3.7),
@@ -201,10 +200,14 @@ class _HomepageState extends State<Homepage> {
                             style:
                             TextStyle(fontSize: 14, color: Color(0xff004BB8)),
                           ),
-                          onPressed: () => Navigator.push(
+                          // onPressed: () => Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => testscreen(userName: '', userImage: '', subjectName: '', subjectDescription: '7s'))),
+                            onPressed: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => EventsPage())),
+                                  builder: (context) =>OverAllAttd())),
                         )
                       ],
                     ),
@@ -282,7 +285,7 @@ class _HomepageState extends State<Homepage> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => ClassNotesPage(),
+                                          builder: (context) => ClassNotesPage()
                                         ),
                                       );
                                     },
@@ -428,7 +431,7 @@ class _HomepageState extends State<Homepage> {
               Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()));
               break;
             case 1:
-              Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => hostelLeavePage()));
               break;
             case 2:
               Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
@@ -437,7 +440,7 @@ class _HomepageState extends State<Homepage> {
               Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
               break;
             case 4:
-              Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => feesPage()));
               break;
             case 5:
               Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));

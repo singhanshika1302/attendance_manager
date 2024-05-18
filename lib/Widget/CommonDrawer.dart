@@ -1,8 +1,8 @@
 import 'package:edumarshals/Screens/Events/Events_Page.dart';
 import 'package:edumarshals/Screens/HomePage/Homepage.dart';
+import 'package:edumarshals/Screens/drawer_screens/fees.dart';
+import 'package:edumarshals/Screens/drawer_screens/hostel_leaves.dart';
 import 'package:flutter/material.dart';
-import '../Screens/Events/Events_Page.dart';
-import '../Screens/HomePage/Homepage.dart';
 
 class CommonDrawer extends StatelessWidget {
   // final Function(int) onDrawerItemSelected;
@@ -87,7 +87,7 @@ class CommonDrawer extends StatelessWidget {
               Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()));
               break;
             case 1:
-              Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => hostelLeavePage()));
               break;
             case 2:
               Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
@@ -96,7 +96,7 @@ class CommonDrawer extends StatelessWidget {
               Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
               break;
             case 4:
-              Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => feesPage()));
               break;
             case 5:
               Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));

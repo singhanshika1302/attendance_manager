@@ -36,7 +36,7 @@ class Homepage extends StatefulWidget {
 }
 final _key = GlobalKey<ExpandableFabState>();
 class _HomepageState extends State<Homepage> {
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> scaffoldKey_ = GlobalKey<ScaffoldState>();
   int selectedTileIndex = -1;
   final AssignmentRepository _assignmentRepository = AssignmentRepository();
   final ClassNotesRepository _classNotesRepository = ClassNotesRepository();
@@ -47,18 +47,18 @@ class _HomepageState extends State<Homepage> {
     return Scaffold(
       floatingActionButtonLocation: ExpandableFab.location,
       floatingActionButton: custom_floating_action_button(Gkey: _key),
-      key: scaffoldKey,
+      key: scaffoldKey_,
       backgroundColor: const Color(0xffEBF3FF),
       appBar: CustomAppBar(
         userName: PreferencesManager().name,
         userImage: PreferencesManager().studentPhoto,
         onTap: () {
-          scaffoldKey.currentState?.openDrawer();
+          scaffoldKey_.currentState?.openDrawer();
         },
-        scaffoldKey: scaffoldKey,// Pass the _scaffoldKey
+        scaffoldKey_: scaffoldKey_,// Pass the _scaffoldKey
       ),
       drawer: CommonDrawer(
-        scaffoldKey: scaffoldKey, currentIndex: 0, // Pass the _scaffoldKey
+        scaffoldKey_: scaffoldKey_, currentIndex: 0, // Pass the _scaffoldKey
       ),
 
 
@@ -439,7 +439,7 @@ class _HomepageState extends State<Homepage> {
           setState(() {
             selectedTileIndex = index;
           });
-          scaffoldKey.currentState?.openDrawer();
+          scaffoldKey_.currentState?.openDrawer();
           Navigator.pop(context);
           switch (index) {
             case 0:

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AttendanceListCard extends StatefulWidget {
   final String date;
   final List<bool> isPresent;
-
+  
   AttendanceListCard({Key? key, required this.date, required this.isPresent})
       : super(key: key);
 

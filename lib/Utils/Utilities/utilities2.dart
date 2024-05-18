@@ -79,7 +79,7 @@ Widget buildtextfiled(String image, String text, BuildContext context,
             child: Row(children: [
               Image.asset(
                 image,
-                scale: 4.5,
+                // scale: 4.5,
                 // height: screenHeight * 0.032,
               ),
               SizedBox(width: screenWidth * 0.01),

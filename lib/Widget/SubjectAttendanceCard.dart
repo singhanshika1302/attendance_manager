@@ -6,20 +6,29 @@ class SubjectAttendanceCard extends StatelessWidget {
   final String subjectName;
   final int attendedClasses;
   final int totalClasses;
+    final VoidCallback? onpressed1;
+
 
   const SubjectAttendanceCard({super.key, 
     required this.subjectName,
     required this.attendedClasses,
-    required this.totalClasses,
+    required this.totalClasses, 
+    this.onpressed1,
   });
 
   @override
   Widget build(BuildContext context) {
     double attendancePercentage = (attendedClasses / totalClasses) * 100;
 
-    return InkWell(
+    return GestureDetector(
       onTap: () {
-        
+        onpressed1?.call();
+        //  Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => DisplayScreen(subject: subjectName),
+        //   ),
+        // );
         // Handle the tap event
       },
       child: Container(
@@ -81,3 +90,6 @@ class SubjectAttendanceCard extends StatelessWidget {
     );
   }
 }
+
+
+// DisplayScreen(subject: 'Mathematics')

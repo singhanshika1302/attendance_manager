@@ -7,14 +7,14 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   final String userName;
   final String? userImage;
   final VoidCallback onTap;
-  final GlobalKey<ScaffoldState> scaffoldKey;
+  final GlobalKey<ScaffoldState> scaffoldKey_;
 
   const CustomAppBar({
     Key? key,
     required this.userName,
     this.userImage,
     required this.onTap,
-    required this.scaffoldKey,
+    required this.scaffoldKey_,
   }) : super(key: key);
 
   @override
@@ -38,7 +38,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
           InkWell(
             child: const Icon(Icons.more_vert),
             onTap: () {
-              widget.scaffoldKey.currentState?.openDrawer();
+              widget.scaffoldKey_.currentState?.openDrawer();
             },
           ),
           InkWell(

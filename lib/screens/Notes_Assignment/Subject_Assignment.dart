@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../Widget/CommonDrawer.dart';
+
 class Subject_Assignment extends StatefulWidget {
   const Subject_Assignment({Key? key}) : super(key: key);
 
@@ -107,21 +109,26 @@ class _Subject_AssignmentState extends State<Subject_Assignment> {
     super.initState();
     loadAssignments();
   }
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> scaffoldKey_ = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
             floatingActionButtonLocation: ExpandableFab.location,
       floatingActionButton: custom_floating_action_button(Gkey: _key,),
-      key: _scaffoldKey,
+      key: scaffoldKey_,
       backgroundColor: const Color.fromRGBO(235, 243, 255, 1),
-      // appBar: CustomAppBar(userName: PreferencesManager().name,
-      // userImage: PreferencesManager().studentPhoto,
-      // onTap: () {
-      //                                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>Subject_Assignment()));
-      //
-      //  },),
+      appBar: CustomAppBar(
+        userName: PreferencesManager().name,
+        userImage: PreferencesManager().studentPhoto,
+        onTap: () {
+          scaffoldKey_.currentState?.openDrawer();
+        },
+        scaffoldKey_: scaffoldKey_, // Pass the _scaffoldKey
+      ),
+      drawer: CommonDrawer(
+        scaffoldKey_: scaffoldKey_, currentIndex: 1, // Pass the _scaffoldKey
+      ),
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,

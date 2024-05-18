@@ -15,6 +15,8 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 
+import '../../Widget/CommonDrawer.dart';
+
 class barGraph extends StatefulWidget {
   final String userName;
   final String userImage;
@@ -37,6 +39,8 @@ class barGraph extends StatefulWidget {
 final _key = GlobalKey<ExpandableFabState>();
 
 class barGraphState extends State<barGraph> {
+
+  final GlobalKey<ScaffoldState> scaffoldKey_ = GlobalKey<ScaffoldState>();
   // ..............attendace api is intigrated ..................
   final AttendanceRepository _repository = AttendanceRepository();
   List<StudentAttendanceData>? _attendanceDataList;
@@ -152,19 +156,17 @@ class barGraphState extends State<barGraph> {
       floatingActionButton: custom_floating_action_button(
         Gkey: _key,
       ),
+
       appBar: CustomAppBar(
-        userName: widget.userName,
-        userImage: widget.userImage,
+        userName: PreferencesManager().name,
+        userImage: PreferencesManager().studentPhoto,
         onTap: () {
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => barGraph(
-                      userName: PreferencesManager().name,
-                      userImage: PreferencesManager().studentPhoto,
-                      subjectName: "",
-                      subjectDescription: "")));
+          scaffoldKey_.currentState?.openDrawer();
         },
+        scaffoldKey_: scaffoldKey_, // Pass the _scaffoldKey
+      ),
+      drawer: CommonDrawer(
+        scaffoldKey_: scaffoldKey_, currentIndex: 1, // Pass the _scaffoldKey
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -235,7 +237,7 @@ class barGraphState extends State<barGraph> {
               //     description: widget.subjectDescription),
 
               SizedBox(
-                height: 20,
+                height: sheight * 0.03,
               ),
               Row(
                 mainAxisSize: MainAxisSize.min,
@@ -250,8 +252,8 @@ class barGraphState extends State<barGraph> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Container(
-                    height: 50,
-                    width: 100,
+                    height: sheight * 0.1,
+                    width: swidth * 0.25,
                     alignment: Alignment.center,
                     child: Column(
                       children: [
@@ -294,7 +296,7 @@ class barGraphState extends State<barGraph> {
                 ],
               ),
               SizedBox(
-                height: 150,
+                height: sheight * 0.18,
                 child: BarChart(
                   BarChartData(
                     maxY: 20,
@@ -378,8 +380,8 @@ class barGraphState extends State<barGraph> {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 12,
+              SizedBox(
+                height: sheight * 0.03,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -396,7 +398,7 @@ class barGraphState extends State<barGraph> {
                 ],
               ),
               SizedBox(
-                height: 15,
+                height: sheight * 0.02,
               ),
               ...(filterWidgets[filter] ?? []).map((widget) => widget).toList(),
             ],
@@ -492,6 +494,8 @@ class barGraphState extends State<barGraph> {
     ScrollController scrollController,
     double bottomSheetOffset,
   ) {
+    final sheight = MediaQuery.of(context).size.height;
+    final swidth = MediaQuery.of(context).size.width;
     return Material(
       child: Container(
         child: Padding(
@@ -550,7 +554,7 @@ class barGraphState extends State<barGraph> {
                 selectedColor: Color(0xff004BB8),
               ),
               SizedBox(
-                height: 14,
+                height: sheight * 0.03,
               ),
               Text(
                 "Absence/Presence",
@@ -589,7 +593,7 @@ class barGraphState extends State<barGraph> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   SizedBox(
-                      width: 120,
+                      width: swidth * 0.3,
                       child: ElevatedButton(
                           style: ButtonStyle(
                               backgroundColor:

@@ -6,6 +6,7 @@ import 'package:edumarshals/main.dart';
 import 'package:edumarshals/repository/assignment_Repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Subject_Assignment extends StatefulWidget {
   const Subject_Assignment({Key? key}) : super(key: key);
@@ -21,10 +22,11 @@ class _Subject_AssignmentState extends State<Subject_Assignment> {
   Future<void> loadAssignments() async {
     try {
       final List<Assignment> assignments = await _repository.fetchAssignments();
+      saveAssignmentIdsToSharedPreferences(assignments);
 
       // Print the entire response body
       for (Assignment assignment in assignments) {
-        // print('Assignment ID: ${assignment.id}');
+        print('Assignment ID: ${assignment.assignmentId}');
         print('Subject: ${assignment.subject?.name}');
         print('Assignment URL: ${assignment.assignment}');
         print('Deadline: ${assignment.deadline}');
@@ -53,6 +55,7 @@ class _Subject_AssignmentState extends State<Subject_Assignment> {
               subjectName: assignment.description ?? "",
               status: "Pending", // You can update this based on assignment status
               assignmentUrl: assignment.assignment != null ? assignment.assignment! : "",
+              assignmentId: assignment.assignmentId ?? "",
             ),
           );
         }
@@ -68,6 +71,21 @@ class _Subject_AssignmentState extends State<Subject_Assignment> {
       // Handle errors
       print('Error loading assignments: $e');
     }
+  }
+
+  Future<void> saveAssignmentIdsToSharedPreferences(List<Assignment> assignments) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> assignmentIds = assignments.map((assignment) {
+      print('Assignment ID: ${assignment.assignmentId}');
+      return assignment.assignmentId ?? "";
+    }).toList();
+    await prefs.setStringList('assignment_ids', assignmentIds);
+  }
+
+
+  Future<List<String>> getAssignmentIdsFromSharedPreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getStringList('assignment_ids') ?? [];
   }
 
   /// List of Tab Bar Item
@@ -98,12 +116,12 @@ class _Subject_AssignmentState extends State<Subject_Assignment> {
       floatingActionButton: custom_floating_action_button(Gkey: _key,),
       key: _scaffoldKey,
       backgroundColor: const Color.fromRGBO(235, 243, 255, 1),
-      appBar: CustomAppBar(userName: PreferencesManager().name, 
-      userImage: PreferencesManager().studentPhoto,
-      onTap: () { 
-                                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>Subject_Assignment()));
-
-       },),
+      // appBar: CustomAppBar(userName: PreferencesManager().name,
+      // userImage: PreferencesManager().studentPhoto,
+      // onTap: () {
+      //                                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>Subject_Assignment()));
+      //
+      //  },),
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
@@ -133,6 +151,7 @@ class _Subject_AssignmentState extends State<Subject_Assignment> {
 
                             // Load assignments for the selected subject
                             loadAssignments();
+
                           },
                           child: Container(
                             // duration: const Duration(milliseconds: 300),

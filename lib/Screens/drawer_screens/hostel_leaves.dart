@@ -8,6 +8,8 @@ import 'package:expandable_section/expandable_section.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
+import '../../Widget/CommonDrawer.dart';
+
 class hostelLeavePage extends StatefulWidget {
   hostelLeavePage({Key? key}) : super(key: key);
 
@@ -23,14 +25,24 @@ final _placeController = TextEditingController();
 
 class _hostelLeavePageState extends State<hostelLeavePage> {
   bool _isExpand = true;
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       backgroundColor: Color(0xffF2F6FF),
-      appBar: CustomAppBar(userName: PreferencesManager().name, userImage: PreferencesManager().studentPhoto,onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=> hostelLeavePage()));
-      },),
+      appBar: CustomAppBar(
+        userName: PreferencesManager().name,
+        userImage: PreferencesManager().studentPhoto,
+        onTap: () {
+          scaffoldKey.currentState?.openDrawer();
+        },
+        scaffoldKey: scaffoldKey, // Pass the _scaffoldKey
+      ),
+      drawer: CommonDrawer(
+        scaffoldKey: scaffoldKey, currentIndex: 1, // Pass the _scaffoldKey
+      ),
       body: SafeArea(
         child: DefaultTabController(
           length: 2,

@@ -74,12 +74,12 @@ class _OverAllAttdState extends State<OverAllAttd> {
       floatingActionButton: custom_floating_action_button(Gkey: _key,),
       key: _scaffoldKey,
       backgroundColor: Color.fromRGBO(242, 246, 255, 1),
-      appBar: CustomAppBar(
-          userName: '${PreferencesManager().name}',
-          userImage: PreferencesManager().studentPhoto, onTap: () {  
-                                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => OverAllAttd()));
-
-          },),
+      // appBar: CustomAppBar(
+      //     userName: '${PreferencesManager().name}',
+      //     userImage: PreferencesManager().studentPhoto, onTap: () {
+      //                                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => OverAllAttd()));
+      //
+      //     },),
       body: ListView(
         children: [
           Column(

@@ -5,23 +5,27 @@
 // import 'package:edumarshals/Screens/Events_Page.dart';
 
 import 'package:edumarshals/Model/assignment_Model.dart';
+import 'package:edumarshals/Model/student_attendance_data_model.dart';
 import 'package:edumarshals/Screens/Attendance/OverAllAttendance.dart';
 import 'package:edumarshals/Screens/Events/Events_Page.dart';
 import 'package:edumarshals/Screens/Notes_Assignment/ClassNotesPage.dart';
 import 'package:edumarshals/Screens/Notes_Assignment/Subject_Assignment.dart';
 import 'package:edumarshals/Screens/User_Info/Profile.dart';
-import 'package:edumarshals/Screens/drawer_screens/fees.dart';
-import 'package:edumarshals/Screens/drawer_screens/hostel_leaves.dart';
 import 'package:edumarshals/Utils/Utilities/Utilities.dart';
 import 'package:edumarshals/Widget/AttendanceCard.dart';
 import 'package:edumarshals/main.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:edumarshals/repository/assignment_Repository.dart';
-import 'package:edumarshals/repository/classnotes_Repo.dart';
+import 'package:edumarshals/repository/overall_attendance_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 
 import '../../Model/classnotes_Model.dart';
 import '../../Utils/floating_action _button.dart';
+import 'package:edumarshals/repository/classnotes_Repo.dart';
+
+import '../../Widget/CommonDrawer.dart';
+import '../../Widget/CustomAppBar.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -32,7 +36,7 @@ class Homepage extends StatefulWidget {
 }
 final _key = GlobalKey<ExpandableFabState>();
 class _HomepageState extends State<Homepage> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> scaffoldKey_ = GlobalKey<ScaffoldState>();
   int selectedTileIndex = -1;
   final AssignmentRepository _assignmentRepository = AssignmentRepository();
   final ClassNotesRepository _classNotesRepository = ClassNotesRepository();
@@ -43,40 +47,53 @@ class _HomepageState extends State<Homepage> {
     return Scaffold(
       floatingActionButtonLocation: ExpandableFab.location,
       floatingActionButton: custom_floating_action_button(Gkey: _key),
-      key: _scaffoldKey,
+      key: scaffoldKey_,
       backgroundColor: const Color(0xffEBF3FF),
-      drawer: Drawer(
-        backgroundColor: const Color(0xff004BB8),
-        child: Padding(
-          padding: const EdgeInsets.only(top: 50),
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              ListTile(
-                leading: const Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Icon(
-                    Icons.close_sharp,
-                    size: 40,
-                    color: Color(0xffCFDDF1),
-                  ),
-                ),
-                onTap: () {
-                  _scaffoldKey.currentState?.openDrawer();
-                  Navigator.pop(context);
-                },
-              ),
-              buildDrawerTile(0, 'assets/buliding.png', 'Classroom', 'assets/sel_bank.png', 4),
-              buildDrawerTile(1, 'assets/buliding.png', 'Hostel', 'assets/sel_building.png', 4),
-              buildDrawerTile(2, 'assets/teacher.png', 'Placement', 'assets/sel_teacher.png', 4),
-              buildDrawerTile(3, 'assets/note.png', 'PYQS Papers', 'assets/sel_note.png', 3.7),
-              buildDrawerTile(4, 'assets/fees.png', 'Fees', 'assets/sel_fees.png', 3.7),
-              buildDrawerTile(5, 'assets/events.png', 'Events', 'assets/sel_events.png', 4)
-
-            ],
-          ),
-        ),
+      appBar: CustomAppBar(
+        userName: PreferencesManager().name,
+        userImage: PreferencesManager().studentPhoto,
+        onTap: () {
+          scaffoldKey_.currentState?.openDrawer();
+        },
+        scaffoldKey_: scaffoldKey_,// Pass the _scaffoldKey
       ),
+      drawer: CommonDrawer(
+        scaffoldKey_: scaffoldKey_, currentIndex: 0, // Pass the _scaffoldKey
+      ),
+
+
+      // drawer: Drawer(
+      //   backgroundColor: const Color(0xff004BB8),
+      //   child: Padding(
+      //     padding: const EdgeInsets.only(top: 50),
+      //     child: ListView(
+      //       padding: EdgeInsets.zero,
+      //       children: <Widget>[
+      //         ListTile(
+      //           leading: const Padding(
+      //             padding: EdgeInsets.only(left: 10),
+      //             child: Icon(
+      //               Icons.close_sharp,
+      //               size: 40,
+      //               color: Color(0xffCFDDF1),
+      //             ),
+      //           ),
+      //           onTap: () {
+      //             _scaffoldKey.currentState?.openDrawer();
+      //             Navigator.pop(context);
+      //           },
+      //         ),
+      //         buildDrawerTile(0, 'assets/bank.png', 'Classroom', 'assets/sel_bank.png', 4),
+      //         buildDrawerTile(1, 'assets/buliding.png', 'Hostel', 'assets/sel_building.png', 4),
+      //         buildDrawerTile(2, 'assets/teacher.png', 'Placement', 'assets/sel_teacher.png', 4),
+      //         buildDrawerTile(3, 'assets/note.png', 'PYQS Papers', 'assets/sel_note.png', 3.7),
+      //         buildDrawerTile(4, 'assets/fees.png', 'Fees', 'assets/sel_fees.png', 3.7),
+      //         buildDrawerTile(5, 'assets/events.png', 'Events', 'assets/sel_events.png', 4)
+      //
+      //       ],
+      //     ),
+      //   ),
+      // ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -85,49 +102,49 @@ class _HomepageState extends State<Homepage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          child: Row(
-                            children: [
-                              GestureDetector(
-                                  onTap: () {
-                                    _scaffoldKey.currentState?.openDrawer();
-                                  },
-                                  child: const Icon(Icons.more_vert)),
-                              Padding(
-                                  padding:
-                                  const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                  child: InkWell(
-                                    child: CircleAvatar(
-                                      backgroundImage: NetworkImage(
-                                          PreferencesManager().studentPhoto),
-                                    ),
-                                    onDoubleTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => Profile()));
-                                    },
-                                  )),
-                              Text(
-                                PreferencesManager().name,
-                                style: const TextStyle(fontSize: 15),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey),
-                              shape: BoxShape.circle),
-                          child: const Padding(
-                              padding: EdgeInsets.all(6.0),
-                              child: Icon(Icons.notifications)),
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     Container(
+                    //       child: Row(
+                    //         children: [
+                    //           GestureDetector(
+                    //               onTap: () {
+                    //                 _scaffoldKey.currentState?.openDrawer();
+                    //               },
+                    //               child: const Icon(Icons.more_vert)),
+                    //           Padding(
+                    //               padding:
+                    //               const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    //               child: InkWell(
+                    //                 child: CircleAvatar(
+                    //                   backgroundImage: NetworkImage(
+                    //                       PreferencesManager().studentPhoto),
+                    //                 ),
+                    //                 onDoubleTap: () {
+                    //                   Navigator.push(
+                    //                       context,
+                    //                       MaterialPageRoute(
+                    //                           builder: (context) => Profile()));
+                    //                 },
+                    //               )),
+                    //           Text(
+                    //             PreferencesManager().name,
+                    //             style: const TextStyle(fontSize: 15),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //     Container(
+                    //       decoration: BoxDecoration(
+                    //           border: Border.all(color: Colors.grey),
+                    //           shape: BoxShape.circle),
+                    //       child: const Padding(
+                    //           padding: EdgeInsets.all(6.0),
+                    //           child: Icon(Icons.notifications)),
+                    //     ),
+                    //   ],
+                    // ),
 
 //  SizedBox(height: sheight * 0.03,),
                     AttendanceCard(
@@ -200,14 +217,10 @@ class _HomepageState extends State<Homepage> {
                             style:
                             TextStyle(fontSize: 14, color: Color(0xff004BB8)),
                           ),
-                          // onPressed: () => Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => testscreen(userName: '', userImage: '', subjectName: '', subjectDescription: '7s'))),
-                            onPressed: () => Navigator.push(
+                          onPressed: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>OverAllAttd())),
+                                  builder: (context) => EventsPage())),
                         )
                       ],
                     ),
@@ -285,7 +298,7 @@ class _HomepageState extends State<Homepage> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => ClassNotesPage()
+                                          builder: (context) => ClassNotesPage(),
                                         ),
                                       );
                                     },
@@ -324,11 +337,7 @@ class _HomepageState extends State<Homepage> {
                     FutureBuilder<List<Assignment>>(
                       future: _assignmentRepository.fetchAssignments(),
                       builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.waiting) {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        } else if (snapshot.hasError) {
+                        if (snapshot.hasError) {
                           return Center(
                             child: Text('Error: ${snapshot.error}'),
                           );
@@ -372,6 +381,12 @@ class _HomepageState extends State<Homepage> {
                                 AssignmentCard(
                                   subjectName: subject,
                                   onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Subject_Assignment(),
+                                      ),
+                                    );
                                     // Handle assignment tap
                                     // You can navigate to a detailed assignment page or perform other actions
                                   },
@@ -424,14 +439,14 @@ class _HomepageState extends State<Homepage> {
           setState(() {
             selectedTileIndex = index;
           });
-          _scaffoldKey.currentState?.openDrawer();
+          scaffoldKey_.currentState?.openDrawer();
           Navigator.pop(context);
           switch (index) {
             case 0:
               Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage()));
               break;
             case 1:
-              Navigator.push(context, MaterialPageRoute(builder: (context) => hostelLeavePage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
               break;
             case 2:
               Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
@@ -440,7 +455,7 @@ class _HomepageState extends State<Homepage> {
               Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
               break;
             case 4:
-              Navigator.push(context, MaterialPageRoute(builder: (context) => feesPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
               break;
             case 5:
               Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));

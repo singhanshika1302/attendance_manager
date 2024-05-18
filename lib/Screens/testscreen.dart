@@ -8,6 +8,7 @@ import 'package:edumarshals/Utils/daily_attendance_card.dart';
 import 'package:edumarshals/Utils/floating_action%20_button.dart';
 import 'package:edumarshals/Utils/weekly_widget.dart';
 import 'package:edumarshals/Widget/AttendanceCard.dart';
+import 'package:edumarshals/Widget/CommonDrawer.dart';
 import 'package:edumarshals/Widget/CustomAppBar.dart';
 import 'package:edumarshals/main.dart';
 import 'package:edumarshals/repository/overall_attendance_repository.dart';
@@ -39,7 +40,7 @@ final _key = GlobalKey<ExpandableFabState>();
 
 
 class testscreenState extends State<testscreen> {
-
+final GlobalKey<ScaffoldState> scaffoldKey_ = GlobalKey<ScaffoldState>();
 
 
 
@@ -216,9 +217,19 @@ class testscreenState extends State<testscreen> {
       backgroundColor: Color(0xffF2F6FF),
       floatingActionButtonLocation: ExpandableFab.location,
       floatingActionButton: custom_floating_action_button(Gkey: _key,),
+      key: scaffoldKey_,
       appBar:
-          CustomAppBar(userName: widget.userName, userImage: widget.userImage, onTap: () { Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => testscreen(userName: PreferencesManager().name, userImage: PreferencesManager().studentPhoto, subjectName: "", subjectDescription: "")));
- },),
+          CustomAppBar(
+        userName: PreferencesManager().name,
+        userImage: PreferencesManager().studentPhoto,
+        onTap: () {
+          scaffoldKey_.currentState?.openDrawer();
+        },
+        scaffoldKey_: scaffoldKey_,// Pass the _scaffoldKey
+      ),
+      drawer: CommonDrawer(
+        scaffoldKey_: scaffoldKey_, currentIndex: 0, // Pass the _scaffoldKey
+      ),
       body: 
       Padding(
         padding: const EdgeInsets.all(16),

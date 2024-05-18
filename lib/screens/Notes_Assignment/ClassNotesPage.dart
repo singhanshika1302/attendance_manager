@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../Widget/CommonDrawer.dart';
 import '../../main.dart';
 
 class ClassNotesPage extends StatefulWidget {
@@ -40,7 +41,7 @@ class _ClassNotesPageState extends State<ClassNotesPage> {
       return [];
     }
   }
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> scaffoldKey_ = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -50,13 +51,19 @@ class _ClassNotesPageState extends State<ClassNotesPage> {
     return Scaffold(
          floatingActionButtonLocation: ExpandableFab.location,
       floatingActionButton: custom_floating_action_button(Gkey: _key,),
-      key: _scaffoldKey,
+      key: scaffoldKey_,
       backgroundColor: Color(0xffEBF3FF),
-      appBar: CustomAppBar(userName: PreferencesManager().name, 
-      userImage: PreferencesManager().studentPhoto,
-      onTap: () {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ClassNotesPage()));
- },),
+      appBar: CustomAppBar(
+        userName: PreferencesManager().name,
+        userImage: PreferencesManager().studentPhoto,
+        onTap: () {
+          scaffoldKey_.currentState?.openDrawer();
+        },
+        scaffoldKey_: scaffoldKey_, // Pass the _scaffoldKey
+      ),
+      drawer: CommonDrawer(
+        scaffoldKey_: scaffoldKey_, currentIndex: 1, // Pass the _scaffoldKey
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(

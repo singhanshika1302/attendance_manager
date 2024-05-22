@@ -1,18 +1,21 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'dart:io';
+import '../Screens/Upload/UploadFilePage.dart';
 
 class Subject_Assignment_Card extends StatelessWidget {
   final String subjectName;
   final String status;
   final String assignmentUrl;
-  final VoidCallback? onUploadPressed;
+  final String assignmentId;
 
   const Subject_Assignment_Card({
     Key? key,
     required this.subjectName,
     required this.status,
     required this.assignmentUrl,
-    this.onUploadPressed,
+    required this.assignmentId,
   }) : super(key: key);
 
   @override
@@ -74,7 +77,16 @@ class Subject_Assignment_Card extends StatelessWidget {
           top: 90,
           right: 20,
           child: InkWell(
-            onTap: onUploadPressed,
+            onTap: () async {
+              // Open file picker when "Upload solution" is tapped
+              final file = await pickFile(context);
+              if (file != null) {
+                // Navigate to UploadFilePage and pass the selected file
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => UploadFilePage(selectedFile: file, assignmentId: assignmentId),
+                ));
+              }
+            },
             child: Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
@@ -97,4 +109,18 @@ class Subject_Assignment_Card extends StatelessWidget {
       ],
     );
   }
+  Future<File?> pickFile(BuildContext context) async {
+    // Open file picker
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+    if (result != null) {
+      // Return the selected file
+      return File(result.files.single.path!);
+    } else {
+      // User canceled the file picker
+      return null;
+    }
+  }
 }
+
+

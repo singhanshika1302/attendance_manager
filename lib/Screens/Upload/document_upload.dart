@@ -123,14 +123,14 @@ class _uploadDocumentState extends State<uploadDocument> {
 
     return Scaffold(
       backgroundColor: const Color.fromRGBO(235, 243, 255, 1),
-   appBar: CustomAppBar(userName: PreferencesManager().name,
-   userImage: PreferencesManager().studentPhoto,
-    onTap:
-    (){
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => uploadDocument()));
-
-    }
-     ),
+   // appBar: CustomAppBar(userName: PreferencesManager().name,
+   // userImage: PreferencesManager().studentPhoto,
+   //  onTap:
+   //  (){
+   //            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => uploadDocument()));
+   //
+   //  }
+   //   ),
       body: Center(
         child: Column(
           children: [

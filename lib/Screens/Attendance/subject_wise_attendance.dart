@@ -1,8 +1,7 @@
 import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
-// import 'package:edumarshals/Utils/floating_action%20_button.dart';
-import 'package:edumarshals/Model/student_attendance_data_model.dart';
+import 'package:edumarshals/Model/subject_wise_attendance_model.dart';
 import 'package:edumarshals/Utils/attendance_list_card.dart';
 import 'package:edumarshals/Utils/daily_attendance_card.dart';
 import 'package:edumarshals/Utils/floating_action%20_button.dart';
@@ -10,75 +9,41 @@ import 'package:edumarshals/Utils/weekly_widget.dart';
 import 'package:edumarshals/Widget/AttendanceCard.dart';
 import 'package:edumarshals/Widget/CustomAppBar.dart';
 import 'package:edumarshals/main.dart';
-import 'package:edumarshals/repository/overall_attendance_repository.dart';
+import 'package:edumarshals/repository/subject_wise_attendance_repo.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 
 import '../../Widget/CommonDrawer.dart';
 
-class barGraph extends StatefulWidget {
-  final String userName;
-  final String userImage;
+class SubjectWiseAtt extends StatefulWidget {
   final String subjectName;
   final String subjectDescription;
-  //final String userName;
-  barGraph(
-      {super.key,
-      required this.userName,
-      required this.userImage,
-      required this.subjectName,
-      required this.subjectDescription});
+
+  SubjectWiseAtt({
+    super.key,
+    required this.subjectName,
+    required this.subjectDescription,
+  });
+
   final Color leftBarColor = Color(0xff004BB8);
   final Color rightBarColor = Color(0xff5299FF);
   final Color avgColor = Colors.orange;
+
   @override
-  State<StatefulWidget> createState() => barGraphState();
+  State<StatefulWidget> createState() => SubjectWiseAttState();
 }
 
 final _key = GlobalKey<ExpandableFabState>();
 
-class barGraphState extends State<barGraph> {
-
+class SubjectWiseAttState extends State<SubjectWiseAtt> {
   final GlobalKey<ScaffoldState> scaffoldKey_ = GlobalKey<ScaffoldState>();
-  // ..............attendace api is intigrated ..................
-  final AttendanceRepository _repository = AttendanceRepository();
-  List<StudentAttendanceData>? _attendanceDataList;
+
+  final SubjectWiseAttendanceRepository _repository =
+      SubjectWiseAttendanceRepository();
+  List<SubjectWiseAttendanceModel>? _attendanceDataList;
   int _totalClasses = 0;
   int _totalPresentClasses = 0;
-
-//.............calling attendance repository ...................................//
-  Future<void> _fetchAttendanceData() async {
-    List<StudentAttendanceData>? attendanceDataList =
-        await _repository.fetchAttendance();
-    int totalClasses = 0;
-    int totalPresentClasses = 0;
-//...............function to store total present and total classes .............//
-    if (attendanceDataList != null) {
-      for (var data in attendanceDataList) {
-        totalClasses += data.totalClasses ?? 0;
-        totalPresentClasses += data.totalPresent ?? 0;
-      }
-    }
-    setState(() {
-      _attendanceDataList = attendanceDataList;
-      _totalClasses = totalClasses;
-      print('totalclasses${_totalClasses}');
-      // PreferencesManager.totalclasses=_totalClasses;
-      // print('totalPresentClasses${_totalPresentClasses}');
-      _totalPresentClasses = totalPresentClasses;
-
-      PreferencesManager().totalclasses = _totalClasses;
-      PreferencesManager().presentclasses = _totalPresentClasses;
-
-      print('totalPresentClasses${_totalPresentClasses}');
-
-      // print('dfghj $attendanceDataList');
-      // PreferencesManager.totalclasses=_totalClasses;
-    });
-  }
-
-  //................attendance api is intigrated ....................//
 
   final _key = GlobalKey<ExpandableFabState>();
   final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
@@ -94,34 +59,9 @@ class barGraphState extends State<barGraph> {
   late Map<String, List<Widget>> filterWidgets;
   int touchedGroupIndex = -1;
 
-  void _initFilterWidgets() {
-    filterWidgets = {
-      'Monthly': [
-        Column(
-          children: [
-            AttendanceListCard(date: "1 jan,24", isPresent: [true]),
-            AttendanceListCard(date: "2 jan,24", isPresent: [true, false]),
-            AttendanceListCard(date: "3 jan,24", isPresent: [false, false]),
-            AttendanceListCard(date: "4 jan,24", isPresent: [true]),
-            AttendanceListCard(date: "6 jan,24", isPresent: [true, true]),
-            AttendanceListCard(date: "7 jan,24", isPresent: [false]),
-            AttendanceListCard(date: "9 jan,24", isPresent: [true]),
-          ],
-        )
-      ],
-      'Weekly': [
-        _buildWeeklyWidgets(),
-      ],
-      'Daily': [
-        _buildDailyWidgets(),
-      ],
-    };
-  }
-
   @override
   void initState() {
     super.initState();
-    _fetchAttendanceData();
     final barGroup1 = makeGroupData(0, 12, 5);
     final barGroup2 = makeGroupData(1, 16, 12);
     final barGroup3 = makeGroupData(2, 18, 5);
@@ -130,7 +70,7 @@ class barGraphState extends State<barGraph> {
     final barGroup6 = makeGroupData(5, 14, 1.5);
     final barGroup7 = makeGroupData(6, 10, 1.5);
     _initFilterWidgets();
-
+    _fetchAttendanceData();
     final items = [
       barGroup1,
       barGroup2,
@@ -146,6 +86,54 @@ class barGraphState extends State<barGraph> {
     showingBarGroups = rawBarGroups;
   }
 
+  void _fetchAttendanceData() async {
+    try {
+      List<SubjectWiseAttendanceModel>? data =
+          await _repository.fetchAttendance();
+      setState(() {
+        _attendanceDataList =
+            data?.where((item) => item.subject == widget.subjectName).toList();
+
+        _calculateTotals();
+        _updateFilterWidgets();
+      });
+    } catch (error) {
+      // Handle error
+      print('Error fetching attendance data: $error');
+    }
+  }
+
+  void _calculateTotals() {
+    _totalClasses = _attendanceDataList?.fold(
+            0, (sum, item) => sum! + (item.totalClasses ?? 0)) ??
+        0;
+    _totalPresentClasses = _attendanceDataList?.fold(
+            0, (sum, item) => sum! + (item.totalPresent ?? 0)) ??
+        0;
+  }
+
+  void _updateFilterWidgets() {
+    filterWidgets = {
+      'Monthly': [
+        _buildMonthlyAttendance(),
+      ],
+      'Weekly': [
+        _buildWeeklyWidgets(),
+      ],
+      'Daily': [
+        _buildDailyWidgets(),
+      ],
+    };
+  }
+
+  void _initFilterWidgets() {
+    filterWidgets = {
+      'Monthly': [],
+      'Weekly': [],
+      'Daily': [],
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
     final sheight = MediaQuery.of(context).size.height;
@@ -156,7 +144,6 @@ class barGraphState extends State<barGraph> {
       floatingActionButton: custom_floating_action_button(
         Gkey: _key,
       ),
-
       appBar: CustomAppBar(
         userName: PreferencesManager().name,
         userImage: PreferencesManager().studentPhoto,
@@ -174,68 +161,11 @@ class barGraphState extends State<barGraph> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Container(
-                height: sheight * 0.18,
-//.................fetching list in which all attendace is stored................//
-                child: _attendanceDataList != null
-                    ? Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: ListView.builder(
-                              itemCount: _attendanceDataList!.length,
-                              itemBuilder: (context, index) {
-                                final attendanceData =
-                                    _attendanceDataList![index];
-//.......................assigning subject attendace to the SubjectAttendaceCard......//
-                                if (attendanceData.subject == 'DSTL') {
-                                  // Only render the SubjectAttendanceCard if the subject is Mathematics
-                                  return AttendanceCard(
-                                      attendedClasses:
-                                          attendanceData.totalPresent!,
-                                      totalClassess:
-                                          attendanceData.totalClasses!,
-                                      // title: widget.subjectName,
-                                      title:
-                                          'Subject: ${attendanceData.subject}',
-                                      description: widget.subjectDescription);
-                                  // SubjectAttendanceCard(
-                                  //   subjectName:
-                                  //       'Subject: ${attendanceData.subject}',
-                                  //   attendedClasses:
-                                  //       attendanceData.totalPresent!,
-                                  //   totalClasses: attendanceData.totalClasses!,
-                                  // );
-                                } else {
-                                  // Return an empty container for other subjects
-                                  return Container();
-                                }
-                                // return SubjectAttendanceCard(
-                                //   subjectName:
-                                //       'Subject: ${attendanceData.subject}',
-                                //   attendedClasses: attendanceData.totalPresent!,
-                                //   totalClasses: attendanceData.totalClasses!,
-                                // );
-                              },
-                            ),
-                          ),
-                        ],
-                      )
-                    : Center(
-                        child: SizedBox(
-                          height: 50, // Adjust the height as needed
-                          width: 50, // Adjust the width as needed
-                          child: CircularProgressIndicator(),
-                        ),
-                      ),
-              ),
-              // AttendanceCard(
-              //     attendedClasses: 24,
-              //     totalClassess: 28,
-              //     // title: widget.subjectName,
-              //     title: "Mathematics",
-              //     description: widget.subjectDescription),
-
+              AttendanceCard(
+                  attendedClasses: _totalPresentClasses,
+                  totalClassess: _totalClasses,
+                  title: widget.subjectName,
+                  description: widget.subjectDescription),
               SizedBox(
                 height: sheight * 0.03,
               ),
@@ -386,7 +316,6 @@ class barGraphState extends State<barGraph> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // SizedBox(width: 1),
                   Text(" " + filter + " Attendance",
                       style:
                           TextStyle(fontWeight: FontWeight.w500, fontSize: 25)),
@@ -526,23 +455,8 @@ class barGraphState extends State<barGraph> {
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
               ),
               CustomRadioButton(
-                //radius: 12,
-                //shapeRadius: 24,
                 enableShape: true,
                 unSelectedBorderColor: Color(0xff004BB8),
-                selectedBorderColor: Colors.white,
-                defaultSelected: filter,
-                // customShape: RoundedRectangleBorder(
-                //     borderRadius: BorderRadius.circular(20)),
-                elevation: 0,
-                absoluteZeroSpacing: false,
-                unSelectedColor: Theme.of(context).canvasColor,
-                buttonLables: [
-                  'Monthly',
-                  'Weekly',
-                  'Daily',
-                ],
-                buttonValues: ['Monthly', 'Weekly', 'Daily'],
                 buttonTextStyle: ButtonTextStyle(
                     selectedColor: Colors.white,
                     unSelectedColor: Color(0xff004BB8),
@@ -552,6 +466,23 @@ class barGraphState extends State<barGraph> {
                   setFilter(value);
                 },
                 selectedColor: Color(0xff004BB8),
+                buttonLables: [
+                  'Monthly',
+                  'Weekly',
+                  'Daily',
+                ],
+                buttonValues: [
+                  'Monthly',
+                  'Weekly',
+                  'Daily',
+                ],
+                defaultSelected: 'Monthly',
+                horizontal: false,
+                enableButtonWrap: false,
+                height: 36,
+                padding: 6,
+                selectedBorderColor: Color(0xff004BB8),
+                unSelectedColor: Colors.white,
               ),
               SizedBox(
                 height: sheight * 0.03,
@@ -563,7 +494,6 @@ class barGraphState extends State<barGraph> {
               CustomCheckBoxGroup(
                 enableShape: true,
                 unSelectedBorderColor: Color(0xff004BB8),
-                // selectedBorderColor: Colors.white,
                 buttonTextStyle: ButtonTextStyle(
                     selectedColor: Colors.white,
                     unSelectedColor: Color(0xff004BB8),
@@ -584,8 +514,6 @@ class barGraphState extends State<barGraph> {
                 defaultSelected: ["Present"],
                 horizontal: false,
                 enableButtonWrap: false,
-                //width: 40,
-                //absoluteZeroSpacing: false,
                 selectedColor: Color(0xff004BB8),
                 padding: 18,
               ),
@@ -616,10 +544,23 @@ class barGraphState extends State<barGraph> {
   void setFilter(String value) {
     setState(() {
       filter = value;
+      _updateFilterWidgets();
     });
   }
 
   Widget _buildDailyWidgets() {
+    List<SWAttendance>? dailyData = _attendanceDataList
+        ?.expand((model) => model.attendance ?? [])
+        .where((item) =>
+            item is SWAttendance &&
+            item.date == _focusDate.toIso8601String().split('T').first)
+        .cast<SWAttendance>()
+        .toList();
+
+    if (dailyData == null || dailyData.isEmpty) {
+      return Center(child: Text("No attendance data available for this date"));
+    }
+
     return Column(
       children: [
         EasyInfiniteDateTimeLine(
@@ -643,9 +584,8 @@ class barGraphState extends State<barGraph> {
           showTimelineHeader: false,
           onDateChange: (selectedDate) {
             setState(() {
-              print(selectedDate);
               _focusDate = selectedDate;
-              print(_focusDate);
+              _updateFilterWidgets();
             });
           },
         ),
@@ -653,29 +593,67 @@ class barGraphState extends State<barGraph> {
           height: 15,
         ),
         DailyAttendanceListCard(
-            date: _focusDate, isPresent: [true, false, true])
+            date: _focusDate,
+            isPresent: dailyData.map((e) => e.attended ?? false).toList())
       ],
     );
   }
 
   Widget _buildWeeklyWidgets() {
+    DateTime startOfWeek =
+        _selectedDay.subtract(Duration(days: _selectedDay.weekday - 1));
+    DateTime endOfWeek = startOfWeek.add(Duration(days: 6));
+    List<SWAttendance>? weeklyData = _attendanceDataList
+        ?.expand((model) => model.attendance ?? [])
+        .where((item) =>
+            item is SWAttendance &&
+            item.date != null &&
+            DateTime.parse(item.date!).isAfter(startOfWeek) &&
+            DateTime.parse(item.date!).isBefore(endOfWeek))
+        .cast<SWAttendance>()
+        .toList();
+
+    if (weeklyData == null || weeklyData.isEmpty) {
+      return Center(child: Text("No attendance data available for this week"));
+    }
+
     return Column(
       children: [
         WeeklyDatePicker(
           selectedDay: DateTime.now(),
           changeDay: (value) => setState(() {
             _selectedDay = value;
+            _updateFilterWidgets();
           }),
         ),
-        AttendanceListCard(date: "Mon", isPresent: [true, true, true]),
-        AttendanceListCard(date: "Tue", isPresent: [
-          true,
-        ]),
-        AttendanceListCard(date: "Wed", isPresent: [false, false]),
-        AttendanceListCard(date: "Thu", isPresent: [true]),
-        AttendanceListCard(date: "Fri", isPresent: [true, true]),
-        AttendanceListCard(date: "Sat", isPresent: []),
-        AttendanceListCard(date: "Sun", isPresent: []),
+        ...weeklyData.map((item) => AttendanceListCard(
+            date: item.date.toString(), isPresent: [item.attended ?? false])),
+      ],
+    );
+  }
+
+  Widget _buildMonthlyAttendance() {
+    DateTime firstDayOfMonth = DateTime(_focusDate.year, _focusDate.month, 1);
+    DateTime lastDayOfMonth =
+        DateTime(_focusDate.year, _focusDate.month + 1, 0);
+    List<SWAttendance>? monthlyData = _attendanceDataList
+        ?.expand((model) => model.attendance ?? [])
+        .where((item) =>
+            item is SWAttendance &&
+            item.date != null &&
+            DateTime.parse(item.date!).isAfter(firstDayOfMonth) &&
+            DateTime.parse(item.date!).isBefore(lastDayOfMonth))
+        .cast<SWAttendance>()
+        .toList();
+
+    if (monthlyData == null || monthlyData.isEmpty) {
+      return Center(child: Text("No attendance data available for this month"));
+    }
+
+    return Column(
+      children: [
+        ...monthlyData.map((item) => AttendanceListCard(
+            date: item.date.toString(), isPresent: [item.attended ?? false])),
       ],
     );
   }

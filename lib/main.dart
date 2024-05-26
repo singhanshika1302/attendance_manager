@@ -9,6 +9,7 @@ import 'package:edumarshals/Screens/User_Info/Personal_Info/Personal_Info_Data.d
 import 'package:edumarshals/Screens/User_Info/Profile.dart';
 import 'package:edumarshals/Screens/User_Info/Subject_Data.dart';
 import 'package:edumarshals/Screens/splash.dart';
+import 'package:edumarshals/display.dart';
 import 'package:edumarshals/screens/time_table.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
       
       debugShowCheckedModeBanner: false,
       //initialRoute: 'login',
-       initialRoute: 'splashscreen',  
+       initialRoute: 'overallattendance',  
       routes: {
         'splashscreen': (context) => SplashScreen(),
         'homepage': (context) => const Homepage(),
@@ -47,13 +48,14 @@ class MyApp extends StatelessWidget {
         'test_screen': (context) => Subject_Assignment(),
 
         'personalinfo': (context) => PersonalInfoScreen(),
-        'subject_wise_attendance': (context) => barGraph(
-              userName: "user",
-              userImage: "vgc",
+        'subject_wise_attendance': (context) => SubjectWiseAtt(
+              
               subjectDescription: "your attendance is good",
               subjectName: "mathematics",
             ),
         'subject': (context) => Subjectdata(),
+        'display': (context) =>DisplayScreen(subject: 'mathematics',),
+        
       },
     );
   }

@@ -1,5 +1,6 @@
 // import 'package:edumarshals/model/student_attendance_data_model.dart';
 import 'package:edumarshals/Model/student_attendance_data_model.dart';
+import 'package:edumarshals/Screens/Attendance/subject_wise_attendance.dart';
 import 'package:edumarshals/Screens/HomePage/Homepage.dart';
 import 'package:edumarshals/Utils/floating_action%20_button.dart';
 import 'package:edumarshals/Widget/AttendanceCard.dart';
@@ -127,7 +128,16 @@ class _OverAllAttdState extends State<OverAllAttd> {
                                   attendedClasses: attendanceData.totalPresent!,
                                   totalClasses: attendanceData.totalClasses!,
                                   onpressed1: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context)=> DisplayScreen(subject: attendanceData.subject)));
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                SubjectWiseAtt(
+                                                    subjectName: attendanceData
+                                                        .subject
+                                                        .toString(),
+                                                    subjectDescription:
+                                                        'subjectDescription')));
                                   },
                                 );
                               },

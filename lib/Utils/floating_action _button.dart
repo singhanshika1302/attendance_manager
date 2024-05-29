@@ -84,7 +84,8 @@ class _custom_floating_action_buttonState
                 color: Color(0xff004BB8),
               ),
               onPressed: () {
-                Navigator.pushNamed(context, 'homepage');
+                 //Dont change this to pushReplacement otherwise Scaffold key will get duplicated
+                Navigator.pushReplacementNamed(context, 'homepage');
               },
             ),
             FloatingActionButton.small(
@@ -96,7 +97,8 @@ class _custom_floating_action_buttonState
               ),
               onPressed: () {
                 // Navigate to bar chart page
-                Navigator.pushNamed(
+                //Dont change this to pushReplacement otherwise Scaffold key will get duplicated
+                Navigator.pushReplacementNamed(
                     context, 'overallattendance');
               },
             ),
@@ -109,7 +111,8 @@ class _custom_floating_action_buttonState
               ),
               onPressed: () {
                 // Navigate to assignment page
-                Navigator.pushNamed(context, 'test_screen');
+                 //Dont change this to pushReplacement otherwise Scaffold key will get duplicated
+                Navigator.pushReplacementNamed(context, 'test_screen');
               },
             ),
             FloatingActionButton.small(
@@ -120,7 +123,8 @@ class _custom_floating_action_buttonState
                 color: Color(0xff004BB8),
               ),
               onPressed: () {
-                Navigator.pushNamed(context, 'profile');
+                 //Dont change this to pushReplacement otherwise Scaffold key will get duplicated
+                Navigator.pushReplacementNamed(context, 'profile');
               },
             ),
           ],

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DailyAttendanceListCard extends StatefulWidget {
-  final DateTime date;
+  final String date;
   final List<bool> isPresent;
 
   DailyAttendanceListCard(

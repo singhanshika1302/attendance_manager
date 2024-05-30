@@ -406,8 +406,8 @@ class SubjectWiseAttState extends State<SubjectWiseAtt> {
                       Row(
                         children: [
                           SizedBox(
-                            height: 35,
-                            width: 160,
+                            height:sheight*0.04,
+                            width: swidth*0.42,
                             child: DropdownDatePicker(
                               textStyle: TextStyle(fontSize: 12),
                               hintMonth: 'MM',

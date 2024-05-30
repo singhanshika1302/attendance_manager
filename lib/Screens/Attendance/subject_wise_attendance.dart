@@ -20,12 +20,10 @@ import '../../Widget/CommonDrawer.dart';
 
 class SubjectWiseAtt extends StatefulWidget {
   final String subjectName;
-  final String subjectDescription;
 
   SubjectWiseAtt({
     super.key,
     required this.subjectName,
-    required this.subjectDescription,
   });
 
   final Color leftBarColor = Color(0xff004BB8);
@@ -36,7 +34,20 @@ class SubjectWiseAtt extends StatefulWidget {
   State<StatefulWidget> createState() => SubjectWiseAttState();
 }
 
-enum Month { January, Febuary, March, April, May, June, July, August, Septemer, October, November, December }
+enum Month {
+  January,
+  Febuary,
+  March,
+  April,
+  May,
+  June,
+  July,
+  August,
+  September,
+  October,
+  November,
+  December
+}
 
 extension MonthExtension on Month {
   String get shortName {
@@ -57,7 +68,7 @@ extension MonthExtension on Month {
         return 'Jul';
       case Month.August:
         return 'Aug';
-      case Month.Septemer:
+      case Month.September:
         return 'Sep';
       case Month.October:
         return 'Oct';
@@ -85,6 +96,7 @@ class SubjectWiseAttState extends State<SubjectWiseAtt> {
   final _key = GlobalKey<ExpandableFabState>();
   final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
   final double width = 15;
+  // List<String> isPresent = ["Absent", "Present"];
   EasyInfiniteDateTimelineController _dailycontroller =
       EasyInfiniteDateTimelineController();
   DateTime _focusDate = DateTime.now();
@@ -100,6 +112,10 @@ class SubjectWiseAttState extends State<SubjectWiseAtt> {
   String filter = 'Monthly'; // Default filter
   late Map<String, List<Widget>> filterWidgets;
   int touchedGroupIndex = -1;
+  List<String> selectedAbsencePresence = [
+    "Absent",
+    "Present"
+  ]; 
 
   @override
   void initState() {
@@ -183,15 +199,43 @@ class SubjectWiseAttState extends State<SubjectWiseAtt> {
   }
 
   void _updateFilterWidgets() {
+    // Filter data based on selected absence/presence values
+    List<SubjectWiseAttendanceModel>? filteredData = _attendanceDataList
+        ?.map((model) {
+          // Filter attendance records within the model
+          List<SWAttendance>? filteredAttendance =
+              model.attendance?.where((item) {
+            if (selectedAbsencePresence.contains("Absent") &&
+                selectedAbsencePresence.contains("Present")) {
+              return true; // Include all records if both "Absent" and "Present" are selected
+            } else if (selectedAbsencePresence.contains("Absent")) {
+              return item.attended == false;
+            } else if (selectedAbsencePresence.contains("Present")) {
+              return item.attended == true;
+            }
+            return false;
+          }).toList();
+
+          // Return a new model with filtered attendance
+          return SubjectWiseAttendanceModel(
+            subject: model.subject,
+            attendance: filteredAttendance,
+          );
+        })
+        .where(
+            (model) => model.attendance != null && model.attendance!.isNotEmpty)
+        .toList();
+
+    // Update the filterWidgets map with the filtered data
     filterWidgets = {
       'Monthly': [
-        _buildMonthlyAttendance(),
+        _buildMonthlyAttendance(filteredData), // Pass filtered data
       ],
       'Weekly': [
-        _buildWeeklyWidgets(),
+        _buildWeeklyWidgets(filteredData), // Pass filtered data
       ],
       'Daily': [
-        _buildDailyWidgets(),
+        _buildDailyWidgets(filteredData), // Pass filtered data
       ],
     };
   }
@@ -247,7 +291,7 @@ class SubjectWiseAttState extends State<SubjectWiseAtt> {
                   attendedClasses: _totalPresentClasses,
                   totalClassess: _totalClasses,
                   title: widget.subjectName,
-                  description: widget.subjectDescription),
+                  description: 'Your Attendance is Good'),
               SizedBox(
                 height: sheight * 0.03,
               ),
@@ -406,8 +450,8 @@ class SubjectWiseAttState extends State<SubjectWiseAtt> {
                       Row(
                         children: [
                           SizedBox(
-                            height:sheight*0.04,
-                            width: swidth*0.42,
+                            height: sheight * 0.04,
+                            width: swidth * 0.41,
                             child: DropdownDatePicker(
                               textStyle: TextStyle(fontSize: 12),
                               hintMonth: 'MM',
@@ -661,10 +705,14 @@ class SubjectWiseAttState extends State<SubjectWiseAtt> {
                   "Present",
                 ],
                 checkBoxButtonValues: (values) {
-                  print(values);
+                  setState(() {
+                    selectedAbsencePresence = values;
+                    print(selectedAbsencePresence);
+                    _updateFilterWidgets(); // Update filter widgets
+                  });
                 },
                 spacing: 12,
-                defaultSelected: ["Present", "Absent"],
+                defaultSelected: selectedAbsencePresence,
                 horizontal: false,
                 enableButtonWrap: false,
                 selectedColor: Color(0xff004BB8),
@@ -701,8 +749,8 @@ class SubjectWiseAttState extends State<SubjectWiseAtt> {
     });
   }
 
-  Widget _buildDailyWidgets() {
-    List<SWAttendance>? dailyData = _attendanceDataList
+  Widget _buildDailyWidgets(List<SubjectWiseAttendanceModel>? filteredData) {
+    List<SWAttendance>? dailyData = filteredData
         ?.expand((model) => model.attendance ?? [])
         .where((item) =>
             item is SWAttendance &&
@@ -756,18 +804,18 @@ class SubjectWiseAttState extends State<SubjectWiseAtt> {
           DailyAttendanceListCard(
             date: parseAndFormatDate(
               _focusDate.toIso8601String().split('T').first,
-            ), // Formatted date
+            ),
             isPresent: dailyData.map((e) => e.attended ?? false).toList(),
           ),
       ],
     );
   }
 
-  Widget _buildWeeklyWidgets() {
+  Widget _buildWeeklyWidgets(List<SubjectWiseAttendanceModel>? filteredData) {
     DateTime startOfWeek =
         _selectedDay.subtract(Duration(days: _selectedDay.weekday - 1));
     DateTime endOfWeek = startOfWeek.add(Duration(days: 6));
-    List<SWAttendance>? weeklyData = _attendanceDataList
+    List<SWAttendance>? weeklyData = filteredData
         ?.expand((model) => model.attendance ?? [])
         .where((item) =>
             item is SWAttendance &&
@@ -799,7 +847,7 @@ class SubjectWiseAttState extends State<SubjectWiseAtt> {
           ...weeklyData.map((item) => Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 child: AttendanceListCard(
-                  date: parseAndFormatDate(item.date!), // Formatted date
+                  date: parseAndFormatDate(item.date!),
                   isPresent: [item.attended ?? false],
                 ),
               )),
@@ -807,8 +855,9 @@ class SubjectWiseAttState extends State<SubjectWiseAtt> {
     );
   }
 
-  Widget _buildMonthlyAttendance() {
-    List<SWAttendance>? monthlyData = _attendanceDataList
+  Widget _buildMonthlyAttendance(
+      List<SubjectWiseAttendanceModel>? filteredData) {
+    List<SWAttendance>? monthlyData = filteredData
         ?.expand((model) => model.attendance ?? [])
         .where((item) =>
             item is SWAttendance &&
@@ -825,7 +874,10 @@ class SubjectWiseAttState extends State<SubjectWiseAtt> {
     return Column(
       children: [
         ...monthlyData.map((item) => AttendanceListCard(
-            date: parseAndFormatDate(item.date!), // Formatted date
+            date: parseAndFormatDate(item.date!),
+            isPresent: [item.attended ?? false])),
+        ...monthlyData.map((item) => AttendanceListCard(
+            date: parseAndFormatDate(item.date!),
             isPresent: [item.attended ?? false])),
       ],
     );

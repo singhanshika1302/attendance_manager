@@ -49,8 +49,6 @@ class MyApp extends StatelessWidget {
 
         'personalinfo': (context) => PersonalInfoScreen(),
         'subject_wise_attendance': (context) => SubjectWiseAtt(
-              
-              subjectDescription: "your attendance is good",
               subjectName: "mathematics",
             ),
         'subject': (context) => Subjectdata(),

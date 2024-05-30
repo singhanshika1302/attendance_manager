@@ -136,8 +136,7 @@ class _OverAllAttdState extends State<OverAllAttd> {
                                                     subjectName: attendanceData
                                                         .subject
                                                         .toString(),
-                                                    subjectDescription:
-                                                        'subjectDescription')));
+                                                    )));
                                   },
                                 );
                               },

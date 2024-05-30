@@ -36,34 +36,34 @@ class SubjectWiseAtt extends StatefulWidget {
   State<StatefulWidget> createState() => SubjectWiseAttState();
 }
 
-enum Month { Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec }
+enum Month { January, Febuary, March, April, May, June, July, August, Septemer, October, November, December }
 
 extension MonthExtension on Month {
   String get shortName {
     switch (this) {
-      case Month.Jan:
+      case Month.January:
         return 'Jan';
-      case Month.Feb:
+      case Month.Febuary:
         return 'Feb';
-      case Month.Mar:
+      case Month.March:
         return 'Mar';
-      case Month.Apr:
+      case Month.April:
         return 'Apr';
       case Month.May:
         return 'May';
-      case Month.Jun:
+      case Month.June:
         return 'Jun';
-      case Month.Jul:
+      case Month.July:
         return 'Jul';
-      case Month.Aug:
+      case Month.August:
         return 'Aug';
-      case Month.Sep:
+      case Month.Septemer:
         return 'Sep';
-      case Month.Oct:
+      case Month.October:
         return 'Oct';
-      case Month.Nov:
+      case Month.November:
         return 'Nov';
-      case Month.Dec:
+      case Month.December:
         return 'Dec';
       default:
         return '';
@@ -629,7 +629,7 @@ class SubjectWiseAttState extends State<SubjectWiseAtt> {
                   'Weekly',
                   'Daily',
                 ],
-                defaultSelected: 'Monthly',
+                defaultSelected: filter,
                 horizontal: false,
                 enableButtonWrap: false,
                 height: 36,
